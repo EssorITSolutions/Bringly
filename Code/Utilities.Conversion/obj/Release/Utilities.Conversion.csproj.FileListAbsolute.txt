@@ -1,0 +1,6 @@
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\bin\Release\Utilities.Conversion.dll
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\bin\Release\Utilities.Conversion.pdb
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Release\Utilities.Conversion.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Release\Utilities.Conversion.dll
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Release\Utilities.Conversion.pdb
+E:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Release\Utilities.Conversion.csprojResolveAssemblyReference.cache

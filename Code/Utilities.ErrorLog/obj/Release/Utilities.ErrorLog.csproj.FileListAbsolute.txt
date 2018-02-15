@@ -1,0 +1,8 @@
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Release\Utilities.ErrorLog.dll
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Release\Utilities.ErrorLog.pdb
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Release\Elmah.dll
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Release\Elmah.Mvc.dll
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Release\Utilities.ErrorLog.csprojResolveAssemblyReference.cache
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Release\Utilities.ErrorLog.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Release\Utilities.ErrorLog.dll
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Release\Utilities.ErrorLog.pdb

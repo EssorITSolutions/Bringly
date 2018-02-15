@@ -1,0 +1,6 @@
+E:\Work\Projects\Bringly\Code\Utilities.Helper\bin\Release\Utilities.Helper.dll
+E:\Work\Projects\Bringly\Code\Utilities.Helper\bin\Release\Utilities.Helper.pdb
+E:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Release\Utilities.Helper.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Release\Utilities.Helper.dll
+E:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Release\Utilities.Helper.pdb
+E:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Release\Utilities.Helper.csprojResolveAssemblyReference.cache
