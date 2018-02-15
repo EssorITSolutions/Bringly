@@ -1,0 +1,85 @@
+﻿
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <div class="Navbar-logo admin-logo">
+            <a class="navbar-brand" href="index.html">
+                <img src="~/Templates/images/logo-2.png" />
+            </a>
+
+            @{Html.RenderAction("ChoosePreferedCity", "Menu");}
+        </div>
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarsExample10" style="">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services We offer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">How it works</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="Navbar-Right-content dashboard-nav">
+            <div class="notification-dropdown">
+                <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span>(3)</span></a>
+                <div class="notification-drop">
+                    <ul class="dropdown-content list-unstyled">
+                        <li>
+                            <div class="arrow-top"><span class="icon-up"></span></div>
+                            <div class="notice-heading">
+                                <div class="float-left"><h4>Jane G.</h4></div>
+                                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                            </div>
+                            <p class="text-left">Lorem ipsum dolor sit a consectetur adipiscing elit</p>
+                        </li>
+                        <li>
+                            <div class="notice-heading">
+                                <div class="float-left"><h4>Seller 1</h4></div>
+                                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                            </div>
+                            <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
+                        </li>
+                        <li class="text-center"><a href="#">See all notifications</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="dropdown dashboard-menu">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-o" aria-hidden="true"></i> <span>Anna Vysotska</span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul class="list-unstyled">
+                        <li><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                        <li class="active"><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                        <li ><a href="my-orders-buyer.html"><i class="fa fa-th-list"></i> My Orders</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                        <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                        <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                        <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                        <li class="tracking"><a href="order-tracking.html"><i class="fa fa-search"></i> Order Tracking</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cart-notice">
+                <p>
+                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+</nav>

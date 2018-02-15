@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BringlyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryDisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CountryGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CountryLastModified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="PhoneCode" Type="varchar" MaxLength="10" />
+    <Property Name="ISOCountryCode" Type="varchar" MaxLength="10" />
+    <Property Name="Valid" Type="bit" />
+    <Property Name="CountryTwoLetterCode" Type="nvarchar" MaxLength="2" />
+    <Property Name="CountryThreeLetterCode" Type="nvarchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="tblFavourite">
+    <Key>
+      <PropertyRef Name="FavouriteGuid" />
+    </Key>
+    <Property Name="FavouriteGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ProductGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomain">
+    <Key>
+      <PropertyRef Name="LookDomainGuid" />
+    </Key>
+    <Property Name="LookDomainGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LookUpDomainCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="LookUpDomainDescription" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomainValue">
+    <Key>
+      <PropertyRef Name="LookUpDomainValueGuid" />
+    </Key>
+    <Property Name="LookUpDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_LookDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LookupDomainValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="LookupDomainText" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderBillingAddressID" Type="int" Nullable="false" />
+    <Property Name="OrderShippingAddressID" Type="int" />
+    <Property Name="OrderTotalPrice" Type="float" Nullable="false" />
+    <Property Name="OrderTotalTax" Type="float" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="OrderStatusID" Type="int" />
+    <Property Name="OrderCustomerID" Type="int" Nullable="false" />
+    <Property Name="OrderCreatedByUserGuid" Type="uniqueidentifier" />
+    <Property Name="OrderNote" Type="nvarchar(max)" />
+    <Property Name="OrderInvoice" Type="nvarchar(max)" />
+    <Property Name="OrderInvoiceNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrderDiscountCouponID" Type="int" />
+    <Property Name="OrderTrackingNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="OrderPaymentResult" Type="nvarchar(max)" />
+    <Property Name="OrderGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderLastModified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="OrderIsPaid" Type="bit" />
+    <Property Name="OrderTotalPriceInMainCurrency" Type="float" />
+    <Property Name="OrderCouponCode" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrderTotalDiscountInMainCurrency" Type="float" />
+    <Property Name="OrderTotalTaxInMainCurrency" Type="float" />
+    <Property Name="OrderDiscounts" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_Bringly.dbo.tblOrderAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblOrderAddress">
+    <Key>
+      <PropertyRef Name="AddressID" />
+      <PropertyRef Name="AddressLine1" />
+      <PropertyRef Name="AddressCity" />
+      <PropertyRef Name="AddressZip" />
+      <PropertyRef Name="AddressCountryID" />
+      <PropertyRef Name="AddressPersonalName" />
+      <PropertyRef Name="AddressLastModified" />
+    </Key>
+    <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddressCity" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AddressZip" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="AddressPhone" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddressCountryID" Type="int" Nullable="false" />
+    <Property Name="AddressStateID" Type="int" />
+    <Property Name="AddressPersonalName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="AddressGUID" Type="uniqueidentifier" />
+    <Property Name="AddressLastModified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddressStateText" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_Bringly.dbo.tblOrderItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblOrderItem">
+    <Key>
+      <PropertyRef Name="OrderItemID" />
+      <PropertyRef Name="OrderItemOrderID" />
+      <PropertyRef Name="OrderItemSKUName" />
+      <PropertyRef Name="OrderItemUnitPrice" />
+      <PropertyRef Name="OrderItemUnitCount" />
+      <PropertyRef Name="OrderItemGuid" />
+      <PropertyRef Name="OrderItemLastModified" />
+    </Key>
+    <Property Name="OrderItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderItemOrderID" Type="int" Nullable="false" />
+    <Property Name="OrderItemSKUName" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="OrderItemUnitPrice" Type="float" Nullable="false" />
+    <Property Name="OrderItemUnitCount" Type="int" Nullable="false" />
+    <Property Name="OrderItemCustomData" Type="nvarchar(max)" />
+    <Property Name="OrderItemGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderItemParentGuid" Type="uniqueidentifier" />
+    <Property Name="OrderItemLastModified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="OrderItemPrice" Type="float" />
+    <Property Name="OrderItemSendNotification" Type="bit" />
+    <Property Name="OrderItemSKU" Type="nvarchar(max)" />
+    <Property Name="OrderItemText" Type="nvarchar(max)" />
+    <Property Name="OrderItemTotalPriceInMainCurrency" Type="float" />
+    <Property Name="OrderItemUnitTotalDiscountInMainCurrency" Type="float" />
+    <Property Name="OrderItemUnitTotalTaxInMainCurrency" Type="float" />
+    <Property Name="OrderItemProductDiscounts" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_Bringly.dbo.tblOrderStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblOrderStatus">
+    <Key>
+      <PropertyRef Name="StatusID" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="StatusDisplayName" />
+      <PropertyRef Name="StatusEnabled" />
+      <PropertyRef Name="StatusGUID" />
+      <PropertyRef Name="StatusLastModified" />
+    </Key>
+    <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="StatusDisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="StatusOrder" Type="int" />
+    <Property Name="StatusEnabled" Type="bit" Nullable="false" />
+    <Property Name="StatusColor" Type="nvarchar" MaxLength="7" />
+    <Property Name="StatusGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StatusLastModified" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateDisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="StateName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="StateCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="StateGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StateLastModified" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUsers">
+    <Key>
+      <PropertyRef Name="UserGuid" />
+    </Key>
+    <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SocialMediaUniqueId" Type="nvarchar" MaxLength="256" />
+    <Property Name="UserSocialMediaData" Type="nvarchar" MaxLength="256" />
+    <Property Name="UserRegistrationType" Type="int" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImageExtension" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Modifiedby" Type="uniqueidentifier" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblUsersAddress">
+    <Key>
+      <PropertyRef Name="UserAddressGuid" />
+    </Key>
+    <Property Name="UserAddressGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar" MaxLength="256" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressType" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_tblState_CountryID_ tblCountry">
+    <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="1" />
+    <End Role="tblState" Type="Self.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblState_CountryID_tblCountry">
+    <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="1" />
+    <End Role="tblState" Type="Self.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUsersAddress_tblUsers">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+    <End Role="tblUsersAddress" Type="Self.tblUsersAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblUsersAddress">
+        <PropertyRef Name="FK_UserGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BringlyModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFavourite" EntityType="Self.tblFavourite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLookUpDomain" EntityType="Self.tblLookUpDomain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLookUpDomainValue" EntityType="Self.tblLookUpDomainValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsersAddress" EntityType="Self.tblUsersAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrderAddress" EntityType="Self.tblOrderAddress" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblOrderAddress].[AddressID] AS [AddressID], 
+    [tblOrderAddress].[AddressLine1] AS [AddressLine1], 
+    [tblOrderAddress].[AddressLine2] AS [AddressLine2], 
+    [tblOrderAddress].[AddressCity] AS [AddressCity], 
+    [tblOrderAddress].[AddressZip] AS [AddressZip], 
+    [tblOrderAddress].[AddressPhone] AS [AddressPhone], 
+    [tblOrderAddress].[AddressCountryID] AS [AddressCountryID], 
+    [tblOrderAddress].[AddressStateID] AS [AddressStateID], 
+    [tblOrderAddress].[AddressPersonalName] AS [AddressPersonalName], 
+    [tblOrderAddress].[AddressGUID] AS [AddressGUID], 
+    [tblOrderAddress].[AddressLastModified] AS [AddressLastModified], 
+    [tblOrderAddress].[AddressStateText] AS [AddressStateText]
+    FROM [dbo].[tblOrderAddress] AS [tblOrderAddress]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblOrderItem" EntityType="Self.tblOrderItem" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblOrderItem].[OrderItemID] AS [OrderItemID], 
+    [tblOrderItem].[OrderItemOrderID] AS [OrderItemOrderID], 
+    [tblOrderItem].[OrderItemSKUName] AS [OrderItemSKUName], 
+    [tblOrderItem].[OrderItemUnitPrice] AS [OrderItemUnitPrice], 
+    [tblOrderItem].[OrderItemUnitCount] AS [OrderItemUnitCount], 
+    [tblOrderItem].[OrderItemCustomData] AS [OrderItemCustomData], 
+    [tblOrderItem].[OrderItemGuid] AS [OrderItemGuid], 
+    [tblOrderItem].[OrderItemParentGuid] AS [OrderItemParentGuid], 
+    [tblOrderItem].[OrderItemLastModified] AS [OrderItemLastModified], 
+    [tblOrderItem].[OrderItemPrice] AS [OrderItemPrice], 
+    [tblOrderItem].[OrderItemSendNotification] AS [OrderItemSendNotification], 
+    [tblOrderItem].[OrderItemSKU] AS [OrderItemSKU], 
+    [tblOrderItem].[OrderItemText] AS [OrderItemText], 
+    [tblOrderItem].[OrderItemTotalPriceInMainCurrency] AS [OrderItemTotalPriceInMainCurrency], 
+    [tblOrderItem].[OrderItemUnitTotalDiscountInMainCurrency] AS [OrderItemUnitTotalDiscountInMainCurrency], 
+    [tblOrderItem].[OrderItemUnitTotalTaxInMainCurrency] AS [OrderItemUnitTotalTaxInMainCurrency], 
+    [tblOrderItem].[OrderItemProductDiscounts] AS [OrderItemProductDiscounts]
+    FROM [dbo].[tblOrderItem] AS [tblOrderItem]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblOrderStatus" EntityType="Self.tblOrderStatus" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblOrderStatus].[StatusID] AS [StatusID], 
+    [tblOrderStatus].[StatusName] AS [StatusName], 
+    [tblOrderStatus].[StatusDisplayName] AS [StatusDisplayName], 
+    [tblOrderStatus].[StatusOrder] AS [StatusOrder], 
+    [tblOrderStatus].[StatusEnabled] AS [StatusEnabled], 
+    [tblOrderStatus].[StatusColor] AS [StatusColor], 
+    [tblOrderStatus].[StatusGUID] AS [StatusGUID], 
+    [tblOrderStatus].[StatusLastModified] AS [StatusLastModified]
+    FROM [dbo].[tblOrderStatus] AS [tblOrderStatus]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblState_CountryID_ tblCountry" Association="Self.FK_tblState_CountryID_ tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountry" />
+      <End Role="tblState" EntitySet="tblState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblState_CountryID_tblCountry" Association="Self.FK_tblState_CountryID_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountry" />
+      <End Role="tblState" EntitySet="tblState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUsersAddress_tblUsers" Association="Self.FK_tblUsersAddress_tblUsers">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblUsersAddress" EntitySet="tblUsersAddress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

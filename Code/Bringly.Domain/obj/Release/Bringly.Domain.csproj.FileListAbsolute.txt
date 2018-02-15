@@ -1,0 +1,15 @@
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Bringly.Domain.dll.config
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Bringly.Domain.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Bringly.Domain.pdb
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\EntityFramework.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\EntityFramework.SqlServer.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Newtonsoft.Json.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Utilities.Helper.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Utilities.Helper.pdb
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\EntityFramework.xml
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\EntityFramework.SqlServer.xml
+E:\Work\Projects\Bringly\Code\Bringly.Domain\bin\Release\Newtonsoft.Json.xml
+E:\Work\Projects\Bringly\Code\Bringly.Domain\obj\Release\Bringly.Domain.csprojResolveAssemblyReference.cache
+E:\Work\Projects\Bringly\Code\Bringly.Domain\obj\Release\Bringly.Domain.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Bringly.Domain\obj\Release\Bringly.Domain.dll
+E:\Work\Projects\Bringly\Code\Bringly.Domain\obj\Release\Bringly.Domain.pdb

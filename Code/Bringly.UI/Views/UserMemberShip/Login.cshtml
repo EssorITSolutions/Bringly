@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+<div class="bg-white section-shadow sign-in-section sign-margin">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <h3 class="heading-sign">Sign In</h3>
+
+            <form class="form-sign-in">
+
+                <div class="form-group">
+                    <div class="map-form form-icon">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <label class="icon-map"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="map-form form-icon">
+                        <input type="password" class="form-control" placeholder="Password">
+                        <label class="icon-map key-img"><img src="~/Templates/images/key-password.png" /></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="text-right forgot-password"><a href="/usermembership/forgotpassword">Forgot password?</a></p>
+                </div>
+
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-primary btn-lg">SIGN IN</button>
+
+                    <p class="button-link">Don't have account? <a href="/usermembership/userregistration">Sign up</a></p>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="right-content-form">
+                @{ Html.RenderPartial("~/Views/UserMemberShip/_socialMediaLogin.cshtml");}
+            </div>
+        </div>
+    </div>
+</div>
+
+

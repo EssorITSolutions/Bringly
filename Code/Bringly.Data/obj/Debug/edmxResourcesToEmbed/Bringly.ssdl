@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BringlyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="CityGuid" />
+    </Key>
+    <Property Name="CityGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityUrlName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="CountryGUID" />
+    </Key>
+    <Property Name="CountryDisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CountryGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateModified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="PhoneCode" Type="varchar" MaxLength="10" />
+    <Property Name="ISOCountryCode" Type="varchar" MaxLength="10" />
+    <Property Name="Valid" Type="bit" />
+    <Property Name="CountryTwoLetterCode" Type="nvarchar" MaxLength="2" />
+    <Property Name="CountryThreeLetterCode" Type="nvarchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="tblFavourite">
+    <Key>
+      <PropertyRef Name="FavouriteGuid" />
+    </Key>
+    <Property Name="FavouriteGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblItem">
+    <Key>
+      <PropertyRef Name="ItemGuid" />
+    </Key>
+    <Property Name="ItemGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CategoryGuid" Type="uniqueidentifier" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedByGuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomain">
+    <Key>
+      <PropertyRef Name="LookDomainGuid" />
+    </Key>
+    <Property Name="LookDomainGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LookUpDomainCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="LookUpDomainDescription" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomainValue">
+    <Key>
+      <PropertyRef Name="LookUpDomainValueGuid" />
+    </Key>
+    <Property Name="LookUpDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_LookDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LookupDomainValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="LookupDomainText" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblRestaurant">
+    <Key>
+      <PropertyRef Name="RestaurantGuid" />
+    </Key>
+    <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RestaurantName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="RestaurantType" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CityGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PinCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CountryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="DeletedByGuid" Type="uniqueidentifier" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserGuid" />
+    </Key>
+    <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="SocialMediaUniqueId" Type="nvarchar" MaxLength="256" />
+    <Property Name="UserSocialMediaData" Type="nvarchar" MaxLength="256" />
+    <Property Name="UserRegistrationType" Type="int" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImageExtension" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="PreferedCity" Type="uniqueidentifier" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Modifiedby" Type="uniqueidentifier" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblUserAddress">
+    <Key>
+      <PropertyRef Name="UserAddressGuid" />
+    </Key>
+    <Property Name="UserAddressGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="CityGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_tblFavourite_tblRestaurant">
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="1" />
+    <End Role="tblFavourite" Type="Self.tblFavourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRestaurant">
+        <PropertyRef Name="RestaurantGuid" />
+      </Principal>
+      <Dependent Role="tblFavourite">
+        <PropertyRef Name="RestaurantGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblFavourite_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblFavourite" Type="Self.tblFavourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblFavourite">
+        <PropertyRef Name="CreatedByGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblItem_tblLookUpDomainValue">
+    <End Role="tblLookUpDomainValue" Type="Self.tblLookUpDomainValue" Multiplicity="0..1" />
+    <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLookUpDomainValue">
+        <PropertyRef Name="LookUpDomainValueGuid" />
+      </Principal>
+      <Dependent Role="tblItem">
+        <PropertyRef Name="CategoryGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblItem_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblItem">
+        <PropertyRef Name="CreatedByGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblItem_tblUser1">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblItem">
+        <PropertyRef Name="DeletedByGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRestaurant_tblCity">
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="CityGuid" />
+      </Principal>
+      <Dependent Role="tblRestaurant">
+        <PropertyRef Name="CityGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRestaurant_tblCountry">
+    <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="1" />
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="CountryGUID" />
+      </Principal>
+      <Dependent Role="tblRestaurant">
+        <PropertyRef Name="CountryGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRestaurant_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblRestaurant">
+        <PropertyRef Name="CreatedByGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRestaurant_tblUser1">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblRestaurant">
+        <PropertyRef Name="DeletedByGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRestaurant_tblUser2">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblRestaurant">
+        <PropertyRef Name="ModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblCity">
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="CityGuid" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="PreferedCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserAddress_tblCity">
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
+    <End Role="tblUserAddress" Type="Self.tblUserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="CityGuid" />
+      </Principal>
+      <Dependent Role="tblUserAddress">
+        <PropertyRef Name="CityGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserAddress_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblUserAddress" Type="Self.tblUserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblUserAddress">
+        <PropertyRef Name="UserGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BringlyModelStoreContainer">
+    <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFavourite" EntityType="Self.tblFavourite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLookUpDomain" EntityType="Self.tblLookUpDomain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLookUpDomainValue" EntityType="Self.tblLookUpDomainValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRestaurant" EntityType="Self.tblRestaurant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserAddress" EntityType="Self.tblUserAddress" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblFavourite_tblRestaurant" Association="Self.FK_tblFavourite_tblRestaurant">
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+      <End Role="tblFavourite" EntitySet="tblFavourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblFavourite_tblUser" Association="Self.FK_tblFavourite_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblFavourite" EntitySet="tblFavourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblItem_tblLookUpDomainValue" Association="Self.FK_tblItem_tblLookUpDomainValue">
+      <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValue" />
+      <End Role="tblItem" EntitySet="tblItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblItem_tblUser" Association="Self.FK_tblItem_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblItem" EntitySet="tblItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblItem_tblUser1" Association="Self.FK_tblItem_tblUser1">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblItem" EntitySet="tblItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRestaurant_tblCity" Association="Self.FK_tblRestaurant_tblCity">
+      <End Role="tblCity" EntitySet="tblCity" />
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRestaurant_tblCountry" Association="Self.FK_tblRestaurant_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountry" />
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRestaurant_tblUser" Association="Self.FK_tblRestaurant_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRestaurant_tblUser1" Association="Self.FK_tblRestaurant_tblUser1">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRestaurant_tblUser2" Association="Self.FK_tblRestaurant_tblUser2">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblCity" Association="Self.FK_tblUser_tblCity">
+      <End Role="tblCity" EntitySet="tblCity" />
+      <End Role="tblUser" EntitySet="tblUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserAddress_tblCity" Association="Self.FK_tblUserAddress_tblCity">
+      <End Role="tblCity" EntitySet="tblCity" />
+      <End Role="tblUserAddress" EntitySet="tblUserAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserAddress_tblUser" Association="Self.FK_tblUserAddress_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblUserAddress" EntitySet="tblUserAddress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

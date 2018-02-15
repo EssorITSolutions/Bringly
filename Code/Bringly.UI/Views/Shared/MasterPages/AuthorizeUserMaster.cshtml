@@ -1,0 +1,33 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @{Html.RenderPartial("_pageHeader");}
+</head>
+<body>
+    @{Html.RenderAction("TopMenu", "Menu");}
+
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            @RenderSection("BreadCrum", false)
+        </ol>
+        @RenderSection("CustomizeTop", false)
+        <div class="dashboard-content inner-margin">
+            <div class="row">
+
+                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel","User"); }
+
+                @RenderBody()
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="clearfix"></div>
+    @{Html.RenderPartial("_pageFooter");}
+</body>
+</html>

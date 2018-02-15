@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BringlyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryDisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryGUID" Type="Guid" Nullable="false" />
+    <Property Name="CountryLastModified" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="PhoneCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ISOCountryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Valid" Type="Boolean" />
+    <Property Name="CountryTwoLetterCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CountryThreeLetterCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblStates" Relationship="Self.FK_tblState_CountryID__tblCountry" FromRole="tblCountry" ToRole="tblState" />
+    <NavigationProperty Name="tblStates1" Relationship="Self.FK_tblState_CountryID_tblCountry" FromRole="tblCountry" ToRole="tblState" />
+  </EntityType>
+  <EntityType Name="tblFavourite">
+    <Key>
+      <PropertyRef Name="FavouriteGuid" />
+    </Key>
+    <Property Name="FavouriteGuid" Type="Guid" Nullable="false" />
+    <Property Name="FK_ProductGuid" Type="Guid" Nullable="false" />
+    <Property Name="FK_UserGuid" Type="Guid" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomain">
+    <Key>
+      <PropertyRef Name="LookDomainGuid" />
+    </Key>
+    <Property Name="LookDomainGuid" Type="Guid" Nullable="false" />
+    <Property Name="LookUpDomainCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LookUpDomainDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblLookUpDomainValue">
+    <Key>
+      <PropertyRef Name="LookUpDomainValueGuid" />
+    </Key>
+    <Property Name="LookUpDomainValueGuid" Type="Guid" Nullable="false" />
+    <Property Name="FK_LookDomainValueGuid" Type="Guid" Nullable="false" />
+    <Property Name="LookupDomainValue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LookupDomainText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderBillingAddressID" Type="Int32" Nullable="false" />
+    <Property Name="OrderShippingAddressID" Type="Int32" />
+    <Property Name="OrderTotalPrice" Type="Double" Nullable="false" />
+    <Property Name="OrderTotalTax" Type="Double" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="OrderStatusID" Type="Int32" />
+    <Property Name="OrderCustomerID" Type="Int32" Nullable="false" />
+    <Property Name="OrderCreatedByUserGuid" Type="Guid" />
+    <Property Name="OrderNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderInvoice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderInvoiceNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OrderDiscountCouponID" Type="Int32" />
+    <Property Name="OrderTrackingNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OrderPaymentResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderGUID" Type="Guid" Nullable="false" />
+    <Property Name="OrderLastModified" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="OrderIsPaid" Type="Boolean" />
+    <Property Name="OrderTotalPriceInMainCurrency" Type="Double" />
+    <Property Name="OrderCouponCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OrderTotalDiscountInMainCurrency" Type="Double" />
+    <Property Name="OrderTotalTaxInMainCurrency" Type="Double" />
+    <Property Name="OrderDiscounts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateDisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="StateGUID" Type="Guid" Nullable="false" />
+    <Property Name="StateLastModified" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="tblCountry" Relationship="Self.FK_tblState_CountryID__tblCountry" FromRole="tblState" ToRole="tblCountry" />
+    <NavigationProperty Name="tblCountry1" Relationship="Self.FK_tblState_CountryID_tblCountry" FromRole="tblState" ToRole="tblCountry" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserGuid" />
+    </Key>
+    <Property Name="UserGuid" Type="Guid" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SocialMediaUniqueId" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserSocialMediaData" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserRegistrationType" Type="Int32" Nullable="false" />
+    <Property Name="ImageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ImageExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modifiedby" Type="Guid" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeletedBy" Type="Guid" />
+    <NavigationProperty Name="tblUsersAddresses" Relationship="BringlyModel.FK_tblUsersAddress_tblUsers" FromRole="tblUser" ToRole="tblUsersAddress" />
+  </EntityType>
+  <EntityType Name="tblUsersAddress">
+    <Key>
+      <PropertyRef Name="UserAddressGuid" />
+    </Key>
+    <Property Name="UserAddressGuid" Type="Guid" Nullable="false" />
+    <Property Name="FK_UserGuid" Type="Guid" Nullable="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressType" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblUsersAddress_tblUsers" FromRole="tblUsersAddress" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblOrderAddress">
+    <Key>
+      <PropertyRef Name="AddressID" />
+      <PropertyRef Name="AddressLine1" />
+      <PropertyRef Name="AddressCity" />
+      <PropertyRef Name="AddressZip" />
+      <PropertyRef Name="AddressCountryID" />
+      <PropertyRef Name="AddressPersonalName" />
+      <PropertyRef Name="AddressLastModified" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressZip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressCountryID" Type="Int32" Nullable="false" />
+    <Property Name="AddressStateID" Type="Int32" />
+    <Property Name="AddressPersonalName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressGUID" Type="Guid" />
+    <Property Name="AddressLastModified" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="AddressStateText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblOrderItem">
+    <Key>
+      <PropertyRef Name="OrderItemID" />
+      <PropertyRef Name="OrderItemOrderID" />
+      <PropertyRef Name="OrderItemSKUName" />
+      <PropertyRef Name="OrderItemUnitPrice" />
+      <PropertyRef Name="OrderItemUnitCount" />
+      <PropertyRef Name="OrderItemGuid" />
+      <PropertyRef Name="OrderItemLastModified" />
+    </Key>
+    <Property Name="OrderItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderItemOrderID" Type="Int32" Nullable="false" />
+    <Property Name="OrderItemSKUName" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OrderItemUnitPrice" Type="Double" Nullable="false" />
+    <Property Name="OrderItemUnitCount" Type="Int32" Nullable="false" />
+    <Property Name="OrderItemCustomData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderItemGuid" Type="Guid" Nullable="false" />
+    <Property Name="OrderItemParentGuid" Type="Guid" />
+    <Property Name="OrderItemLastModified" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="OrderItemPrice" Type="Double" />
+    <Property Name="OrderItemSendNotification" Type="Boolean" />
+    <Property Name="OrderItemSKU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderItemText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderItemTotalPriceInMainCurrency" Type="Double" />
+    <Property Name="OrderItemUnitTotalDiscountInMainCurrency" Type="Double" />
+    <Property Name="OrderItemUnitTotalTaxInMainCurrency" Type="Double" />
+    <Property Name="OrderItemProductDiscounts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblOrderStatu">
+    <Key>
+      <PropertyRef Name="StatusID" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="StatusDisplayName" />
+      <PropertyRef Name="StatusEnabled" />
+      <PropertyRef Name="StatusGUID" />
+      <PropertyRef Name="StatusLastModified" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusDisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusOrder" Type="Int32" />
+    <Property Name="StatusEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="StatusColor" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="StatusGUID" Type="Guid" Nullable="false" />
+    <Property Name="StatusLastModified" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <Association Name="FK_tblState_CountryID__tblCountry">
+    <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="1" />
+    <End Role="tblState" Type="Self.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblState_CountryID_tblCountry">
+    <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="1" />
+    <End Role="tblState" Type="Self.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BringlyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCountries" EntityType="Self.tblCountry" />
+    <EntitySet Name="tblFavourites" EntityType="Self.tblFavourite" />
+    <EntitySet Name="tblLookUpDomains" EntityType="Self.tblLookUpDomain" />
+    <EntitySet Name="tblLookUpDomainValues" EntityType="Self.tblLookUpDomainValue" />
+    <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+    <EntitySet Name="tblStates" EntityType="Self.tblState" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <EntitySet Name="tblUsersAddresses" EntityType="Self.tblUsersAddress" />
+    <EntitySet Name="tblOrderAddresses" EntityType="Self.tblOrderAddress" />
+    <EntitySet Name="tblOrderItems" EntityType="Self.tblOrderItem" />
+    <EntitySet Name="tblOrderStatus" EntityType="Self.tblOrderStatu" />
+    <AssociationSet Name="FK_tblState_CountryID__tblCountry" Association="Self.FK_tblState_CountryID__tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountries" />
+      <End Role="tblState" EntitySet="tblStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblState_CountryID_tblCountry" Association="Self.FK_tblState_CountryID_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountries" />
+      <End Role="tblState" EntitySet="tblStates" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="BringlyModel.sysdiagram" />
+    <AssociationSet Name="FK_tblUsersAddress_tblUsers" Association="BringlyModel.FK_tblUsersAddress_tblUsers">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblUsersAddress" EntitySet="tblUsersAddresses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_tblUsersAddress_tblUsers">
+    <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+    <End Type="BringlyModel.tblUsersAddress" Role="tblUsersAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserGuid" />
+      </Principal>
+      <Dependent Role="tblUsersAddress">
+        <PropertyRef Name="FK_UserGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

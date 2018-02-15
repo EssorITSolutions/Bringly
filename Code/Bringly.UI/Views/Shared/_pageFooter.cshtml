@@ -1,0 +1,90 @@
+﻿<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="footer-col">
+                    <h5>MENU</h5>
+                    <ul class="list-unstyled">
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">About Us</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Restaurants</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Pick Up Goods</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">How it Works</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Services We offer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="footer-col">
+                    <h5>NAVIGATIONAL LINKS</h5>
+                    <ul class="list-unstyled">
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Terms &amp; Conditions</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Privacy Policy</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Contact US</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Merchant Register</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Delivery Boy Register</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="footer-col">
+                    <h5>POPULAR AREAS</h5>
+                    <ul class="list-unstyled">
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Delivery Food in Milan</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Delivery Flowers in Venezia</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Delivery Documents in Verona</a></li>
+                        <li class="list-unstyled-item"><a href="javascript:void(0)">Delivery Products in Roma</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="footer-col">
+                    <h5>WE ARE SOCIAL</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0)"><img src="~/Templates/images/facebook.png"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0)"><img src="~/Templates/images/twitter.png"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0)"><img src="~/Templates/images/instagram.png"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0)"><img src="~/Templates/images/pinterest.png"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0)"><img src="~/Templates/images/google-plus.png"></a>
+                        </li>
+                    </ul>
+
+                    <p>
+                        <a href="javascript:void(0)"><img src="~/Templates/images/google-play.png"></a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bottom-footer">
+        <p class="text-center">&copy; @DateTime.Now.Year Website Name, Inc. All rights reserved.</p>
+    </div>
+</footer>
+<!--footer-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+@Scripts.Render("~/Ljs")
+@if (ViewBag.ErrorBlock != null)
+{
+    <script type="text/javascript">
+            ErrorBlock('@ViewBag.ErrorBlock');
+    </script>
+}
+else if (ViewBag.success != null)
+{
+    <script type="text/javascript">
+            Success('@ViewBag.Success');
+    </script>
+}

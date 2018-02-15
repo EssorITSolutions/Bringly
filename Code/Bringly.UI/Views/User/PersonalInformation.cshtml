@@ -1,0 +1,103 @@
+﻿
+@model Bringly.Domain.User.UserProfile
+
+@{
+    ViewBag.Title = "PersonalInformation";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card personal-information">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <h5 class="heading-sub">Personal Information</h5>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                                <p class="edit">@Html.ActionLink("Edit", "EditPersonalInformation", "User")</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td width="30%"><span>Name:</span></td>
+                                    <td width="75%">@Model.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>E-mail:</span></td>
+                                    <td width="75%">@Model.EmailAddress</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>Mobile Number:</span></td>
+                                    <td width="75%">@Model.MobileNumber</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <h5 class="heading-sub">Billing Information</h5>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td width="30%"><span>Billing Address:</span></td>
+                                    <td width="75%">@Model.BillingAddress.Address</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>City:</span></td>
+                                    <td width="75%">@Model.BillingAddress.CityName</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>Postcode:</span></td>
+                                    <td width="75%">@Model.BillingAddress.PostCode</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <h5 class="heading-sub">Shipping Information</h5>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td width="30%"><span>Shipping Address:</span></td>
+                                    <td width="75%">@Model.ShippingAddress.Address</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>City:</span></td>
+                                    <td width="75%">@Model.ShippingAddress.CityName</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%"><span>Postcode:</span></td>
+                                    <td width="75%">@Model.ShippingAddress.PostCode</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

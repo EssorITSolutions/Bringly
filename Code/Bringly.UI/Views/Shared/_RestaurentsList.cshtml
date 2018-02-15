@@ -1,0 +1,59 @@
+﻿@model List<Bringly.Domain.Restaurant>
+@{Layout = null;}
+@foreach (var restaurant in Model)
+{
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="shadow-box restaurant-info">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="brand-logo">
+                        <img src="images/brand-logo.png" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail" id="restaurant-@restaurant.RestaurantGuid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.Hidden("restaurant_RestaurantGuid", restaurant.RestaurantGuid)
+                                <h4>@restaurant.RestaurantName</h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <p class="timing"><i class="fa fa-heart-o" name="favourite" onclick="addToFavourite(@("'" + restaurant.RestaurantGuid + "'"))"></i></p>
+
+                            </div>
+                        </div>
+                        <p class="rating-star"><span class="tag-star"><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a></span> &nbsp; 5.0 (27)</p>
+                        <p>Italian cuisine, European</p>
+                        <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, Kyiv</p>
+                        <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail">
+                        <ul class="list-inline order-detail">
+                            <li class="list-inline-item">
+                                Min order<br />
+                                <span>25<sub>$</sub></span>
+                            </li>
+                            <li class="list-inline-item">
+                                Delivery cost<br />
+                                <span>Free</span>
+                            </li>
+                            <li class="list-inline-item">
+                                Delivery time<br />
+                                <span>90 <sub>min</sub></span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="float-right" style="padding-top:12px;">
+                        <button class="btn btn-primary btn-lg">ORDER NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

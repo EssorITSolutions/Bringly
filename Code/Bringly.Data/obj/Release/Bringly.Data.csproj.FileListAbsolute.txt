@@ -1,0 +1,11 @@
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\Bringly.Data.dll.config
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\Bringly.Data.dll
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\Bringly.Data.pdb
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\EntityFramework.dll
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\EntityFramework.xml
+E:\Work\Projects\Bringly\Code\Bringly.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\Work\Projects\Bringly\Code\Bringly.Data\obj\Release\Bringly.Data.csprojResolveAssemblyReference.cache
+E:\Work\Projects\Bringly\Code\Bringly.Data\obj\Release\Bringly.Data.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Bringly.Data\obj\Release\Bringly.Data.dll
+E:\Work\Projects\Bringly\Code\Bringly.Data\obj\Release\Bringly.Data.pdb

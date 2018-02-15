@@ -1,0 +1,34 @@
+﻿<!-- Left Panel-->
+@model Bringly.Domain.User.UserProfile
+
+<div class="col-lg-3 col-md-5 col-sm-12">
+    <aside class="left-side">
+        <div class="shadow-box profile-info">
+            <img src="~/Templates/images/@Model.ProfileImage" style="width:92px;height:93px;" class="m-auto d-block" />           
+            <p class="text-center">@Model.FullName</p>
+            <p class="text-center"><span>Buyer</span></p>
+        </div>
+
+        <div class="shadow-box dashboard-menu">
+            <ul class="list-unstyled">
+                <li><a href="#"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                <li class="active"><a href="user/personalinformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                @*<li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>*@
+                @if (!string.IsNullOrEmpty(Model.PreferedCity))
+                {
+                    <li><a href="restaurant/city/@Model.PreferedCity"><i class="fa fa-heart"></i> Favourites</a></li>
+                }
+                else
+                {
+                    <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                }
+                <li><a href="#"><i class="fa fa-star"></i> My Reviews</a></li>
+                <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+    </aside>
+</div>

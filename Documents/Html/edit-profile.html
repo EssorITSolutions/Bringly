@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+	<style>
+	.form-control.validation{
+		border: 1px solid #f52020;
+	}
+	.validation_error {
+		position: relative;
+		background: #ffffff;
+		border: 1px solid #f52020;
+		padding: 4px 10px;
+		font-size: 14px;
+		color: #f52020;
+		margin-top: 10px;
+		display: inline-block;
+}
+.validation_error:after, .validation_error:before {
+	bottom: 100%;
+	left: 20px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.validation_error:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #ffffff;
+	border-width: 8px;
+	margin-left: -8px;
+}
+.validation_error:before {
+	border-color: rgba(245, 32, 32, 0);
+	border-bottom-color: #f52020;
+	border-width: 9px;
+	margin-left: -9px;
+
+	</style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="Navbar-logo admin-logo">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/logo-2.png" />
+                </a>
+
+                <div class="Navbar-dropdown">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>Copenhagen</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="shadow-box">
+                                <a href="#" class="close-icon">&times;</a>
+                                <h4>Choose your city</h4>
+                                <ul class="list-unstyled">
+                                    <li class="active"><a href="#">Vienna</a></li>
+                                    <li><a href="#">Paris</a></li>
+                                    <li><a href="#">Milan</a></li>
+                                    <li><a href="#">Turin</a></li>
+                                    <li><a href="#">Hamburg</a></li>
+                                    <li><a href="#">London</a></li>
+                                </ul>
+
+                                <div class="form-row align-items-center pt-3">
+                                    <label>or enter in search bar</label>
+                                    <div class="map-form">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Your City">
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nunc dui, ultrices ut magna vel, lobortis pharetra nisi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarsExample10" style="">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services We offer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">How it works</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="Navbar-Right-content dashboard-nav">
+                <div class="notification-dropdown">
+                    <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span>(3)</span></a>
+                    <div class="notification-drop">
+                        <ul class="dropdown-content list-unstyled">
+                            <li>
+                                <div class="arrow-top"><span class="icon-up"></span></div>
+                                <div class="notice-heading">
+                                    <div class="float-left"><h4>Jane G.</h4></div>
+                                    <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                                </div>
+                                <p class="text-left">Lorem ipsum dolor sit a consectetur adipiscing elit</p>
+                            </li>
+                            <li>
+                                <div class="notice-heading">
+                                    <div class="float-left"><h4>Seller 1</h4></div>
+                                    <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                                </div>
+                                <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
+                            </li>
+                            <li class="text-center"><a href="#">See all notifications</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="dropdown dashboard-menu">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> <span>Anna Vysotska</span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <ul class="list-unstyled">
+                            <li><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                            <li class="active"><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                            <li><a href="my-orders-buyer.html"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                            <li class="tracking"><a href="order-tracking.html"><i class="fa fa-search"></i> Order Tracking</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cart-notice">
+                    <p>
+                        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+            <li class="breadcrumb-item active">Personal Information</li>
+        </ol>
+
+        <div class="dashboard-content inner-margin">
+            <div class="row">
+                <div class="col-lg-3 col-md-5 col-sm-12">
+                    <aside class="left-side">
+                        <div class="shadow-box profile-info">
+                            <img src="images/profile.png" class="m-auto d-block" />
+                            <p class="text-center">Anna Vysotska</p>
+                            <p class="text-center"><span>Buyer</span></p>
+                        </div>
+
+                        <div class="shadow-box dashboard-menu">
+                            <ul class="list-unstyled">
+                                <li><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                                <li class="active"><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                                <li><a href="my-orders-buyer.html"><i class="fa fa-th-list"></i> My Orders</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                                <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                                <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                                <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                                <li class="tracking"><a href="order-tracking.html"><i class="fa fa-search"></i> Order Tracking</a></li>
+                                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="col-lg-9 col-md-7 col-sm-12">
+                    <div class="right-side">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card personal-information">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                                <h5 class="heading-sub">Edit Personal Information</h5>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+										<form>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Name:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <input type="text" class="form-control" placeholder="Anna Vysotska">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>E-mail:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <input type="email" class="form-control validation" >
+												  <span class="validation_error">The field cannot be enpty</span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Mobile Phone number:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <input type="text" class="form-control" placeholder="+39 38068 504 47">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Billing Address:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <textarea class="form-control">Via Giulio Cesare Procaccini, 30</textarea>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Shipping Address:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <textarea class="form-control">Via Giulio Cesare Procaccini, 30</textarea>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>City:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+													<select class="form-control">
+														<option>Milan</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Postcode:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <input type="text" placeholder="20154" class="form-control">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+													<span>Postcode:</span>
+												</label>
+												<div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+												  <input type="text" placeholder="20154" class="form-control">
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+													<button type="submit" class="btn btn-primary btn-lg">UPDATE</button>
+												</div>
+												
+											</div>
+										</form>
+                                    
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+    <div class="clearfix"></div>
+    <!--footer-->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>MENU</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">About Us</a></li>
+                            <li class="list-unstyled-item"><a href="#">Restaurants</a></li>
+                            <li class="list-unstyled-item"><a href="#">Pick Up Goods</a></li>
+                            <li class="list-unstyled-item"><a href="#">How it Works</a></li>
+                            <li class="list-unstyled-item"><a href="#">Services We offer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>NAVIGATIONAL LINKS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Terms & Conditions</a></li>
+                            <li class="list-unstyled-item"><a href="#">Privacy Policy</a></li>
+                            <li class="list-unstyled-item"><a href="#">Contact US</a></li>
+                            <li class="list-unstyled-item"><a href="#">Merchant Register</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Boy Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>POPULAR AREAS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Delivery Food in Milan</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Flowers in Venezia</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Documents in Verona</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Products in Roma</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>WE ARE SOCIAL</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/facebook.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/twitter.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/instagram.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/pinterest.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/google-plus.png" /></a>
+                            </li>
+                        </ul>
+
+                        <p>
+                            <a href="#"><img src="images/google-play.png" /></a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <p class="text-center">© 2017 Website Name, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

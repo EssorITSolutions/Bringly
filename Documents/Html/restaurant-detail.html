@@ -1,0 +1,773 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="Navbar-logo admin-logo">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/logo-2.png" />
+                </a>
+                <div class="Navbar-dropdown">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>Copenhagen</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="shadow-box">
+                                <a href="#" class="close-icon">&times;</a>
+                                <h4>Choose your city</h4>
+                                <ul class="list-unstyled">
+                                    <li class="active"><a href="#">Vienna</a></li>
+                                    <li><a href="#">Paris</a></li>
+                                    <li><a href="#">Milan</a></li>
+                                    <li><a href="#">Turin</a></li>
+                                    <li><a href="#">Hamburg</a></li>
+                                    <li><a href="#">London</a></li>
+                                </ul>
+
+                                <div class="form-row align-items-center pt-3">
+                                    <label>or enter in search bar</label>
+                                    <div class="map-form">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Your City">
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nunc dui, ultrices ut magna vel, lobortis pharetra nisi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarsExample10" style="">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services We offer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">How it works</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="Navbar-Right-content dashboard-nav">
+                <div class="dropdown dashboard-menu">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> <span>Anna Vysotska</span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <ul class="list-unstyled">
+                            <li class="active"><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                            <li><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                            <li><a href="my-orders_merchant.html"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                            <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cart-notice">
+                    <p>
+                        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Restaurants</a></li>
+            <li class="breadcrumb-item active">Pano's Pizza</li>
+        </ol>
+
+        <div class="dashboard-content inner-margin">
+            <div class="main-heading">
+                <h3>Pano's Pizza</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-12">
+                    <aside class="left-side">
+                        <div class="shadow-box categories">
+                            <div class="heading-block">
+                                <h5 class="heading-sub">Categories</h5>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Pizza</a></li>
+                                <li><a href="#">Salad</a></li>
+                                <li><a href="">Pasta</a></li>
+                                <li><a href="">Meat</a></li>
+                                <li><a href="">Drinks</a></li>
+                                <li><a href="">Desserts</a></li>
+                            </ul>
+                        </div>
+
+                        
+                    </aside>
+                </div>
+
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <div class="right-side">
+                        <div class="shadow-box restaurant-info">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                    <div class="brand-logo">
+                                        <img src="images/brand-logo.png" class="m-auto d-block"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-8 col-sm-12">
+                                    <div class="brand-detail">
+                                        <h4>Pano's Pizza</h4>
+                                        <p class="rating-star"><span class="tag-star"><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a></span> &nbsp; 5.0 (27)</p>
+                                        <p>Italian cuisine, European</p>
+                                        <p class="address-point"><i class="fa fa-map-marker"></i> Oude Leliestraat 5H , 1016BD Amsterdam</p>
+                                        <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <div class="brand-detail">
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-6 col-sm-12">
+                                                <p class="timing"><i class="fa fa-clock-o"></i> 10:00-22:00</p>
+                                            </div>
+                                            <div class="col-lg-7 col-md-6 col-sm-12">
+                                               <p class="add-favourites"><a href="#" class="text-link"><i class="fa fa-heart-o"></i> Add to Favourites</a></p> 
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline order-detail">
+                                            <li class="list-inline-item">
+                                                Delivery cost<br />
+                                                <span>Free</span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                Delivery time<br />
+                                                <span>90<sub>min</sub></span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                Pick-up time<br />
+                                                <span>60<sub>min</sub></span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                Min order<br />
+                                                <span>25<sub>$</sub></span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                Max order<br />
+                                                <span>225<sub>$</sub></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card tabs-detail">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#menu" role="tab">Menu</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-block">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="menu" role="tabpanel">
+                                        <div class="panel-menu">
+                                            <h5 class="text-weight">PIZZA</h5>
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-1.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Pizza Toscana &nbsp;&nbsp;&nbsp; <span class="veg-menu"><i class="fa fa-check-circle"></i> Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        13<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-3.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Pizza Toscana &nbsp;&nbsp;&nbsp; <span class="non-veg-menu"><i class="fa fa-times-circle"></i> Non-Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        15<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-1.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Pizza Toscana &nbsp;&nbsp;&nbsp; <span class="veg-menu"><i class="fa fa-check-circle"></i> Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        16<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-3.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Pizza Toscana &nbsp;&nbsp;&nbsp; <span class="non-veg-menu"><i class="fa fa-times-circle"></i> Non-Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        10<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-menu">
+                                            <h5 class="text-weight">SALADS</h5>
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-4.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Salad Cesar &nbsp;&nbsp;&nbsp; <span class="veg-menu"><i class="fa fa-check-circle"></i> Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        13<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-5.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Salad Healthy &nbsp;&nbsp;&nbsp; <span class="non-veg-menu"><i class="fa fa-times-circle"></i> Non-Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        15<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-6.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Salad Tuna &nbsp;&nbsp;&nbsp; <span class="veg-menu"><i class="fa fa-check-circle"></i> Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        16<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="restaurant-menu">
+                                                <div class="product-image">
+                                                    <img src="images/product-2.png" class="img-fluid" />
+                                                </div>
+                                                <div class="product-detail">
+                                                    <p class="text-weight">Salad Green &nbsp;&nbsp;&nbsp; <span class="non-veg-menu"><i class="fa fa-times-circle"></i> Non-Veg</span></p>
+                                                    <p>
+                                                        Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese,
+                                                        onion, tomato, sweet pepper<br />550 g / 28 cm
+                                                    </p>
+                                                </div>
+                                                <div class="menu-quantity">
+                                                    <p class="count-quantity float-left">
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                                        <span class="quanity-input">1</span>
+                                                        <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                                    </p>
+                                                    <h3 class="amount-menu float-right">
+                                                        10<sub>$</sub>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO CART
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="tab-pane" id="about" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-12 col-sm-12">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt nisi 
+                                                    urna, non blandit lectus laoreet sit amet. Maecenas mi augue, scelerisque et 
+                                                    nibh porta, cursus varius ligula. In sagittis quis lectus in lobortis. Sed 
+                                                    ullamcorper eleifend lorem sit amet mattis. Suspendisse commodo dictum massa 
+                                                    in maximus. Phasellus lobortis tincidunt nulla, et fringilla odio auctor ac. 
+                                                    Vivamus a pulvinar sem. Pellentesque laoreet orci metus, eu bibendum nisl 
+                                                    ornare quis. Sed quis neque dignissim ligula egestas interdum. Sed vel lectus 
+                                                    lacus. Nulla tempor metus in elit ultricies, vel sagittis neque finibus.
+                                                </p>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                                <div class="timing-panel">
+                                                    <h5>Delivery Hours</h5>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Monday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tuesday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Wednesday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thursday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Friday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Saturday</td>
+                                                                <td>11:30 - 23:45</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                                <div class="timing-panel pickup-area">
+                                                    <h5>Delivery Areas</h5>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1014 Amsterdam (Stadsdeel Westerpoort)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1015 Amsterdam (Stadsdeel Binnenstad)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1016 Amsterdam (Stadsdeel Amsterdam-Noord)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1016 Amsterdam (Stadsdeel Binnenstad)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1017 Amsterdam (Stadsdeel Binnenstad) </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1018 Amsterdam (Stadsdeel Binnenstad)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1014 Amsterdam (Stadsdeel Westerpoort)</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                                <div class="timing-panel pickup-area">
+                                                    <h5>Pick-up Address</h5>
+                                                    <p>Oude Leliestraat 5H , 1016BD Amsterdam</p>
+                                                    <div style="width: 100%"><iframe width="100%" height="345" src="https://www.mapsdirections.info/en/custom-google-maps/map.php?width=100%&height=600&hl=ru&q=Oude%20Leliestraat%205H%20%2C%201016BD%20Amsterdam+(Your%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=A&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.mapsdirections.info/en/custom-google-maps/">Create a custom Google Map</a> by <a href="https://www.mapsdirections.info/en/">Measure area on map</a></iframe></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="reviews" role="tabpanel">
+                                        <div class="review-panel">
+                                            <div class="total-rating">
+                                                <p>
+                                                    <span class="tag-star">
+                                                    <a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a>
+                                                    </span>
+                                                    4.5(27)
+                                                </p>
+                                            </div>
+                                            <div class="media">
+                                                <img class="d-flex mr-3" src="images/profile.png" width="51" height="51">
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-md-8 col-sm-12">
+                                                            <h4 class="mt-0">Jannet &nbsp;&nbsp;&nbsp;<span class="tag-date">13.06.2017 at 13:02</span></h4>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <p class="star-rating">
+                                                                <span class="tag-star"><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt nisi urna, non blandit lectus laoreet sit amet.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="media">
+                                                <img class="d-flex mr-3" src="images/profile.png" width="51" height="51">
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-md-8 col-sm-12">
+                                                            <h4 class="mt-0">Anna &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag-date">05.06.2017 at 13:02</span></h4>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <p class="star-rating">
+                                                                <span class="tag-star"><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt nisi urna, non blandit lectus laoreet sit amet.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="media">
+                                                <img class="d-flex mr-3" src="images/profile.png" width="51" height="51">
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-md-8 col-sm-12">
+                                                            <h4 class="mt-0">Karol &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag-date">01.06.2017 at 13:02</span></h4>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <p class="star-rating">
+                                                                <span class="tag-star"><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#" class="unselected"><i class="fa fa-star"></i></a></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt nisi urna, non blandit lectus laoreet sit amet.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="media">
+                                                <img class="d-flex mr-3" src="images/profile.png" width="51" height="51">
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-md-8 col-sm-12">
+                                                            <h4 class="mt-0">Karol &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag-date">01.06.2017 at 13:02</span></h4>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <p class="star-rating">
+                                                                <span class="tag-star"><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#" class="unselected"><i class="fa fa-star"></i></a></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt nisi urna, non blandit lectus laoreet sit amet.</p>     
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="review-comment">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label class="label-comment">Leave comment</label>
+                                                    <textarea class="form-control" cols="5" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn btn-primary btn-lg" value="SUBMIT">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!--Add-meal-popup-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">You have added 1 item to Shopping Cart</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="shopping-table">
+                        <div class="meal-table">
+                            <ul class="list-inline">
+                                <li class="list-inline-item product-image">
+                                    <img src="images/product-1.png" class="img-fluid">
+                                </li>
+                                <li class="list-inline-item product-name">
+                                    <h5 class="product-name">Pizza Toscana</h5>
+                                    <p>550 g / 28 cm</p>
+                                </li>
+                                <li class="list-inline-item product-quantity">
+                                    <a href="" class="add-minus-icon"><i class="fa fa-minus"></i></a>
+                                    <span class="quanity-input">1</span>
+                                    <a href="" class="add-minus-icon"><i class="fa fa-plus"></i></a>
+                                </li>
+                                <li class="list-inline-item product-prices">
+                                    <span class="td-content">16<sub>$</sub></span>
+                                </li>
+                                <li class="list-inline-item product-status text-right">
+                                    <a href="" class="trash-icon"><i class="fa fa-trash"></i> Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="meal-total">
+                            <ul class="list-inline">
+                                <li class="list-inline-item product-image">
+                                   
+                                </li>
+                                <li class="list-inline-item product-name">
+                                    
+                                </li>
+                                <li class="list-inline-item product-quantity">
+                                    
+                                </li>
+                                <li class="list-inline-item product-prices text-right">
+                                    <span class="td-content">Total:</span>
+                                </li>
+                                <li class="list-inline-item product-prices text-right">
+                                    <span class="td-content">16$</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="foot-button">
+                            <div class="float-left">
+                                <button class="btn btn-secondary btn-lg">ADD MEALS</button>
+                            </div>
+                            <div class="float-right ">
+                                <button class="btn btn-primary btn-lg">CHECKOUT <i class="fa fa-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!--end-add-meal-popup-->
+    <!--footer-->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>MENU</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">About Us</a></li>
+                            <li class="list-unstyled-item"><a href="#">Restaurants</a></li>
+                            <li class="list-unstyled-item"><a href="#">Pick Up Goods</a></li>
+                            <li class="list-unstyled-item"><a href="#">How it Works</a></li>
+                            <li class="list-unstyled-item"><a href="#">Services We offer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>NAVIGATIONAL LINKS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Terms & Conditions</a></li>
+                            <li class="list-unstyled-item"><a href="#">Privacy Policy</a></li>
+                            <li class="list-unstyled-item"><a href="#">Contact US</a></li>
+                            <li class="list-unstyled-item"><a href="#">Merchant Register</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Boy Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>POPULAR AREAS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Delivery Food in Milan</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Flowers in Venezia</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Documents in Verona</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Products in Roma</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>WE ARE SOCIAL</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/facebook.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/twitter.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/instagram.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/pinterest.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/google-plus.png" /></a>
+                            </li>
+                        </ul>
+
+                        <p>
+                            <a href="#"><img src="images/google-play.png" /></a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <p class="text-center">© 2017 Website Name, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

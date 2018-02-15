@@ -1,0 +1,6 @@
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Release\Bringly.UserVariables.dll
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Release\Bringly.UserVariables.pdb
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\obj\Release\Bringly.UserVariables.csprojResolveAssemblyReference.cache
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\obj\Release\Bringly.UserVariables.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\obj\Release\Bringly.UserVariables.dll
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\obj\Release\Bringly.UserVariables.pdb

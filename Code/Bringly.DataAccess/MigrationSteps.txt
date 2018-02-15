@@ -1,0 +1,41 @@
+﻿Add-Migration <<NAME>>
+
+*************************************
+
+Now update your database
+
+Update-Database
+
+OR
+
+update-database -Script
+
+*************************************
+
+
+Add-Migration InitialCreate -force
+
+
+
+
+
+
+
+
+
+-----------------------------------
+Create New Class BringlyContext and Add Constructor 
+
+ public BringlyContext() : base ("DbBringly")
+        {
+
+        }
+
+
+Enable-Migrations -ContextTypeName BringlyContext -MigrationsDirectory Migrations/Bringly 
+
+Run in Manager console. It will create Configuration.cs file
+
+add-migration -ConfigurationTypeName Bringly.DataAccess.Migrations.Configuration "InitialCreate" 
+
+update-database -ConfigurationTypeName Bringly.DataAccess.Migrations.Configuration 

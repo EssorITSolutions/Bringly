@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body class="non-menu">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="Navbar-logo admin-logo">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/logo-2.png" />
+                </a>
+
+                <div class="Navbar-dropdown">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>Copenhagen</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="shadow-box">
+                                <a href="#" class="close-icon">&times;</a>
+                                <h4>Choose your city</h4>
+                                <ul class="list-unstyled">
+                                    <li class="active"><a href="#">Vienna</a></li>
+                                    <li><a href="#">Paris</a></li>
+                                    <li><a href="#">Milan</a></li>
+                                    <li><a href="#">Turin</a></li>
+                                    <li><a href="#">Hamburg</a></li>
+                                    <li><a href="#">London</a></li>
+                                </ul>
+
+                                <div class="form-row align-items-center pt-3">
+                                    <label>or enter in search bar</label>
+                                    <div class="map-form">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Your City">
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nunc dui, ultrices ut magna vel, lobortis pharetra nisi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-toggler collapsed"></div>
+
+
+            <div class="Navbar-Right-content dashboard-nav">
+                <div class="notification-dropdown">
+                    <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span>(3)</span></a>
+                    <div class="notification-drop">
+                        <ul class="dropdown-content list-unstyled">
+                            <li>
+                                <div class="arrow-top"><span class="icon-up"></span></div>
+                                <div class="notice-heading">
+                                    <div class="float-left"><h4>Jane G.</h4></div>
+                                    <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                                </div>
+                                <p class="text-left">Lorem ipsum dolor sit a consectetur adipiscing elit</p>
+                            </li>
+                            <li>
+                                <div class="notice-heading">
+                                    <div class="float-left"><h4>Seller 1</h4></div>
+                                    <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+                                </div>
+                                <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
+                            </li>
+                            <li class="text-center"><a href="#">See all notifications</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="dropdown dashboard-menu">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> <span>Anna Vysotska</span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <ul class="list-unstyled">
+                            <li class="active"><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                            <li><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                            <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                            <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cart-notice">
+                    <p>
+                        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container inner-margin">
+        <div class="wizard">
+
+            <ul class="nav nav-wizard">
+                <li>
+                    <a class="active" href="#step1" data-toggle="tab">Delivery</a>
+                </li>
+                <li>
+                    <a href="#step2" data-toggle="tab">Payment</a>
+                </li>
+
+                <li>
+                    <a href="#step3" data-toggle="tab">Confirmation</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="bg-white section-shadow tab-pane active mt-5" id="step1">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <h5 class="text-weight">Delivery Method</h5>
+                            <div class="radio-option check-option">
+                                <label class="custom-control custom-radio">
+                                    <input id="radio3" name="radio" type="radio" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Delivery</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="radio2" name="radio" type="radio" checked class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description checked-label">Pick Up</span>
+                                </label>
+                            </div>
+                            <form class="form-sign-in">
+                                <p class="mb-2" style="color:#333;"><i class="fa fa-map-marker" aria-hidden="true"></i>
+<span style="font-weight:500;">Pick Up Address: </span> Herrengasse 14, 1010 Wien</p>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        <input type="text" class="form-control" placeholder="Your Name">
+                                        <label class="icon-map"><i class="fa fa-user" aria-hidden="true"></i></label>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        <input type="email" class="form-control" placeholder="Your Email">
+                                        <label class="icon-map"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        <input type="text" class="form-control" placeholder="Mobile Phone Number">
+                                        <label class="icon-map"><i class="fa fa-phone" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        <select class="form-control">
+                                            <option>Pick Up Time</option>
+                                        </select>
+                                        <label class="icon-map"><i class="fa fa-clock-o" aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p><a href="#">Add Comment</a></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary btn-lg">CONTINUE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white section-shadow tab-pane mt-5" id="step2">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <h5 class="text-weight">Payment</h5>
+                            <div class="media pt-2">
+                                <img class="d-flex mr-4" src="images/icon-9.png">
+                                <div class="media-body">
+                                    <div class="radio-option check-option pt-0">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Cash</span>
+                                        </label>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate tristique varius</p>
+                                </div>
+                            </div>
+
+                            <div class="media pt-4">
+                                <img class="d-flex mr-4" src="images/icon-10.png">
+                                <div class="media-body">
+                                    <div class="radio-option check-option pt-0">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio2"  name="radio" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Credit Card</span>
+                                        </label>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate tristique varius</p>
+                                </div>
+                            </div>
+                            <div class="media pt-3 pb-3">
+                                <button type="submit" class="btn btn-secondary btn-lg">CONTINUE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white section-shadow tab-pane mt-5" id="step3">
+                    <h5 class="text-weight">Order Confirmation</h5>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="Customer-Detail pl-0 pb-0">
+                                <p class="text-weight">Delivery Address: </p>
+                                <p>Rostovska 8, Vienna, 10653</p>
+                            </div>
+
+                            <div class="Customer-Detail pl-0 pb-0">
+                                <p class="text-weight">Delivery Time: </p>
+                                <p>
+                                    ASAP
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="Customer-Detail pl-0 pb-0">
+                                <p class="text-weight">Contact Information: </p>
+                                <p>Anna Vysotska, +39 38 068 5474</p>
+                            </div>
+
+                            <div class="Customer-Detail pl-0 pb-0">
+                                <p class="text-weight">Payment Method: </p>
+                                <p>Credit Card</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shopping-table mt-4">
+                        <div class="Customer-Detail pl-0 mb-2">
+                            <p class="text-weight">Order Details: </p>
+                        </div>
+                        <table id="cart" class="table table-responsive">
+                            <thead class="table-head">
+                                <tr>
+                                    <th style="width:34%" class="pl-0">Item</th>
+                                    <th style="width:17%">Quantity</th>
+                                    <th style="width:17%">Price</th>
+                                    <th style="width:17%">Discount</th>
+                                    <th style="width:15%; padding-left:3.60rem !important;" class="px-5">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="align-items-center">
+                                    <td class="Product py-3 pl-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-4">
+                                                <img src="images/product-1.png" class="img-fluid">
+                                            </div>
+                                            <div class="col-8">
+                                                <h5 class="product-name">Pizza Toscana</h5>
+                                                <p>550 g / 28cm</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="Quantity py-3">
+                                        <div class="row align-items-center px-4">
+                                            <span class="quanity-input">1</span>
+                                        </div>
+                                    </td>
+                                    <td class="Price py-3">
+                                        <div class="row align-items-center">
+                                            <span class="td-content">16<sub>$</sub></span>
+                                        </div>
+                                    </td>
+
+                                    <td class="discout py-3">
+                                        <div class="row align-items-center">
+                                            <span class="td-content">0<sub>$</sub></span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center action-button py-3">
+                                        <div class="row align-items-center px-5">
+                                            <span class="td-content">16<sub>$</sub></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="align-items-center">
+                                    <td class="Product py-3 pl-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-4">
+                                                <img src="images/product-2.png" class="img-fluid">
+                                            </div>
+                                            <div class="col-8">
+                                                <h5 class="product-name">Salad Cesar</h5>
+                                                <p>200 g</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="Quantity py-3">
+                                        <div class="row align-items-center px-4">
+                                            <span class="quanity-input">1</span>
+                                        </div>
+                                    </td>
+                                    <td class="Price py-3">
+                                        <div class="row align-items-center">
+                                            <span class="td-content">10<sub>$</sub></span>
+                                        </div>
+                                    </td>
+
+                                    <td class="discout py-3">
+                                        <div class="row align-items-center">
+                                            <span class="td-content">0<sub>$</sub></span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center action-button py-3">
+                                        <div class="row align-items-center px-5">
+                                            <span class="td-content">10<sub>$</sub></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td>
+                                        <table class="no-border">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Subtotal:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Delivery:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Discount:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total:</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="no-border" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">26$</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">FREE</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">0$</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">26$</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                </tr>
+
+                                <tr class="foot-button">
+                                    <td>
+                                        <button class="btn btn-secondary btn-lg">BACK</button>
+                                    </td>
+                                    <td colspan="3"></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-lg">CONFIRM </button>
+                                    </td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <!--footer-->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>MENU</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">About Us</a></li>
+                            <li class="list-unstyled-item"><a href="#">Restaurants</a></li>
+                            <li class="list-unstyled-item"><a href="#">Pick Up Goods</a></li>
+                            <li class="list-unstyled-item"><a href="#">How it Works</a></li>
+                            <li class="list-unstyled-item"><a href="#">Services We offer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>NAVIGATIONAL LINKS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Terms & Conditions</a></li>
+                            <li class="list-unstyled-item"><a href="#">Privacy Policy</a></li>
+                            <li class="list-unstyled-item"><a href="#">Contact US</a></li>
+                            <li class="list-unstyled-item"><a href="#">Merchant Register</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Boy Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>POPULAR AREAS</h5>
+                        <ul class="list-unstyled">
+                            <li class="list-unstyled-item"><a href="#">Delivery Food in Milan</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Flowers in Venezia</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Documents in Verona</a></li>
+                            <li class="list-unstyled-item"><a href="#">Delivery Products in Roma</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer-col">
+                        <h5>WE ARE SOCIAL</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/facebook.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/twitter.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/instagram.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/pinterest.png" /></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><img src="images/google-plus.png" /></a>
+                            </li>
+                        </ul>
+
+                        <p>
+                            <a href="#"><img src="images/google-play.png" /></a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <p class="text-center">© 2017 Website Name, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>
