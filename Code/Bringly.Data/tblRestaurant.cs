@@ -23,6 +23,7 @@ namespace Bringly.Data
         public System.Guid RestaurantGuid { get; set; }
         public string RestaurantName { get; set; }
         public string RestaurantType { get; set; }
+        public string RestaurantImage { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }

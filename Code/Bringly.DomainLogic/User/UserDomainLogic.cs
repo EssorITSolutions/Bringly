@@ -25,7 +25,7 @@ namespace Bringly.DomainLogic.User
                 userProfile.FullName = User.FullName;
                 userProfile.EmailAddress = User.EmailAddress;
                 userProfile.MobileNumber = User.MobileNumber;
-                userProfile.PreferedCity = User.PreferedCity.ToString();
+                userProfile.PreferedCity = User.PreferedCity!=null? User.PreferedCity.ToString():"";
                 userProfile.ProfileImage = string.IsNullOrEmpty(User.ImageName)?CommonDomainLogic.DefaultProfileImage:User.ImageName;
                 foreach (tblUserAddress usrAddress in User.tblUserAddresses)
                 {
@@ -79,7 +79,7 @@ namespace Bringly.DomainLogic.User
         public List<Restaurant> FavouriteRestaurants()
         {
             List<Guid> favouriteRestaurantGuids = bringlyEntities.tblFavourites.Where(f => f.CreatedByGuid == UserVariables.LoggedInUserGuid).Select(t => t.RestaurantGuid).ToList();
-            return bringlyEntities.tblRestaurants.Where(r => favouriteRestaurantGuids.Contains(r.RestaurantGuid)).Select(f => new Restaurant { RestaurantGuid = f.RestaurantGuid, RestaurantName = f.RestaurantName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
+            return bringlyEntities.tblRestaurants.Where(r => favouriteRestaurantGuids.Contains(r.RestaurantGuid)).Select(f => new Restaurant { RestaurantImage = f.RestaurantImage, RestaurantGuid = f.RestaurantGuid, RestaurantName = f.RestaurantName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
         }
 
         public bool AddFavourite(Guid restaurantGuid)

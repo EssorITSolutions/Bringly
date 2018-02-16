@@ -18,6 +18,7 @@ namespace Bringly.Domain
         public string RestaurantName { get; set; }
         public bool IsFavorite { get; set; }
         public string CityName { get; set; }
+        public string RestaurantImage { get; set; }
         public Guid CityGuid { get; set; }
     }
 }

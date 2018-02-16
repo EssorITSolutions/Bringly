@@ -82,6 +82,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CityGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PinCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RestaurantImage" Type="nvarchar" MaxLength="50" />
           <Property Name="CountryGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
@@ -598,6 +599,7 @@
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblRestaurant_tblUser" FromRole="tblRestaurant" ToRole="tblUser" />
           <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblRestaurant_tblUser1" FromRole="tblRestaurant" ToRole="tblUser" />
           <NavigationProperty Name="tblUser2" Relationship="BringlyModel.FK_tblRestaurant_tblUser2" FromRole="tblRestaurant" ToRole="tblUser" />
+          <Property Name="RestaurantImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tblRestaurant_tblCity">
           <End Type="BringlyModel.tblCity" Role="tblCity" Multiplicity="1" />
@@ -838,6 +840,7 @@
           <EntitySetMapping Name="tblRestaurants">
             <EntityTypeMapping TypeName="BringlyModel.tblRestaurant">
               <MappingFragment StoreEntitySet="tblRestaurant">
+                <ScalarProperty Name="RestaurantImage" ColumnName="RestaurantImage" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="DeletedByGuid" ColumnName="DeletedByGuid" />

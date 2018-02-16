@@ -185,3 +185,14 @@ $('input:checkbox').change(function () {
         $('label.toggle-off').removeClass("off");
     }
 });
+$(document).ready(function () {
+    $('.dropdown-menu-form .dropdown-menu').on('click', function (e) {
+        if ($(this).hasClass('show')) {
+            e.stopPropagation();
+        }
+    });
+    $('.close-icon').on('click', function () {
+        $(this).parents('div.dropdown-menu').removeClass('show');
+    });
+
+});

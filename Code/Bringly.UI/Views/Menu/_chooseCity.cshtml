@@ -3,12 +3,12 @@
     Layout = null;
 }
 
-<div class="Navbar-dropdown">
+<div class="Navbar-dropdown dropdown-menu-form">
     <div class="dropdown">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-map-marker" aria-hidden="true"></i> <span>@Model.SelectedCity.CityName</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu   " aria-labelledby="dropdownMenuLink">
             <div class="shadow-box">
                 <a href="#" class="close-icon">&times;</a>
                 <h4>Choose your city</h4>
@@ -23,7 +23,7 @@
                     <label>or enter in search bar</label>
                     <div class="map-form">
                         @*<input type="text" class="chosen-search-input form-control form-control-lg" placeholder="Your City">*@
-                        <select data-placeholder="Choose a City..."  onchange="location = this.value;">
+                        <select data-placeholder="Choose a City..." onchange="location = this.value;">
                             <option value=""></option>
                             @foreach (Bringly.Domain.City city in Model.Cities)
                             {

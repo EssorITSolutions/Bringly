@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BaseClasses\DomainBase.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LookUps\LookUpDomainCode.cs" />
     <Compile Include="Enums\User\UserRegistrationType.cs" />
     <Compile Include="Enums\User\UserRoles.cs" />

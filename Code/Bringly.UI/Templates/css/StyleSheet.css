@@ -154,7 +154,7 @@ ul.navbar-nav li.nav-item a.nav-link {
         }
 
 .Navbar-dropdown .dropdown span {
-    border-bottom: 1px dotted;
+    /*border-bottom: 1px dotted;*/
     padding-bottom: 2px;
     font-family: 'MYRIADPROREGULAR';
     font-weight: normal;

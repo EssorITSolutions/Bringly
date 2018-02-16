@@ -3,5 +3,16 @@
     ViewBag.Title = "Favourites";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
-
-@*@{Html.RenderPartial("_RestaurentsList", Model);}*@
+@section BreadCrum{
+<li class="breadcrumb-item active">Favorites</li>
+    }
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="page-sub-title">
+            <h3>Favorites</h3>
+        </div>
+        <div class="row">
+            @{Html.RenderPartial("_FavouriteRestaurantsList", Model);}
+        </div>
+    </div>
+</div>

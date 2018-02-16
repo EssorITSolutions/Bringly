@@ -267,6 +267,10 @@
     <Content Include="Templates\Scripts\validation\jquery-migrate-1.1.0.js" />
     <Content Include="Templates\Scripts\validation\jquery.validate.js" />
     <Content Include="Templates\Scripts\validation\jquery.validate.unobtrusive.js" />
+    <Content Include="Upload\Restaurant\img-3.jpg" />
+    <Content Include="Upload\Restaurant\img-4.jpg" />
+    <Content Include="Upload\Restaurant\pie-chart.png" />
+    <Content Include="Upload\User\about-img.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -281,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\Item\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -323,12 +328,13 @@
     <Content Include="Views\Shared\_LeftPanel.cshtml" />
     <Content Include="Views\User\PersonalInformation.cshtml" />
     <Content Include="Views\Menu\_chooseCity.cshtml" />
-    <Content Include="Views\User\Favourites.cshtml" />
     <Content Include="Views\User\EditPersonalInformation.cshtml" />
     <Content Include="Views\Restaurant\ListRestaurants.cshtml" />
     <Content Include="Views\Shared\_filterRestaurants.cshtml" />
     <Content Include="Views\Shared\MasterPages\RestaurantMaster.cshtml" />
-    <Content Include="Views\Shared\_RestaurentsList.cshtml" />
+    <Content Include="Views\Shared\_FavouriteRestaurantsList.cshtml" />
+    <Content Include="Views\Shared\_RestaurantsList.cshtml" />
+    <Content Include="Views\User\Favourites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">

@@ -3,11 +3,20 @@
 });
 
 function addToFavourite(restaurantGuid) {
-    alert('coming'); 
-    PostData("/user/addtofavourite/", { restaurantGuid: restaurantGuid }, addToFavouriteSuccess)
+
+    if ($("div#restaurant-" + restaurantGuid + " [name=favourite]").hasClass("fa-heart-o")) {
+        PostData("/user/addtofavourite/", { restaurantGuid: restaurantGuid }, addToFavouriteSuccess)
+        $("div#restaurant-" + restaurantGuid + " [name=favourite]").removeClass("fa-heart-o");
+        $("div#restaurant-" + restaurantGuid + " [name=favourite]").addClass("fa-heart");
+    }
+    else {
+        
+        PostData("/user/RemoveFavourite/", { restaurantGuid: restaurantGuid }, addToFavouriteSuccess)
+        $("div#restaurant-" + restaurantGuid + " [name=favourite]").removeClass("fa-heart");
+        $("div#restaurant-" + restaurantGuid + " [name=favourite]").addClass("fa-heart-o");
+    }
 }
 function addToFavouriteSuccess(response) {
-    alert(response);
-    $("div#restaurant-" + restaurantGuid + "i[name=favourite]").removeClass("fa-heart-o");
-    $("div#restaurant-" + restaurantGuid + "i[name=favourite]").addClass("fa-heart");
+    //$("div#restaurant-" + restaurantGuid + " [name=favourite]").removeClass("fa-heart-o");
+    //$("div#restaurant-" + restaurantGuid + " [name=favourite]").addClass("fa-heart");
 }

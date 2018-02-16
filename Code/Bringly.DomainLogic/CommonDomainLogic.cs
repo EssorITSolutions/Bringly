@@ -7,6 +7,7 @@ using Bringly.Domain;
 using Bringly.Data;
 using Bringly.Domain.User;
 using Bringly.DomainLogic.User;
+using Bringly.Domain.Enums;
 
 namespace Bringly.DomainLogic
 {
@@ -41,6 +42,24 @@ namespace Bringly.DomainLogic
                 _City = commonDomainLogic.GetCityByGUID(new Guid(_FindUser.PreferedCity)).FirstOrDefault();                
             }
             return _City;
+        }
+        public static string GetImagePath(ImageType imagetype, string ImageName)
+        {
+            string retstring = "";
+            switch (imagetype)
+            {
+                case ImageType.Item:
+                    retstring = "/Upload/Item/" + ImageName;
+                    break;
+                case ImageType.User:
+                    retstring = "/Upload/User/" + ImageName;
+                    break;
+                case ImageType.Restaurant:
+                    retstring = "/Upload/Restaurant/" + ImageName;
+                    break;
+            }
+            return retstring;
+            //return "~/Upload" + imagetype + "/" + ImageName;
         }
     } 
 }
