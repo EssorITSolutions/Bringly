@@ -4,7 +4,16 @@
 <div class="col-lg-3 col-md-5 col-sm-12">
     <aside class="left-side">
         <div class="shadow-box profile-info">
-            <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User,Model.ProfileImage))" style="width:92px;height:93px;" class="m-auto d-block" />
+            <form enctype="multipart/form-data">
+            
+                <div class="user-profile position-relative">
+                    <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User,Model.ProfileImage))" name="leftProfileImage" style="width:92px;height:93px;" class="m-auto d-block" />
+                    <p class="edit-profil-img position-absolute">
+                        <input type="file" id="fileUserProfileImage" style="display:none" />
+                        <a id="OpenImgUpload" style="cursor:pointer;">Edit Profile</a>
+                    </p>
+                </div>
+            </form>
             <p class="text-center">@Model.FullName</p>
             <p class="text-center"><span>Buyer</span></p>
         </div>

@@ -8,6 +8,9 @@ using Bringly.Data;
 using Bringly.Domain.User;
 using Bringly.Domain.Enums.User;
 using Bringly.Domain;
+using System.IO;
+using System.Web;
+
 namespace Bringly.DomainLogic.User
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
@@ -82,7 +85,7 @@ namespace Bringly.DomainLogic.User
             return bringlyEntities.tblRestaurants.Where(r => favouriteRestaurantGuids.Contains(r.RestaurantGuid)).Select(f => new Restaurant { RestaurantImage = f.RestaurantImage, RestaurantGuid = f.RestaurantGuid, RestaurantName = f.RestaurantName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
         }
 
-        public bool AddFavourite(Guid restaurantGuid)
+        public bool AddFavourite(Guid restaurantGuid,string IsFavourite)
         {
             tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite == null)
@@ -93,7 +96,7 @@ namespace Bringly.DomainLogic.User
             return true;
         }
 
-        public bool RemoveFavourite(Guid restaurantGuid)
+        public bool RemoveFavourite(Guid restaurantGuid,string IsFavourite)
         {
             tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite != null)
@@ -102,6 +105,32 @@ namespace Bringly.DomainLogic.User
                 bringlyEntities.SaveChanges();
             }
             return true;
+        }
+
+        public string UpdateProfileImage(HttpRequestBase Request)
+        {
+            tblUser user = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
+            string imageName = "";
+            string imageLocation = "";
+            if (Request.Files.Count > 0)
+            {               
+                UserDomainLogic userdomainLogic = new UserDomainLogic();
+                UserProfile userProfile = new UserProfile();
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    imageName = Path.GetFileName("Buyer_" + Guid.NewGuid() + "_" + Path.GetExtension(Request.Files[i].FileName));
+                     imageLocation = CommonDomainLogic.GetImagePath(Domain.Enums.ImageType.User, imageName);
+                    Request.Files[i].SaveAs(HttpContext.Current.Server.MapPath(imageLocation));
+                }
+                userProfile.ProfileImage = imageName;
+                user.ImageName = userProfile.ProfileImage;
+                bringlyEntities.SaveChanges();
+                return imageLocation;
+            }
+            else {
+                return imageLocation;
+            }
+            
         }
 
     }

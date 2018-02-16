@@ -18,7 +18,7 @@
                             @restaurant.RestaurantName
                         </span>
                         <span class="like-link">
-                            <i class='fa @(restaurant.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite" onclick="addToFavourite(@("'" + restaurant.RestaurantGuid + "'"))"></i>
+                            <i class='fa @(restaurant.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite"  onclick="addRemoveToFavourite(@("'" + restaurant.RestaurantGuid + "'"),1)"></i>
                         </span>
                     </h4>
                     <p>

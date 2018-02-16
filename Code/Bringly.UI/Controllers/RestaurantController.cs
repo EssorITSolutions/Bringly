@@ -24,8 +24,6 @@ namespace Bringly.UI.Controllers
             chooseCity.Cities = _commonDomainLogic.GetCityByGUID(_cityguid);            
             chooseCity.SelectedCity = new City { CityName = chooseCity.Cities.FirstOrDefault().CityName, CityGuid = chooseCity.Cities.FirstOrDefault().CityGuid, CityUrlName = chooseCity.Cities.FirstOrDefault().CityUrlName };
             return View("ListRestaurants", restaurantDomainLogic.GetRestaurantsByCity(chooseCity.SelectedCity));
-        }
-      
-        
+        }         
     }
 }

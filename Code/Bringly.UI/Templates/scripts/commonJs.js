@@ -196,3 +196,42 @@ $(document).ready(function () {
     });
 
 });
+$(function () {
+    $("#fileUserProfileImage").change(function () {
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+            if (window.FormData !== undefined) {
+
+                var fileData = new FormData();
+                fileData.append("FileToUpload", $(this).get(0).files[0]);
+                $.ajax({
+                    url: '/User/UploadProfileImage',
+                    type: "POST",
+                    contentType: false, // Not to set any content header  
+                    processData: false, // Not to process data  
+                    data: fileData,
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            Success(result.Message);
+                            $('img[name=leftProfileImage]').attr("src", result.NewImage);
+                        }
+                        else {
+                            ErrorBlock(result.Message);           
+                        }                        
+                    },
+                    error: function (err) {
+                        ErrorBlock(err.statusText);                        
+                    }
+                })
+            } else {
+                ErrorBlock("FormData is not supported.");
+            }
+        } else {
+            ErrorBlock("Please upload a valid image file.");
+        }
+    });
+});
+
+function fileImageSuccess(response) {
+
+}

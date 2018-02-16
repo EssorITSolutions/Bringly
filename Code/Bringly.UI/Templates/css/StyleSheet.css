@@ -2654,3 +2654,21 @@ ul.nav-wizard li a {
     border-width: 9px;
     margin-left: -9px;
 }
+.user-profile {
+    position: relative;
+}
+
+    .user-profile p.edit-profil-img {
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+        .user-profile p.edit-profil-img a {
+            opacity: 0.4;
+        }
+
+            .user-profile p.edit-profil-img a:hover {
+                opacity: 1;
+            }

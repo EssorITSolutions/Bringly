@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Bringly.Domain.User;
 using Bringly.DomainLogic.User;
 using Bringly.DomainLogic;
+using System.IO;
+
 namespace Bringly.UI.Controllers
 {
     public class UserController : BaseClasses.AuthoriseUserControllerBase
@@ -57,16 +59,16 @@ namespace Bringly.UI.Controllers
             return null;
         }
         [HttpPost]
-        public JsonResult AddToFavourite(string restaurantGuid)
+        public JsonResult AddToFavourite(string restaurantGuid, string IsFavourite)
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return Json(userDomainLogic.AddFavourite(Guid.Parse(restaurantGuid)), JsonRequestBehavior.AllowGet);
+            return Json(userDomainLogic.AddFavourite(Guid.Parse(restaurantGuid), IsFavourite), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult RemoveFavourite(Guid restaurantGuid)
+        public JsonResult RemoveFavourite(Guid restaurantGuid, string IsFavourite)
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return Json(userDomainLogic.RemoveFavourite(restaurantGuid), JsonRequestBehavior.AllowGet);
+            return Json(userDomainLogic.RemoveFavourite(restaurantGuid, IsFavourite), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Favourites()
@@ -77,7 +79,33 @@ namespace Bringly.UI.Controllers
         public ActionResult partialLeftPanel()
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return View("_LeftPanel",userDomainLogic.FindUser(Bringly.UserVariables.LoggedInUserId));
+            return View("_LeftPanel", userDomainLogic.FindUser(Bringly.UserVariables.LoggedInUserId));
+        }
+
+        public ActionResult UploadProfileImage(FormCollection frm)
+        {
+            if (Request.Files.Count > 0)
+            {
+                try
+                {
+                    string imageName = "";
+                    if (Request.Files.Count > 0)
+                    {
+                        UserDomainLogic userdomainLogic = new UserDomainLogic();
+                        imageName = userdomainLogic.UpdateProfileImage(Request);
+                    }
+                    return Json(new { NewImage = imageName, Message ="File uploaded successfully",IsSuccess=true });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { NewImage = "", Message = "Error occurred. Error details: " + ex.Message, IsSuccess = false });
+                }
+            }
+            else
+            {
+                return Json(new { NewImage = "", Message = "No image selected.", IsSuccess = false });
+            }
+
         }
     }
 }
