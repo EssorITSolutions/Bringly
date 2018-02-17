@@ -40,17 +40,10 @@ namespace Bringly.AdminDomainLogic
         {
             get
             {
-                return false;
+                return true;
                 //return GetValue(2).ToType<bool>();
             }
-        }
-        public static UserRoles UserRole
-        {
-            get
-            {
-                return ((UserRoles)Convert.ToInt32(GetValue(2)));
-            }
-        }
+        } 
         public static string UserName
         {
             get
