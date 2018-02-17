@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/Templates/resources/images/icons/favicon.ico" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/css")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+     @RenderSection("pageHeaderResources", false)
+</head>
+<body>
+    <div id="message" class="" style="">
+    </div>
+    @RenderBody()
+    @Scripts.Render("~/js")
+    @RenderSection("pageFooterResources", false)
+    @if (ViewBag.errorBlock != null)
+    {
+        <script type="text/javascript">
+            errorBlock('@ViewBag.errorBlock');
+        </script>
+    }
+    else if (ViewBag.success != null)
+    {
+        <script type="text/javascript">
+            success('@ViewBag.success');
+        </script>
+    }
+</body>
+</html>

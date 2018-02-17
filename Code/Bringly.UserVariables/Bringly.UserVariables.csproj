@@ -44,5 +44,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserVariables.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bringly.Domain\Bringly.Domain.csproj">
+      <Project>{F9F5A96A-55D0-4A78-9744-93468F6AF8C6}</Project>
+      <Name>Bringly.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -32,3 +32,10 @@ D:\Bringly\Code\Bringly.UserVariables\obj\Debug\Bringly.UserVariables.csprojReso
 D:\Bringly\Code\Bringly.UserVariables\obj\Debug\Bringly.UserVariables.dll
 D:\Bringly\Code\Bringly.UserVariables\obj\Debug\Bringly.UserVariables.pdb
 D:\Bringly\Code\Bringly.UserVariables\obj\Debug\Bringly.UserVariables.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\Bringly.Domain.dll
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\EntityFramework.dll
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\Newtonsoft.Json.dll
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\Bringly.Domain.pdb
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\Bringly.Domain.dll.config
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\EntityFramework.xml
+E:\Work\Projects\Bringly\Code\Bringly.UserVariables\bin\Debug\Newtonsoft.Json.xml

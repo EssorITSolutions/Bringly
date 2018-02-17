@@ -12,4 +12,8 @@ namespace Bringly.Domain.Enums
         Restaurant,
         Item
     }
+    public enum MessageType
+    {
+        Success, Error, Info
+    }
 }

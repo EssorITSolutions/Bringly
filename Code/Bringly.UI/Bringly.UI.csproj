@@ -162,7 +162,6 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserMemberShipController.cs" />
     <Compile Include="d.aspx.cs">
       <DependentUpon>d.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,10 +318,9 @@
     <Content Include="Views\Shared\_pageHeader.cshtml" />
     <Content Include="Views\Shared\_pageFooter.cshtml" />
     <Content Include="Views\Shared\MasterPages\AnonymousUser.cshtml" />
-    <Content Include="Views\UserMemberShip\Login.cshtml" />
-    <Content Include="Views\UserMemberShip\UserRegistration.cshtml" />
-    <Content Include="Views\UserMemberShip\_socialMediaLogin.cshtml" />
-    <Content Include="Views\UserMemberShip\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\UserRegistration.cshtml" />
+    <Content Include="Views\Home\_socialMediaLogin.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Shared\MasterPages\AuthorizeUserMaster.cshtml" />
     <Content Include="Views\Menu\_topUserMenu.cshtml" />
     <Content Include="Views\Shared\_LeftPanel.cshtml" />
@@ -335,6 +333,8 @@
     <Content Include="Views\Shared\_FavouriteRestaurantsList.cshtml" />
     <Content Include="Views\Shared\_RestaurantsList.cshtml" />
     <Content Include="Views\User\Favourites.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">
@@ -344,10 +344,6 @@
     <ProjectReference Include="..\Bringly.Domain\Bringly.Domain.csproj">
       <Project>{f9f5a96a-55d0-4a78-9744-93468f6af8c6}</Project>
       <Name>Bringly.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bringly.UserVariables\Bringly.UserVariables.csproj">
-      <Project>{b886c62f-21e6-4e37-9ff7-d2fb2d326fb6}</Project>
-      <Name>Bringly.UserVariables</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities.Conversion\Utilities.Conversion.csproj">
       <Project>{96169320-2d28-41db-8f89-4a3081f72043}</Project>

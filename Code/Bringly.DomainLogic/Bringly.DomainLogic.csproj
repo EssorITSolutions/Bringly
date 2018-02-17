@@ -65,10 +65,6 @@
       <Project>{f9f5a96a-55d0-4a78-9744-93468f6af8c6}</Project>
       <Name>Bringly.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bringly.UserVariables\Bringly.UserVariables.csproj">
-      <Project>{b886c62f-21e6-4e37-9ff7-d2fb2d326fb6}</Project>
-      <Name>Bringly.UserVariables</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utilities.Conversion\Utilities.Conversion.csproj">
       <Project>{96169320-2d28-41db-8f89-4a3081f72043}</Project>
       <Name>Utilities.Conversion</Name>

@@ -113,7 +113,6 @@ E:\Work\Projects\Bringly\Bringly_v1\Bringly.DomainLogic\obj\Debug\Bringly.Domain
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.DomainLogic.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.DomainLogic.pdb
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.Domain.dll
-E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.UserVariables.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Newtonsoft.Json.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Utilities.Conversion.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Utilities.ErrorLog.dll
@@ -123,7 +122,6 @@ E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\EntityFramework.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Elmah.dll
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.Domain.pdb
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.Domain.dll.config
-E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.UserVariables.pdb
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Utilities.Conversion.pdb
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Utilities.ErrorLog.pdb
 E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\Utilities.Helper.pdb
@@ -161,3 +159,4 @@ D:\Bringly\Code\Bringly.DomainLogic\obj\Debug\Bringly.DomainLogic.pdb
 D:\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.Data.dll.config
 D:\Bringly\Code\Bringly.DomainLogic\bin\Debug\Bringly.Domain.dll.config
 D:\Bringly\Code\Bringly.DomainLogic\obj\Debug\Bringly.DomainLogic.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Bringly.DomainLogic\bin\Debug\System.Data.SqlServerCe.dll

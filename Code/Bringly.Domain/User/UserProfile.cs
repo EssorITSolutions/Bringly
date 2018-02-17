@@ -53,6 +53,13 @@ namespace Bringly.Domain.User
             }
         }
         public List<City> Cities { get; set; }
+        public UserRoles UserRole { get; set; }
+
     }
 
+    public class UserLogin
+    {
+        public string Username { get; set; }
+        public string UserPassword { get; set; }
+    }
 }

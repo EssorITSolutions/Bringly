@@ -12,11 +12,17 @@
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             @RenderSection("BreadCrum", false)
         </ol>
+        @if (Bringly.DomainLogic.UserVariables.IsAuthenticated)
+        {
+            <div class="main-heading">
+                <h3>Welcome, @Bringly.DomainLogic.UserVariables.UserName !</h3>
+            </div>
+        }
         @RenderSection("CustomizeTop", false)
         <div class="dashboard-content inner-margin">
             <div class="row">
 
-                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel","User"); }
+                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel", "User"); }
 
                 @RenderBody()
 

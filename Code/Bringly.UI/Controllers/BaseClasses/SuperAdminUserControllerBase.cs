@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-
+using Bringly.DomainLogic;
 namespace Bringly.UI.Controllers.BaseClasses
 {
     [SuperAdminUserModulesCheck]

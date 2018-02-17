@@ -114,6 +114,7 @@
     <EntitySetMapping Name="tblRestaurants">
       <EntityTypeMapping TypeName="BringlyModel.tblRestaurant">
         <MappingFragment StoreEntitySet="tblRestaurant">
+          <ScalarProperty Name="RestaurantImage" ColumnName="RestaurantImage" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="DeletedByGuid" ColumnName="DeletedByGuid" />

@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/Templates/resources/images/icons/favicon.ico" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/css")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    @RenderSection("pageHeaderResources", false)
+    @{
+        bool isDeveloper = Admin.Exigo.UserVariables.IsDeveloper;
+    }
+</head>
+<body>
+    <div id="message" class="" style="">
+    </div>
+    <div id="mws-header" class="clearfix" style="background-color: #fff; background-image: none">
+        <!-- Logo Container -->
+        <div id="mws-logo-container">
+            <div id="mws-logo-wrap">
+                <img src="~/Templates/resources/images/Logo.png" alt="Logo" />
+            </div>
+        </div>
+        <div id="mws-user-tools" class="clearfix">
+            <div id="mws-user-info" class="mws-inset">
+                @*<div id="mws-user-photo">
+                    </div>*@
+                <div id="mws-user-functions">
+                    @*<div id="mws-username">
+                            Hello,
+                        </div>*@
+                    <ul>
+
+                        @*<li><a href="/myaccount/editprofile">Profile |</a></li>
+                            <li><a href="/myaccount/changepassword">Change Password |</a></li>*@
+                        <li><a onclick="javascript:return confirm('Are you sure you want to logout?')" href="/login/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Main Wrapper -->
+    <div id="mws-wrapper">
+        <div id="mws-sidebar-stitch"></div>
+        <div id="mws-sidebar-bg"></div>
+        <!-- Sidebar Wrapper -->
+        <div id="mws-sidebar">
+            <!-- Hidden Nav Collapse Button -->
+            <div id="mws-nav-collapse">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- Searchbox -->
+            <div id="mws-searchbox" class="mws-inset">
+                <form>
+                    <input type="text" class="mws-search-input" placeholder="Options...">
+                </form>
+            </div>
+            <!-- Main Navigation -->
+            <div id="mws-navigation">
+                <ul>
+                    @*<li>
+                            <a href="javascript:void(0)"><i class="icon-user"></i>My Account</a>
+                            <ul class="closed">
+                                <li><a title="Edit Profile" href="/myaccount/editprofile">Edit Profile</a></li>
+                                <li><a title="Change Password" href="/myaccount/changepassword">Change Password</a></li>
+                            </ul>
+                        </li>*@
+                    <li>
+                        <a href="javascript:void(0)"><i class="icon-user"></i>Agencies</a>
+                        <ul class="closed">
+                            <li><a title="View Agencies" href="/manageagency/viewagencies">View Agencies</a></li>
+                        </ul>
+                    </li>
+                    @if (isDeveloper)
+                    {
+                        <li>
+                            <a href="javascript:void(0)"><i class="icon-user"></i>Dev Area</a>
+                            <ul class="closed">
+                                <li><a title="View Email Receiver" href="/emailreceiver/manageemailreceiver">Manage Email Receiver</a></li>
+                                <li><a title="View CvParser Settings" href="/parsersettings/cvparserpathsettings">CvParser Settings</a></li>
+                                <li><a title="Find Jobs and Responses" href="/jobmapping/jobmapping">Find Jobs and Responses</a></li>
+                                <li><a title="Window Service Log" href="/windowservicelog/viewlog">Window Service Log</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="icon-user"></i>Referesh</a>
+                            <ul class="closed">
+                                <li><a title="View CvParser Settings" href="/manageagency/refereshallagencies">Referesh All Agencies</a></li>
+                                <li><a title="View CvParser Settings" href="/manageagency/openallagencies">Open All Agencies</a></li>
+                                <li><a title="Referesh All Gateway Domains" href="/manageagency/refereshallagencycvgateway">Referesh All Gateway Domains</a></li>
+                                <li><a title="Open All Gateway Domains" href="/manageagency/openallagencycvgateway">Open All Gateway Domains</a></li>
+                                <li><a title="Login To All Agencies" href="/manageagency/logintoallagencies">Login To All Agencies</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Container Start -->
+        <div id="mws-container" class="clearfix">
+            <!-- Inner Container Start -->
+            <div class="container">
+                @RenderBody()
+            </div>
+            <!-- Inner Container End -->
+            <!-- Footer -->
+            <div id="mws-footer">
+                &copy; @DateTime.Now.Year. All Rights Reserved.
+            </div>
+        </div>
+        <!-- Main Container End -->
+    </div>
+    @Scripts.Render("~/Ljs")
+    @RenderSection("pageFooterResources", false)
+    @if (ViewBag.errorBlock != null)
+    {
+        <script type="text/javascript">
+            errorBlock('@ViewBag.errorBlock');
+        </script>
+    }
+    else if (ViewBag.success != null)
+    {
+        <script type="text/javascript">
+            success('@ViewBag.success');
+        </script>
+    }
+</body>
+</html>

@@ -1,0 +1,95 @@
+body,
+#mws-container {
+    background-image: url('/Templates/resources/images/core/bg/paper.png');
+}
+
+#mws-sidebar,
+#mws-sidebar-bg,
+#mws-header,
+.mws-panel .mws-panel-header,
+#mws-login,
+#mws-login .mws-login-lock,
+.ui-accordion .ui-accordion-header,
+.ui-tabs .ui-tabs-nav,
+.ui-datepicker,
+.fc-event-skin,
+.ui-dialog .ui-dialog-titlebar,
+.jGrowl .jGrowl-notification, .jGrowl .jGrowl-closer,
+#mws-user-tools .mws-dropdown-menu .mws-dropdown-box,
+#mws-user-tools .mws-dropdown-menu.open .mws-dropdown-trigger {
+    background-color:#6E6F72;
+}
+
+#mws-header {
+    border-color: #f06424; /*#c5d52b;*/
+}
+
+.mws-panel .mws-panel-header span,
+#mws-navigation ul li.active a,
+#mws-navigation ul li.active span,
+#mws-user-tools #mws-username,
+#mws-navigation ul li .mws-nav-tooltip,
+#mws-user-tools #mws-user-info #mws-user-functions #mws-username,
+.ui-dialog .ui-dialog-title,
+.ui-state-default,
+.ui-state-active,
+.ui-state-hover,
+.ui-state-focus,
+.ui-state-default a,
+.ui-state-active a,
+.ui-state-hover a,
+.ui-state-focus a {
+    color: #f06424;
+}
+
+#mws-searchbox .mws-search-submit,
+.mws-panel .mws-panel-header .mws-collapse-button span,
+.dataTables_wrapper .dataTables_paginate .paginate_disabled_previous,
+.dataTables_wrapper .dataTables_paginate .paginate_enabled_previous,
+.dataTables_wrapper .dataTables_paginate .paginate_disabled_next,
+.dataTables_wrapper .dataTables_paginate .paginate_enabled_next,
+.dataTables_wrapper .dataTables_paginate .paginate_active,
+.mws-table tbody tr.odd:hover td,
+.mws-table tbody tr.even:hover td,
+.ui-slider-horizontal .ui-slider-range,
+.ui-slider-vertical .ui-slider-range,
+.ui-progressbar .ui-progressbar-value,
+.ui-datepicker td.ui-datepicker-current-day,
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next,
+.ui-accordion-header .ui-accordion-header-icon,
+.ui-dialog-titlebar-close {
+    background-color: #c5d52b;
+}
+
+.mws-form .mws-form-cols input[type="checkbox"]{
+  width: auto;
+}
+@media only screen and (min-width:600px) and (max-width:1024px) {
+    .mws-form .mws-form-cols .mws-form-col-3-8, .mws-form .mws-form-cols .mws-form-col-2-8 ,.mws-form .mws-form-cols .mws-form-col-6-8{
+        margin: 0;
+        padding: 5px;
+        width: 48%;
+    }
+}
+@media only screen and (min-width:200px) and (max-width:599px) {
+    .mws-form .mws-form-cols .mws-form-col-3-8, 
+    .mws-form .mws-form-cols .mws-form-col-2-8 ,
+    .mws-form .mws-form-cols .mws-form-col-6-8 ,
+    .mws-form .mws-form-cols .mws-form-col-4-8{
+        margin: 0;
+        padding: 5px;
+        width:97%;
+    }
+    .mws-form .mws-form-row{
+        padding-bottom:0;
+    }
+
+}
+@media only screen and (min-width:200px) and (max-width:1023px) {
+        .dataTables_wrapper{
+        width:100%;
+        max-width:100%;
+        overflow-x:auto;
+    }
+}

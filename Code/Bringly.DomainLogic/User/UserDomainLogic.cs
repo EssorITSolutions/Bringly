@@ -10,7 +10,8 @@ using Bringly.Domain.Enums.User;
 using Bringly.Domain;
 using System.IO;
 using System.Web;
-
+using System.Web.Security;
+using Bringly.Domain.Common;
 namespace Bringly.DomainLogic.User
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
@@ -28,8 +29,8 @@ namespace Bringly.DomainLogic.User
                 userProfile.FullName = User.FullName;
                 userProfile.EmailAddress = User.EmailAddress;
                 userProfile.MobileNumber = User.MobileNumber;
-                userProfile.PreferedCity = User.PreferedCity!=null? User.PreferedCity.ToString():"";
-                userProfile.ProfileImage = string.IsNullOrEmpty(User.ImageName)?CommonDomainLogic.DefaultProfileImage:User.ImageName;
+                userProfile.PreferedCity = User.PreferedCity != null ? User.PreferedCity.ToString() : "";
+                userProfile.ProfileImage = string.IsNullOrEmpty(User.ImageName) ? CommonDomainLogic.DefaultProfileImage : User.ImageName;
                 foreach (tblUserAddress usrAddress in User.tblUserAddresses)
                 {
                     userProfile.UserAddresses.Add(new UserAddress { UserAddressGuid = usrAddress.UserAddressGuid, Address = usrAddress.Address, CityGuid = usrAddress.CityGuid, CityName = usrAddress.tblCity.CityName, PostCode = usrAddress.PostCode, AddressType = usrAddress.AddressType });
@@ -85,7 +86,7 @@ namespace Bringly.DomainLogic.User
             return bringlyEntities.tblRestaurants.Where(r => favouriteRestaurantGuids.Contains(r.RestaurantGuid)).Select(f => new Restaurant { RestaurantImage = f.RestaurantImage, RestaurantGuid = f.RestaurantGuid, RestaurantName = f.RestaurantName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
         }
 
-        public bool AddFavourite(Guid restaurantGuid,string IsFavourite)
+        public bool AddFavourite(Guid restaurantGuid, string IsFavourite)
         {
             tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite == null)
@@ -96,7 +97,7 @@ namespace Bringly.DomainLogic.User
             return true;
         }
 
-        public bool RemoveFavourite(Guid restaurantGuid,string IsFavourite)
+        public bool RemoveFavourite(Guid restaurantGuid, string IsFavourite)
         {
             tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite != null)
@@ -113,13 +114,13 @@ namespace Bringly.DomainLogic.User
             string imageName = "";
             string imageLocation = "";
             if (Request.Files.Count > 0)
-            {               
+            {
                 UserDomainLogic userdomainLogic = new UserDomainLogic();
                 UserProfile userProfile = new UserProfile();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     imageName = Path.GetFileName("Buyer_" + Guid.NewGuid() + "_" + Path.GetExtension(Request.Files[i].FileName));
-                     imageLocation = CommonDomainLogic.GetImagePath(Domain.Enums.ImageType.User, imageName);
+                    imageLocation = CommonDomainLogic.GetImagePath(Domain.Enums.ImageType.User, imageName);
                     Request.Files[i].SaveAs(HttpContext.Current.Server.MapPath(imageLocation));
                 }
                 userProfile.ProfileImage = imageName;
@@ -127,10 +128,51 @@ namespace Bringly.DomainLogic.User
                 bringlyEntities.SaveChanges();
                 return imageLocation;
             }
-            else {
+            else
+            {
                 return imageLocation;
             }
-            
+
+        }
+
+        public Message UserLogin(UserLogin userLogin)
+        {
+            Message message = new Message();
+            tblUser user = bringlyEntities.tblUsers.Where(u => u.EmailAddress == userLogin.Username && u.Password == userLogin.UserPassword && u.IsDeleted == false).FirstOrDefault();
+            if (user != null && user.IsActive)
+            {
+                AuthencationTicket(user);
+                message.MessageType = Domain.Enums.MessageType.Success;
+            }
+            else if (user != null && user.IsActive == false)
+            {
+                message.MessageType = Domain.Enums.MessageType.Error;
+                message.MessageText = "Your account has been deactivated, Please contact administrator";
+            }
+            else
+            {
+                message.MessageType = Domain.Enums.MessageType.Error;
+                message.MessageText = "Wrong username or password";
+            }
+            return message;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="users"></param>
+        private void AuthencationTicket(tblUser user)
+        {
+            string userData =
+                user.UserGuid + "}" //0
+                + user.EmailAddress + "}" //1
+                + (user.UserRegistrationType).ToString() + "}"//2  
+                + user.FullName;
+            FormsAuthenticationTicket tkt = new FormsAuthenticationTicket(1, userData, DateTime.Now, DateTime.Now.AddHours(5), false, "Bringly", FormsAuthentication.FormsCookiePath);
+            string st = FormsAuthentication.Encrypt(tkt);
+            HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, st) { HttpOnly = true };
+            HttpContext.Current.Response.Cookies.Add(ck);
         }
 
     }

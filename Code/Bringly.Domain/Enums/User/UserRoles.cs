@@ -6,7 +6,7 @@ namespace Bringly.Domain.Enums.User
     {
         [Display(Name = "System Admin")]
         SuperAdmin = 1,
-        [Display(Name = "Caller")]
+        [Display(Name = "Buyer")]
         Buyer = 2,
         [Display(Name = "Merchant")]
         Merchant = 3,

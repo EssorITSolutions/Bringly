@@ -18,7 +18,7 @@ namespace Bringly.UI.Controllers
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
             UserDomainLogic _userDomainLogic = new UserDomainLogic();            
             ChooseCity chooseCity = new ChooseCity();
-            UserProfile _FindUser = _userDomainLogic.FindUser(UserVariables.LoggedInUserId);
+            UserProfile _FindUser = _userDomainLogic.FindUser(UserVariables.LoggedInUserGuid);
             chooseCity.Cities = commonDomainLogic.GetCities();
             chooseCity.SelectedCity = commonDomainLogic.GetPreferedCity();
             return PartialView("_chooseCity", chooseCity);

@@ -7,15 +7,20 @@ using Bringly.Domain.User;
 using Bringly.DomainLogic.User;
 using Bringly.DomainLogic;
 using System.IO;
+using System.Web.Security;
 
 namespace Bringly.UI.Controllers
 {
     public class UserController : BaseClasses.AuthoriseUserControllerBase
     {
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
         public ActionResult PersonalInformation()
         {
             UserDomainLogic userProfile = new UserDomainLogic();
-            return View(userProfile.FindUser(Guid.Parse("9327aedc-65a4-4f53-87d4-be94a3bb91a3")));
+            return View(userProfile.FindUser(UserVariables.LoggedInUserGuid));
         }
         [HttpGet]
         public ActionResult EditPersonalInformation()
@@ -79,7 +84,7 @@ namespace Bringly.UI.Controllers
         public ActionResult partialLeftPanel()
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return View("_LeftPanel", userDomainLogic.FindUser(Bringly.UserVariables.LoggedInUserId));
+            return View("_LeftPanel", userDomainLogic.FindUser(UserVariables.LoggedInUserGuid));
         }
 
         public ActionResult UploadProfileImage(FormCollection frm)
@@ -94,7 +99,7 @@ namespace Bringly.UI.Controllers
                         UserDomainLogic userdomainLogic = new UserDomainLogic();
                         imageName = userdomainLogic.UpdateProfileImage(Request);
                     }
-                    return Json(new { NewImage = imageName, Message ="File uploaded successfully",IsSuccess=true });
+                    return Json(new { NewImage = imageName, Message = "File uploaded successfully", IsSuccess = true });
                 }
                 catch (Exception ex)
                 {
@@ -106,6 +111,11 @@ namespace Bringly.UI.Controllers
                 return Json(new { NewImage = "", Message = "No image selected.", IsSuccess = false });
             }
 
+        }
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home");
         }
     }
 }

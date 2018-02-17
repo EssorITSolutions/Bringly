@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Bringly.Domain.Enums.User;
+using System;
 using System.Web;
-
 namespace Bringly
 {
     public class UserVariables
@@ -21,12 +21,11 @@ namespace Bringly
         /// <summary>
         /// Login User ID -- 0
         /// </summary>
-        public static Guid LoggedInUserId
+        public static Guid LoggedInUserGuid
         {
             get
             {
-                //return new Guid(GetValue(0).ToString());
-                return new Guid("9327aedc-65a4-4f53-87d4-be94a3bb91a3");
+                return new Guid(GetValue(0).ToString());
             }
         }
         /// <summary>
@@ -37,7 +36,13 @@ namespace Bringly
             get
             {
                 return false;
-                //return GetValue(2).ToType<bool>();
+            }
+        }
+        public static UserRoles UserRole
+        {
+            get
+            {
+                return (UserRoles)GetValue(2);
             }
         }
         /// <summary>

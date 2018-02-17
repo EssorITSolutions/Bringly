@@ -47,3 +47,4 @@ D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.csprojResolveAss
 D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.dll
 D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.pdb
 D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\System.Data.SqlServerCe.dll

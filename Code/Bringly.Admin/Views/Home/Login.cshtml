@@ -1,0 +1,36 @@
+﻿@model Bringly.AdminDomain.UserLogin
+    @{
+        ViewBag.Title = "Admin Login";
+        Layout = "~/Views/Shared/MasterPages/_AnonymousUserMaster.cshtml";
+    }
+    @section pageHeaderResources
+{
+        <link href="~/Templates/resources/css/login.css" rel="stylesheet" />
+    }
+    <div id="mws-login-wrapper">
+        <div id="mws-login">
+            <h1>Login</h1>
+            <div class="mws-login-lock"><i class="fa fa-lock"></i></div>
+            <div id="mws-login-form">
+                <form class="mws-form" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mws-form-row">
+                        <div class="mws-form-item">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "mws-login-username", placeholder = "username" })
+                            @Html.ValidationMessageFor(m => m.UserName)
+                        </div>
+                    </div>
+                    <div class="mws-form-row">
+                        <div class="mws-form-item">
+                            @Html.PasswordFor(m => m.UserPassword, new { @class = "mws-login-password", placeholder = "password" })
+                            @Html.ValidationMessageFor(m => m.UserPassword)
+                        </div>
+                    </div>
+
+                    <div class="mws-form-row">
+                        <input type="submit" value="Login" class="btn btn-success mws-login-button">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

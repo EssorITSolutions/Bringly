@@ -52,23 +52,38 @@
                 </div>
 
             </div>
-
             <div class="dropdown dashboard-menu">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user-o" aria-hidden="true"></i> <span>Anna Vysotska</span>
+                    <i class="fa fa-user-o" aria-hidden="true"></i> <span>@Bringly.DomainLogic.UserVariables.UserName</span>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <ul class="list-unstyled">
-                        <li><a href="buyer-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a></li>
-                        <li class="active"><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
-                        <li ><a href="my-orders-buyer.html"><i class="fa fa-th-list"></i> My Orders</a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
-                        <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
-                        <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
-                        <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
-                        <li class="tracking"><a href="order-tracking.html"><i class="fa fa-search"></i> Order Tracking</a></li>
+                        <li><a href="/user/dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                        @if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+                        {
+                            <li class="active"><a href="personal-information.html"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                            <li><a href="my-orders-buyer.html"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="Favorites.html"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li><a href="#"><img src="images/wallet-icon.png" /> Wallet Account</a></li>
+                            <li class="tracking"><a href="order-tracking.html"><i class="fa fa-search"></i> Order Tracking</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="#"><img src="/templates/images/restaurant-icon.png" /> My Restaurant</a></li>
+                            <li><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages <span class="alter-message">(1)</span></a></li>
+                            <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li><a href="#"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>
+                            <li><a href="#"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                            <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                        }
                         <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                        <li><a href="/User/SignOut"><i class="fa fa-cog"></i> SignOut</a></li>
                     </ul>
                 </div>
             </div>

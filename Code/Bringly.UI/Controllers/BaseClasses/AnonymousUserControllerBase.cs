@@ -18,7 +18,7 @@ namespace Bringly.UI.Controllers.BaseClasses
             }
             else
             {
-                return RedirectToAction("dashboard", "reports");
+                return RedirectToAction("Dashboard", "User");
             }
         }
     }
