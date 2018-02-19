@@ -7,6 +7,8 @@ using Bringly.AdminDomain.Enums;
 using System.Web.Security;
 using System.Web;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
 namespace Bringly.AdminDomainLogic
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
@@ -57,6 +59,22 @@ namespace Bringly.AdminDomainLogic
         public City GetCity(Guid cityGuid)
         {
             return bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).FirstOrDefault();
+
+        }
+        public bool AddUpdateCity(string cityName,Guid cityGuid)
+        {
+            tblCity cityObject = bringlyEntities.tblCities.Where(x => x.CityGuid == cityGuid).FirstOrDefault();
+            if (cityObject != null && !string.IsNullOrEmpty(cityObject.CityName))
+            {
+                cityObject.CityName = cityName;
+                bringlyEntities.SaveChanges();
+            }
+            else {
+                cityObject = new tblCity();            
+                cityObject = bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = cityName, CityUrlName = Regex.Replace(cityName, @"[^0-9a-zA-Z]+", "") });
+                bringlyEntities.SaveChanges();                
+            }
+            return true;
 
         }
     }

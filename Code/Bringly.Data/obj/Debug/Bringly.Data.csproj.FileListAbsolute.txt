@@ -42,3 +42,14 @@ D:\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.csprojResolveAssemblyReferen
 D:\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.dll
 D:\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.pdb
 D:\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\Bringly.Data.dll.config
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\Bringly.Data.dll
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\Bringly.Data.pdb
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\EntityFramework.dll
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\EntityFramework.xml
+D:\Work\Projects\Bringly\Code\Bringly.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Projects\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.csprojResolveAssemblyReference.cache
+D:\Work\Projects\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.dll
+D:\Work\Projects\Bringly\Code\Bringly.Data\obj\Debug\Bringly.Data.pdb

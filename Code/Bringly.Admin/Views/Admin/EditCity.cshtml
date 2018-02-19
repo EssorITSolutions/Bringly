@@ -1,8 +1,31 @@
-﻿
+﻿@model Bringly.AdminDomain.City
+
 @{
-    ViewBag.Title = "EditCity";
+    ViewBag.Title = "Edit City";
     Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
 }
 
-<h2>EditCity</h2>
-
+<h2>Edit City</h2>
+<form method="post" enctype="multipart/form-data">
+    <table class="mws-datatable-fn mws-table dataTable">
+        <thead>
+            <tr role="row">
+                <th colspan="2">
+                    City Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody id="viewCities">
+            <tr>
+                <td>City Name </td>
+                <td>@Html.HiddenFor(m => m.CityGuid) @Html.TextBoxFor(m => m.CityName)</td>
+                <td>
+                    <input class="btn" type="submit" id="UpdateCity" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

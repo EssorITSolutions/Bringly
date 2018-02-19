@@ -48,3 +48,12 @@ D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.dll
 D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.pdb
 D:\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.csproj.CoreCompileInputs.cache
 E:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\System.Data.SqlServerCe.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\Utilities.ErrorLog.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\Utilities.ErrorLog.pdb
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\Elmah.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\Elmah.Mvc.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\bin\Debug\System.Data.SqlServerCe.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.csprojResolveAssemblyReference.cache
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.dll
+D:\Work\Projects\Bringly\Code\Utilities.ErrorLog\obj\Debug\Utilities.ErrorLog.pdb

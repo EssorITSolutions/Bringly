@@ -1,0 +1,17 @@
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.AdminDomainLogic.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.AdminDomainLogic.pdb
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.AdminDomain.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.Data.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\EntityFramework.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Newtonsoft.Json.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.AdminDomain.pdb
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.Data.pdb
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Bringly.Data.dll.config
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\EntityFramework.xml
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\bin\Debug\Newtonsoft.Json.xml
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\obj\Debug\Bringly.AdminDomainLogic.csprojResolveAssemblyReference.cache
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\obj\Debug\Bringly.AdminDomainLogic.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\obj\Debug\Bringly.AdminDomainLogic.dll
+D:\Work\Projects\Bringly\Code\Bringly.AdminDomainLogic\obj\Debug\Bringly.AdminDomainLogic.pdb
