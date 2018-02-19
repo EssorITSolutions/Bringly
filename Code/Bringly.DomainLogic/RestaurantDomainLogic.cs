@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bringly.Domain;
+using Bringly.DomainLogic.User;
+
 namespace Bringly.DomainLogic
 {
     public class RestaurantDomainLogic : BaseClass.DomainLogicBase
@@ -16,8 +18,18 @@ namespace Bringly.DomainLogic
             {
                 _restaurantSearch.Restaurants = _restaurantSearch.Restaurants.Where(s => s.CityGuid == _city.CityGuid).ToList();
             }
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            List<Restaurant> favouriteRestaurants = userDomainLogic.FavouriteRestaurants();
             _restaurantSearch.CityGuid = _city.CityGuid;
             _restaurantSearch.CityName = _city.CityName;
+            List<Guid> restaurentGuid = favouriteRestaurants.Select(c => c.RestaurantGuid).ToList();
+            foreach (Restaurant restaurant in _restaurantSearch.Restaurants)
+            {
+                if (restaurentGuid.Contains(restaurant.RestaurantGuid))
+                {
+                    restaurant.IsFavorite = true;
+                }
+            }
             return _restaurantSearch;
         }
     }

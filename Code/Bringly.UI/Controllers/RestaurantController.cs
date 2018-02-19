@@ -17,13 +17,22 @@ namespace Bringly.UI.Controllers
         {
             RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
             CommonDomainLogic _commonDomainLogic = new CommonDomainLogic();
-            Guid _cityguid= _commonDomainLogic.FindCityGuid(id);
-            UserDomainLogic _userDomainLogic = new UserDomainLogic();
-            _userDomainLogic.UpdatePreferedCity(_cityguid);
             ChooseCity chooseCity = new ChooseCity();
-            chooseCity.Cities = _commonDomainLogic.GetCityByGUID(_cityguid);            
-            chooseCity.SelectedCity = new City { CityName = chooseCity.Cities.FirstOrDefault().CityName, CityGuid = chooseCity.Cities.FirstOrDefault().CityGuid, CityUrlName = chooseCity.Cities.FirstOrDefault().CityUrlName };
+            if (!string.IsNullOrEmpty(id))
+            {
+                Guid _cityguid = _commonDomainLogic.FindCityGuid(id);
+                UserDomainLogic _userDomainLogic = new UserDomainLogic();
+                _userDomainLogic.UpdatePreferedCity(_cityguid);
+                chooseCity.Cities = _commonDomainLogic.GetCityByGUID(_cityguid);
+                chooseCity.SelectedCity = new City { CityName = chooseCity.Cities.FirstOrDefault().CityName, CityGuid = chooseCity.Cities.FirstOrDefault().CityGuid, CityUrlName = chooseCity.Cities.FirstOrDefault().CityUrlName };
+            }
+            else
+            {
+                chooseCity.Cities = _commonDomainLogic.GetCities();
+                chooseCity.SelectedCity = new City { CityName = chooseCity.Cities.FirstOrDefault().CityName, CityGuid = chooseCity.Cities.FirstOrDefault().CityGuid, CityUrlName = chooseCity.Cities.FirstOrDefault().CityUrlName };
+            }
+
             return View("ListRestaurants", restaurantDomainLogic.GetRestaurantsByCity(chooseCity.SelectedCity));
-        }         
+        }
     }
 }

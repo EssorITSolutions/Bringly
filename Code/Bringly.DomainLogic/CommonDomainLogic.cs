@@ -16,7 +16,7 @@ namespace Bringly.DomainLogic
         public static string DefaultProfileImage= "profile.png";
         public List<City> GetCities()
         {
-            return bringlyEntities.tblCities.Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName,CityUrlName=t.CityUrlName }).ToList();
+            return bringlyEntities.tblCities.Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).OrderByDescending(t => t.CityGuid).Take(5).ToList();
         }
         public Guid FindCityGuid(string CityUrlName)
         {

@@ -16,11 +16,16 @@ namespace Bringly.UI.Controllers
         public PartialViewResult ChoosePreferedCity()
         {
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
-            UserDomainLogic _userDomainLogic = new UserDomainLogic();            
+            UserDomainLogic _userDomainLogic = new UserDomainLogic();
             ChooseCity chooseCity = new ChooseCity();
             UserProfile _FindUser = _userDomainLogic.FindUser(UserVariables.LoggedInUserGuid);
             chooseCity.Cities = commonDomainLogic.GetCities();
             chooseCity.SelectedCity = commonDomainLogic.GetPreferedCity();
+            bool hascity = chooseCity.Cities.Any(guid => guid.CityGuid == chooseCity.SelectedCity.CityGuid);
+            if (!hascity)
+            {
+                chooseCity.Cities.Insert(0, new City() { CityGuid = chooseCity.SelectedCity.CityGuid, CityName = chooseCity.SelectedCity.CityName, CityUrlName = chooseCity.SelectedCity.CityUrlName });
+            }
             return PartialView("_chooseCity", chooseCity);
         }
         public PartialViewResult TopMenu()
