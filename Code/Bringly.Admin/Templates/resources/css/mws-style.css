@@ -781,12 +781,13 @@ body {
         background-repeat: repeat-x;
         height: 25px;
         position: relative;
-        padding: 12px 12px 10px 12px;
+        padding: 7px 12px 10px 12px;
         border-bottom: 2px solid #35353a;
         font-size: 14px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
+        height: 32px;
     }
 
         .mws-panel .mws-panel-header span {
@@ -2198,4 +2199,10 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 
 li.active {
     background-color: rgba(0,0,0,0.15);
+}
+.floatleft {
+    float:left;
+}
+.floatright {
+    float:right;
 }

@@ -1,10 +1,17 @@
 ﻿@model List<Bringly.AdminDomain.City>
 @{
     Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+    Guid guid = new Guid();
 }
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>Manage Cities</span>
+        <span class="floatleft">Manage Cities</span>
+        <span class="floatright">
+
+            <a class="btn" href="/Admin/EditCity/@guid">
+                Add City
+            </a>
+        </span>
     </div>
     <div class="mws-panel-body no-padding">
         <div class="dataTables_wrapper">
@@ -32,9 +39,10 @@
                             <td>@city.CityName </td> 
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn" href="/Admin/DeleteCity/@city.CityGuid">
+                                    <input class="btn" type="button" value="Delete" onclick="DeleteCity('@city.CityGuid')" />
+                                    @*<a class="btn" href="/Admin/DeleteCity/@city.CityGuid">
                                         Delete
-                                    </a>
+                                    </a>*@
                                     <a class="btn" href="/Admin/EditCity/@city.CityGuid">
                                         Edit
                                     </a>

@@ -5,27 +5,31 @@
     Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
 }
 
-<h2>Edit City</h2>
+<h2><span id="cityHeader">@((Model!=null && !string.IsNullOrEmpty(Model.CityUrlName))?"Edit":"Add")</span> City</h2>
 <form method="post" enctype="multipart/form-data">
-    <table class="mws-datatable-fn mws-table dataTable">
-        <thead>
-            <tr role="row">
-                <th colspan="2">
-                    City Name
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody id="viewCities">
-            <tr>
-                <td>City Name </td>
-                <td>@Html.HiddenFor(m => m.CityGuid) @Html.TextBoxFor(m => m.CityName)</td>
-                <td>
-                    <input class="btn" type="submit" id="UpdateCity" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <table class="mws-datatable-fn mws-table dataTable">
+            <thead>
+                <tr role="row">
+                    <th colspan="2">
+                        City Name
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="viewCities">
+                <tr>
+                    <td>City Name </td>
+                    <td>@Html.HiddenFor(m => m.CityGuid) @Html.TextBoxFor(m => m.CityName)</td>
+                    <td>
+                        <input class="btn" onclick="CheckDuplicateCity(this)" value="Submit" type="button" id="UpdateCity" />
+                        <input class="btn" type="submit" style="display:none;" id="UpdateCityClick" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
 </form>

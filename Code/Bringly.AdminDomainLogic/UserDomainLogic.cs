@@ -59,7 +59,6 @@ namespace Bringly.AdminDomainLogic
         public City GetCity(Guid cityGuid)
         {
             return bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).FirstOrDefault();
-
         }
         public bool AddUpdateCity(string cityName,Guid cityGuid)
         {
@@ -75,7 +74,23 @@ namespace Bringly.AdminDomainLogic
                 bringlyEntities.SaveChanges();                
             }
             return true;
-
+        }
+        public bool IsCityExists(string cityName,Guid guid)
+        {
+            bool cityexists = false;
+            string cityurl = Regex.Replace(cityName, @"[^0-9a-zA-Z]+", "");
+            tblCity cityObject = bringlyEntities.tblCities.Where(x => x.CityUrlName== cityurl && x.CityGuid!= guid).FirstOrDefault();
+            if (cityObject != null && !string.IsNullOrEmpty(cityObject.CityName))
+            {
+                cityexists = true;
+            }
+            return cityexists;
+        }
+        public bool DeleteCityLogic(Guid cityGuid)
+        {
+            tblCity city = bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).FirstOrDefault();            
+            bringlyEntities.tblCities.Remove(city);
+            return true;
         }
     }
 }

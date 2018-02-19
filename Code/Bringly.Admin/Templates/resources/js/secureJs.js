@@ -57,18 +57,18 @@ function bindLeftMenuEvents() {
         current.parent().parent().parent().addClass('activeParent');
         return;
     }
-    if (current.length <= 0) {
-        var replaceString = GetURLParameter();
-        loc = loc.replace("/" + replaceString, "");
-        loc = checkUrlForInnerpages(loc).toLowerCase();
-        current = $nav.find('a[href="' + loc + '"]');
-        if (current.length != 0) {
-            current.parents().parents().removeClass();
-            current.parent().addClass('active');
-            current.parent().parent().parent().addClass('activeParent');
-            return;
-        }
-    }
+    //if (current.length <= 0) {
+    //    var replaceString = GetURLParameter();
+    //    loc = loc.replace("/" + replaceString, "");
+    //    loc = checkUrlForInnerpages(loc).toLowerCase();
+    //    current = $nav.find('a[href="' + loc + '"]');
+    //    if (current.length != 0) {
+    //        current.parents().parents().removeClass();
+    //        current.parent().addClass('active');
+    //        current.parent().parent().parent().addClass('activeParent');
+    //        return;
+    //    }
+    //}
     /******** -----> Select Left Menu Ends ----->  ********/
 }
 function GetURLParameter() {
@@ -79,4 +79,43 @@ function GetURLParameter() {
     else
         return 0;
 }
- 
+function CheckDuplicateCity(evt) {
+    if ($.trim($('#CityName').val()) != '') {
+        PostData("/Admin/IsDuplicateCity", { cityName: $('#CityName').val(), cityGuid: $('#CityGuid').val() }, DuplicateCityHandler)
+    }
+    else {
+        errorBlock("Please enter city name.");
+    }   
+}
+function DuplicateCityHandler(response) {
+    if (response) {
+        errorBlock("City already exists");
+    }
+    else {
+        $('#UpdateCityClick').click();
+    }
+}
+
+function DeleteCity(evt) {
+    swal({
+        title: "Are you sure?",
+        text: "Your will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    },
+        function () {
+            PostData("/Admin/DeleteCity", { cityGuid: $('#CityGuid').val() }, DeleteCityHandler)
+        });
+}
+function DeleteCityHandler(response) {
+    if (response) {
+        swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+        });
+        window.location.reload();
+    }
+}
+
