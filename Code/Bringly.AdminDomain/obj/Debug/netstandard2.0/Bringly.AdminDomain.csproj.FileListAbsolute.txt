@@ -1,9 +1,0 @@
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\netstandard2.0\Bringly.AdminDomain.deps.json
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\netstandard2.0\Bringly.AdminDomain.dll
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\netstandard2.0\Bringly.AdminDomain.pdb
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.csprojResolveAssemblyReference.cache
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.csproj.CoreCompileInputs.cache
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.AssemblyInfoInputs.cache
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.AssemblyInfo.cs
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.dll
-E:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\netstandard2.0\Bringly.AdminDomain.pdb

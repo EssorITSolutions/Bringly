@@ -1,0 +1,50 @@
+﻿@model List<Bringly.AdminDomain.City>
+@{
+    Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+}
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span>Manage Cities</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <div class="dataTables_wrapper">
+            <div class="dataTables_filter">
+                <label>
+                    Search:
+                    <input type="text" data-filter-grid-id="viewCities" data-filter-grid="true">
+                </label>
+            </div>
+            <table class="mws-datatable-fn mws-table dataTable">
+                <thead>
+                    <tr role="row">
+                        <th>
+                            City Name
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="viewCities">
+                    @foreach (Bringly.AdminDomain.City city in Model)
+                    {
+                        <tr>
+                            <td>@city.CityName </td> 
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn" href="/Admin/DeleteCity/@city.CityGuid">
+                                        Delete
+                                    </a>
+                                    <a class="btn" href="/Admin/EditCity/@city.CityGuid">
+                                        Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -4,6 +4,9 @@ using Bringly.AdminDomain.Common;
 using Bringly.Data;
 using System.Linq;
 using Bringly.AdminDomain.Enums;
+using System.Web.Security;
+using System.Web;
+using System.Collections.Generic;
 namespace Bringly.AdminDomainLogic
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
@@ -11,7 +14,7 @@ namespace Bringly.AdminDomainLogic
         public Message UserLogin(UserLogin userLogin)
         {
             Message message = new Message();
-            tblUser user = bringlyEntities.tblUsers.Where(u => u.EmailAddress == userLogin.UserName && u.Password == userLogin.UserPassword && u.IsDeleted == false && u.UserRegistrationType==Convert.ToInt32(UserRoles.SuperAdmin)).FirstOrDefault();
+            tblUser user = bringlyEntities.tblUsers.Where(u => u.EmailAddress == userLogin.UserName && u.Password == userLogin.UserPassword && u.IsDeleted == false && u.UserRegistrationType == 1).FirstOrDefault();
             if (user != null && user.IsActive)
             {
                 AuthencationTicket(user);
@@ -46,6 +49,15 @@ namespace Bringly.AdminDomainLogic
             string st = FormsAuthentication.Encrypt(tkt);
             HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, st) { HttpOnly = true };
             HttpContext.Current.Response.Cookies.Add(ck);
+        }
+        public List<City> GetCities()
+        {
+            return bringlyEntities.tblCities.Where(c => c.IsDeleted == false).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).ToList();
+        }
+        public City GetCity(Guid cityGuid)
+        {
+            return bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).FirstOrDefault();
+
         }
     }
 }

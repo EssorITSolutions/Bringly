@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bringly.AdminDomain
 {
-    public class City
+    public class City : BaseClasses.DomainBase
     {
         public Guid CityGuid { get; set; }
         public string CityName { get; set; }

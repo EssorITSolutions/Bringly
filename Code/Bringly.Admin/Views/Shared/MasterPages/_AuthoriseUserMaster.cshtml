@@ -7,9 +7,6 @@
     @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     @RenderSection("pageHeaderResources", false)
-    @{
-        bool isDeveloper = Admin.Exigo.UserVariables.IsDeveloper;
-    }
 </head>
 <body>
     <div id="message" class="" style="">
@@ -69,34 +66,11 @@
                             </ul>
                         </li>*@
                     <li>
-                        <a href="javascript:void(0)"><i class="icon-user"></i>Agencies</a>
+                        <a href="javascript:void(0)"><i class="icon-user"></i>Manage</a>
                         <ul class="closed">
-                            <li><a title="View Agencies" href="/manageagency/viewagencies">View Agencies</a></li>
+                            <li><a title="Manage Cities" href="/Admin/ManageCities">Manage Cities</a></li>
                         </ul>
                     </li>
-                    @if (isDeveloper)
-                    {
-                        <li>
-                            <a href="javascript:void(0)"><i class="icon-user"></i>Dev Area</a>
-                            <ul class="closed">
-                                <li><a title="View Email Receiver" href="/emailreceiver/manageemailreceiver">Manage Email Receiver</a></li>
-                                <li><a title="View CvParser Settings" href="/parsersettings/cvparserpathsettings">CvParser Settings</a></li>
-                                <li><a title="Find Jobs and Responses" href="/jobmapping/jobmapping">Find Jobs and Responses</a></li>
-                                <li><a title="Window Service Log" href="/windowservicelog/viewlog">Window Service Log</a></li>
-
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="icon-user"></i>Referesh</a>
-                            <ul class="closed">
-                                <li><a title="View CvParser Settings" href="/manageagency/refereshallagencies">Referesh All Agencies</a></li>
-                                <li><a title="View CvParser Settings" href="/manageagency/openallagencies">Open All Agencies</a></li>
-                                <li><a title="Referesh All Gateway Domains" href="/manageagency/refereshallagencycvgateway">Referesh All Gateway Domains</a></li>
-                                <li><a title="Open All Gateway Domains" href="/manageagency/openallagencycvgateway">Open All Gateway Domains</a></li>
-                                <li><a title="Login To All Agencies" href="/manageagency/logintoallagencies">Login To All Agencies</a></li>
-                            </ul>
-                        </li>
-                    }
                 </ul>
             </div>
         </div>

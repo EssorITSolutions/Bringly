@@ -47,6 +47,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -575,7 +582,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -594,14 +600,17 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\MasterPages\_AnonymousUserMaster.cshtml" />
     <Content Include="Views\Shared\MasterPages\_AuthoriseUserMaster.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\ManageCities.cshtml" />
+    <Content Include="Views\Admin\EditCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.AdminDomainLogic\Bringly.AdminDomainLogic.csproj">
-      <Project>{3be59865-76c0-4d27-8625-33c82e9fc9b5}</Project>
+      <Project>{3a394b06-21bc-4937-89ea-9bf16c267b9b}</Project>
       <Name>Bringly.AdminDomainLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bringly.AdminDomain\Bringly.AdminDomain.csproj">
-      <Project>{33ac9046-3a51-4fb8-ba74-1c81f1dd4601}</Project>
+      <Project>{185b6735-8c69-40c2-b28e-8aa8486bd928}</Project>
       <Name>Bringly.AdminDomain</Name>
     </ProjectReference>
   </ItemGroup>
