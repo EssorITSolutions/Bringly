@@ -36,13 +36,10 @@
                     @foreach (Bringly.AdminDomain.City city in Model)
                     {
                         <tr>
-                            <td>@city.CityName </td> 
+                            <td>@city.CityName </td>
                             <td>
                                 <div class="btn-group">
-                                    <input class="btn" type="button" value="Delete" onclick="DeleteCity('@city.CityGuid')" />
-                                    @*<a class="btn" href="/Admin/DeleteCity/@city.CityGuid">
-                                        Delete
-                                    </a>*@
+                                    <input class="btn" type="button" value="Delete" onclick="DeleteCity('@city.CityGuid')" /> 
                                     <a class="btn" href="/Admin/EditCity/@city.CityGuid">
                                         Edit
                                     </a>

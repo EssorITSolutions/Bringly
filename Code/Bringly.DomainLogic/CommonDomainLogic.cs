@@ -13,15 +13,29 @@ namespace Bringly.DomainLogic
 {
     public class CommonDomainLogic : BaseClass.DomainLogicBase
     {
-        public static string DefaultProfileImage= "profile.png";
+        public static string DefaultProfileImage = "profile.png";
         public List<City> GetCities()
         {
-            return bringlyEntities.tblCities.Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).OrderByDescending(t => t.CityGuid).Take(5).ToList();
+            return bringlyEntities.tblCities.Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).OrderBy(c => c.CityName).ToList();
+        }
+        public List<City> GetTopCities(City PreferredCity = null)
+        {
+            int takeTop = 6;
+            if (PreferredCity != null)
+            {
+                takeTop = takeTop - 1;
+            }
+            List<City> Cities = bringlyEntities.tblCities.Where(c => (PreferredCity != null || c.CityGuid != PreferredCity.CityGuid)).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).Take(takeTop).ToList();
+            if (PreferredCity != null)
+            {
+                Cities.Add(PreferredCity);
+            }
+            return Cities;
         }
         public Guid FindCityGuid(string CityUrlName)
         {
             tblCity _city = bringlyEntities.tblCities.Where(x => x.CityUrlName == CityUrlName).FirstOrDefault();
-            return _city!=null ?_city.CityGuid: Guid.Empty;
+            return _city != null ? _city.CityGuid : Guid.Empty;
         }
         public List<City> GetCityByGUID(Guid _cityguid)
         {
@@ -39,11 +53,11 @@ namespace Bringly.DomainLogic
             }
             else
             {
-                _City = commonDomainLogic.GetCityByGUID(new Guid(_FindUser.PreferedCity)).FirstOrDefault();                
+                _City = commonDomainLogic.GetCityByGUID(new Guid(_FindUser.PreferedCity)).FirstOrDefault();
             }
             return _City;
         }
-        public static string GetImagePath(ImageType imagetype, string ImageName)
+        public static string GetImagePath(ImageType? imagetype, string ImageName)
         {
             string retstring = "";
             switch (imagetype)
@@ -61,5 +75,5 @@ namespace Bringly.DomainLogic
             return retstring;
             //return "~/Upload" + imagetype + "/" + ImageName;
         }
-    } 
+    }
 }

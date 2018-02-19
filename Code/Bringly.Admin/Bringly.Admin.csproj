@@ -550,7 +550,6 @@
     <Content Include="Templates\resources\images\core\sort.png" />
     <Content Include="Templates\resources\images\core\sort_asc.png" />
     <Content Include="Templates\resources\images\core\sort_desc.png" />
-    <Content Include="Templates\resources\images\icons\favicon.ico" />
     <Content Include="Templates\resources\images\Logo.png" />
     <Content Include="Templates\resources\js\commonJs.js" />
     <Content Include="Templates\resources\js\jquery.blockUI.js" />
@@ -582,6 +581,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Templates\resources\images\icons\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -603,6 +603,7 @@
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\ManageCities.cshtml" />
     <Content Include="Views\Admin\EditCity.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.AdminDomainLogic\Bringly.AdminDomainLogic.csproj">

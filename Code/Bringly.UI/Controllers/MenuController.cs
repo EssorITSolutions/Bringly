@@ -22,10 +22,7 @@ namespace Bringly.UI.Controllers
             chooseCity.Cities = commonDomainLogic.GetCities();
             chooseCity.SelectedCity = commonDomainLogic.GetPreferedCity();
             bool hascity = chooseCity.Cities.Any(guid => guid.CityGuid == chooseCity.SelectedCity.CityGuid);
-            if (!hascity)
-            {
-                chooseCity.Cities.Insert(0, new City() { CityGuid = chooseCity.SelectedCity.CityGuid, CityName = chooseCity.SelectedCity.CityName, CityUrlName = chooseCity.SelectedCity.CityUrlName });
-            }
+            chooseCity.TopCities = commonDomainLogic.GetTopCities(chooseCity.SelectedCity);
             return PartialView("_chooseCity", chooseCity);
         }
         public PartialViewResult TopMenu()

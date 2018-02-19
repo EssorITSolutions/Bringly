@@ -335,6 +335,7 @@
     <Content Include="Views\User\Favourites.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\User\Dashboard.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">

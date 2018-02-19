@@ -2,11 +2,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <div class="Navbar-logo admin-logo">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="~/Templates/images/logo-2.png" />
             </a>
-
-            @{Html.RenderAction("ChoosePreferedCity", "Menu");}
+            @if (Bringly.DomainLogic.UserVariables.IsAuthenticated && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+            {
+                Html.RenderAction("ChoosePreferedCity", "Menu");
+            }
         </div>
 
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">

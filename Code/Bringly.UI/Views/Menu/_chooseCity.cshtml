@@ -13,7 +13,7 @@
                 <a href="#" class="close-icon">&times;</a>
                 <h4>Choose your city</h4>
                 <ul class="list-unstyled">
-                    @foreach (Bringly.Domain.City city in Model.Cities)
+                    @foreach (Bringly.Domain.City city in Model.TopCities)
                     {
                         <li class="@(Model.SelectedCity.CityGuid==city.CityGuid? "active":"")"><a href="/restaurant/city/@city.CityUrlName">@city.CityName</a></li>
                     }
@@ -37,6 +37,4 @@
             </div>
         </div>
     </div>
-</div>
-@*<script src="~/Templates/Scripts/Plugins/chosen/chosen.jquery.js"></script>*@
-@*<link href="~/Templates/Scripts/Plugins/chosen/style.css" rel="stylesheet" />*@
+</div> 

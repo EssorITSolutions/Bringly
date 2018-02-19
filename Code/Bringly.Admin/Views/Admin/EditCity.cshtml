@@ -5,31 +5,30 @@
     Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
 }
 
-<h2><span id="cityHeader">@((Model!=null && !string.IsNullOrEmpty(Model.CityUrlName))?"Edit":"Add")</span> City</h2>
-<form method="post" enctype="multipart/form-data">
-    <div>
-        <table class="mws-datatable-fn mws-table dataTable">
-            <thead>
-                <tr role="row">
-                    <th colspan="2">
-                        City Name
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="viewCities">
-                <tr>
-                    <td>City Name </td>
-                    <td>@Html.HiddenFor(m => m.CityGuid) @Html.TextBoxFor(m => m.CityName)</td>
-                    <td>
-                        <input class="btn" onclick="CheckDuplicateCity(this)" value="Submit" type="button" id="UpdateCity" />
-                        <input class="btn" type="submit" style="display:none;" id="UpdateCityClick" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span id="cityHeader">@((Model != null && !string.IsNullOrEmpty(Model.CityUrlName)) ? "Edit" : "Add") City</span>
     </div>
-    
-</form>
+    <div class="mws-panel-body no-padding">
+        <form method="post" class="mws-form">
+            <div class="mws-form-block">
+                <div class="mws-form-row">
+                    <div class="mws-form-cols">
+                        <div class="mws-form-col-4-8">
+                            <label class="mws-form-label">City name<span class="required">*</span></label>
+                            <div class="mws-form-item">
+                                @Html.TextBoxFor(m => m.CityName)
+                                @Html.ValidationMessageFor(v => v.CityName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mws-button-row">
+                    @Html.HiddenFor(m => m.CityGuid)
+                    <input type="submit" name="submit" value="Save" title="Save" class="btn btn-inverse">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

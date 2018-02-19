@@ -51,7 +51,7 @@ namespace Bringly.UI.Controllers
             usrAddress.AddressType = Bringly.Domain.Enums.User.UserAddressType.Shipping.ToString();
             userProfile.UserAddresses.Add(usrAddress);
             userdomainLogic.UpdateUserProfile(userProfile);
-            Success("saved sucessfully");
+            Success("Saved successfully");
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
             userProfile.Cities = commonDomainLogic.GetCities();
             return View(userProfile);

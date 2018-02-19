@@ -17,34 +17,31 @@ namespace Bringly.Admin.Controllers
         }
         public ActionResult ManageCities()
         {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return View(userDomainLogic.GetCities());
+            CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            return View(cityDomainLogic.GetCities());
         }
+        public Action AddCity()
+        {
+            return View();
+        }
+        [HttpGet]
         public ActionResult EditCity(Guid id)
         {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();
-            City city= userDomainLogic.GetCity(id);
-            return View(city==null?new City():city);
+            CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            City city = cityDomainLogic.GetCity(id);
+            return View(city == null ? new City() : city);
         }
         [HttpPost]
-        public ActionResult EditCity(FormCollection formCityEdit)
+        public ActionResult EditCity(City city)
         {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();
-            Guid cityGuid = new Guid(formCityEdit["CityGuid"]);
-            userDomainLogic.AddUpdateCity(formCityEdit["CityName"], cityGuid);
-            return RedirectToAction("ManageCities");
+            CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            cityDomainLogic.AddUpdateCity(city);
+            return View(city);
         }
-        
-        public ActionResult IsDuplicateCity(string cityName,string cityGuid)
-        {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();            ;
-            return Json(userDomainLogic.IsCityExists(cityName,new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult DeleteCity(string cityGuid)
         {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return Json(userDomainLogic.DeleteCityLogic(new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
+            CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            return Json(cityDomainLogic.DeleteCityLogic(new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
         }
 
     }

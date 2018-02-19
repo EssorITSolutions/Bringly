@@ -10,7 +10,7 @@ namespace Bringly.Domain
     {
         public List<City> Cities { get; set; }
         public City SelectedCity { get; set; }
-
+        public List<City> TopCities { get; set; }
     }
 
     public class City
