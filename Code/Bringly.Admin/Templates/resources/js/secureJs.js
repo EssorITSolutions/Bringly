@@ -96,10 +96,10 @@ function DuplicateCityHandler(response) {
     }
 }
 
-function DeleteCity(evt) {
+function DeleteCity(cityguid) {
     swal({
         title: "Are you sure?",
-        text: "Your will not be able to recover this imaginary file!",
+        text: "You want to delete the city.",
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -107,7 +107,7 @@ function DeleteCity(evt) {
         closeOnConfirm: false
     },
         function () {
-            PostData("/Admin/DeleteCity", { cityGuid: $('#CityGuid').val() }, DeleteCityHandler)
+            PostData("/Admin/DeleteCity", { cityGuid: cityguid }, DeleteCityHandler)
         });
 }
 function DeleteCityHandler(response) {

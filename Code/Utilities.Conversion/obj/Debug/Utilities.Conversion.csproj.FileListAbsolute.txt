@@ -33,9 +33,3 @@ D:\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.csprojResolv
 D:\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.dll
 D:\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.pdb
 D:\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.csproj.CoreCompileInputs.cache
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\bin\Debug\Utilities.Conversion.dll
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\bin\Debug\Utilities.Conversion.pdb
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.csprojResolveAssemblyReference.cache
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.csproj.CoreCompileInputs.cache
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.dll
-D:\Work\Projects\Bringly\Code\Utilities.Conversion\obj\Debug\Utilities.Conversion.pdb

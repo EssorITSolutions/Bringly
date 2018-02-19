@@ -41,10 +41,10 @@ namespace Bringly.Admin.Controllers
             return Json(userDomainLogic.IsCityExists(cityName,new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult DeleteCity(Guid cityGuid)
+        public ActionResult DeleteCity(string cityGuid)
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return Json(userDomainLogic.DeleteCityLogic(cityGuid), JsonRequestBehavior.AllowGet);
+            return Json(userDomainLogic.DeleteCityLogic(new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
         }
 
     }

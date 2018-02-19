@@ -32,8 +32,3 @@ D:\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.csprojResolveAssembl
 D:\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.dll
 D:\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.pdb
 D:\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.csproj.CoreCompileInputs.cache
-D:\Work\Projects\Bringly\Code\Utilities.Helper\bin\Debug\Utilities.Helper.dll
-D:\Work\Projects\Bringly\Code\Utilities.Helper\bin\Debug\Utilities.Helper.pdb
-D:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.csproj.CoreCompileInputs.cache
-D:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.dll
-D:\Work\Projects\Bringly\Code\Utilities.Helper\obj\Debug\Utilities.Helper.pdb

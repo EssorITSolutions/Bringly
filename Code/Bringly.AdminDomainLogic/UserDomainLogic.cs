@@ -88,8 +88,9 @@ namespace Bringly.AdminDomainLogic
         }
         public bool DeleteCityLogic(Guid cityGuid)
         {
-            tblCity city = bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).FirstOrDefault();            
-            bringlyEntities.tblCities.Remove(city);
+            tblCity city = bringlyEntities.tblCities.Where(c => c.CityGuid == cityGuid).FirstOrDefault();
+            city.IsDeleted = true;
+            bringlyEntities.SaveChanges();
             return true;
         }
     }
