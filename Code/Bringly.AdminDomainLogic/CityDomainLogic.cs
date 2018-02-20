@@ -23,20 +23,32 @@ namespace Bringly.AdminDomainLogic
         }
         public bool AddCity(City city)
         {
-
-            tblCity cityObject = new tblCity();
-            string cityUrlName = Regex.Replace(city.CityName, @"[^0-9a-zA-Z]+", "-").Replace("--", "-");
-            cityObject = bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName });
-            bringlyEntities.SaveChanges();
-            return true;
+            if (!IsCityExists(city))
+            {
+                string cityUrlName = Regex.Replace(city.CityName, @"[^0-9a-zA-Z]+", "-").Replace("--", "-");
+                bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName });
+                bringlyEntities.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return true;
+            }
 
         }
         public bool UpdateCity(City city)
         {
-            tblCity cityObject = bringlyEntities.tblCities.Where(x => x.CityGuid == city.CityGuid).FirstOrDefault();
-            cityObject.CityName = city.CityName;
-            bringlyEntities.SaveChanges(); 
-            return true;
+            if (!IsCityExists(city))
+            {
+                tblCity cityObject = bringlyEntities.tblCities.Where(x => x.CityGuid == city.CityGuid).FirstOrDefault();
+                cityObject.CityName = city.CityName;
+                bringlyEntities.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool IsCityExists(City city)

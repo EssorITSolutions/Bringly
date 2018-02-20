@@ -602,7 +602,7 @@
     <Content Include="Views\Shared\MasterPages\_AuthoriseUserMaster.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\ManageCities.cshtml" />
-    <Content Include="Views\Admin\EditCity.cshtml" />
+    <Content Include="Views\Admin\SaveCity.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>

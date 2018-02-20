@@ -20,23 +20,48 @@ namespace Bringly.Admin.Controllers
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
             return View(cityDomainLogic.GetCities());
         }
-        public Action AddCity()
+        public ActionResult AddCity()
         {
-            return View();
+            return View("SaveCity", new City());
+        }
+        [HttpPost]
+        public ActionResult AddCity(City city)
+        {
+            CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            if (cityDomainLogic.AddCity(city))
+            {
+                Success("City added successfully");
+                ModelState.Clear();
+                city = new City();
+            }
+            else
+            {
+                ErrorBlock("City already exists");
+            }
+            return View("SaveCity", city);
         }
         [HttpGet]
         public ActionResult EditCity(Guid id)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
             City city = cityDomainLogic.GetCity(id);
-            return View(city == null ? new City() : city);
+            return View("SaveCity", city);
         }
         [HttpPost]
         public ActionResult EditCity(City city)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
-            cityDomainLogic.AddUpdateCity(city);
-            return View(city);
+            if (cityDomainLogic.UpdateCity(city))
+            {
+                Success("City saved successfully");
+                ModelState.Clear();
+                city = new City();
+            }
+            else
+            {
+                ErrorBlock("City already exists");
+            }
+            return View("SaveCity", city);
         }
         public ActionResult DeleteCity(string cityGuid)
         {
