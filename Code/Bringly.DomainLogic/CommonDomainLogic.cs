@@ -16,16 +16,19 @@ namespace Bringly.DomainLogic
         public static string DefaultProfileImage = "profile.png";
         public List<City> GetCities()
         {
-            return bringlyEntities.tblCities.Where(c=> c.IsDeleted==false).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).OrderBy(c => c.CityName).ToList();
+            return bringlyEntities.tblCities.Where(c => c.IsDeleted == false).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).OrderBy(c => c.CityName).ToList();
         }
         public List<City> GetTopCities(City PreferredCity = null)
         {
             int takeTop = 6;
+            Guid preferredCityGuid = Guid.Empty;
             if (PreferredCity != null)
             {
                 takeTop = takeTop - 1;
+                preferredCityGuid = PreferredCity.CityGuid;
             }
-            List<City> Cities = bringlyEntities.tblCities.Where(c => (PreferredCity != null || c.CityGuid != PreferredCity.CityGuid)).OrderByDescending(c=>c.DateCreated).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).Take(takeTop).ToList();
+
+            List<City> Cities = bringlyEntities.tblCities.Where(c => c.IsDeleted == false && (preferredCityGuid == Guid.Empty || c.CityGuid != preferredCityGuid)).OrderByDescending(c => c.DateCreated).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).Take(takeTop).ToList();
             if (PreferredCity != null)
             {
                 Cities.Add(PreferredCity);

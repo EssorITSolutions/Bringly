@@ -21,7 +21,6 @@ namespace Bringly.UI.Controllers
             UserProfile _FindUser = _userDomainLogic.FindUser(UserVariables.LoggedInUserGuid);
             chooseCity.Cities = commonDomainLogic.GetCities();
             chooseCity.SelectedCity = commonDomainLogic.GetPreferedCity();
-            bool hascity = chooseCity.Cities.Any(guid => guid.CityGuid == chooseCity.SelectedCity.CityGuid);
             chooseCity.TopCities = commonDomainLogic.GetTopCities(chooseCity.SelectedCity);
             return PartialView("_chooseCity", chooseCity);
         }

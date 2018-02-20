@@ -2,7 +2,7 @@
     InitCustomDropdown();
     CheckBoxCheckUnCheck();
     $(function () {
-        $('ul.user-menu a[href^="/' + location.pathname.split("/")[1] + '"]').parents().addClass('active');
+        $('ul.user-menu a[href$="/' + location.pathname.split("/")[2] + '"]').parents().addClass('active');
     });
     
 });/********Document Ready function Ends********/

@@ -2,7 +2,7 @@
 @model RestaurantSearch
 @{
     var cityname = string.IsNullOrEmpty(Model.CityName) ? "" : Model.CityName;
-    ViewBag.Title = "List Restaurants " + cityname;
+    ViewBag.Title = "List of Restaurants in " + cityname;
     Layout = "~/Views/Shared/MasterPages/RestaurantMaster.cshtml";
     ViewBag.HideLeftSection = true;
 }

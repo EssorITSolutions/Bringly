@@ -8,23 +8,23 @@
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span class="floatleft">Manage Cities</span>
-     
+
     </div>
     <div class="mws-panel-body no-padding">
         <div class="dataTables_wrapper">
 
             <div id="AddEditCity">
                 <div>
-                    <div class="mws-panel-header header-color">
-                        <span id="cityHeader">Add City</span>
-                    </div>
+                    @*<div class="mws-panel-header header-color">
+                            <span id="cityHeader">Add City</span>
+                        </div>*@
                     <div class="mws-panel-body no-padding no-margin">
                         <form method="post" class="mws-form" id="formCity">
                             <div class="mws-form-block">
                                 <div class="mws-form-row">
                                     <div class="mws-form-cols">
                                         <div class="mws-form-col-4-8">
-                                            <label class="mws-form-label">City name<span class="required">*</span></label>
+                                            <label class="mws-form-label">City Name<span class="required">*</span></label>
                                             <div class="mws-form-item">
                                                 @Html.TextBox("CityName")
                                                 @Html.ValidationMessage("CityName")
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="mws-button-row">
                                     @Html.Hidden("CityGuid", guid)
-                                    <input type="button" id="btnupdatecity" name="submit" value="Save" title="Save" class="btn btn-inverse">
+                                    <input type="button" id="btnupdatecity" name="submit" value="Add" title="Add" class="btn btn-inverse">
                                     <a href="/Admin/ManageCities" class="btn btn-inverse">Cancel</a>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="dataTables_filter">
+            <div class="dataTables_filter" style="background-color:#fff;border-bottom:1px solid #fff;">
                 <label>
                     Search:
                     <input type="text" data-filter-grid-id="viewCities" data-filter-grid="true">
@@ -55,26 +55,30 @@
                             City Name
                         </th>
                         <th>
+                            Created On
+                        </th>
+                        <th>
                             Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody id="viewCities">
                     @foreach (Bringly.AdminDomain.City city in Model)
-            {
-                <tr>
-                    <td>@city.CityName </td>
-                    <td>
-                        <div class="btn-group">
-                            <input class="btn" type="button" value="Delete" onclick="DeleteCity('@city.CityGuid')" />
-                            <input class="btn" type="button" value="Edit" id="btnAddEditCity" onclick="EditCity('@city.CityGuid','@city.CityName')" />
-                            @*<a href="/Admin/EditCity/@city.CityGuid">
-                            Edit
-                        </a>*@
-                        </div>
-                    </td>
-                </tr>
-    }
+                    {
+                        <tr>
+                            <td>@city.CityName </td>
+                            <td>@city.DateCreated.ToShortDateString() </td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="DeleteCity('@city.CityGuid')"><i class="fa fa-trash-o"></i></a>  &nbsp;
+                                <a href="javascript:void(0);" id="btnAddEditCity" onclick="EditCity('@city.CityGuid','@city.CityName')"><i style="" class="fa fa-pencil"></i></a>
+
+                                @*<a href="/Admin/EditCity/@city.CityGuid">
+                                        Edit
+                                    </a>*@
+
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
 

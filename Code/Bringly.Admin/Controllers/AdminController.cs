@@ -7,6 +7,7 @@ using Bringly.AdminDomain;
 using Bringly.AdminDomainLogic;
 using Bringly.AdminDomain.Common;
 using Bringly.AdminDomain.Enums;
+using System.Web.Security;
 
 namespace Bringly.Admin.Controllers
 {
@@ -86,6 +87,11 @@ namespace Bringly.Admin.Controllers
                 message.MessageType = MessageType.Error;
             }
             return Json(message, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home");
         }
 
     }

@@ -4,8 +4,8 @@ $(document).ready(function () {
     bindLeftMenuEvents();
     InitCustomDropdown();
 
-    var url = window.location.href; 
-    if (url.indexOf("ManageCities")>-1) {
+    var url = window.location.href;
+    if (url.indexOf("ManageCities") > -1) {
         if (window.location.search != "") {
             if (getParameterByName('MessageType') == "Success") {
                 success(getParameterByName('Message'));
@@ -88,7 +88,7 @@ function GetURLParameter() {
         return sPageUrl.substring(indexOfLastSlash + 1);
     else
         return 0;
-} 
+}
 
 function DeleteCity(cityguid) {
     swal({
@@ -112,14 +112,13 @@ function DeleteCityHandler(response) {
         errorBlock(response.MessageText);
     }
 }
-function EditCity(cityguid,cityname) {
+function EditCity(cityguid, cityname) {
     $('#CityName').val(cityname);
     $('#CityGuid').val(cityguid);
-    $('#cityHeader').text("Edit City");
     $('#btnupdatecity').val('Update');
 }
 $('#btnupdatecity').on('click', function () {
-    if ($.trim($('#CityName').val() != '')) {
+    if ($.trim($('#CityName').val()) != '') {
         var formcity = $('#formCity').serialize();
         if ($('#btnupdatecity').val() == 'Update') {
             PostData("/Admin/EditCity", formcity, EditCityHandler)
@@ -136,7 +135,7 @@ $('#btnupdatecity').on('click', function () {
 
 function EditCityHandler(response) {
     if (response.MessageType == "0") {//0 for success
-        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;  
+        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;
     }
     else {
         errorBlock(response.MessageText);
@@ -144,7 +143,7 @@ function EditCityHandler(response) {
 }
 function SaveCityHandler(response) {
     if (response.MessageType == "0") {//0 for success
-        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;      
+        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;
     }
     else {
         errorBlock(response.MessageText);
@@ -156,4 +155,4 @@ function CreateGuid() {
         return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
     }
     return _p8() + _p8(true) + _p8(true) + _p8();
-} 
+}

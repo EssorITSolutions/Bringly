@@ -16,7 +16,7 @@ namespace Bringly.Admin.Controllers.BaseClasses
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("ManageCities", "Admin");
         }
     }
 }

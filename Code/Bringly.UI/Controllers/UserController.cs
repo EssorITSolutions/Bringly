@@ -26,7 +26,7 @@ namespace Bringly.UI.Controllers
         public ActionResult EditPersonalInformation()
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            UserProfile userProfile = userDomainLogic.FindUser(Guid.Parse("9327aedc-65a4-4f53-87d4-be94a3bb91a3"));
+            UserProfile userProfile = userDomainLogic.FindUser(UserVariables.LoggedInUserGuid);
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
             userProfile.Cities = commonDomainLogic.GetCities();
             return View(userProfile);

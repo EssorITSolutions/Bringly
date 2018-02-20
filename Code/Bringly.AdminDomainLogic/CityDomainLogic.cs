@@ -15,7 +15,7 @@ namespace Bringly.AdminDomainLogic
     {
         public List<City> GetCities()
         {
-            return bringlyEntities.tblCities.Where(c => c.IsDeleted == false).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).ToList();
+            return bringlyEntities.tblCities.Where(c => c.IsDeleted == false).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName, DateCreated = c.DateCreated }).ToList();
         }
         public City GetCity(Guid cityGuid)
         {
@@ -26,7 +26,7 @@ namespace Bringly.AdminDomainLogic
             if (!IsCityExists(city))
             {
                 string cityUrlName = Regex.Replace(city.CityName, @"[^0-9a-zA-Z]+", "-").Replace("--", "-");
-                bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName,DateCreated=DateTime.Now });
+                bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName, DateCreated = DateTime.Now });
                 bringlyEntities.SaveChanges();
                 return true;
             }
