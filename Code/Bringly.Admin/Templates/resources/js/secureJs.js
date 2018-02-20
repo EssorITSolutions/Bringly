@@ -120,7 +120,7 @@ function EditCity(cityguid,cityname) {
 }
 $('#btnupdatecity').on('click', function () {
     var formcity = $('#formCity').serialize();
-    if ($('#btnsaveupdatecity').val() == 'Update') {
+    if ($('#btnupdatecity').val() == 'Update') {
         PostData("/Admin/EditCity", formcity, EditCityHandler)
     }
     else {
@@ -130,7 +130,6 @@ $('#btnupdatecity').on('click', function () {
 
 
 function EditCityHandler(response) {
-    console.log(response);
     if (response.MessageType == "0") {//0 for success
         window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;  
     }
@@ -139,7 +138,6 @@ function EditCityHandler(response) {
     }
 }
 function SaveCityHandler(response) {
-    console.log(response);
     if (response.MessageType == "0") {//0 for success
         window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;      
     }
