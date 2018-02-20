@@ -1,8 +1,0 @@
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\Bringly.AdminDomain.dll
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\Bringly.AdminDomain.pdb
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\Newtonsoft.Json.dll
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\bin\Debug\Newtonsoft.Json.xml
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\Bringly.AdminDomain.csprojResolveAssemblyReference.cache
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\Bringly.AdminDomain.csproj.CoreCompileInputs.cache
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\Bringly.AdminDomain.dll
-D:\Work\Projects\Bringly\Code\Bringly.AdminDomain\obj\Debug\Bringly.AdminDomain.pdb
