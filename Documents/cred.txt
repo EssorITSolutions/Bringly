@@ -1,0 +1,11 @@
+FTP Details
+bringly2.essorsolutions.com
+Bringly2Essor/Bringly2@2018
+
+bringly2admin.essorsolutions.com
+BringlyAdmin2/Bringly2@2018
+
+DEV SQL Server
+148.72.232.166
+bringlyEssor
+Bringly@2018
