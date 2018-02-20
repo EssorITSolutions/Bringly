@@ -74,7 +74,18 @@ namespace Bringly.Admin.Controllers
         public ActionResult DeleteCity(string cityGuid)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
-            return Json(cityDomainLogic.DeleteCityLogic(new Guid(cityGuid)), JsonRequestBehavior.AllowGet);
+            Message message = new Message();
+            if (cityDomainLogic.DeleteCityLogic(new Guid(cityGuid)))
+            {
+                ModelState.Clear();
+                message.MessageText = "City has been deleted successfully.";
+                message.MessageType = MessageType.Success;
+            }
+            else {
+                message.MessageText = "City deletion failed.";
+                message.MessageType = MessageType.Error;
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
     }

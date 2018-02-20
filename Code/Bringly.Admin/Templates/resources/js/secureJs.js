@@ -105,11 +105,11 @@ function DeleteCity(cityguid) {
         });
 }
 function DeleteCityHandler(response) {
-    if (response) {
-        swal("City has been deleted!", {
-            icon: "success",
-        });
-        window.location.href = "/Admin/ManageCities";
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;
+    }
+    else {
+        errorBlock(response.MessageText);
     }
 }
 function EditCity(cityguid,cityname) {
