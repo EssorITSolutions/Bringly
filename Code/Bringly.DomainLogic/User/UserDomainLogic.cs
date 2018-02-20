@@ -119,7 +119,7 @@ namespace Bringly.DomainLogic.User
                 UserProfile userProfile = new UserProfile();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
-                    imageName = Path.GetFileName("Buyer_" + Guid.NewGuid() + "_" + Request.Files[i].FileName);
+                    imageName = Path.GetFileName("Buyer_" + Guid.NewGuid() + Path.GetExtension(Request.Files[i].FileName));
                     imageLocation = CommonDomainLogic.GetImagePath(Domain.Enums.ImageType.User, imageName);
                     Request.Files[i].SaveAs(HttpContext.Current.Server.MapPath(imageLocation));
                 }
