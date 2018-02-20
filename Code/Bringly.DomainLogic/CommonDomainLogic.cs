@@ -25,7 +25,7 @@ namespace Bringly.DomainLogic
             {
                 takeTop = takeTop - 1;
             }
-            List<City> Cities = bringlyEntities.tblCities.Where(c => (PreferredCity != null || c.CityGuid != PreferredCity.CityGuid)).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).Take(takeTop).ToList();
+            List<City> Cities = bringlyEntities.tblCities.Where(c => (PreferredCity != null || c.CityGuid != PreferredCity.CityGuid)).OrderByDescending(c=>c.DateCreated).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).Take(takeTop).ToList();
             if (PreferredCity != null)
             {
                 Cities.Add(PreferredCity);
