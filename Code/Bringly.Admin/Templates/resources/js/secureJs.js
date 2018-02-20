@@ -119,12 +119,17 @@ function EditCity(cityguid,cityname) {
     $('#btnupdatecity').val('Update');
 }
 $('#btnupdatecity').on('click', function () {
-    var formcity = $('#formCity').serialize();
-    if ($('#btnupdatecity').val() == 'Update') {
-        PostData("/Admin/EditCity", formcity, EditCityHandler)
+    if ($.trim($('#CityName').val() != '')) {
+        var formcity = $('#formCity').serialize();
+        if ($('#btnupdatecity').val() == 'Update') {
+            PostData("/Admin/EditCity", formcity, EditCityHandler)
+        }
+        else {
+            PostData("/Admin/AddCity", formcity, SaveCityHandler)
+        }
     }
     else {
-        PostData("/Admin/AddCity", formcity, SaveCityHandler)
+        errorBlock("Please enter city name.");
     }
 });
 
