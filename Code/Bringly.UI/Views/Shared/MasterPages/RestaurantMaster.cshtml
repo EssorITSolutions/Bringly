@@ -21,7 +21,7 @@
         <div class="dashboard-content inner-margin">
             <div class="row">
 
-                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderPartial("~/Views/Menu/_LeftPanel.cshtml"); }
+                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel", "User"); }
 
                 @RenderBody()
 

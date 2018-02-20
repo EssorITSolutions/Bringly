@@ -34,5 +34,8 @@ namespace Bringly.UI.Controllers
 
             return View("ListRestaurants", restaurantDomainLogic.GetRestaurantsByCity(chooseCity.SelectedCity));
         }
+        public ActionResult MyRestaurant() {
+            return View();
+        }
     }
 }
