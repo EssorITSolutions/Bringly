@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {/********Document Ready function Starts********/
     InitCustomDropdown();
     CheckBoxCheckUnCheck();
+    $(function () {
+        $('ul.user-menu a[href^="/' + location.pathname.split("/")[1] + '"]').parents().addClass('active');
+    });
     
 });/********Document Ready function Ends********/
 /*************************************** Bring Element To Center Starts *****************************************/
