@@ -2665,10 +2665,34 @@ ul.nav-wizard li a {
         width: 100%;
     }
 
-        .user-profile p.edit-profil-img a {
-            opacity: 0.4;
-        }
+.user-profile p.edit-profil-img a {
+    opacity: 0.4;
+}
 
-            .user-profile p.edit-profil-img a:hover {
-                opacity: 1;
-            }
+    .user-profile p.edit-profil-img a:hover {
+        opacity: 1;
+    }
+.required {
+    color: #ff0a0a;
+}
+	.profile-info{
+	position:relative;
+	}
+	.profile-info p.edit-profil-img{
+	position:absolute;
+	top:0;
+	right:20px;
+	text-align:center;
+	width:auto;
+	
+	}
+	.profile-info p.edit-profil-img a {
+    
+    font-size: 14px;
+    color: #c8c8c8;
+	}
+	.profile-info p.edit-profil-img a:hover{
+		
+		color:#FA5342;
+	}
+
