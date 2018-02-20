@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Edit City";
-    Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+    //Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+    Layout = null;
 }
 
 
 <div class="mws-panel grid_8">
-    <div class="mws-panel-header">
+    <div class="">
         <span id="cityHeader">@((Model != null && !string.IsNullOrEmpty(Model.CityUrlName)) ? "Edit" : "Add") City</span>
     </div>
     <div class="mws-panel-body no-padding">

@@ -26,13 +26,13 @@ namespace Bringly.AdminDomainLogic
             if (!IsCityExists(city))
             {
                 string cityUrlName = Regex.Replace(city.CityName, @"[^0-9a-zA-Z]+", "-").Replace("--", "-");
-                bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName });
+                bringlyEntities.tblCities.Add(new tblCity { CityGuid = Guid.NewGuid(), CityName = city.CityName, CityUrlName = cityUrlName,DateCreated=DateTime.Now });
                 bringlyEntities.SaveChanges();
                 return true;
             }
             else
             {
-                return true;
+                return false;
             }
 
         }

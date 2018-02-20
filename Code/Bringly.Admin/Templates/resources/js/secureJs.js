@@ -3,8 +3,29 @@
 $(document).ready(function () {
     bindLeftMenuEvents();
     InitCustomDropdown();
+
+    var url = window.location.href; 
+    if (url.indexOf("ManageCities")>-1) {
+        if (window.location.search != "") {
+            if (getParameterByName('MessageType') == "Success") {
+                success(getParameterByName('Message'));
+            }
+            else {
+                errorBlock(getParameterByName('Message'));
+            }
+        }
+    }
 });/******** Document Ready function Ends ********/
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 function InitCustomDropdown() {
     var config = {
@@ -88,7 +109,48 @@ function DeleteCityHandler(response) {
         swal("City has been deleted!", {
             icon: "success",
         });
-        window.location.reload();
+        window.location.href = "/Admin/ManageCities";
     }
 }
+function EditCity(cityguid,cityname) {
+    $('#CityName').val(cityname);
+    $('#CityGuid').val(cityguid);
+    $('#cityHeader').text("Edit City");
+    $('#btnupdatecity').val('Update');
+}
+$('#btnupdatecity').on('click', function () {
+    var formcity = $('#formCity').serialize();
+    if ($('#btnsaveupdatecity').val() == 'Update') {
+        PostData("/Admin/EditCity", formcity, EditCityHandler)
+    }
+    else {
+        PostData("/Admin/AddCity", formcity, SaveCityHandler)
+    }
+});
 
+
+function EditCityHandler(response) {
+    console.log(response);
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;  
+    }
+    else {
+        errorBlock(response.MessageText);
+    }
+}
+function SaveCityHandler(response) {
+    console.log(response);
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;      
+    }
+    else {
+        errorBlock(response.MessageText);
+    }
+}
+function CreateGuid() {
+    function _p8(s) {
+        var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+        return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+    }
+    return _p8() + _p8(true) + _p8(true) + _p8();
+} 

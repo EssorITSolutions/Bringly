@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Bringly.AdminDomain;
 using Bringly.AdminDomainLogic;
+using Bringly.AdminDomain.Common;
+using Bringly.AdminDomain.Enums;
 
 namespace Bringly.Admin.Controllers
 {
@@ -28,40 +30,46 @@ namespace Bringly.Admin.Controllers
         public ActionResult AddCity(City city)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            Message message = new Message();            
             if (cityDomainLogic.AddCity(city))
             {
-                Success("City added successfully");
                 ModelState.Clear();
                 city = new City();
+                message.MessageText = "City added successfully.";
+                message.MessageType = MessageType.Success;
             }
             else
             {
-                ErrorBlock("City already exists");
+                message.MessageText = "City already exists.";
+                message.MessageType = MessageType.Error;
             }
-            return View("SaveCity", city);
+            return Json(message, JsonRequestBehavior.AllowGet); ;            
         }
         [HttpGet]
         public ActionResult EditCity(Guid id)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
             City city = cityDomainLogic.GetCity(id);
-            return View("SaveCity", city);
+            return PartialView("SaveCity", city);
         }
         [HttpPost]
         public ActionResult EditCity(City city)
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
+            Message message = new Message();
             if (cityDomainLogic.UpdateCity(city))
             {
-                Success("City saved successfully");
                 ModelState.Clear();
                 city = new City();
+                message.MessageText = "City updated successfully.";
+                message.MessageType = MessageType.Success;
             }
             else
             {
-                ErrorBlock("City already exists");
+                message.MessageText = "City already exists.";
+                message.MessageType = MessageType.Error;
             }
-            return View("SaveCity", city);
+            return Json(message, JsonRequestBehavior.AllowGet); ;
         }
         public ActionResult DeleteCity(string cityGuid)
         {

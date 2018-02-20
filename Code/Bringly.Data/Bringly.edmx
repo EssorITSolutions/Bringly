@@ -13,6 +13,7 @@
           <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CityUrlName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCountry">
           <Key>
@@ -112,7 +113,7 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="Modifiedby" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="DeletedBy" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="tblUserAddress">
@@ -363,6 +364,7 @@
           <NavigationProperty Name="tblUsers" Relationship="BringlyModel.FK_tblUser_tblCity" FromRole="tblCity" ToRole="tblUser" />
           <NavigationProperty Name="tblRestaurants" Relationship="BringlyModel.FK_tblRestaurant_tblCity" FromRole="tblCity" ToRole="tblRestaurant" />
           <Property Name="CityUrlName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -383,7 +385,7 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modifiedby" Type="Guid" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeletedBy" Type="Guid" />
           <NavigationProperty Name="tblUserAddresses" Relationship="Self.FK_tblUserAddress_tblUser" FromRole="tblUser" ToRole="tblUserAddress" />
           <Property Name="PreferedCity" Type="Guid" />
@@ -730,6 +732,7 @@
           <EntitySetMapping Name="tblCities">
             <EntityTypeMapping TypeName="BringlyModel.tblCity">
               <MappingFragment StoreEntitySet="tblCity">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="CityUrlName" ColumnName="CityUrlName" />
                 <ScalarProperty Name="CityGuid" ColumnName="CityGuid" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />

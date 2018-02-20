@@ -26,6 +26,7 @@ namespace Bringly.Data
         public string CityName { get; set; }
         public bool IsDeleted { get; set; }
         public string CityUrlName { get; set; }
+        public System.DateTime DateCreated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserAddress> tblUserAddresses { get; set; }

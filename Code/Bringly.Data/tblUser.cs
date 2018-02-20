@@ -41,7 +41,7 @@ namespace Bringly.Data
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.Guid> Modifiedby { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public Nullable<System.Guid> DeletedBy { get; set; }
         public Nullable<System.Guid> PreferedCity { get; set; }
     
