@@ -158,6 +158,7 @@
     <Compile Include="Controllers\BaseClasses\AuthoriseUserControllerBase.cs" />
     <Compile Include="Controllers\BaseClasses\ControllerBase.cs" />
     <Compile Include="Controllers\BaseClasses\SuperAdminUserControllerBase.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -338,6 +339,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Restaurant\MyRestaurant.cshtml" />
     <Content Include="Views\User\RestaurantReview.cshtml" />
+    <Content Include="Views\Errors\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">
