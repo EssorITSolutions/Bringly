@@ -9,5 +9,12 @@
                 return "~/Error/Error404";
             }
         }
+        public static int DefaultPageSize
+        {
+            get
+            {
+                return 50;
+            }
+        }
     }
 }

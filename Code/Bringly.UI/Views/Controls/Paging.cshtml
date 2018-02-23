@@ -1,0 +1,29 @@
+﻿@model Bringly.Domain.Paging
+
+@if (Model == null) { return; }
+
+<ul class="pagination success" id="paging">
+    @if (Model.CurrentPage != 1)
+    {
+        <li title="First"><a href="@Model.QueryString&page=1&savesearch=true" title="First">‹‹</a></li>
+        <li title="Previous"><a href="@Model.QueryString&page=@(Convert.ToInt32(Model.CurrentPage) - 1)&savesearch=true" title="Previous">‹</a></li>
+    }
+    @for (int i = Model.FirstIndex; i < Model.LastIndex; i++)
+    {
+        if (Model.CurrentPage == i)
+        {
+        <li class="active disabled"><a href="javascript:void()">@i</a></li>
+        }
+        else
+        {
+        <li><a href="@Model.QueryString&page=@i&savesearch=true">@i</a></li>
+            
+        }
+    }
+
+    @if (Model.CurrentPage != Model.LastPage)
+    {
+        <li title="Next"><a href="@Model.QueryString&page=@(Convert.ToInt32(Model.CurrentPage) + 1)&savesearch=true" title="Next">›</a></li>
+        <li title="Last"><a href="@Model.QueryString&page=@Model.LastPage&savesearch=true" title="Last">››</a></li>
+    }
+</ul>

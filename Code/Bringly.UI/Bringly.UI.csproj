@@ -158,6 +158,7 @@
     <Compile Include="Controllers\BaseClasses\AuthoriseUserControllerBase.cs" />
     <Compile Include="Controllers\BaseClasses\ControllerBase.cs" />
     <Compile Include="Controllers\BaseClasses\SuperAdminUserControllerBase.cs" />
+    <Compile Include="Controllers\ControlsController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
@@ -339,6 +340,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Restaurant\MyRestaurant.cshtml" />
     <Content Include="Views\Errors\Error404.cshtml" />
+    <Content Include="Views\Controls\Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">
@@ -360,6 +362,10 @@
     <ProjectReference Include="..\Utilities.Helper\Utilities.Helper.csproj">
       <Project>{56f24718-5196-4a7c-aec8-fe937ebef81d}</Project>
       <Name>Utilities.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities.QueryStringHelper\Utilities.QueryStringHelper.csproj">
+      <Project>{de52ff52-5eb8-4cda-81a7-d6e3e1f65385}</Project>
+      <Name>Utilities.QueryStringHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

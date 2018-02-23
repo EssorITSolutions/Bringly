@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Linq;
 using System.Collections.Generic;
+using Utilities;
 
 namespace Bringly.UI.Controllers.BaseClasses
 {
@@ -126,5 +127,50 @@ namespace Bringly.UI.Controllers.BaseClasses
             }
         }
         #endregion
+
+        #region Paging Properties
+        /// <summary>
+        /// returns the current page
+        /// </summary>
+        protected int CurrentPage
+        {
+            get
+            {
+                int currentPage;
+                if (!QueryStringHelper.getIntValue("page", out currentPage))
+                {
+                    currentPage = 1;
+                }
+                return currentPage;
+            }
+        }
+
+        /// <summary>
+        /// default page size - SetUp in web.config - AppSetting Name : DefaultPageSize
+        /// </summary>
+        protected int PageSize
+        {
+            get
+            {
+                return DomainLogic.Settings.SystemSettings.DefaultPageSize;
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected string SortBy
+        {
+            get
+            {
+                string outPut = QueryStringHelper.getQueryStringVaue("SortBy");
+                if (string.IsNullOrWhiteSpace(outPut) || string.IsNullOrEmpty(outPut))
+                {
+                    return string.Empty;
+                }
+                return outPut;
+            }
+        }
     }
 }
