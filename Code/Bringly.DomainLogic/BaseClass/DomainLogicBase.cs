@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace Bringly.DomainLogic.BaseClass
 {
@@ -44,6 +45,49 @@ namespace Bringly.DomainLogic.BaseClass
                     return uri.Scheme + "://" + uri.Host + ":" + uri.Port + "/";
                 }
                 return current.Request.Url.Host.ToLower();
+            }
+        }
+        #region Paging Properties
+        /// <summary>
+        /// returns the current page
+        /// </summary>
+        protected int CurrentPage
+        {
+            get
+            {
+                int currentPage;
+                if (!QueryStringHelper.getIntValue("page", out currentPage))
+                {
+                    currentPage = 1;
+                }
+                return currentPage;
+            }
+        }
+
+        /// <summary>
+        /// default page size - SetUp in web.config - AppSetting Name : DefaultPageSize
+        /// </summary>
+        protected int PageSize
+        {
+            get
+            {
+                return Settings.SystemSettings.DefaultPageSize;
+            }
+        }
+        #endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        protected string SortBy
+        {
+            get
+            {
+                string outPut = QueryStringHelper.getQueryStringVaue("SortBy");
+                if (string.IsNullOrWhiteSpace(outPut) || string.IsNullOrEmpty(outPut))
+                {
+                    return string.Empty;
+                }
+                return outPut;
             }
         }
     }

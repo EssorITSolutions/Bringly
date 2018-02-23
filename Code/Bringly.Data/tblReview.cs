@@ -19,8 +19,12 @@ namespace Bringly.Data
         public System.Guid UserGuid { get; set; }
         public byte Rating { get; set; }
         public string Review { get; set; }
+        public System.Guid OrderGuid { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsSkipped { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+        public Nullable<bool> IsProcessed { get; set; }
+        public Nullable<System.DateTime> ApproveDate { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.Guid CreatedByGuid { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
@@ -28,15 +32,12 @@ namespace Bringly.Data
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedByGuid { get; set; }
-        public System.Guid OrderGuid { get; set; }
-        public Nullable<bool> IsApproved { get; set; }
-        public Nullable<bool> IsProcessed { get; set; }
     
+        public virtual tblOrder tblOrder { get; set; }
         public virtual tblRestaurant tblRestaurant { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }
         public virtual tblUser tblUser3 { get; set; }
-        public virtual tblOrder tblOrder { get; set; }
     }
 }

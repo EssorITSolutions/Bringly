@@ -330,3 +330,11 @@ var model_windowId, model_DivModalOverlayId;
     }
 })(jQuery);
 /*************************************** Model Window Ends *****************************************/
+$('.limited-content a').on('click', function () {
+    $(this).parent().removeClass('display-inline-block').addClass('display-none');
+    $(this).parent().next().removeClass('display-none').addClass('display-inline-block');
+})
+$('.full-content a').on('click', function () {
+    $(this).parent().removeClass('display-inline-block').addClass('display-none');
+    $(this).parent().prev().removeClass('display-none').addClass('display-inline-block');
+})

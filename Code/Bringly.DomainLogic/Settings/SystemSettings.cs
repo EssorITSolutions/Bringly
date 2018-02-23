@@ -13,7 +13,7 @@
         {
             get
             {
-                return 50;
+                return 5;
             }
         }
     }

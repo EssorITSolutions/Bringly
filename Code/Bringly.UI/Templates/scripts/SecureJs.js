@@ -112,38 +112,37 @@ function OpenReviewPopUp(ReviewGuid) {
     });
 }
 
-$('.approvedisapprove').on('click', function () {
+$('.approve').on('click', function () {
     var guid = $(this).attr('reviewguid');
     var Isapprove = $(this).attr('approve');  
     PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: Isapprove }, ReviewApprovalResponse)
 })
+$('.reject').on('click', function () {
+    var guid = $(this).attr('reviewguid');
+    var Isapprove = $(this).attr('approve');
+    PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: Isapprove }, ReviewApprovalResponse)
+})
 
 function ReviewApprovalResponse(response, data) {
-    if (response) {  
-        
+    if (response.MessageType ==0) {
         if (data.Isapprove == 'true') {
-            $("#reviewapprovalpending").css("display", "none");
-            $("#reviewapprovalreject").css("display", "none");
-            $("#lblreviewapproved").css("display", "block").addClass('green-text').text("Approved");
-
-           // Success("Review approved successfully.")
+            $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
+            $('a[reviewguid="' + data.reviewguid + '"]#reviewapprovalreject').next().css("display", "block").addClass('green-text').text("Approved");
         }
         else {
-            $("#reviewapprovalpending").css("display", "none");
-            $("#reviewapprovalreject").css("display", "none");
-            $("#lblreviewapproved").css("display", "block").addClass('red-text').text("Rejected");
-            //Success("Review disapproved successfully.")
+            $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
+            $('a[reviewguid="' + data.reviewguid + '"]#reviewapprovalreject').next().css("display", "block").addClass('red-text').text("Rejected");
         }
     }
     else {
-        if (data.Isapprove == 'true') {
-            ErrorBlock("Error while approving the review.");
-        }
-        else {
-            ErrorBlock("Error while disapproving the review.");
-        }        
+        ErrorBlock(response.MessageText);
     }
 }
+
+
+
+
+
 
 $('.skip-review').on('click', function () {
     var guid = $(this).attr('reviewguid');

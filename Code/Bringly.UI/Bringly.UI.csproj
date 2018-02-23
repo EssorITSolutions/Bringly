@@ -345,6 +345,8 @@
     <Content Include="Views\Shared\_AddReview.cshtml" />
     <Content Include="Views\Shared\_RestaurantReviewList.cshtml" />
     <Content Include="Views\User\MerchantReview.cshtml" />
+    <Content Include="Views\Shared\_ReviewContent.cshtml" />
+    <Content Include="Views\Shared\_NoRecordFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">

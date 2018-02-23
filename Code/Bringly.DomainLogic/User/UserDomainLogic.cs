@@ -184,7 +184,7 @@ namespace Bringly.DomainLogic.User
                 review.IsSkipped = myReview.IsSkipped;
                 review.Rating = (byte)myReview.Rating;
                 review.IsCompleted = myReview.IsSkipped?false:true;
-            review.IsProcessed = true;
+                review.IsProcessed = false;
             bringlyEntities.SaveChanges();
            
             return GetMyReviewBuyer(myReview.UserGuid);
@@ -202,14 +202,34 @@ namespace Bringly.DomainLogic.User
                 myReview.RestaurantImage = restaurantReviews.tblRestaurant.RestaurantImage;
             }
             myReview.RestaurantReviews = bringlyEntities.tblReviews.Where(u => u.UserGuid == UserGuid && u.IsDeleted == false && u.IsCompleted==true)
-                .Select(f=>new RestaurantReview { IsProcessed=f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid,Review=f.Review,UserGuid=f.UserGuid,RestaurantGuid=f.RestaurantGuid,DateCreated=f.DateCreated,RestaurantName=f.tblRestaurant.RestaurantName,Rating=f.Rating }).ToList();
+                .Select(f=>new RestaurantReview { IsProcessed=f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid,Review=f.Review,UserGuid=f.UserGuid,RestaurantGuid=f.RestaurantGuid,DateCreated=f.DateCreated,RestaurantName=f.tblRestaurant.RestaurantName,Rating=f.Rating })
+                .OrderByDescending(x=>x.DateCreated)
+                .ToList();
             return myReview;
         }
-        public MyReview GetMyReviewMerchant(Guid UserGuid)
+        public MyReview GetMyReviewMerchant(MyReview myReview)
         {
-            MyReview myReview = new MyReview();
-            tblReview restaurantReviews = bringlyEntities.tblReviews.Where(u => u.CreatedByGuid == UserGuid && u.IsDeleted == false && u.IsCompleted == true).ToList().FirstOrDefault();
-
+            
+            myReview.PageSize = PageSize;
+            myReview.CurrentPage = CurrentPage;
+            myReview.SortBy = SortBy;
+            myReview.RestaurantReviews = bringlyEntities.tblReviews.Where(u => u.CreatedByGuid == myReview.UserGuid && u.IsDeleted == false && u.IsCompleted == true)
+                .Select(f => new RestaurantReview { UserName = f.tblUser.FullName, IsProcessed = f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid, Review = f.Review, UserGuid = f.UserGuid, RestaurantGuid = f.RestaurantGuid, DateCreated = f.DateCreated, RestaurantName = f.tblRestaurant.RestaurantName, Rating = f.Rating })
+                .OrderByDescending(x => x.IsApproved == true).OrderByDescending(x => x.IsProcessed == false)
+                .ToList();
+            myReview.TotalRecords = myReview.RestaurantReviews.Count;
+            int Skip = 0;
+            int Take = 5;
+            //if (myReview.PageSize == 1)
+            //    Skip = 0;
+            //else
+            if (myReview.CurrentPage == 1)
+                Skip = 0;
+            else
+                Skip = ((myReview.CurrentPage* myReview.PageSize) - myReview.PageSize);
+            
+            tblReview restaurantReviews = bringlyEntities.tblReviews.Where(u => u.CreatedByGuid == myReview.UserGuid && u.IsDeleted == false && u.IsCompleted == true).ToList().FirstOrDefault();
+          
             if (restaurantReviews != null && restaurantReviews.ReviewGuid != Guid.Empty)
             {
                 myReview.RestaurantGuid = restaurantReviews.RestaurantGuid;
@@ -217,8 +237,7 @@ namespace Bringly.DomainLogic.User
                 myReview.ReviewGuid = restaurantReviews.ReviewGuid;
                 myReview.RestaurantImage = restaurantReviews.tblRestaurant.RestaurantImage;
             }
-            myReview.RestaurantReviews = bringlyEntities.tblReviews.Where(u => u.CreatedByGuid == UserGuid && u.IsDeleted == false && u.IsCompleted == true )
-                .Select(f => new RestaurantReview { IsProcessed = f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid, Review = f.Review, UserGuid = f.UserGuid, RestaurantGuid = f.RestaurantGuid, DateCreated = f.DateCreated, RestaurantName = f.tblRestaurant.RestaurantName, Rating = f.Rating }).ToList();
+            myReview.RestaurantReviews= myReview.RestaurantReviews.Skip(Skip).Take(Take).ToList();
             return myReview;
         }
 
@@ -238,13 +257,26 @@ namespace Bringly.DomainLogic.User
             HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, st) { HttpOnly = true };
             HttpContext.Current.Response.Cookies.Add(ck);
         }
-        public bool ApproveReviewLogic(Guid ReviewGuid, bool Isapprove)
+        public Message ApproveReviewLogic(Guid ReviewGuid, bool Isapprove)
         {
-            tblReview review = bringlyEntities.tblReviews.Where(u => u.ReviewGuid == ReviewGuid).FirstOrDefault();
-            review.IsApproved = Isapprove;
-            review.IsProcessed = true;
-            bringlyEntities.SaveChanges();
-            return true;
+            Message message = new Message();
+            try
+            {
+                tblReview review = bringlyEntities.tblReviews.Where(u => u.ReviewGuid == ReviewGuid).FirstOrDefault();
+                review.IsApproved = Isapprove;
+                review.IsProcessed = true;
+                review.ApproveDate = DateTime.Now;
+                bringlyEntities.SaveChanges();
+                message.MessageType = Domain.Enums.MessageType.Success;
+                message.MessageText = "";
+            }
+            catch (Exception ex) {
+                message.MessageType = Domain.Enums.MessageType.Error;
+                if(Isapprove)
+                message.MessageText = "Error while approving the review";
+                else message.MessageText = "Error while rejecting the review";
+            }
+            return message;
         }
     }
 }

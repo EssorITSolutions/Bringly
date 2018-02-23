@@ -26,7 +26,6 @@ namespace Bringly.Data
         }
     
         public virtual DbSet<tblCity> tblCities { get; set; }
-        public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblUserAddress> tblUserAddresses { get; set; }
         public virtual DbSet<tblLookUpDomain> tblLookUpDomains { get; set; }
         public virtual DbSet<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
@@ -34,7 +33,8 @@ namespace Bringly.Data
         public virtual DbSet<tblFavourite> tblFavourites { get; set; }
         public virtual DbSet<tblItem> tblItems { get; set; }
         public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
-        public virtual DbSet<tblReview> tblReviews { get; set; }
         public virtual DbSet<tblOrder> tblOrders { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblReview> tblReviews { get; set; }
     }
 }

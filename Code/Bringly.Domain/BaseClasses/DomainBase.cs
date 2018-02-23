@@ -31,6 +31,15 @@ namespace Bringly.Domain.BaseClasses
             get { return _dateCreated; }
             set { _dateCreated = value; }
         }
+        public static string Dateformat(DateTime _dateTime)
+        {
+            return _dateTime.ToString("dd/MM/yyyy");
+        }
+        public static string Time24hr(DateTime _dateTime)
+        {
+            return _dateTime.ToString("H:mm");
+        }
+
 
         [JsonIgnore]
         public Guid LoggedInUserId

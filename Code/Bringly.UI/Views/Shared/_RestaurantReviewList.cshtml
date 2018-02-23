@@ -1,42 +1,53 @@
-﻿@model List<Bringly.Domain.RestaurantReview>
+﻿
+@model Bringly.Domain.MyReview
 @{    
     Layout = null;
     bool ismerchant = (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Merchant) ? true : false;
 }
 <div class="review-panel marchent-review">
-    @if (Model != null && Model.Count > 0)
+    @if (Model.RestaurantReviews != null && Model.RestaurantReviews.Count > 0)
     {
-        foreach (var review in Model.OrderByDescending(x => x.DateCreated))
+        foreach (var review in Model.RestaurantReviews.OrderByDescending(x => x.DateCreated))
         {
             <div class="media shadow-box">
                 <div class="media-body">
                     <div class="row">
-                        <div class="col-lg-8 col-md-12 col-sm-12">
-                            <h4 class="mt-0 m-0"><label>To:</label> @review.RestaurantName<span class="tag-date">@review.DateCreated.ToString("dd/MM/yyyy") &nbsp; @review.DateCreated.ToString("H:mm") </span></h4>
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <h4 class="mt-0 m-0"><label>
+                               @(ismerchant ? "From:" : "To:") 
+                                </label> 
+                            @if (ismerchant)
+                            { @review.UserName}
+                            else { <a href="#">@review.RestaurantName</a>}
+                                   <span class="tag-date">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(review.DateCreated) @Bringly.Domain.BaseClasses.DomainBase.Time24hr(review.DateCreated) </span></h4>
                         </div>
                         @if (ismerchant)
                         {
-                            <div class="col-lg-4 col-md-12 col-sm-12">
-                                <p class="text-left text-lg-right text-weight m-0">
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <p class="text-left text-lg-right text-weight m-0 option-icon">
 
-                                    @if (review.IsApproved && review.IsProcessed)
-                                    {
-                                <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
-                                    }
-                                    else if (!review.IsApproved && review.IsProcessed)
-                                    {
-                                <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
-                                    }
-                                    else
-                                    {
-                                <label reviewguid="@review.ReviewGuid" style="display:none;"  id="lblreviewapproved" ></label>
-                                    }
 
-                                    <a style="display:@((!review.IsApproved && !review.IsProcessed) ?"block":"none"); float:left;" reviewguid="@review.ReviewGuid" approve="true"
-                                       id="reviewapprovalpending" class="approvedisapprove" href='#'>Approval Pending</a>
-                                    
-                                    <a style="display:@((!review.IsApproved && !review.IsProcessed)?"block":"none"); " reviewguid="@review.ReviewGuid" approve="false"
-                                       id="reviewapprovalreject" class="approvedisapprove" href='#'>Reject</a>
+                                    @if (!review.IsProcessed)
+                                    {
+                                        <a reviewguid="@review.ReviewGuid" approve="true"
+                                           id="reviewapprovalpending" class="approve btn btn-success" href='#'><i class="fa fa-thumbs-up" aria-hidden="true"></i>Approve</a>
+
+                                        <a reviewguid="@review.ReviewGuid" approve="false"
+                                           id="reviewapprovalreject" class="reject btn btn-danger" href='#'><i class="fa fa-thumbs-down" aria-hidden="true"></i>Reject</a>
+                                    }
+                                        @if (review.IsApproved && review.IsProcessed)
+                                        {
+                                            <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
+                                        }
+                                        else if (!review.IsApproved && review.IsProcessed)
+                                        {
+                                            <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
+                                        }
+                                        else
+                                        {
+                                            <label reviewguid="@review.ReviewGuid" style="display:none;" id="lblreviewapproved"></label>
+                                        }
+
                                 </p>
                             </div>
                         }
@@ -46,19 +57,19 @@
                         <!-- Rating Stars Box -->
                         <div class='rating-stars text-center'>
                             <ul id='stars' class="review-list">
-                                <li class='star @(review.Rating>=1?"selected":"")' title='Poor' data-value='1'>
+                                <li class='star @(review.Rating >= 1 ? "selected" : "")' title='Poor' data-value='1'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star @(review.Rating>=2?"selected":"")' title='Fair' data-value='2'>
+                                <li class='star @(review.Rating >= 2 ? "selected" : "")' title='Fair' data-value='2'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star @(review.Rating>=3?"selected":"")' title='Good' data-value='3'>
+                                <li class='star @(review.Rating >= 3 ? "selected" : "")' title='Good' data-value='3'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star @(review.Rating>=4?"selected":"")' title='Excellent' data-value='4'>
+                                <li class='star @(review.Rating >= 4 ? "selected" : "")' title='Excellent' data-value='4'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star @(review.Rating==5?"selected":"")' title='WOW!!!' data-value='5'>
+                                <li class='star @(review.Rating == 5 ? "selected" : "")' title='WOW!!!' data-value='5'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
                                 <li class="star-rating">Rating: @(review.Rating)</li>
@@ -66,19 +77,14 @@
                         </div>
                     </section>
                     <div class="clearfix"></div>
-                    <p>
-                        @review.Review
-                    </p>
+                   @Html.Partial("_ReviewContent", review.Review)
                 </div>
             </div>
         }
+        Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize=Model.PageSize, currentPage = Model.CurrentPage });
     }
     else
     {
-        <div>
-            <p>
-                No review found.
-            </p>
-        </div>
+        @Html.Partial("_NoRecordFound", "No review found.")        
     }
 </div>

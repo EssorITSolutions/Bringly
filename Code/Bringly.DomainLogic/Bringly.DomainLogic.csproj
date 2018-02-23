@@ -77,6 +77,10 @@
       <Project>{56f24718-5196-4a7c-aec8-fe937ebef81d}</Project>
       <Name>Utilities.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilities.QueryStringHelper\Utilities.QueryStringHelper.csproj">
+      <Project>{de52ff52-5eb8-4cda-81a7-d6e3e1f65385}</Project>
+      <Name>Utilities.QueryStringHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

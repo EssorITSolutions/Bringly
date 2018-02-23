@@ -1668,6 +1668,7 @@ a.link-border{
 }
 .marchent-review .media-body a.read-more-link{
     color:#aeaeae;
+    cursor:pointer;
 }
 
 /*toggle-on-off*/
@@ -2839,3 +2840,16 @@ color:red;
    
 
 /********************* Popup Class Ends **********************/
+
+.display-none {
+    display:none
+}
+.display-inline-block {
+    display:inline-block;
+}
+
+
+
+
+
+

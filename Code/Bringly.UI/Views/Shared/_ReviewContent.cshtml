@@ -1,0 +1,16 @@
+﻿@model string
+    @{ Layout = null;}
+<p>
+    <div class="limited-content">
+        @if (Model.Length > 150)
+        {
+            @Model.Substring(0, 150)  <a class="read-more-link">... Read more</a>
+        }
+        else{
+           @Model
+        }
+    </div>
+    <div class="full-content display-none">
+        @Model  <a class="read-more-link"> Read less</a>
+    </div>
+</p>

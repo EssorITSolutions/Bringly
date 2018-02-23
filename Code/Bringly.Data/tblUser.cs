@@ -17,18 +17,18 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblUser()
         {
-            this.tblUserAddresses = new HashSet<tblUserAddress>();
             this.tblFavourites = new HashSet<tblFavourite>();
             this.tblItems = new HashSet<tblItem>();
             this.tblItems1 = new HashSet<tblItem>();
+            this.tblOrders = new HashSet<tblOrder>();
             this.tblRestaurants = new HashSet<tblRestaurant>();
             this.tblRestaurants1 = new HashSet<tblRestaurant>();
             this.tblRestaurants2 = new HashSet<tblRestaurant>();
+            this.tblUserAddresses = new HashSet<tblUserAddress>();
             this.tblReviews = new HashSet<tblReview>();
             this.tblReviews1 = new HashSet<tblReview>();
             this.tblReviews2 = new HashSet<tblReview>();
             this.tblReviews3 = new HashSet<tblReview>();
-            this.tblOrders = new HashSet<tblOrder>();
         }
     
         public System.Guid UserGuid { get; set; }
@@ -42,16 +42,14 @@ namespace Bringly.Data
         public string ImageName { get; set; }
         public string ImageExtension { get; set; }
         public string ImagePath { get; set; }
+        public Nullable<System.Guid> PreferedCity { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.Guid> Modifiedby { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.Guid> DeletedBy { get; set; }
-        public Nullable<System.Guid> PreferedCity { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUserAddress> tblUserAddresses { get; set; }
         public virtual tblCity tblCity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblFavourite> tblFavourites { get; set; }
@@ -60,11 +58,15 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblItem> tblItems1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrder> tblOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRestaurant> tblRestaurants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRestaurant> tblRestaurants1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRestaurant> tblRestaurants2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserAddress> tblUserAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -73,7 +75,5 @@ namespace Bringly.Data
         public virtual ICollection<tblReview> tblReviews2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblOrder> tblOrders { get; set; }
     }
 }

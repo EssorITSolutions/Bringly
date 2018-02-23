@@ -5,28 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="850a1b6dbde04202b109f0b9a64465e9" Name="Diagram1">
-        <EntityTypeShape EntityType="BringlyModel.tblCity" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BringlyModel.tblUser" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BringlyModel.tblUserAddress" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BringlyModel.tblCity" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BringlyModel.tblUserAddress" Width="1.5" PointX="3.25" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="BringlyModel.FK_tblUserAddress_tblCity" ManuallyRouted="false" />
-        <AssociationConnector Association="BringlyModel.FK_tblUserAddress_tblUser" ManuallyRouted="false" />
-        <AssociationConnector Association="BringlyModel.FK_tblUser_tblCity" />
-        <EntityTypeShape EntityType="BringlyModel.tblLookUpDomain" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="BringlyModel.tblLookUpDomainValue" Width="1.5" PointX="0.75" PointY="14.25" />
-        <EntityTypeShape EntityType="BringlyModel.tblCountry" Width="1.5" PointX="3.75" PointY="13.25" />
-        <EntityTypeShape EntityType="BringlyModel.tblFavourite" Width="1.5" PointX="8.25" PointY="9" />
-        <EntityTypeShape EntityType="BringlyModel.tblItem" Width="1.5" PointX="3" PointY="8.75" />
-        <EntityTypeShape EntityType="BringlyModel.tblRestaurant" Width="1.5" PointX="6" PointY="6.25" />
+        <EntityTypeShape EntityType="BringlyModel.tblLookUpDomain" Width="1.5" PointX="7.875" PointY="0.5" />
+        <EntityTypeShape EntityType="BringlyModel.tblLookUpDomainValue" Width="1.5" PointX="4" PointY="8.625" />
+        <EntityTypeShape EntityType="BringlyModel.tblCountry" Width="1.5" PointX="11.625" PointY="12.375" />
+        <EntityTypeShape EntityType="BringlyModel.tblFavourite" Width="1.5" PointX="8.875" PointY="7.125" />
+        <EntityTypeShape EntityType="BringlyModel.tblItem" Width="1.5" PointX="5" PointY="13" />
+        <EntityTypeShape EntityType="BringlyModel.tblRestaurant" Width="1.5" PointX="6.375" PointY="4.875" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblCity" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblCountry" />
         <AssociationConnector Association="BringlyModel.FK_tblFavourite_tblRestaurant" />
-        <AssociationConnector Association="BringlyModel.FK_tblFavourite_tblUser" />
         <AssociationConnector Association="BringlyModel.FK_tblItem_tblLookUpDomainValue" />
+        <EntityTypeShape EntityType="BringlyModel.tblUser" Width="1.5" PointX="0.875" PointY="14.5" />
+        <AssociationConnector Association="BringlyModel.FK_tblUser_tblCity" />
+        <AssociationConnector Association="BringlyModel.FK_tblFavourite_tblUser" />
         <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser" />
         <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser1" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser1" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser2" />
+        <AssociationConnector Association="BringlyModel.FK_tblUserAddress_tblUser" />
+        <EntityTypeShape EntityType="BringlyModel.tblReview" Width="1.5" PointX="14.75" PointY="10.375" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_tblRestaurant" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_CreatedByGuid" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_DeletedBy" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_ModifiedBy" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_tblUser" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

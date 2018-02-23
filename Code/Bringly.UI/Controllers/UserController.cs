@@ -10,6 +10,7 @@ using System.IO;
 using System.Web.Security;
 using Bringly.Domain;
 using System.Web.UI;
+using Bringly.Domain.Common;
 
 namespace Bringly.UI.Controllers
 {
@@ -173,15 +174,16 @@ namespace Bringly.UI.Controllers
             return true;
         }
         [HttpPost]
-        public bool ApproveReview(Guid reviewguid,string Isapprove)
+        public ActionResult ApproveReview(Guid reviewguid,string Isapprove)
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return userDomainLogic.ApproveReviewLogic(reviewguid, Convert.ToBoolean(Isapprove));
+            return Json(userDomainLogic.ApproveReviewLogic(reviewguid, Convert.ToBoolean(Isapprove)),JsonRequestBehavior.AllowGet);
         }
-        public ActionResult MerchantReview()
+        public ActionResult MerchantReview(MyReview myreview)
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return View(userDomainLogic.GetMyReviewMerchant(UserVariables.LoggedInUserGuid));
+            myreview.UserGuid = UserVariables.LoggedInUserGuid;
+            return View(userDomainLogic.GetMyReviewMerchant(myreview));
         }
     }
 }
