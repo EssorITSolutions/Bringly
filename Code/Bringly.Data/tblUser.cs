@@ -24,6 +24,11 @@ namespace Bringly.Data
             this.tblRestaurants = new HashSet<tblRestaurant>();
             this.tblRestaurants1 = new HashSet<tblRestaurant>();
             this.tblRestaurants2 = new HashSet<tblRestaurant>();
+            this.tblReviews = new HashSet<tblReview>();
+            this.tblReviews1 = new HashSet<tblReview>();
+            this.tblReviews2 = new HashSet<tblReview>();
+            this.tblReviews3 = new HashSet<tblReview>();
+            this.tblOrders = new HashSet<tblOrder>();
         }
     
         public System.Guid UserGuid { get; set; }
@@ -60,5 +65,15 @@ namespace Bringly.Data
         public virtual ICollection<tblRestaurant> tblRestaurants1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRestaurant> tblRestaurants2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblReview> tblReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblReview> tblReviews1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblReview> tblReviews2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblReview> tblReviews3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrder> tblOrders { get; set; }
     }
 }

@@ -34,5 +34,7 @@ namespace Bringly.Data
         public virtual DbSet<tblFavourite> tblFavourites { get; set; }
         public virtual DbSet<tblItem> tblItems { get; set; }
         public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
+        public virtual DbSet<tblReview> tblReviews { get; set; }
+        public virtual DbSet<tblOrder> tblOrders { get; set; }
     }
 }

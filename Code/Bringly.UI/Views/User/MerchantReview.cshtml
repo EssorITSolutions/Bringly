@@ -1,0 +1,19 @@
+﻿@model Bringly.Domain.MyReview
+@{
+    ViewBag.Title = "RestaurantReview";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+@section BreadCrum{
+    <li class="breadcrumb-item active">My Reviews</li>
+}
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="page-sub-title">
+            <h3>My Reviews</h3>
+          
+        </div>
+        @Html.Partial("_RestaurantReviewList", Model.RestaurantReviews)
+
+    </div>
+
+</div>

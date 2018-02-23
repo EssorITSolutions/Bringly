@@ -1,13 +1,5 @@
 ﻿/*************************************** Model Window Starts ***************************************/
-/*
-How to use : 
- $(this).modelPopUp({
-            windowId: "addVacancyLocationDetails",
-            width: 900,
-            url: url
-            closeOnOutSideClick: false,
-        });
-*/
+
 function closeModelPopUpForm(refereshPreviousPage) {
     if (refereshPreviousPage == true) {
         window.parent.location.reload();

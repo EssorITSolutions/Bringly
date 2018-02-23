@@ -238,3 +238,95 @@ $(function () {
 function fileImageSuccess(response) {
 
 }
+
+/*************************************** Model Window Starts ***************************************/
+/*
+How to use : 
+ $(this).modelPopUp({
+            windowId: "addVacancyLocationDetails",
+            width: 900,
+            url: url
+            closeOnOutSideClick: false,
+        });
+*/
+function closeModelPopUpForm(refereshPreviousPage) {
+    if (refereshPreviousPage == true) {
+        window.parent.location.reload();
+    }
+    $("#" + model_windowId).remove();
+    $("#" + model_DivModalOverlayId).remove();
+    $(window).scroll(function () { return true; });
+    $("body").css("overflow", "auto");
+
+}
+
+function closeModelPopUpFormById(refereshPreviousPage, modelWindowId) {
+    if (refereshPreviousPage == true) {
+        window.parent.location.reload();
+    }
+    $("#" + modelWindowId).remove();
+    $(window).scroll(function () { return true; });
+    $("body").css("overflow", "auto");
+}
+
+
+
+var model_windowId, model_DivModalOverlayId;
+(function ($) {
+
+    $.fn.modelPopUp = function (params) {
+        var defaults = {
+            parent: "body",
+            windowId: "_windowId",
+            url: params.url,
+            width: 750,
+            height: 395,
+            scroll: "no",
+            addCloseButton: false,
+            IFrameId: "_IFrameId",
+            DivModalOverlayId: "divmodaloverlay",
+            closeOnOutSideClick: false,
+            close: function () {
+                $("#" + params.windowId).remove();
+                $("#" + params.DivModalOverlayId).remove();
+            },
+        };
+
+        //Overwrite default options 
+        // with user provided ones 
+        // and merge them into "options". 
+        var params = $.extend({}, defaults, params);
+
+        var modal = "";
+        modal += "<div id=\"" + params.DivModalOverlayId + "\" class=\"modal-overlay\"></div>";
+        modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\" width:" + params.width + "px; height:" + params.height + "px;\">";
+        if (params.addCloseButton) {
+            modal += "<button style=\"float:right\" class=\"btn btn-primary\" onclick=\"closeModelPopUpForm()\">Close</button>";
+        }
+        modal += "<iframe width='" + params.width + "'  id='" + params.IFrameId + "' height='" + params.height + "' frameborder='0' scrolling='" + scroll + "' allowtransparency='true' src='" + params.url + "'></iframe>";
+        modal += "</div>";
+        $(params.parent).append(modal);
+   
+        $(window).scroll(function () { return false; });
+        $("body").css("overflow", "hidden");
+
+
+        if (params.closeOnOutSideClick) {
+            $("#" + params.DivModalOverlayId).click(function () {
+                params.close();
+            });
+        }
+        model_windowId = params.windowId;
+        model_DivModalOverlayId = params.DivModalOverlayId;
+        //Close on PouUp Close
+        
+        $(document).keyup(function (e) {
+            if (e.keyCode == 27) {
+                params.close();
+                $(document).off("keyup");
+                $("body").css("overflow", "auto");
+            }
+        });
+    }
+})(jQuery);
+/*************************************** Model Window Ends *****************************************/

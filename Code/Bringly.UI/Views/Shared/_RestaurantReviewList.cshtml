@@ -1,0 +1,84 @@
+﻿@model List<Bringly.Domain.RestaurantReview>
+@{    
+    Layout = null;
+    bool ismerchant = (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Merchant) ? true : false;
+}
+<div class="review-panel marchent-review">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var review in Model.OrderByDescending(x => x.DateCreated))
+        {
+            <div class="media shadow-box">
+                <div class="media-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <h4 class="mt-0 m-0"><label>To:</label> @review.RestaurantName<span class="tag-date">@review.DateCreated.ToString("dd/MM/yyyy") &nbsp; @review.DateCreated.ToString("H:mm") </span></h4>
+                        </div>
+                        @if (ismerchant)
+                        {
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <p class="text-left text-lg-right text-weight m-0">
+
+                                    @if (review.IsApproved && review.IsProcessed)
+                                    {
+                                <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
+                                    }
+                                    else if (!review.IsApproved && review.IsProcessed)
+                                    {
+                                <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
+                                    }
+                                    else
+                                    {
+                                <label reviewguid="@review.ReviewGuid" style="display:none;"  id="lblreviewapproved" ></label>
+                                    }
+
+                                    <a style="display:@((!review.IsApproved && !review.IsProcessed) ?"block":"none"); float:left;" reviewguid="@review.ReviewGuid" approve="true"
+                                       id="reviewapprovalpending" class="approvedisapprove" href='#'>Approval Pending</a>
+                                    
+                                    <a style="display:@((!review.IsApproved && !review.IsProcessed)?"block":"none"); " reviewguid="@review.ReviewGuid" approve="false"
+                                       id="reviewapprovalreject" class="approvedisapprove" href='#'>Reject</a>
+                                </p>
+                            </div>
+                        }
+                    </div>
+                    <section class='rating-widget '>
+
+                        <!-- Rating Stars Box -->
+                        <div class='rating-stars text-center'>
+                            <ul id='stars' class="review-list">
+                                <li class='star @(review.Rating>=1?"selected":"")' title='Poor' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star @(review.Rating>=2?"selected":"")' title='Fair' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star @(review.Rating>=3?"selected":"")' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star @(review.Rating>=4?"selected":"")' title='Excellent' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star @(review.Rating==5?"selected":"")' title='WOW!!!' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class="star-rating">Rating: @(review.Rating)</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <div class="clearfix"></div>
+                    <p>
+                        @review.Review
+                    </p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div>
+            <p>
+                No review found.
+            </p>
+        </div>
+    }
+</div>
