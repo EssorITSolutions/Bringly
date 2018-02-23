@@ -24,7 +24,7 @@
                         @if (ismerchant)
                         {
                             <div class="col-lg-5 col-md-12 col-sm-12">
-                                <p class="text-left text-lg-right text-weight m-0 option-icon">
+                                <p class="text-left text-lg-right text-weight m-0 option-icon" id="review-@review.ReviewGuid">
 
 
                                     @if (!review.IsProcessed)
@@ -45,7 +45,7 @@
                                         }
                                         else
                                         {
-                                            <label reviewguid="@review.ReviewGuid" style="display:none;" id="lblreviewapproved"></label>
+                                            <label class="review-status" style="display:none;"></label>
                                         }
 
                                 </p>

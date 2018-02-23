@@ -114,24 +114,21 @@ function OpenReviewPopUp(ReviewGuid) {
 
 $('.approve').on('click', function () {
     var guid = $(this).attr('reviewguid');
-    var Isapprove = $(this).attr('approve');  
-    PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: Isapprove }, ReviewApprovalResponse)
+    PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: true }, ReviewApprovalResponse)
 })
 $('.reject').on('click', function () {
     var guid = $(this).attr('reviewguid');
-    var Isapprove = $(this).attr('approve');
-    PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: Isapprove }, ReviewApprovalResponse)
+    PostDataWithSuccessParam("/User/ApproveReview", { reviewguid: guid, Isapprove: false }, ReviewApprovalResponse)
 })
 
 function ReviewApprovalResponse(response, data) {
-    if (response.MessageType ==0) {
-        if (data.Isapprove == 'true') {
-            $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
-            $('a[reviewguid="' + data.reviewguid + '"]#reviewapprovalreject').next().css("display", "block").addClass('green-text').text("Approved");
+    if (response.MessageType == 0) {
+        $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
+        if (data.Isapprove) {          
+            $('p[id=review-' + data.reviewguid + '] label.review-status').css("display", "block").addClass('green-text').text("Approved");
         }
         else {
-            $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
-            $('a[reviewguid="' + data.reviewguid + '"]#reviewapprovalreject').next().css("display", "block").addClass('red-text').text("Rejected");
+            $('p[id=review-' + data.reviewguid + '] label.review-status').css("display", "block").addClass('red-text').text("Rejected");
         }
     }
     else {
