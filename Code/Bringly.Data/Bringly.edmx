@@ -71,6 +71,16 @@
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderGuid" />
+          </Key>
+          <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblRestaurant">
           <Key>
             <PropertyRef Name="RestaurantGuid" />
@@ -92,6 +102,28 @@
           <Property Name="DeletedByGuid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="tblReview">
+          <Key>
+            <PropertyRef Name="ReviewGuid" />
+          </Key>
+          <Property Name="ReviewGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Rating" Type="tinyint" Nullable="false" />
+          <Property Name="Review" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="IsSkipped" Type="bit" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="IsProcessed" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedByGuid" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedByGuid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -190,6 +222,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblOrder_tblRestaurant">
+          <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRestaurant">
+              <PropertyRef Name="RestaurantGuid" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="RestaurantGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblRestaurant_tblCity">
           <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
           <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="*" />
@@ -250,6 +306,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblReview_CreatedByGuid">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_DeletedBy">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="DeletedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_ModifiedBy">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblOrder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblRestaurant">
+          <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRestaurant">
+              <PropertyRef Name="RestaurantGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="RestaurantGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUser_tblCity">
           <End Role="tblCity" Type="Self.tblCity" Multiplicity="0..1" />
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
@@ -293,7 +421,9 @@
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLookUpDomain" EntityType="Self.tblLookUpDomain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLookUpDomainValue" EntityType="Self.tblLookUpDomainValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRestaurant" EntityType="Self.tblRestaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReview" EntityType="Self.tblReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserAddress" EntityType="Self.tblUserAddress" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblFavourite_tblRestaurant" Association="Self.FK_tblFavourite_tblRestaurant">
@@ -316,6 +446,14 @@
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblItem" EntitySet="tblItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblRestaurant" Association="Self.FK_tblOrder_tblRestaurant">
+            <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblUser" Association="Self.FK_tblOrder_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblRestaurant_tblCity" Association="Self.FK_tblRestaurant_tblCity">
             <End Role="tblCity" EntitySet="tblCity" />
             <End Role="tblRestaurant" EntitySet="tblRestaurant" />
@@ -335,6 +473,30 @@
           <AssociationSet Name="FK_tblRestaurant_tblUser2" Association="Self.FK_tblRestaurant_tblUser2">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_CreatedByGuid" Association="Self.FK_tblReview_CreatedByGuid">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblReview" EntitySet="tblReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_DeletedBy" Association="Self.FK_tblReview_DeletedBy">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblReview" EntitySet="tblReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_ModifiedBy" Association="Self.FK_tblReview_ModifiedBy">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblReview" EntitySet="tblReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblOrder" Association="Self.FK_tblReview_tblOrder">
+            <End Role="tblOrder" EntitySet="tblOrder" />
+            <End Role="tblReview" EntitySet="tblReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblRestaurant" Association="Self.FK_tblReview_tblRestaurant">
+            <End Role="tblRestaurant" EntitySet="tblRestaurant" />
+            <End Role="tblReview" EntitySet="tblReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblUser" Association="Self.FK_tblReview_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblReview" EntitySet="tblReview" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUser_tblCity" Association="Self.FK_tblUser_tblCity">
             <End Role="tblCity" EntitySet="tblCity" />
@@ -396,6 +558,11 @@
           <NavigationProperty Name="tblRestaurants" Relationship="BringlyModel.FK_tblRestaurant_tblUser" FromRole="tblUser" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblRestaurants1" Relationship="BringlyModel.FK_tblRestaurant_tblUser1" FromRole="tblUser" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblRestaurants2" Relationship="BringlyModel.FK_tblRestaurant_tblUser2" FromRole="tblUser" ToRole="tblRestaurant" />
+          <NavigationProperty Name="tblReviews" Relationship="BringlyModel.FK_tblReview_CreatedByGuid" FromRole="tblUser" ToRole="tblReview" />
+          <NavigationProperty Name="tblReviews1" Relationship="BringlyModel.FK_tblReview_DeletedBy" FromRole="tblUser" ToRole="tblReview" />
+          <NavigationProperty Name="tblReviews2" Relationship="BringlyModel.FK_tblReview_ModifiedBy" FromRole="tblUser" ToRole="tblReview" />
+          <NavigationProperty Name="tblReviews3" Relationship="BringlyModel.FK_tblReview_tblUser" FromRole="tblUser" ToRole="tblReview" />
+          <NavigationProperty Name="tblOrders" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
           </EntityType>
         <EntityType Name="tblUserAddress">
           <Key>
@@ -498,6 +665,40 @@
           <AssociationSet Name="FK_tblRestaurant_tblUser2" Association="BringlyModel.FK_tblRestaurant_tblUser2">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblRestaurant" EntitySet="tblRestaurants" />
+          </AssociationSet>
+          <EntitySet Name="tblReviews" EntityType="BringlyModel.tblReview" />
+          <AssociationSet Name="FK_tblReview_tblRestaurant" Association="BringlyModel.FK_tblReview_tblRestaurant">
+            <End Role="tblRestaurant" EntitySet="tblRestaurants" />
+            <End Role="tblReview" EntitySet="tblReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_CreatedByGuid" Association="BringlyModel.FK_tblReview_CreatedByGuid">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblReview" EntitySet="tblReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_DeletedBy" Association="BringlyModel.FK_tblReview_DeletedBy">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblReview" EntitySet="tblReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_ModifiedBy" Association="BringlyModel.FK_tblReview_ModifiedBy">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblReview" EntitySet="tblReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblUser" Association="BringlyModel.FK_tblReview_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblReview" EntitySet="tblReviews" />
+          </AssociationSet>
+          <EntitySet Name="tblOrders" EntityType="BringlyModel.tblOrder" />
+          <AssociationSet Name="FK_tblOrder_tblRestaurant" Association="BringlyModel.FK_tblOrder_tblRestaurant">
+            <End Role="tblRestaurant" EntitySet="tblRestaurants" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblUser" Association="BringlyModel.FK_tblOrder_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblOrder" Association="BringlyModel.FK_tblReview_tblOrder">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblReview" EntitySet="tblReviews" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblUser_tblCity">
@@ -602,6 +803,8 @@
           <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblRestaurant_tblUser1" FromRole="tblRestaurant" ToRole="tblUser" />
           <NavigationProperty Name="tblUser2" Relationship="BringlyModel.FK_tblRestaurant_tblUser2" FromRole="tblRestaurant" ToRole="tblUser" />
           <Property Name="RestaurantImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblReviews" Relationship="BringlyModel.FK_tblReview_tblRestaurant" FromRole="tblRestaurant" ToRole="tblReview" />
+          <NavigationProperty Name="tblOrders" Relationship="BringlyModel.FK_tblOrder_tblRestaurant" FromRole="tblRestaurant" ToRole="tblOrder" />
         </EntityType>
         <Association Name="FK_tblRestaurant_tblCity">
           <End Type="BringlyModel.tblCity" Role="tblCity" Multiplicity="1" />
@@ -720,6 +923,143 @@
             </Principal>
             <Dependent Role="tblRestaurant">
               <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblReview">
+          <Key>
+            <PropertyRef Name="ReviewGuid" />
+          </Key>
+          <Property Name="ReviewGuid" Type="Guid" Nullable="false" />
+          <Property Name="RestaurantGuid" Type="Guid" Nullable="false" />
+          <Property Name="UserGuid" Type="Guid" Nullable="false" />
+          <Property Name="Rating" Type="Byte" Nullable="false" />
+          <Property Name="Review" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsSkipped" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByGuid" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedByGuid" Type="Guid" />
+          <NavigationProperty Name="tblRestaurant" Relationship="BringlyModel.FK_tblReview_tblRestaurant" FromRole="tblReview" ToRole="tblRestaurant" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblReview_CreatedByGuid" FromRole="tblReview" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblReview_DeletedBy" FromRole="tblReview" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser2" Relationship="BringlyModel.FK_tblReview_ModifiedBy" FromRole="tblReview" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser3" Relationship="BringlyModel.FK_tblReview_tblUser" FromRole="tblReview" ToRole="tblUser" />
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="tblOrder" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblReview" ToRole="tblOrder" />
+          <Property Name="IsProcessed" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_tblReview_tblRestaurant">
+          <End Type="BringlyModel.tblRestaurant" Role="tblRestaurant" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRestaurant">
+              <PropertyRef Name="RestaurantGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="RestaurantGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_CreatedByGuid">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_DeletedBy">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="DeletedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_ModifiedBy">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderGuid" />
+          </Key>
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <Property Name="UserGuid" Type="Guid" Nullable="false" />
+          <Property Name="RestaurantGuid" Type="Guid" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblRestaurant" Relationship="BringlyModel.FK_tblOrder_tblRestaurant" FromRole="tblOrder" ToRole="tblRestaurant" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
+          <NavigationProperty Name="tblReviews" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblOrder" ToRole="tblReview" />
+        </EntityType>
+        <Association Name="FK_tblOrder_tblRestaurant">
+          <End Type="BringlyModel.tblRestaurant" Role="tblRestaurant" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRestaurant">
+              <PropertyRef Name="RestaurantGuid" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="RestaurantGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblOrder">
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="OrderGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -860,6 +1200,40 @@
                 <ScalarProperty Name="RestaurantType" ColumnName="RestaurantType" />
                 <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
                 <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReviews">
+            <EntityTypeMapping TypeName="BringlyModel.tblReview">
+              <MappingFragment StoreEntitySet="tblReview">
+                <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+                <ScalarProperty Name="DeletedByGuid" ColumnName="DeletedByGuid" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModifiedByGuid" ColumnName="ModifiedByGuid" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsSkipped" ColumnName="IsSkipped" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
+                <ScalarProperty Name="ReviewGuid" ColumnName="ReviewGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="BringlyModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

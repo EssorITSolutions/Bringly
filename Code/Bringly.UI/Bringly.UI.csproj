@@ -340,6 +340,9 @@
     <Content Include="Views\Restaurant\MyRestaurant.cshtml" />
     <Content Include="Views\User\RestaurantReview.cshtml" />
     <Content Include="Views\Errors\Error404.cshtml" />
+    <Content Include="Views\Shared\_AddReview.cshtml" />
+    <Content Include="Views\Shared\_RestaurantReviewList.cshtml" />
+    <Content Include="Views\User\MerchantReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">

@@ -2696,3 +2696,146 @@ ul.nav-wizard li a {
 		color:#FA5342;
 	}
 
+.mws-form .skip-btn {
+    background: none;
+    border: none;
+    color: #4a4a4a;
+    font-weight: 500;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #4a4a4a;
+    cursor: pointer;
+}
+/* Rating Star Widgets Style */
+.rating-stars ul {
+    list-style-type: none;
+    padding: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin-bottom:0;
+}
+
+    .rating-stars ul > li.star {
+        display: inline-block;
+        font-size: 7px;
+    }
+
+        /* Idle State of the stars */
+        .rating-stars ul > li.star > i.fa {
+            font-size: 2.5em; /* Change the size of the stars */
+            color: #ccc; /* Color on idle state */
+        }
+    .rating-stars ul.review-list > li {
+        float:left;
+    }
+    /* Hover state of the stars */
+    .rating-stars ul > li.star.hover > i.fa {
+        color: #FFCC36;
+    }
+
+        /* Selected state of the stars */
+        .rating-stars ul > li.star.selected > i.fa {
+            color: #FF912C;
+        }
+
+.red-text {
+color:red;
+}
+.buyer_review {
+    padding: 0 20px;
+}
+.buyer_review .form-control {
+    height: 148px;
+    resize: none;
+}
+.rating-stars ul > li.star-rating {
+    padding-left: 10px;
+    margin-top: -3px;
+    color: #aaa;
+    font-style: italic;
+    font-weight: 200;
+}
+.buyer_review .review-lbllength {
+    float: right;
+    margin-right: 6%;
+}
+.green-text{color:green;}
+
+.review-panel .approvedisapprove {
+    cursor: pointer;
+}
+
+.buyer_review span.field-validation-error {
+    text-align: left;
+    width: 100%;
+    border: none;
+    background-color: #fafafa;
+    margin-top: 0;
+    padding: 0;
+}
+    .buyer_review span.field-validation-error:after, .buyer_review span.field-validation-error:before {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #ffffff;
+        border-width: 0px;
+        margin-left: 0px;
+    }
+
+.buyer_review .rating-widget span.field-validation-error {
+    text-align:center;
+}
+
+
+
+/********************* Popup Class Starts **********************/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    opacity: .75;
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    z-index: 888888888888888;
+}
+
+.modal-window {
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    -webkit-transform: translate(-50% , -50%);
+    -moz-transform: translate(-50% , -50%);
+    -ms-transform: translate(-50% , -  50%);
+    max-width: 90%;
+    margin: 0;
+    padding: 0;
+    z-index: 9999999999999999;
+}
+.close-button 
+{
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+.close-button button.btn-close {
+    border:none;
+    background-color: #fa5342;
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    line-height: 16px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    display: block;
+    padding: 0;
+}
+   
+
+/********************* Popup Class Ends **********************/

@@ -21,4 +21,5 @@ namespace Bringly.Domain
         public string RestaurantImage { get; set; }
         public Guid CityGuid { get; set; }
     }
+   
 }

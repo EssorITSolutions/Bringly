@@ -8,6 +8,8 @@ using Bringly.DomainLogic.User;
 using Bringly.DomainLogic;
 using System.IO;
 using System.Web.Security;
+using Bringly.Domain;
+using System.Web.UI;
 
 namespace Bringly.UI.Controllers
 {
@@ -116,6 +118,70 @@ namespace Bringly.UI.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult RestaurantReview()
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return View(userDomainLogic.GetMyReviewBuyer(UserVariables.LoggedInUserGuid));
+        }
+        //[HttpPost]
+        //public ActionResult RestaurantReview(MyReview myReview, string Command)
+        //{
+        //    UserDomainLogic userDomainLogic = new UserDomainLogic();
+        //    if (Command == "Leave Review")
+        //    {
+        //        myReview.IsSkipped = false;
+        //        userDomainLogic.InsertReview(myReview);
+        //        Success("Review saved successfully");
+        //    }
+        //    else
+        //    {
+        //        myReview.IsSkipped = true;
+        //        userDomainLogic.InsertReview(myReview);
+        //        Success("Review skipped successfully");
+        //    }            
+        //    return View(userDomainLogic.InsertReview(myReview));
+        //}
+
+        public ActionResult AddReview(Guid ReviewGuid)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return PartialView("_AddReview", userDomainLogic.GetReviewByGuid(ReviewGuid));
+        }
+        [HttpPost]
+        public ActionResult AddReview(MyReview myReview)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            if (ModelState.IsValid)
+            {                
+                myReview.IsSkipped = false;
+                userDomainLogic.InsertReview(myReview);
+                ViewBag.IspopUp = true;               
+            }
+            return PartialView("_AddReview", userDomainLogic.GetReviewByGuid(myReview.ReviewGuid));
+        }
+
+        public bool SkipReview(Guid reviewguid)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            MyReview myReview = new MyReview();
+            myReview.Review = "";
+            myReview.IsSkipped = true;
+            myReview.ReviewGuid = reviewguid;
+            myReview=userDomainLogic.InsertReview(myReview);                    
+            return true;
+        }
+        [HttpPost]
+        public bool ApproveReview(Guid reviewguid,string Isapprove)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return userDomainLogic.ApproveReviewLogic(reviewguid, Convert.ToBoolean(Isapprove));
+        }
+        public ActionResult MerchantReview()
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return View(userDomainLogic.GetMyReviewMerchant(UserVariables.LoggedInUserGuid));
         }
     }
 }

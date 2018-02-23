@@ -1,0 +1,27 @@
+﻿@model Bringly.Domain.MyReview
+@{
+    ViewBag.Title = "RestaurantReview";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+@section BreadCrum{
+    <li class="breadcrumb-item active">My Reviews</li>
+}
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <form method="post" class="mws-form" id="formReview">
+            <div class="page-sub-title">
+                <h3>My Reviews</h3>
+                <p style="display:@((Model.ReviewGuid != Guid.Empty) ? "block" : "none")"
+                   class="tag-line">
+                    You can leave the comments or
+                    @*<input type="submit" id="btnskipreview" name="Command" value="Skip This" class="skip-btn">*@         <a reviewguid="@Model.ReviewGuid" class="skip-review" href="#">Skip This</a>
+            </div>
+            <div class="row" style="display:@((Model.ReviewGuid != Guid.Empty) ? "block" : "none")">
+                <input value="Add Review" type="button" class="btn btn-primary" onclick="OpenReviewPopUp('@(Model.ReviewGuid)')" id="btnAddReviewPopUp" />
+            </div>
+        </form>
+        @Html.Partial("_RestaurantReviewList", Model.RestaurantReviews)
+
+    </div>
+
+</div>

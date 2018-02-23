@@ -78,5 +78,6 @@ namespace Bringly.DomainLogic
             return retstring;
             //return "~/Upload" + imagetype + "/" + ImageName;
         }
+        
     }
 }

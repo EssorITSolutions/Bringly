@@ -1,0 +1,78 @@
+﻿@model Bringly.Domain.MyReview
+@{
+    Layout = null;
+}
+<link href="~/Templates/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Templates/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Templates/css/StyleSheet.css" rel="stylesheet" />
+<script src="~/Templates/Scripts/Jquery/jquery-3.2.1.js"></script>
+<script src="~/Templates/Scripts/Jquery/jquery-ui.js"></script>
+<script src="~/Templates/Scripts/SecureJs.js"></script>
+<script src="~/Templates/Scripts/validation/jquery.validate.js" type="text/javascript"></script>
+<script src="~/Templates/Scripts/validation/jquery.validate.unobtrusive.js"></script>
+@if (ViewBag.IspopUp != null)
+{
+<script>    
+    window.parent.closeModelPopUpForm(true);
+</script>
+}
+else
+{
+using (@Html.BeginForm("AddReview", "User", FormMethod.Post))
+{
+    <div class="close-button">
+        <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
+    </div>
+    <div class="buyer_review">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-5">
+                <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant, Model.RestaurantImage))" class="float-left" />
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-7">
+                @Html.HiddenFor(m => m.ReviewGuid)
+
+                @Html.HiddenFor(m => m.UserGuid)
+                @Html.TextAreaFor(m => m.Review, new { @class = "form-control", @maxlength = "500", @onkeyup = "getreviewcharcount(this,'500')" })
+                @Html.ValidationMessageFor(m => m.Review)
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <label class="review-lbllength">Character left: <label id="lblreviewcharactercount">500</label></label>
+        </div>
+        <div class="clearfix"></div>
+        <section class='rating-widget'>
+            <!-- Rating Stars Box -->
+            <div class='rating-stars text-center'>
+                <ul id='stars'>
+                    <li class='star onhover' title='Poor' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star onhover' title='Fair' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star onhover' title='Good' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star onhover' title='Excellent' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star onhover' title='WOW!!!' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+            </div>
+            @Html.HiddenFor(m => m.Rating)
+            @Html.ValidationMessageFor(m => m.Rating)
+        </section>
+        
+        <div class="clearfix"></div>
+        <div class="text-center m-2">
+            <input type="submit" id="btnrestaurantreview" value="Leave Review" title="Leave Review" class="btn btn-primary btn-lg">
+        </div>
+    </div>
+}
+
+}
