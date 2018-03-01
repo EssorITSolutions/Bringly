@@ -252,7 +252,7 @@ function DeleteSentEmailResponse(response, data) {
         $('.sweet-alert.showSweetAlert.visible').removeAttr('class');
         //alert($('.emails-count:hidden').length);
         if (!$('div#partialEmaiList div').hasClass('emails-count')) {
-            PostDataWithSuccessParam("/Email/GetSentEmailPartial", {}, EmailListPartialView);
+            PostDataWithSuccessParam("/Email/Sent", {str:""}, EmailListPartialView);
             disableemailbutton();
         }
     }
@@ -283,7 +283,7 @@ function DeleteInboxEmailResponse(response, data) {
         $('div.sweet-overlay').css('display', 'none');
         $('.sweet-alert.showSweetAlert.visible').removeAttr('class');
         if (!$('div#partialEmaiList div').hasClass('emails-count')) {
-            PostDataWithSuccessParam("/Email/GetInboxEmailPartial", {}, EmailListPartialView);
+            PostDataWithSuccessParam("/Email/Inbox", {str:""}, EmailListPartialView);
         }
         PostData("/Email/GetUnReadEmailCount", {}, UnreadEmailResponse);
         disableemailbutton();

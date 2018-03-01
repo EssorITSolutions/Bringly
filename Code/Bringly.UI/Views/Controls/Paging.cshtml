@@ -1,9 +1,7 @@
 ﻿@model Bringly.Domain.Paging
 
 @if (Model == null) { return; }
-else { Model.QueryString = Model.QueryString.Contains("GetSentEmailPartial") ? Model.QueryString.Replace("GetSentEmailPartial", "Sent") : Model.QueryString;
-    Model.QueryString = Model.QueryString.Contains("GetInboxEmailPartial") ? Model.QueryString.Replace("GetInboxEmailPartial", "Inbox") : Model.QueryString;
-}
+
 <div class="download-button">
 
 

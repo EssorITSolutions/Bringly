@@ -128,8 +128,6 @@ namespace Bringly.DomainLogic
             Email.PageSize = PageSize;
             Email.CurrentPage = LatestPage > 0 ? LatestPage : CurrentPage; ;//ViewBag.CurrentPage
             Email.SortBy = SortBy;
-            Regex regex = new Regex("\\<[^\\>]*\\>"); 
-            
 
             Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false).
                 Select(em => new Email { EmailGuid = em.tblEmail.EmailGuid, TemplateGuid = em.tblEmail.TemplateGuid, Subject = em.tblEmail.Subject, Body = em.tblEmail.Body, EmailFrom = em.tblEmail.EmailFrom
@@ -137,8 +135,8 @@ namespace Bringly.DomainLogic
                 .OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read==false).ToList();
             if (EmailGuid != Guid.Empty) {
                 Email.Emails = Email.Emails.Where(x => x.EmailGuid == EmailGuid).ToList();
-                Guid[] guidArrayList=new Guid[1];
-                guidArrayList[0]=EmailGuid;
+                //Guid[] guidArrayList=new Guid[1];
+                //guidArrayList[0]=EmailGuid;
                // MarkAsRead(guidArrayList);
             }
             Email.UnReadCount= bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read==false)
@@ -156,8 +154,7 @@ namespace Bringly.DomainLogic
                 Skip = Skip - 1;
             }
             Email.Emails = Email.Emails.Skip(Skip).Take(Take).ToList();
-            
-            
+
             return Email;
         }
 
@@ -203,8 +200,7 @@ namespace Bringly.DomainLogic
                     TemplateGuid = em.tblEmail.TemplateGuid,
                     Subject = em.tblEmail.Subject,
                     Body = em.tblEmail.Body,
-                    EmailFrom = em.tblEmail.EmailFrom
-                ,
+                    EmailFrom = em.tblEmail.EmailFrom,
                     Sent = em.tblEmail.Sent,
                     DateCreated = em.tblEmail.DateCreated,
                     UserName = em.tblEmail.tblUser.FullName,

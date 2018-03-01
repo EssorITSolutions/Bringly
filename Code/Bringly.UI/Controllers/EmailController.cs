@@ -22,26 +22,24 @@ namespace Bringly.UI.Controllers
                     TempData["CurrentPage"] = Request.Url.AbsoluteUri.Split('&')[1].Split('=')[1].Split('&')[0];
                     Currentpage = TempData["CurrentPage"] == null ? 0 : Convert.ToInt32(TempData["CurrentPage"]);
                     TempData.Keep();
-                }
-                
-            }
-             
+                }                
+            }             
             EmailDomainLogic email = new EmailDomainLogic();
             return View(email.GetInboxEmail(EmailGuid, Currentpage));
         }
-        [HttpPost]
-        public ActionResult Inbox(MyEmail MyEmail)
-        {
-            EmailDomainLogic email = new EmailDomainLogic();
-           // email.SendEmail(MyEmail); compose email
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Inbox(MyEmail MyEmail)
+        //{
+        //    EmailDomainLogic email = new EmailDomainLogic();
+        //   // email.SendEmail(MyEmail); compose email
+        //    return View();
+        //}
   
-        [HttpPost]
-        public ActionResult Sent(List<Email> MyEmail)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Sent(List<Email> MyEmail)
+        //{
+        //    return View();
+        //}
         public ActionResult Sent()
         {
             TempData["CurrentPage"] = null;
@@ -56,25 +54,30 @@ namespace Bringly.UI.Controllers
             myemail = email.GetSentEmail(Currentpage);
             return View(myemail);
         }
+
         public ActionResult DeleteEmail(Guid[] EmailGuid)
         {
             EmailDomainLogic email = new EmailDomainLogic();
             return Json(email.DeleteEmail(EmailGuid),JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetSentEmailPartial()
+
+        [HttpPost]
+        public ActionResult Sent(string Current)
         {
             EmailDomainLogic email = new EmailDomainLogic();
             int Currentpage = TempData["CurrentPage"] == null ? 0 : Convert.ToInt32(TempData["CurrentPage"]);
             TempData.Keep();
             return PartialView("_EmailList",email.GetSentEmail(Currentpage));
         }
-        public ActionResult GetInboxEmailPartial()
+        [HttpPost]
+        public ActionResult Inbox(string Current)
         {
             EmailDomainLogic email = new EmailDomainLogic();
             int Currentpage = TempData["CurrentPage"] == null ? 0 : Convert.ToInt32(TempData["CurrentPage"]);
             TempData.Keep();
             return PartialView("_EmailList", email.GetInboxEmail(Guid.Empty, Currentpage));
         }
+
         public ActionResult MarkAsRead(Guid[] EmailGuid)
         {
             EmailDomainLogic email = new EmailDomainLogic();
@@ -85,11 +88,13 @@ namespace Bringly.UI.Controllers
             EmailDomainLogic email = new EmailDomainLogic();
             return Json(email.MarkAsUnRead(EmailGuid), JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult GetUnReadEmailCount()
         {
             EmailDomainLogic email = new EmailDomainLogic();
             return Json(email.GetUnReadEmailCount(), JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ComposeEmail()
         {
             return PartialView("_ComposeEmail",new ComposeEmail());
