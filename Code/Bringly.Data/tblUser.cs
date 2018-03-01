@@ -29,6 +29,7 @@ namespace Bringly.Data
             this.tblReviews1 = new HashSet<tblReview>();
             this.tblReviews2 = new HashSet<tblReview>();
             this.tblReviews3 = new HashSet<tblReview>();
+            this.tblEmails = new HashSet<tblEmail>();
         }
     
         public System.Guid UserGuid { get; set; }
@@ -75,5 +76,7 @@ namespace Bringly.Data
         public virtual ICollection<tblReview> tblReviews2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblEmail> tblEmails { get; set; }
     }
 }

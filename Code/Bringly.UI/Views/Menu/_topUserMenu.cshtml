@@ -1,4 +1,7 @@
 ﻿
+@model Bringly.Domain.MyEmail
+
+<input type="hidden" value="@Model.UnReadCount" class="UnReadEmailCount" name="UnReadEmailCount" id="UnReadEmailCount" />
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <div class="Navbar-logo admin-logo">
@@ -31,27 +34,23 @@
 
         <div class="Navbar-Right-content dashboard-nav">
             <div class="notification-dropdown">
-                <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span>(3)</span></a>
+                <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="message-count">(3)</span></a>
                 <div class="notification-drop">
-                    <ul class="dropdown-content list-unstyled">
-                        <li>
-                            <div class="arrow-top"><span class="icon-up"></span></div>
-                            <div class="notice-heading">
-                                <div class="float-left"><h4>Jane G.</h4></div>
-                                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
-                            </div>
-                            <p class="text-left">Lorem ipsum dolor sit a consectetur adipiscing elit</p>
-                        </li>
-                        <li>
-                            <div class="notice-heading">
-                                <div class="float-left"><h4>Seller 1</h4></div>
-                                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
-                            </div>
-                            <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
-                        </li>
-                        <li class="text-center"><a href="#">See all notifications</a></li>
-                    </ul>
-                </div>
+                    <div class="notification-data">
+
+                        @Html.Partial("_NotificationMessage", Model)
+                        </div>
+
+                        @*<li>
+            <div class="notice-heading">
+                <div class="float-left"><h4>Seller 1</h4></div>
+                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
+            </div>
+            <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
+        </li>*@
+
+
+                    </div>
 
             </div>
             <div class="dropdown dashboard-menu">
@@ -77,7 +76,7 @@
                         {
                             <li><a href="/Restaurant/MyRestaurant"><img src="/templates/images/restaurant-icon.png" /> My Restaurant</a></li>
                             <li><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> Messages <span class="alter-message">(1)</span></a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> Messages <span class="alter-message message-count">(1)</span></a></li>
                             <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> My Reviews</a></li>
                             <li><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>

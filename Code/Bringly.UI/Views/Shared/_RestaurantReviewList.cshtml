@@ -13,13 +13,16 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-lg-7 col-md-12 col-sm-12">
-                            <h4 class="mt-0 m-0"><label>
-                               @(ismerchant ? "From:" : "To:") 
-                                </label> 
-                            @if (ismerchant)
-                            { @review.UserName}
-                            else { <a href="#">@review.RestaurantName</a>}
-                                   <span class="tag-date">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(review.DateCreated) @Bringly.Domain.BaseClasses.DomainBase.Time24hr(review.DateCreated) </span></h4>
+                            <h4 class="mt-0 m-0">
+                                <label>
+                                    @(ismerchant ? "From:" : "To:")
+                                </label>
+                                @if (ismerchant)
+                                {@review.UserName}
+                            else
+                            { <a href="#">@review.RestaurantName</a>}
+                                <span class="tag-date">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(review.DateCreated) @Bringly.Domain.BaseClasses.DomainBase.Time24hr(review.DateCreated) </span>
+                            </h4>
                         </div>
                         @if (ismerchant)
                         {
@@ -35,18 +38,18 @@
                                         <a reviewguid="@review.ReviewGuid" approve="false"
                                            id="reviewapprovalreject" class="reject btn btn-danger" href='#'><i class="fa fa-thumbs-down" aria-hidden="true"></i>Reject</a>
                                     }
-                                        @if (review.IsApproved && review.IsProcessed)
-                                        {
-                                            <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
-                                        }
-                                        else if (!review.IsApproved && review.IsProcessed)
-                                        {
-                                            <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
-                                        }
-                                        else
-                                        {
-                                            <label class="review-status" style="display:none;"></label>
-                                        }
+                                    @if (review.IsApproved && review.IsProcessed)
+                                    {
+                                        <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
+                                    }
+                                    else if (!review.IsApproved && review.IsProcessed)
+                                    {
+                                        <label reviewguid="@review.ReviewGuid" approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="review-status" style="display:none;"></label>
+                                    }
 
                                 </p>
                             </div>
@@ -77,14 +80,20 @@
                         </div>
                     </section>
                     <div class="clearfix"></div>
-                   @Html.Partial("_ReviewContent", review.Review)
+                    @Html.Partial("_ReviewContent", review.Review)
                 </div>
             </div>
         }
-        Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize=Model.PageSize, currentPage = Model.CurrentPage });
+        Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
     }
     else
     {
-        @Html.Partial("_NoRecordFound", "No review found.")        
+        <div class="media shadow-box">
+            <div class="media-body">
+                <div class="row">
+                    @Html.Partial("_NoRecordFound", "No review found.")
+                </div>
+            </div>
+        </div>
     }
 </div>

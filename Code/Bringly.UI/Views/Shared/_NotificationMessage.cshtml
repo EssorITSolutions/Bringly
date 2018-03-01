@@ -1,0 +1,29 @@
+﻿@using System.Text.RegularExpressions;
+@model Bringly.Domain.MyEmail
+@{int count = 0; string str = "<div class='arrow-top'><span class='icon-up'></span></div>";}
+
+    <ul class="dropdown-content list-unstyled">
+        @foreach (Bringly.Domain.Email email in Model.Emails)
+        {
+            TimeSpan span = (DateTime.Now - email.DateCreated);
+            <li class="notification-@email.EmailGuid">
+                @if (count > 0) { str = ""; }
+                @Html.Raw(str)
+                <div class="notice-heading">
+                    <div class="float-left"><h4>@email.UserName</h4></div>
+                    <div class="float-right">
+                        <p class="time-post">
+                            @email.TimeStamp
+                        </p><a class="close-icon notification-message" emailguid="@email.EmailGuid">&times;</a>
+                    </div>
+                </div>
+                <p class="text-left">
+                    <a href="/Email/Inbox?EmailGuid=@email.EmailGuid">
+                        @email.PlainText
+                    </a>
+                </p>
+            </li>
+            count++;
+        }
+        <li class="text-center"><a href="/Email/Inbox?EmailGuid=@Guid.Empty">See all notifications</a></li>
+        </ul>

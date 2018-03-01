@@ -12,6 +12,8 @@ using System.IO;
 using System.Web;
 using System.Web.Security;
 using Bringly.Domain.Common;
+using Bringly.Domain.Enums;
+
 namespace Bringly.DomainLogic.User
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
@@ -185,6 +187,26 @@ namespace Bringly.DomainLogic.User
                 review.Rating = (byte)myReview.Rating;
                 review.IsCompleted = myReview.IsSkipped?false:true;
                 review.IsProcessed = false;
+            if (review.IsCompleted)
+            {
+                EmailDomainLogic email = new EmailDomainLogic();
+                MyEmail myEmail = new MyEmail();
+                myEmail.TemplateType = Enum.GetName(typeof(TemplateType),TemplateType.Review);
+                tblTemplate templatereview = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.TemplateType).ToList().FirstOrDefault();
+                myEmail.Body = review.Review;
+                myEmail.EmailFrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault().EmailAddress;
+                myEmail.EmailTo = templatereview.EmailFrom;
+                myEmail.Subject = templatereview.Subject;
+                email.SendEmail(myEmail);
+                myEmail = new MyEmail();
+                myEmail.TemplateType = Enum.GetName(typeof(TemplateType), TemplateType.FeedBack);
+                tblTemplate templatefeedback = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.TemplateType).ToList().FirstOrDefault();
+                myEmail.Body = review.Review;
+                myEmail.EmailTo = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault().EmailAddress;
+                myEmail.EmailFrom = templatefeedback.EmailFrom;
+                myEmail.Subject = templatefeedback.Subject;
+                email.SendEmail(myEmail);
+            }
             bringlyEntities.SaveChanges();
            
             return GetMyReviewBuyer(myReview.UserGuid);
@@ -278,5 +300,7 @@ namespace Bringly.DomainLogic.User
             }
             return message;
         }
+
+        
     }
 }

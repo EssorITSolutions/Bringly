@@ -73,6 +73,12 @@
     <Compile Include="tblCountry.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblEmail.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblEmailTo.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblFavourite.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
@@ -92,6 +98,9 @@
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblReview.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblTemplate.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUser.cs">

@@ -1,6 +1,9 @@
 ﻿@model Bringly.Domain.Paging
 
 @if (Model == null) { return; }
+else { Model.QueryString = Model.QueryString.Contains("GetSentEmailPartial") ? Model.QueryString.Replace("GetSentEmailPartial", "Sent") : Model.QueryString;
+    Model.QueryString = Model.QueryString.Contains("GetInboxEmailPartial") ? Model.QueryString.Replace("GetInboxEmailPartial", "Inbox") : Model.QueryString;
+}
 <div class="download-button">
 
 
@@ -26,12 +29,10 @@
             }
             @if (Model.CurrentPage != Model.LastPage)
             {
-        <li title="Next" class="page-item"><a class="page-link" href="@Model.QueryString&page=@(Convert.ToInt32(Model.CurrentPage) + 1)&savesearch=true" title="Next"><i class="fa fa-angle-right"></i></a></li>
-        <li title="Last" class="page-item">
-            <a title="Last"  class="page-link" href="@Model.QueryString&page=@(Convert.ToInt32(Model.LastPage))&savesearch=true"><i class="fa fa-angle-double-right"></i></a>
-        </li>
-
-
+                <li title="Next" class="page-item"><a class="page-link" href="@Model.QueryString&page=@(Convert.ToInt32(Model.CurrentPage) + 1)&savesearch=true" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                <li title="Last" class="page-item">
+                    <a title="Last" class="page-link" href="@Model.QueryString&page=@(Convert.ToInt32(Model.LastPage))&savesearch=true"><i class="fa fa-angle-double-right"></i></a>
+                </li>
             }
         </ul>
     </nav>

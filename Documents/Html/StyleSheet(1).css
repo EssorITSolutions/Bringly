@@ -154,7 +154,7 @@ ul.navbar-nav li.nav-item a.nav-link {
         }
 
 .Navbar-dropdown .dropdown span {
-    /*border-bottom: 1px dotted;*/
+    border-bottom: 1px dotted;
     padding-bottom: 2px;
     font-family: 'MYRIADPROREGULAR';
     font-weight: normal;
@@ -580,12 +580,10 @@ p.text-right.forgot-password a {
             color: #fa5342;
             font-size: 24px;
             line-height: 16px;
-            cursor:pointer;
         }
 
         .dropdown-content.list-unstyled li:hover a.close-icon {
             display: inline-block;
-            cursor: pointer;
         }
 
         .dropdown-content.list-unstyled li:last-child {
@@ -1670,7 +1668,6 @@ a.link-border{
 }
 .marchent-review .media-body a.read-more-link{
     color:#aeaeae;
-    cursor:pointer;
 }
 
 /*toggle-on-off*/
@@ -2618,254 +2615,17 @@ ul.nav-wizard li a {
 
 }
 
-.form-control.validation {
-    border: 1px solid #f52020;
-}
-
-.field-validation-error {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #f52020;
-    padding: 4px 10px;
-    font-size: 14px;
-    color: #f52020;
-    margin-top: 10px;
-    display: inline-block;
-}
-
-.field-validation-error:after, .field-validation-error:before {
-    bottom: 100%;
-    left: 20px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-
-.field-validation-error:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 8px;
-    margin-left: -8px;
-}
-
-.field-validation-error:before {
-    border-color: rgba(245, 32, 32, 0);
-    border-bottom-color: #f52020;
-    border-width: 9px;
-    margin-left: -9px;
-}
-.user-profile {
-    position: relative;
-}
-
-    .user-profile p.edit-profil-img {
-        position: absolute;
-        bottom: 0;
-        text-align: center;
-        width: 100%;
-    }
-
-.user-profile p.edit-profil-img a {
-    opacity: 0.4;
-}
-
-    .user-profile p.edit-profil-img a:hover {
-        opacity: 1;
-    }
-.required {
-    color: #ff0a0a;
-}
-	.profile-info{
-	position:relative;
-	}
-	.profile-info p.edit-profil-img{
-	position:absolute;
-	top:0;
-	right:20px;
-	text-align:center;
-	width:auto;
-	
-	}
-	.profile-info p.edit-profil-img a {
-    
-    font-size: 14px;
-    color: #c8c8c8;
-	}
-	.profile-info p.edit-profil-img a:hover{
-		
-		color:#FA5342;
-	}
-
-.mws-form .skip-btn {
-    background: none;
-    border: none;
-    color: #4a4a4a;
-    font-weight: 500;
-    padding-bottom: 2px;
-    border-bottom: 1px dotted #4a4a4a;
-    cursor: pointer;
-}
-/* Rating Star Widgets Style */
-.rating-stars ul {
-    list-style-type: none;
-    padding: 0;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    margin-bottom:0;
-}
-
-    .rating-stars ul > li.star {
-        display: inline-block;
-        font-size: 7px;
-    }
-
-        /* Idle State of the stars */
-        .rating-stars ul > li.star > i.fa {
-            font-size: 2.5em; /* Change the size of the stars */
-            color: #ccc; /* Color on idle state */
-        }
-    .rating-stars ul.review-list > li {
-        float:left;
-    }
-    /* Hover state of the stars */
-    .rating-stars ul > li.star.hover > i.fa {
-        color: #FFCC36;
-    }
-
-        /* Selected state of the stars */
-        .rating-stars ul > li.star.selected > i.fa {
-            color: #FF912C;
-        }
-
-.red-text {
-color:red;
-}
-.buyer_review {
-    padding: 0 20px;
-}
-.buyer_review .form-control {
-    height: 148px;
-    resize: none;
-}
-.rating-stars ul > li.star-rating {
-    padding-left: 10px;
-    margin-top: -3px;
-    color: #aaa;
-    font-style: italic;
-    font-weight: 200;
-}
-.buyer_review .review-lbllength {
-    float: right;
-    margin-right: 6%;
-}
-.green-text{color:green;}
-
-.review-panel .approvedisapprove {
-    cursor: pointer;
-}
-
-.buyer_review span.field-validation-error {
-    text-align: left;
-    width: 100%;
-    border: none;
-    background-color: #fafafa;
-    margin-top: 0;
-    padding: 0;
-}
-    .buyer_review span.field-validation-error:after, .buyer_review span.field-validation-error:before {
-        border-color: rgba(255, 255, 255, 0);
-        border-bottom-color: #ffffff;
-        border-width: 0px;
-        margin-left: 0px;
-    }
-
-.buyer_review .rating-widget span.field-validation-error {
-    text-align:center;
-}
-
-
-
-/********************* Popup Class Starts **********************/
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #000;
-    opacity: .75;
-    filter: alpha(opacity=75);
-    -moz-opacity: 0.75;
-    z-index: 888888888888888;
-}
-
-.modal-window {
-    top: 50%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    -webkit-transform: translate(-50% , -50%);
-    -moz-transform: translate(-50% , -50%);
-    -ms-transform: translate(-50% , -  50%);
-    max-width: 90%;
-    margin: 0;
-    padding: 0;
-    z-index: 9999999999999999;
-}
-.close-button 
-{
-    position:absolute;
-    top:0;
-    right:0;
-}
-
-.close-button button.btn-close {
-    border:none;
-    background-color: #fa5342;
-    color: #ffffff;
-    width: 20px;
-    height: 20px;
-    line-height: 16px;
-    font-size: 20px;
-    border-radius: 50%;
-    text-align: center;
-    display: block;
-    padding: 0;
-}
-   
-
-/********************* Popup Class Ends **********************/
-
-.display-none {
-    display:none
-}
-.display-inline-block {
-    display:inline-block;
-}
-
-
-
-
-
-
 
 /*=====mail-box=====*/
 
 .mail-box a.shadow-box {
-    display: block;
+    display:block;
 }
 
-    .mail-box a.shadow-box:hover,
-    .mail-box a.shadow-box:focus {
-        background-color: #f8f8f8;
-    }
+.mail-box a.shadow-box:hover,
+.mail-box a.shadow-box:focus {
+    background-color: #f8f8f8;
+}
 
 .mail-box h4 {
     font-size: 18px;
@@ -2910,13 +2670,12 @@ ul.list-inline.top-bar a {
 
 
 aside.left-side li.mail a {
-    position: relative;
+    position:relative;
 }
-
-    aside.left-side li.mail a::after {
-        position: absolute;
-        right: 35px;
-    }
+aside.left-side li.mail a::after {
+    position: absolute;
+    right:35px;
+}
 
 aside.left-side .mail ul.dropdown-menu {
     position: static !important;
@@ -2925,7 +2684,6 @@ aside.left-side .mail ul.dropdown-menu {
     background-color: #f8f8f8;
     border: 0 none;
 }
-
     aside.left-side .mail ul.dropdown-menu li a {
         font-size: 14px;
         padding-left: 50px;
@@ -2944,19 +2702,17 @@ aside.left-side .mail ul.dropdown-menu {
     background-color: #f2f2f2;
 }
 
-    .top-bar-mail .btn-secondary {
-        box-shadow: none;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+    .top-bar-mail .btn-secondary{
+        box-shadow:none;
+        border:1px solid rgba(0, 0, 0, 0.3);
     }
-
         .top-bar-mail .btn-secondary:hover,
         .top-bar-mail .btn-secondary:focus {
             box-shadow: none;
             border: 1px solid rgba(0, 0, 0, 0.3);
             background-color: rgba(0, 0, 0, 0.3);
-            color: #fff;
+            color:#fff;
         }
-
     .top-bar-mail .btn-danger {
         box-shadow: none;
         border: 1px solid #dc3545;
@@ -2971,11 +2727,9 @@ aside.left-side .mail ul.dropdown-menu {
             background-color: #dc3545;
             color: #fff;
         }
-
     .top-bar-mail .custom-checkbox span.custom-control-indicator {
         top: 10px;
     }
-
     .top-bar-mail .custom-checkbox .custom-control-input {
         top: 11px;
         right: 0;
@@ -2985,78 +2739,27 @@ aside.left-side .mail ul.dropdown-menu {
     height: 250px;
 }
 
-.user-profile {
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    margin-bottom: 20px;
+.user-profile{
+    width:100px;
+    height:100px;
+    display:inline-block;
+    margin-bottom:20px;
 }
-
 .user-detail {
     display: inline-block;
     vertical-align: top;
     padding-left: 20px;
     margin-bottom: 20px;
 }
-
     .user-detail p a {
         color: #777777;
     }
-
-    .user-detail h3 {
-        color: #fa5342;
+.user-detail h3{
+    color:#fa5342;
+}
+    
+    
+    
+    .mail-text p {
+        font-size: 16px;
     }
-
-
-
-.mail-text p {
-    font-size: 16px;
-}
-.custom-checkbox .custom-control-input {
-    position:relative;
-}
-
-
-.unreaded {
-    background-color: #f2f2f2;
-}
-
-.top-bar-mail .btn-success {
-    box-shadow: none;
-    border: 1px solid #4092d0;
-    background-color: transparent;
-    color: #4092d0;
-    margin-left: 15px;
-}
-
-    .top-bar-mail .btn-success:hover,
-    .top-bar-mail .btn-success:focus {
-        box-shadow: none;
-        border: 1px solid #4092d0;
-        background-color: #4092d0;
-        color: #fff;
-    }
-
-.top-bar-mail .btn-primary {
-    box-shadow: none;
-    background-color: transparent;
-    color: #fa5342;
-    margin-left: 10px;
-}
-
-    .top-bar-mail .btn-primary:hover,
-    .top-bar-mail .btn-primary:focus {
-        box-shadow: none;
-        background-color: #fa5342;
-        color: #fff;
-    }
-.padding-zero {
-    padding:0;
-}
-.margin-zero {
-    margin: 0 !important;
-}
-.btn-disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}

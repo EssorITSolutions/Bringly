@@ -36,5 +36,8 @@ namespace Bringly.Data
         public virtual DbSet<tblOrder> tblOrders { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblReview> tblReviews { get; set; }
+        public virtual DbSet<tblTemplate> tblTemplates { get; set; }
+        public virtual DbSet<tblEmailTo> tblEmailToes { get; set; }
+        public virtual DbSet<tblEmail> tblEmails { get; set; }
     }
 }

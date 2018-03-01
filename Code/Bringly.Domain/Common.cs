@@ -12,5 +12,11 @@ namespace Bringly.Domain.Common
         public MessageType MessageType { get; set; }
         public string MessageText { get; set; }
     }
+    public class Template
+    {
+        public TemplateType TemplateType { get; set; }
+        public string Body { get; set; }
+        public string Subject { get; set; }
+    }
 
 }

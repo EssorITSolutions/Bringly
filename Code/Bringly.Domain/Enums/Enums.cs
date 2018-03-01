@@ -16,4 +16,9 @@ namespace Bringly.Domain.Enums
     {
         Success, Error, Info
     }
+    public enum TemplateType
+    {
+        Review, Order,FeedBack,Other
+    }
+
 }

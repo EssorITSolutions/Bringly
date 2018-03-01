@@ -33,6 +33,12 @@
         <AssociationConnector Association="BringlyModel.FK_tblReview_DeletedBy" />
         <AssociationConnector Association="BringlyModel.FK_tblReview_ModifiedBy" />
         <AssociationConnector Association="BringlyModel.FK_tblReview_tblUser" />
+        <EntityTypeShape EntityType="BringlyModel.tblTemplate" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BringlyModel.tblEmailTo" Width="1.5" PointX="5.25" PointY="23.125" />
+        <EntityTypeShape EntityType="BringlyModel.tblEmail" Width="1.5" PointX="3" PointY="22.5" />
+        <AssociationConnector Association="BringlyModel.FK_tblEmail_tblTemplate" />
+        <AssociationConnector Association="BringlyModel.FK_tblEmailTo_tblEmail" />
+        <AssociationConnector Association="BringlyModel.FK_tblEmail_tblUser" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

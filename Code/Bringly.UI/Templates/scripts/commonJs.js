@@ -338,3 +338,17 @@ $('.full-content a').on('click', function () {
     $(this).parent().removeClass('display-inline-block').addClass('display-none');
     $(this).parent().prev().removeClass('display-none').addClass('display-inline-block');
 })
+function Delete(text, confirmButtonText, url,param, Response) {
+    swal({
+        title: "Are you sure?",
+        text: text,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: confirmButtonText,
+        closeOnConfirm: false
+    },
+        function () {
+            PostDataWithSuccessParam(url, param, Response)
+        });
+}

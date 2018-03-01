@@ -1,0 +1,16 @@
+﻿
+<!--footer-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+@Scripts.Render("~/Ljs")
+@if (ViewBag.ErrorBlock != null)
+{
+    <script type="text/javascript">
+            ErrorBlock('@ViewBag.ErrorBlock');
+    </script>
+}
+else if (ViewBag.success != null)
+{
+    <script type="text/javascript">
+            Success('@ViewBag.Success');
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@using System.Text.RegularExpressions;
+@model Bringly.Domain.MyEmail
+@{
+    Layout = null;
+    var issent = Request.Url.AbsoluteUri.Contains("Sent");
+}
+
+@foreach (Bringly.Domain.Email email in Model.Emails)
+{
+    <div divemailguid="@email.EmailGuid" class="emails-count">
+        <a class="shadow-box @(!issent?email.Read?"":"unreaded":"")" href="javascript:void(0)">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label class="custom-control custom-checkbox">
+                        <input id="checkbox-@email.EmailGuid" EmailGuid="@email.EmailGuid" name="checkboxemail" type="checkbox" class="singlechecheckbox custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                    </label>
+                    <h4>@email.UserName</h4>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
+                </div>
+            </div>
+            <div data-toggle="collapse" data-target="#@email.EmailGuid">
+
+
+                <h5>@email.Subject</h5>
+                <p>
+                   @email.PlainText
+                </p>
+                <div id="@email.EmailGuid" class="collapse">
+                    @Html.Raw(email.Body)
+                </div>
+            </div>
+        </a>
+    </div>
+}
+@{
+    Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+}
+

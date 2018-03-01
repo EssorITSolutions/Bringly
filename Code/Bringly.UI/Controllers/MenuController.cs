@@ -26,7 +26,8 @@ namespace Bringly.UI.Controllers
         }
         public PartialViewResult TopMenu()
         {
-            return PartialView("_topUserMenu");
+            EmailDomainLogic email = new EmailDomainLogic();
+            return PartialView("_topUserMenu",email.GetNotificationEmail(Guid.Empty));
         }
     }
 }

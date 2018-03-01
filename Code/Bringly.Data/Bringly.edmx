@@ -29,6 +29,29 @@
           <Property Name="CountryTwoLetterCode" Type="nvarchar" MaxLength="2" />
           <Property Name="CountryThreeLetterCode" Type="nvarchar" MaxLength="3" />
         </EntityType>
+        <EntityType Name="tblEmail">
+          <Key>
+            <PropertyRef Name="EmailGuid" />
+          </Key>
+          <Property Name="EmailGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TemplateGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailFrom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sent" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEmailTo">
+          <Key>
+            <PropertyRef Name="EmailToGuid" />
+          </Key>
+          <Property Name="EmailToGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmailTo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Read" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblFavourite">
           <Key>
             <PropertyRef Name="FavouriteGuid" />
@@ -126,6 +149,18 @@
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedByGuid" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="tblTemplate">
+          <Key>
+            <PropertyRef Name="TemplateGuid" />
+          </Key>
+          <Property Name="TemplateGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailFrom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TemplateType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserGuid" />
@@ -163,6 +198,42 @@
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="DeletedDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_tblEmail_tblTemplate">
+          <End Role="tblTemplate" Type="Self.tblTemplate" Multiplicity="1" />
+          <End Role="tblEmail" Type="Self.tblEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplate">
+              <PropertyRef Name="TemplateGuid" />
+            </Principal>
+            <Dependent Role="tblEmail">
+              <PropertyRef Name="TemplateGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmail_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblEmail" Type="Self.tblEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblEmail">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmailTo_tblEmail">
+          <End Role="tblEmail" Type="Self.tblEmail" Multiplicity="1" />
+          <End Role="tblEmailTo" Type="Self.tblEmailTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmail">
+              <PropertyRef Name="EmailGuid" />
+            </Principal>
+            <Dependent Role="tblEmailTo">
+              <PropertyRef Name="EmailGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblFavourite_tblRestaurant">
           <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="1" />
           <End Role="tblFavourite" Type="Self.tblFavourite" Multiplicity="*" />
@@ -418,6 +489,8 @@
         <EntityContainer Name="BringlyModelStoreContainer">
           <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmail" EntityType="Self.tblEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmailTo" EntityType="Self.tblEmailTo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFavourite" EntityType="Self.tblFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLookUpDomain" EntityType="Self.tblLookUpDomain" Schema="dbo" store:Type="Tables" />
@@ -425,8 +498,21 @@
           <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRestaurant" EntityType="Self.tblRestaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblReview" EntityType="Self.tblReview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplate" EntityType="Self.tblTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserAddress" EntityType="Self.tblUserAddress" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblEmail_tblTemplate" Association="Self.FK_tblEmail_tblTemplate">
+            <End Role="tblTemplate" EntitySet="tblTemplate" />
+            <End Role="tblEmail" EntitySet="tblEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmail_tblUser" Association="Self.FK_tblEmail_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblEmail" EntitySet="tblEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmailTo_tblEmail" Association="Self.FK_tblEmailTo_tblEmail">
+            <End Role="tblEmail" EntitySet="tblEmail" />
+            <End Role="tblEmailTo" EntitySet="tblEmailTo" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblFavourite_tblRestaurant" Association="Self.FK_tblFavourite_tblRestaurant">
             <End Role="tblRestaurant" EntitySet="tblRestaurant" />
             <End Role="tblFavourite" EntitySet="tblFavourite" />
@@ -653,6 +739,21 @@
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblReview" EntitySet="tblReviews" />
           </AssociationSet>
+          <EntitySet Name="tblTemplates" EntityType="BringlyModel.tblTemplate" />
+          <EntitySet Name="tblEmailToes" EntityType="BringlyModel.tblEmailTo" />
+          <EntitySet Name="tblEmails" EntityType="BringlyModel.tblEmail" />
+          <AssociationSet Name="FK_tblEmail_tblTemplate" Association="BringlyModel.FK_tblEmail_tblTemplate">
+            <End Role="tblTemplate" EntitySet="tblTemplates" />
+            <End Role="tblEmail" EntitySet="tblEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmailTo_tblEmail" Association="BringlyModel.FK_tblEmailTo_tblEmail">
+            <End Role="tblEmail" EntitySet="tblEmails" />
+            <End Role="tblEmailTo" EntitySet="tblEmailToes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmail_tblUser" Association="BringlyModel.FK_tblEmail_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblEmail" EntitySet="tblEmails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="tblLookUpDomain">
           <Key>
@@ -855,6 +956,7 @@
           <NavigationProperty Name="tblReviews1" Relationship="BringlyModel.FK_tblReview_DeletedBy" FromRole="tblUser" ToRole="tblReview" />
           <NavigationProperty Name="tblReviews2" Relationship="BringlyModel.FK_tblReview_ModifiedBy" FromRole="tblUser" ToRole="tblReview" />
           <NavigationProperty Name="tblReviews3" Relationship="BringlyModel.FK_tblReview_tblUser" FromRole="tblUser" ToRole="tblReview" />
+          <NavigationProperty Name="tblEmails" Relationship="BringlyModel.FK_tblEmail_tblUser" FromRole="tblUser" ToRole="tblEmail" />
           </EntityType>
         <Association Name="FK_tblUser_tblCity">
           <End Type="BringlyModel.tblCity" Role="tblCity" Multiplicity="0..1" />
@@ -1065,6 +1167,82 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblTemplate">
+          <Key>
+            <PropertyRef Name="TemplateGuid" />
+          </Key>
+          <Property Name="TemplateGuid" Type="Guid" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailFrom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblEmails" Relationship="BringlyModel.FK_tblEmail_tblTemplate" FromRole="tblTemplate" ToRole="tblEmail" />
+        </EntityType>
+        <EntityType Name="tblEmailTo">
+          <Key>
+            <PropertyRef Name="EmailToGuid" />
+          </Key>
+          <Property Name="EmailToGuid" Type="Guid" Nullable="false" />
+          <Property Name="EmailTo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailGuid" Type="Guid" Nullable="false" />
+          <Property Name="Read" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblEmail" Relationship="BringlyModel.FK_tblEmailTo_tblEmail" FromRole="tblEmailTo" ToRole="tblEmail" />
+        </EntityType>
+        <EntityType Name="tblEmail">
+          <Key>
+            <PropertyRef Name="EmailGuid" />
+          </Key>
+          <Property Name="EmailGuid" Type="Guid" Nullable="false" />
+          <Property Name="TemplateGuid" Type="Guid" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailFrom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sent" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="tblTemplate" Relationship="BringlyModel.FK_tblEmail_tblTemplate" FromRole="tblEmail" ToRole="tblTemplate" />
+          <NavigationProperty Name="tblEmailToes" Relationship="BringlyModel.FK_tblEmailTo_tblEmail" FromRole="tblEmail" ToRole="tblEmailTo" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblEmail_tblUser" FromRole="tblEmail" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblEmail_tblTemplate">
+          <End Type="BringlyModel.tblTemplate" Role="tblTemplate" Multiplicity="1" />
+          <End Type="BringlyModel.tblEmail" Role="tblEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplate">
+              <PropertyRef Name="TemplateGuid" />
+            </Principal>
+            <Dependent Role="tblEmail">
+              <PropertyRef Name="TemplateGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmailTo_tblEmail">
+          <End Type="BringlyModel.tblEmail" Role="tblEmail" Multiplicity="1" />
+          <End Type="BringlyModel.tblEmailTo" Role="tblEmailTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmail">
+              <PropertyRef Name="EmailGuid" />
+            </Principal>
+            <Dependent Role="tblEmailTo">
+              <PropertyRef Name="EmailGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmail_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblEmail" Role="tblEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblEmail">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1240,7 +1418,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="tblTemplates">
+            <EntityTypeMapping TypeName="BringlyModel.tblTemplate">
+              <MappingFragment StoreEntitySet="tblTemplate">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TemplateType" ColumnName="TemplateType" />
+                <ScalarProperty Name="EmailFrom" ColumnName="EmailFrom" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="TemplateGuid" ColumnName="TemplateGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmailToes">
+            <EntityTypeMapping TypeName="BringlyModel.tblEmailTo">
+              <MappingFragment StoreEntitySet="tblEmailTo">
+                <ScalarProperty Name="Read" ColumnName="Read" />
+                <ScalarProperty Name="EmailGuid" ColumnName="EmailGuid" />
+                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
+                <ScalarProperty Name="EmailToGuid" ColumnName="EmailToGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmails">
+            <EntityTypeMapping TypeName="BringlyModel.tblEmail">
+              <MappingFragment StoreEntitySet="tblEmail">
+                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Sent" ColumnName="Sent" />
+                <ScalarProperty Name="EmailFrom" ColumnName="EmailFrom" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="TemplateGuid" ColumnName="TemplateGuid" />
+                <ScalarProperty Name="EmailGuid" ColumnName="EmailGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -159,6 +159,7 @@
     <Compile Include="Controllers\BaseClasses\ControllerBase.cs" />
     <Compile Include="Controllers\BaseClasses\SuperAdminUserControllerBase.cs" />
     <Compile Include="Controllers\ControlsController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
@@ -272,7 +273,9 @@
     <Content Include="Upload\Restaurant\img-4.jpg" />
     <Content Include="Upload\Restaurant\pie-chart.png" />
     <Content Include="Upload\User\about-img.jpg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -347,8 +350,19 @@
     <Content Include="Views\User\MerchantReview.cshtml" />
     <Content Include="Views\Shared\_ReviewContent.cshtml" />
     <Content Include="Views\Shared\_NoRecordFound.cshtml" />
+    <Content Include="Views\Email\Sent.cshtml" />
+    <Content Include="Views\Email\Inbox.cshtml" />
+    <Content Include="Views\Shared\_EmailList.cshtml" />
+    <Content Include="Views\Shared\MasterPages\PartialMaster.cshtml" />
+    <Content Include="Views\Shared\_partialpageFooter.cshtml" />
+    <Content Include="Views\Shared\_ComposeEmail.cshtml" />
+    <Content Include="Views\Shared\_NotificationMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bringly.Data\Bringly.Data.csproj">
+      <Project>{506A8AB9-1AFF-4795-8EAB-E541F9EB9557}</Project>
+      <Name>Bringly.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bringly.DomainLogic\Bringly.DomainLogic.csproj">
       <Project>{1cf07906-a8e3-42a2-86f7-ae9809d7ae44}</Project>
       <Name>Bringly.DomainLogic</Name>
@@ -372,6 +386,10 @@
     <ProjectReference Include="..\Utilities.QueryStringHelper\Utilities.QueryStringHelper.csproj">
       <Project>{de52ff52-5eb8-4cda-81a7-d6e3e1f65385}</Project>
       <Name>Utilities.QueryStringHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ESSOR-1010\Desktop\Utilities.EmailSender\Utilities.EmailSender.csproj">
+      <Project>{6c2bde55-09f8-49f8-aa32-6ad4f38218b3}</Project>
+      <Name>Utilities.EmailSender</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BaseClass\DomainLogicBase.cs" />
     <Compile Include="CommonDomainLogic.cs" />
+    <Compile Include="EmailDomainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantDomainLogic.cs" />
     <Compile Include="Settings\SystemSettings.cs" />
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\Utilities.QueryStringHelper\Utilities.QueryStringHelper.csproj">
       <Project>{de52ff52-5eb8-4cda-81a7-d6e3e1f65385}</Project>
       <Name>Utilities.QueryStringHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ESSOR-1010\Desktop\Utilities.EmailSender\Utilities.EmailSender.csproj">
+      <Project>{6c2bde55-09f8-49f8-aa32-6ad4f38218b3}</Project>
+      <Name>Utilities.EmailSender</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
