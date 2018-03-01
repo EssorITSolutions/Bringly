@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bringly.Domain;
+using Bringly.Domain.Enums;
 using Bringly.DomainLogic;
 
 namespace Bringly.UI.Controllers
@@ -103,6 +104,7 @@ namespace Bringly.UI.Controllers
                 myEmail.EmailTo = ComposeEmail.EmailTo;
                 myEmail.Subject = ComposeEmail.Subject;
                 myEmail.Body = ComposeEmail.Body;
+                myEmail.TemplateType = Enum.GetName(typeof(TemplateType), TemplateType.Order);
                 email.SendEmail(myEmail);
                 ViewBag.IspopUp = true;
             }
