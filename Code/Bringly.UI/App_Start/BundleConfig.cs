@@ -26,6 +26,7 @@ namespace Bringly.UI
 
                  //datetime picker
                  , "~/Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.css"
+                         //"~/Templates/Scripts/Plugins/ckeditor/contents.css"
                ));
             #endregion
 
@@ -64,6 +65,10 @@ namespace Bringly.UI
 
                  //datetime picker
                  , "~/Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.js"
+                   //ck editor js
+
+                 ,  "~/Templates/Scripts/Plugins/ckeditor/ckeditor.js"
+                  //,"~/Templates/Scripts/Plugins/ckeditor/plugins/maxlengthplugin.js"
                 ));
             #endregion
         }

@@ -18,7 +18,9 @@ namespace Bringly.Data
         public string EmailTo { get; set; }
         public System.Guid EmailGuid { get; set; }
         public bool Read { get; set; }
+        public System.Guid UserGuid { get; set; }
     
         public virtual tblEmail tblEmail { get; set; }
+        public virtual tblUser tblUser { get; set; }
     }
 }

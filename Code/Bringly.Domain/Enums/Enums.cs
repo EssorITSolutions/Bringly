@@ -10,7 +10,8 @@ namespace Bringly.Domain.Enums
     {
         User,
         Restaurant,
-        Item
+        Item,
+        Default
     }
     public enum MessageType
     {
@@ -18,7 +19,11 @@ namespace Bringly.Domain.Enums
     }
     public enum TemplateType
     {
-        Review, Order,FeedBack,Other
+        Review, Mail,FeedBack,Other
+    }
+    public enum OrderStatus
+    {
+        Incomplete,Inprogress,completed,Cancelled
     }
 
 }

@@ -18,7 +18,6 @@ namespace Bringly.Data
         public tblRestaurant()
         {
             this.tblFavourites = new HashSet<tblFavourite>();
-            this.tblOrders = new HashSet<tblOrder>();
             this.tblReviews = new HashSet<tblReview>();
         }
     
@@ -44,8 +43,6 @@ namespace Bringly.Data
         public virtual tblCountry tblCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblFavourite> tblFavourites { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblOrder> tblOrders { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }

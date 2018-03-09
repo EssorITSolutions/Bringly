@@ -4,23 +4,16 @@
 <head>
     @{Html.RenderPartial("_pageHeader");}
 </head>
-<body>
+<body class="popup-body">
 
-    <div class="container">
-        
-        <div class="dashboard-content inner-margin">
-            <div class="row">
+
 
                
 
                 @RenderBody()
 
 
-            </div>
-        </div>
-
-
-    </div>
+           
 
     <div class="clearfix"></div>
     @{Html.RenderPartial("_partialpageFooter");}

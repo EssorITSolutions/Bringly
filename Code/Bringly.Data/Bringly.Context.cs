@@ -31,13 +31,14 @@ namespace Bringly.Data
         public virtual DbSet<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
         public virtual DbSet<tblCountry> tblCountries { get; set; }
         public virtual DbSet<tblFavourite> tblFavourites { get; set; }
-        public virtual DbSet<tblItem> tblItems { get; set; }
         public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
-        public virtual DbSet<tblOrder> tblOrders { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblReview> tblReviews { get; set; }
         public virtual DbSet<tblTemplate> tblTemplates { get; set; }
         public virtual DbSet<tblEmailTo> tblEmailToes { get; set; }
         public virtual DbSet<tblEmail> tblEmails { get; set; }
+        public virtual DbSet<tblItem> tblItems { get; set; }
+        public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
+        public virtual DbSet<tblOrder> tblOrders { get; set; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {/********Document Ready function Starts********/
     InitCustomDropdown();
     CheckBoxCheckUnCheck();
-    $(function () {
-        $('ul.user-menu a[href$="/' + location.pathname.split("/")[2] + '"]').parents().addClass('active');
-    });
+    //$(function () {
+    //    $('ul.user-menu a[href$="/' + location.pathname.split("/")[2] + '"]').parents().addClass('active');
+    //});
+
+   
     
 });/********Document Ready function Ends********/
 /*************************************** Bring Element To Center Starts *****************************************/
@@ -163,6 +165,37 @@ function PostDataWithSuccessParam(url, _data, _successHandler, ShowBlackImage) {
     });
 }
 /************************************** *AJAX Custom POST Ends***************************************/
+/************************************** *AJAX Custom GET Starts***************************************/
+function GetData(url, _data, _successHandler, ShowBlackImage) {
+    if (ShowBlackImage == null || ShowBlackImage == undefined) {
+        ShowBlackImage = true;
+    }
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: _data,
+        success: _successHandler,
+        global: ShowBlackImage
+    });
+}
+/************************************** *AJAX Custom GET Ends***************************************/
+
+/************************************** *AJAX Custom GET Starts***************************************/
+function GetDataWithSuccessParam(url, _data, _successHandler, ShowBlackImage) {
+    if (ShowBlackImage == null || ShowBlackImage == undefined) {
+        ShowBlackImage = true;
+    }
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: _data,
+        success: function successHandler(result) {
+            _successHandler(result, _data)
+        },
+        global: ShowBlackImage
+    });
+}
+/************************************** *AJAX Custom GET Ends***************************************/
 
 $('.carousel').carousel({
     interval: 5000
@@ -268,6 +301,38 @@ function closeModelPopUpFormById(refereshPreviousPage, modelWindowId) {
     $(window).scroll(function () { return true; });
     $("body").css("overflow", "auto");
 }
+function closeModelPopUpFormCompose(Ismessagesent) {   
+    $("#" + model_windowId).remove();
+    $("#" + model_DivModalOverlayId).remove();
+    $(window).scroll(function () { return true; });
+    $("body").css("overflow", "auto");
+    if (Ismessagesent=='True') {
+     
+        swal({
+            title: "Mail Info!",
+            text: "Message sent successfully.",
+            type: "success",
+            buttons: false,
+            timer: 3000,
+            showConfirmButton: false
+        });
+       
+    }
+    else {
+        swal({
+            title: "Mail Info!",
+            text: "Failed to send message.",
+            type: "error",
+            buttons: false,
+            timer: 3000,
+            showConfirmButton: false
+        });
+    }
+    window.setTimeout(function () {
+        window.location.href = "/Email/Inbox";
+    }, 3000);
+
+}
 
 
 
@@ -299,7 +364,7 @@ var model_windowId, model_DivModalOverlayId;
 
         var modal = "";
         modal += "<div id=\"" + params.DivModalOverlayId + "\" class=\"modal-overlay\"></div>";
-        modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\" width:" + params.width + "px; height:" + params.height + "px;\">";
+        modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\" width:" + params.width + "px; height:" + params.height + "px; margin-top:-" + (params.height / 2) + "px; margin-left:-" + (params.width / 2) + "px;\" >";
         if (params.addCloseButton) {
             modal += "<button style=\"float:right\" class=\"btn btn-primary\" onclick=\"closeModelPopUpForm()\">Close</button>";
         }
@@ -352,3 +417,8 @@ function Delete(text, confirmButtonText, url,param, Response) {
             PostDataWithSuccessParam(url, param, Response)
         });
 }
+
+//$('.dashboard-menu ul.list-unstyled.user-menu li').on('click', function () {
+//    $('.dashboard-menu ul.list-unstyled.user-menu li').removeClass('active');
+//    $(this).addClass('active');
+//})

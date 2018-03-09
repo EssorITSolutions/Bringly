@@ -35,7 +35,7 @@
           </Key>
           <Property Name="EmailGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TemplateGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="EmailFrom" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Sent" Type="bit" Nullable="false" />
@@ -49,6 +49,7 @@
           </Key>
           <Property Name="EmailToGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailTo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Read" Type="bit" Nullable="false" />
         </EntityType>
@@ -67,12 +68,22 @@
           </Key>
           <Property Name="ItemGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryGuid" Type="uniqueidentifier" />
+          <Property Name="DeliveryCharge" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ItemImage" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemWeight" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemSize" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="DeletedByGuid" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="tblLookUpDomain">
           <Key>
@@ -99,9 +110,24 @@
             <PropertyRef Name="OrderGuid" />
           </Key>
           <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderDiscount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderSubTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemGuid" />
+          </Key>
+          <Property Name="OrderItemGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedByGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblRestaurant">
@@ -222,15 +248,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblEmailTo_tblEmail">
-          <End Role="tblEmail" Type="Self.tblEmail" Multiplicity="1" />
+        <Association Name="FK_tblEmailTo_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblEmailTo" Type="Self.tblEmailTo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblEmail">
-              <PropertyRef Name="EmailGuid" />
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
             </Principal>
             <Dependent Role="tblEmailTo">
-              <PropertyRef Name="EmailGuid" />
+              <PropertyRef Name="UserGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,18 +320,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblOrder_tblRestaurant">
-          <End Role="tblRestaurant" Type="Self.tblRestaurant" Multiplicity="1" />
-          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRestaurant">
-              <PropertyRef Name="RestaurantGuid" />
-            </Principal>
-            <Dependent Role="tblOrder">
-              <PropertyRef Name="RestaurantGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblOrder_tblUser">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
@@ -314,7 +328,43 @@
               <PropertyRef Name="UserGuid" />
             </Principal>
             <Dependent Role="tblOrder">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="1" />
+          <End Role="tblOrderItem" Type="Self.tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="ItemGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblOrder1">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblOrderItem" Type="Self.tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblOrderItem" Type="Self.tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
               <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="CreatedByGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -496,6 +546,7 @@
           <EntitySet Name="tblLookUpDomain" EntityType="Self.tblLookUpDomain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLookUpDomainValue" EntityType="Self.tblLookUpDomainValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderItem" EntityType="Self.tblOrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRestaurant" EntityType="Self.tblRestaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblReview" EntityType="Self.tblReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTemplate" EntityType="Self.tblTemplate" Schema="dbo" store:Type="Tables" />
@@ -509,8 +560,8 @@
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblEmail" EntitySet="tblEmail" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblEmailTo_tblEmail" Association="Self.FK_tblEmailTo_tblEmail">
-            <End Role="tblEmail" EntitySet="tblEmail" />
+          <AssociationSet Name="FK_tblEmailTo_tblUser" Association="Self.FK_tblEmailTo_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblEmailTo" EntitySet="tblEmailTo" />
           </AssociationSet>
           <AssociationSet Name="FK_tblFavourite_tblRestaurant" Association="Self.FK_tblFavourite_tblRestaurant">
@@ -533,13 +584,21 @@
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblItem" EntitySet="tblItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblOrder_tblRestaurant" Association="Self.FK_tblOrder_tblRestaurant">
-            <End Role="tblRestaurant" EntitySet="tblRestaurant" />
-            <End Role="tblOrder" EntitySet="tblOrder" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblOrder_tblUser" Association="Self.FK_tblOrder_tblUser">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblItem" Association="Self.FK_tblOrderItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblOrder1" Association="Self.FK_tblOrderItem_tblOrder1">
+            <End Role="tblOrder" EntitySet="tblOrder" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblUser" Association="Self.FK_tblOrderItem_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRestaurant_tblCity" Association="Self.FK_tblRestaurant_tblCity">
             <End Role="tblCity" EntitySet="tblCity" />
@@ -654,7 +713,6 @@
           <EntitySet Name="tblLookUpDomainValues" EntityType="BringlyModel.tblLookUpDomainValue" />
           <EntitySet Name="tblCountries" EntityType="BringlyModel.tblCountry" />
           <EntitySet Name="tblFavourites" EntityType="BringlyModel.tblFavourite" />
-          <EntitySet Name="tblItems" EntityType="BringlyModel.tblItem" />
           <EntitySet Name="tblRestaurants" EntityType="BringlyModel.tblRestaurant" />
           <AssociationSet Name="FK_tblRestaurant_tblCity" Association="BringlyModel.FK_tblRestaurant_tblCity">
             <End Role="tblCity" EntitySet="tblCities" />
@@ -668,15 +726,6 @@
             <End Role="tblRestaurant" EntitySet="tblRestaurants" />
             <End Role="tblFavourite" EntitySet="tblFavourites" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblItem_tblLookUpDomainValue" Association="BringlyModel.FK_tblItem_tblLookUpDomainValue">
-            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValues" />
-            <End Role="tblItem" EntitySet="tblItems" />
-          </AssociationSet>
-          <EntitySet Name="tblOrders" EntityType="BringlyModel.tblOrder" />
-          <AssociationSet Name="FK_tblOrder_tblRestaurant" Association="BringlyModel.FK_tblOrder_tblRestaurant">
-            <End Role="tblRestaurant" EntitySet="tblRestaurants" />
-            <End Role="tblOrder" EntitySet="tblOrders" />
-          </AssociationSet>
           <EntitySet Name="tblUsers" EntityType="BringlyModel.tblUser" />
           <AssociationSet Name="FK_tblUser_tblCity" Association="BringlyModel.FK_tblUser_tblCity">
             <End Role="tblCity" EntitySet="tblCities" />
@@ -685,18 +734,6 @@
           <AssociationSet Name="FK_tblFavourite_tblUser" Association="BringlyModel.FK_tblFavourite_tblUser">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblFavourite" EntitySet="tblFavourites" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblItem_tblUser" Association="BringlyModel.FK_tblItem_tblUser">
-            <End Role="tblUser" EntitySet="tblUsers" />
-            <End Role="tblItem" EntitySet="tblItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblItem_tblUser1" Association="BringlyModel.FK_tblItem_tblUser1">
-            <End Role="tblUser" EntitySet="tblUsers" />
-            <End Role="tblItem" EntitySet="tblItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblOrder_tblUser" Association="BringlyModel.FK_tblOrder_tblUser">
-            <End Role="tblUser" EntitySet="tblUsers" />
-            <End Role="tblOrder" EntitySet="tblOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRestaurant_tblUser" Association="BringlyModel.FK_tblRestaurant_tblUser">
             <End Role="tblUser" EntitySet="tblUsers" />
@@ -715,10 +752,6 @@
             <End Role="tblUserAddress" EntitySet="tblUserAddresses" />
           </AssociationSet>
           <EntitySet Name="tblReviews" EntityType="BringlyModel.tblReview" />
-          <AssociationSet Name="FK_tblReview_tblOrder" Association="BringlyModel.FK_tblReview_tblOrder">
-            <End Role="tblOrder" EntitySet="tblOrders" />
-            <End Role="tblReview" EntitySet="tblReviews" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblReview_tblRestaurant" Association="BringlyModel.FK_tblReview_tblRestaurant">
             <End Role="tblRestaurant" EntitySet="tblRestaurants" />
             <End Role="tblReview" EntitySet="tblReviews" />
@@ -753,6 +786,45 @@
           <AssociationSet Name="FK_tblEmail_tblUser" Association="BringlyModel.FK_tblEmail_tblUser">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblEmail" EntitySet="tblEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmailTo_tblUser" Association="BringlyModel.FK_tblEmailTo_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblEmailTo" EntitySet="tblEmailToes" />
+          </AssociationSet>
+          <EntitySet Name="tblItems" EntityType="BringlyModel.tblItem" />
+          <EntitySet Name="tblOrderItems" EntityType="BringlyModel.tblOrderItem" />
+          <AssociationSet Name="FK_tblItem_tblLookUpDomainValue" Association="BringlyModel.FK_tblItem_tblLookUpDomainValue">
+            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValues" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblItem_tblUser" Association="BringlyModel.FK_tblItem_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblItem_tblUser1" Association="BringlyModel.FK_tblItem_tblUser1">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblItem" Association="BringlyModel.FK_tblOrderItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblUser" Association="BringlyModel.FK_tblOrderItem_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItems" />
+          </AssociationSet>
+          <EntitySet Name="tblOrders" EntityType="BringlyModel.tblOrder" />
+          <AssociationSet Name="FK_tblOrder_tblUser" Association="BringlyModel.FK_tblOrder_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrderItem_tblOrder1" Association="BringlyModel.FK_tblOrderItem_tblOrder1">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblOrderItem" EntitySet="tblOrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReview_tblOrder" Association="BringlyModel.FK_tblReview_tblOrder">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblReview" EntitySet="tblReviews" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="tblLookUpDomain">
@@ -802,22 +874,6 @@
           <NavigationProperty Name="tblRestaurant" Relationship="BringlyModel.FK_tblFavourite_tblRestaurant" FromRole="tblFavourite" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblFavourite_tblUser" FromRole="tblFavourite" ToRole="tblUser" />
         </EntityType>
-        <EntityType Name="tblItem">
-          <Key>
-            <PropertyRef Name="ItemGuid" />
-          </Key>
-          <Property Name="ItemGuid" Type="Guid" Nullable="false" />
-          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryGuid" Type="Guid" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeletedByGuid" Type="Guid" />
-          <NavigationProperty Name="tblLookUpDomainValue" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblItem" ToRole="tblLookUpDomainValue" />
-          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblItem_tblUser" FromRole="tblItem" ToRole="tblUser" />
-          <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblItem_tblUser1" FromRole="tblItem" ToRole="tblUser" />
-        </EntityType>
         <EntityType Name="tblRestaurant">
           <Key>
             <PropertyRef Name="RestaurantGuid" />
@@ -842,7 +898,6 @@
           <NavigationProperty Name="tblCountry" Relationship="BringlyModel.FK_tblRestaurant_tblCountry" FromRole="tblRestaurant" ToRole="tblCountry" />
           <NavigationProperty Name="tblFavourites" Relationship="BringlyModel.FK_tblFavourite_tblRestaurant" FromRole="tblRestaurant" ToRole="tblFavourite" />
           <Property Name="RestaurantImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblOrders" Relationship="BringlyModel.FK_tblOrder_tblRestaurant" FromRole="tblRestaurant" ToRole="tblOrder" />
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblRestaurant_tblUser" FromRole="tblRestaurant" ToRole="tblUser" />
           <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblRestaurant_tblUser1" FromRole="tblRestaurant" ToRole="tblUser" />
           <NavigationProperty Name="tblUser2" Relationship="BringlyModel.FK_tblRestaurant_tblUser2" FromRole="tblRestaurant" ToRole="tblUser" />
@@ -884,43 +939,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblItem_tblLookUpDomainValue">
-          <End Type="BringlyModel.tblLookUpDomainValue" Role="tblLookUpDomainValue" Multiplicity="0..1" />
-          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLookUpDomainValue">
-              <PropertyRef Name="LookUpDomainValueGuid" />
-            </Principal>
-            <Dependent Role="tblItem">
-              <PropertyRef Name="CategoryGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tblOrder">
-          <Key>
-            <PropertyRef Name="OrderGuid" />
-          </Key>
-          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
-          <Property Name="UserGuid" Type="Guid" Nullable="false" />
-          <Property Name="RestaurantGuid" Type="Guid" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tblRestaurant" Relationship="BringlyModel.FK_tblOrder_tblRestaurant" FromRole="tblOrder" ToRole="tblRestaurant" />
-          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
-          <NavigationProperty Name="tblReviews" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblOrder" ToRole="tblReview" />
-        </EntityType>
-        <Association Name="FK_tblOrder_tblRestaurant">
-          <End Type="BringlyModel.tblRestaurant" Role="tblRestaurant" Multiplicity="1" />
-          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRestaurant">
-              <PropertyRef Name="RestaurantGuid" />
-            </Principal>
-            <Dependent Role="tblOrder">
-              <PropertyRef Name="RestaurantGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserGuid" />
@@ -945,9 +963,6 @@
           <Property Name="DeletedBy" Type="Guid" />
           <NavigationProperty Name="tblCity" Relationship="BringlyModel.FK_tblUser_tblCity" FromRole="tblUser" ToRole="tblCity" />
           <NavigationProperty Name="tblFavourites" Relationship="BringlyModel.FK_tblFavourite_tblUser" FromRole="tblUser" ToRole="tblFavourite" />
-          <NavigationProperty Name="tblItems" Relationship="BringlyModel.FK_tblItem_tblUser" FromRole="tblUser" ToRole="tblItem" />
-          <NavigationProperty Name="tblItems1" Relationship="BringlyModel.FK_tblItem_tblUser1" FromRole="tblUser" ToRole="tblItem" />
-          <NavigationProperty Name="tblOrders" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
           <NavigationProperty Name="tblRestaurants" Relationship="BringlyModel.FK_tblRestaurant_tblUser" FromRole="tblUser" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblRestaurants1" Relationship="BringlyModel.FK_tblRestaurant_tblUser1" FromRole="tblUser" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblRestaurants2" Relationship="BringlyModel.FK_tblRestaurant_tblUser2" FromRole="tblUser" ToRole="tblRestaurant" />
@@ -957,6 +972,11 @@
           <NavigationProperty Name="tblReviews2" Relationship="BringlyModel.FK_tblReview_ModifiedBy" FromRole="tblUser" ToRole="tblReview" />
           <NavigationProperty Name="tblReviews3" Relationship="BringlyModel.FK_tblReview_tblUser" FromRole="tblUser" ToRole="tblReview" />
           <NavigationProperty Name="tblEmails" Relationship="BringlyModel.FK_tblEmail_tblUser" FromRole="tblUser" ToRole="tblEmail" />
+          <NavigationProperty Name="tblEmailToes" Relationship="BringlyModel.FK_tblEmailTo_tblUser" FromRole="tblUser" ToRole="tblEmailTo" />
+          <NavigationProperty Name="tblItems" Relationship="BringlyModel.FK_tblItem_tblUser" FromRole="tblUser" ToRole="tblItem" />
+          <NavigationProperty Name="tblItems1" Relationship="BringlyModel.FK_tblItem_tblUser1" FromRole="tblUser" ToRole="tblItem" />
+          <NavigationProperty Name="tblOrderItems" Relationship="BringlyModel.FK_tblOrderItem_tblUser" FromRole="tblUser" ToRole="tblOrderItem" />
+          <NavigationProperty Name="tblOrders" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
           </EntityType>
         <Association Name="FK_tblUser_tblCity">
           <End Type="BringlyModel.tblCity" Role="tblCity" Multiplicity="0..1" />
@@ -979,42 +999,6 @@
             </Principal>
             <Dependent Role="tblFavourite">
               <PropertyRef Name="CreatedByGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblItem_tblUser">
-          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
-          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUser">
-              <PropertyRef Name="UserGuid" />
-            </Principal>
-            <Dependent Role="tblItem">
-              <PropertyRef Name="CreatedByGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblItem_tblUser1">
-          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="0..1" />
-          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUser">
-              <PropertyRef Name="UserGuid" />
-            </Principal>
-            <Dependent Role="tblItem">
-              <PropertyRef Name="DeletedByGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblOrder_tblUser">
-          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
-          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUser">
-              <PropertyRef Name="UserGuid" />
-            </Principal>
-            <Dependent Role="tblOrder">
-              <PropertyRef Name="UserGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1088,25 +1072,13 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedByGuid" Type="Guid" />
-          <NavigationProperty Name="tblOrder" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblReview" ToRole="tblOrder" />
           <NavigationProperty Name="tblRestaurant" Relationship="BringlyModel.FK_tblReview_tblRestaurant" FromRole="tblReview" ToRole="tblRestaurant" />
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblReview_CreatedByGuid" FromRole="tblReview" ToRole="tblUser" />
           <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblReview_DeletedBy" FromRole="tblReview" ToRole="tblUser" />
           <NavigationProperty Name="tblUser2" Relationship="BringlyModel.FK_tblReview_ModifiedBy" FromRole="tblReview" ToRole="tblUser" />
           <NavigationProperty Name="tblUser3" Relationship="BringlyModel.FK_tblReview_tblUser" FromRole="tblReview" ToRole="tblUser" />
+          <NavigationProperty Name="tblOrder" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblReview" ToRole="tblOrder" />
         </EntityType>
-        <Association Name="FK_tblReview_tblOrder">
-          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="1" />
-          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblOrder">
-              <PropertyRef Name="OrderGuid" />
-            </Principal>
-            <Dependent Role="tblReview">
-              <PropertyRef Name="OrderGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblReview_tblRestaurant">
           <End Type="BringlyModel.tblRestaurant" Role="tblRestaurant" Multiplicity="1" />
           <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
@@ -1189,6 +1161,8 @@
           <Property Name="EmailGuid" Type="Guid" Nullable="false" />
           <Property Name="Read" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblEmail" Relationship="BringlyModel.FK_tblEmailTo_tblEmail" FromRole="tblEmailTo" ToRole="tblEmail" />
+          <Property Name="UserGuid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblEmailTo_tblUser" FromRole="tblEmailTo" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblEmail">
           <Key>
@@ -1196,7 +1170,7 @@
           </Key>
           <Property Name="EmailGuid" Type="Guid" Nullable="false" />
           <Property Name="TemplateGuid" Type="Guid" Nullable="false" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmailFrom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Sent" Type="Boolean" Nullable="false" />
@@ -1240,6 +1214,172 @@
             </Principal>
             <Dependent Role="tblEmail">
               <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmailTo_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblEmailTo" Role="tblEmailTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblEmailTo">
+              <PropertyRef Name="UserGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemGuid" />
+          </Key>
+          <Property Name="ItemGuid" Type="Guid" Nullable="false" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RestaurantGuid" Type="Guid" Nullable="false" />
+          <Property Name="CategoryGuid" Type="Guid" />
+          <Property Name="DeliveryCharge" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ItemImage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemWeight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemSize" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedByGuid" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Guid" />
+          <NavigationProperty Name="tblLookUpDomainValue" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblItem" ToRole="tblLookUpDomainValue" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblItem_tblUser" FromRole="tblItem" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblItem_tblUser1" FromRole="tblItem" ToRole="tblUser" />
+          <NavigationProperty Name="tblOrderItems" Relationship="BringlyModel.FK_tblOrderItem_tblItem" FromRole="tblItem" ToRole="tblOrderItem" />
+        </EntityType>
+        <EntityType Name="tblOrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemGuid" />
+          </Key>
+          <Property Name="OrderItemGuid" Type="Guid" Nullable="false" />
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <Property Name="ItemGuid" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblItem" Relationship="BringlyModel.FK_tblOrderItem_tblItem" FromRole="tblOrderItem" ToRole="tblItem" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblOrderItem_tblUser" FromRole="tblOrderItem" ToRole="tblUser" />
+          <NavigationProperty Name="tblOrder" Relationship="BringlyModel.FK_tblOrderItem_tblOrder1" FromRole="tblOrderItem" ToRole="tblOrder" />
+        </EntityType>
+        <Association Name="FK_tblItem_tblLookUpDomainValue">
+          <End Type="BringlyModel.tblLookUpDomainValue" Role="tblLookUpDomainValue" Multiplicity="0..1" />
+          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLookUpDomainValue">
+              <PropertyRef Name="LookUpDomainValueGuid" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="CategoryGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblItem_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblItem_tblUser1">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="DeletedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblItem">
+          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrderItem" Role="tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="ItemGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrderItem" Role="tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderGuid" />
+          </Key>
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <Property Name="CreatedByGuid" Type="Guid" Nullable="false" />
+          <Property Name="OrderDiscount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrderSubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrderTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrderStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
+          <NavigationProperty Name="tblOrderItems" Relationship="BringlyModel.FK_tblOrderItem_tblOrder1" FromRole="tblOrder" ToRole="tblOrderItem" />
+          <NavigationProperty Name="tblReviews" Relationship="BringlyModel.FK_tblReview_tblOrder" FromRole="tblOrder" ToRole="tblReview" />
+        </EntityType>
+        <Association Name="FK_tblOrder_tblUser">
+          <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserGuid" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="CreatedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrderItem_tblOrder1">
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="1" />
+          <End Type="BringlyModel.tblOrderItem" Role="tblOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderGuid" />
+            </Principal>
+            <Dependent Role="tblOrderItem">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReview_tblOrder">
+          <End Type="BringlyModel.tblOrder" Role="tblOrder" Multiplicity="1" />
+          <End Type="BringlyModel.tblReview" Role="tblReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderGuid" />
+            </Principal>
+            <Dependent Role="tblReview">
+              <PropertyRef Name="OrderGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1322,20 +1462,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblItems">
-            <EntityTypeMapping TypeName="BringlyModel.tblItem">
-              <MappingFragment StoreEntitySet="tblItem">
-                <ScalarProperty Name="DeletedByGuid" ColumnName="DeletedByGuid" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CategoryGuid" ColumnName="CategoryGuid" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="ItemGuid" ColumnName="ItemGuid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblRestaurants">
             <EntityTypeMapping TypeName="BringlyModel.tblRestaurant">
               <MappingFragment StoreEntitySet="tblRestaurant">
@@ -1356,17 +1482,6 @@
                 <ScalarProperty Name="RestaurantType" ColumnName="RestaurantType" />
                 <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
                 <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblOrders">
-            <EntityTypeMapping TypeName="BringlyModel.tblOrder">
-              <MappingFragment StoreEntitySet="tblOrder">
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
-                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
-                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1434,6 +1549,7 @@
           <EntitySetMapping Name="tblEmailToes">
             <EntityTypeMapping TypeName="BringlyModel.tblEmailTo">
               <MappingFragment StoreEntitySet="tblEmailTo">
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="Read" ColumnName="Read" />
                 <ScalarProperty Name="EmailGuid" ColumnName="EmailGuid" />
                 <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
@@ -1453,6 +1569,57 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="TemplateGuid" ColumnName="TemplateGuid" />
                 <ScalarProperty Name="EmailGuid" ColumnName="EmailGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblItems">
+            <EntityTypeMapping TypeName="BringlyModel.tblItem">
+              <MappingFragment StoreEntitySet="tblItem">
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedByGuid" ColumnName="DeletedByGuid" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+                <ScalarProperty Name="ItemSize" ColumnName="ItemSize" />
+                <ScalarProperty Name="ItemWeight" ColumnName="ItemWeight" />
+                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+                <ScalarProperty Name="DeliveryCharge" ColumnName="DeliveryCharge" />
+                <ScalarProperty Name="CategoryGuid" ColumnName="CategoryGuid" />
+                <ScalarProperty Name="RestaurantGuid" ColumnName="RestaurantGuid" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemGuid" ColumnName="ItemGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderItems">
+            <EntityTypeMapping TypeName="BringlyModel.tblOrderItem">
+              <MappingFragment StoreEntitySet="tblOrderItem">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemGuid" ColumnName="ItemGuid" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+                <ScalarProperty Name="OrderItemGuid" ColumnName="OrderItemGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="BringlyModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderTotal" ColumnName="OrderTotal" />
+                <ScalarProperty Name="OrderSubTotal" ColumnName="OrderSubTotal" />
+                <ScalarProperty Name="OrderDiscount" ColumnName="OrderDiscount" />
+                <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

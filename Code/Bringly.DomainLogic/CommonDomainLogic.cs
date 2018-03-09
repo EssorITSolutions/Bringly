@@ -8,6 +8,7 @@ using Bringly.Data;
 using Bringly.Domain.User;
 using Bringly.DomainLogic.User;
 using Bringly.Domain.Enums;
+using System.Web;
 
 namespace Bringly.DomainLogic
 {
@@ -63,21 +64,42 @@ namespace Bringly.DomainLogic
         public static string GetImagePath(ImageType? imagetype, string ImageName)
         {
             string retstring = "";
-            switch (imagetype)
+            if (!string.IsNullOrEmpty(ImageName))
             {
-                case ImageType.Item:
-                    retstring = "/Upload/Item/" + ImageName;
-                    break;
-                case ImageType.User:
-                    retstring = "/Upload/User/" + ImageName;
-                    break;
-                case ImageType.Restaurant:
-                    retstring = "/Upload/Restaurant/" + ImageName;
-                    break;
+                switch (imagetype)
+                {
+                    case ImageType.Item:
+                        retstring = "/Upload/Item/" + ImageName;
+                        break;
+                    case ImageType.User:
+                        retstring = "/Upload/User/" + ImageName;
+                        break;
+                    case ImageType.Restaurant:
+                        retstring = "/Upload/Restaurant/" + ImageName;
+                        break;
+                    case ImageType.Default:
+                        retstring = "/Templates/images/profile.png";
+                        break;
+                }
+            }
+            else {
+                retstring = "/Templates/images/profile.png";
             }
             return retstring;
             //return "~/Upload" + imagetype + "/" + ImageName;
         }
-        
+        public static string GetCurrentDomain
+        {
+            get
+            {
+                var current = HttpContext.Current;
+                if (current.Request.IsLocal)
+                {
+                    var fulluri = current.Request.Url;
+                    return fulluri.Scheme + "://" + fulluri.Host + ":" + fulluri.Port + "/";
+                }
+                return current.Request.Url.Host.ToLower();
+            }
+        }
     }
 }

@@ -94,6 +94,9 @@
     <Compile Include="tblOrder.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblOrderItem.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblRestaurant.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>

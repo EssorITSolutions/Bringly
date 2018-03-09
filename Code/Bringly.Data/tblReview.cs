@@ -33,11 +33,11 @@ namespace Bringly.Data
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedByGuid { get; set; }
     
-        public virtual tblOrder tblOrder { get; set; }
         public virtual tblRestaurant tblRestaurant { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }
         public virtual tblUser tblUser3 { get; set; }
+        public virtual tblOrder tblOrder { get; set; }
     }
 }

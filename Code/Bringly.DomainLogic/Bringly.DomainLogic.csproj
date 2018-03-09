@@ -52,6 +52,7 @@
     <Compile Include="CommonDomainLogic.cs" />
     <Compile Include="EmailDomainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartDomainLogic.cs" />
     <Compile Include="RestaurantDomainLogic.cs" />
     <Compile Include="Settings\SystemSettings.cs" />
     <Compile Include="UserVariables.cs" />
@@ -70,6 +71,10 @@
       <Project>{96169320-2d28-41db-8f89-4a3081f72043}</Project>
       <Name>Utilities.Conversion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilities.EmailSender\Utilities.EmailSender.csproj">
+      <Project>{6c2bde55-09f8-49f8-aa32-6ad4f38218b3}</Project>
+      <Name>Utilities.EmailSender</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities.ErrorLog\Utilities.ErrorLog.csproj">
       <Project>{2a771db4-24bc-4e84-bdcc-1a1d3c85e201}</Project>
       <Name>Utilities.ErrorLog</Name>
@@ -81,10 +86,6 @@
     <ProjectReference Include="..\Utilities.QueryStringHelper\Utilities.QueryStringHelper.csproj">
       <Project>{de52ff52-5eb8-4cda-81a7-d6e3e1f65385}</Project>
       <Name>Utilities.QueryStringHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\ESSOR-1010\Desktop\Utilities.EmailSender\Utilities.EmailSender.csproj">
-      <Project>{6c2bde55-09f8-49f8-aa32-6ad4f38218b3}</Project>
-      <Name>Utilities.EmailSender</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

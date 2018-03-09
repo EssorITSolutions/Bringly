@@ -1,38 +1,120 @@
-﻿@using System.Text.RegularExpressions;
+﻿@*@using Bringly.DomainLogic.BaseClass.DomainLogicBase*@
+
 @model Bringly.Domain.MyEmail
 @{
     Layout = null;
-    var issent = Request.Url.AbsoluteUri.Contains("Sent");
+    var isSentBox = Request.Url.AbsoluteUri.Contains("Sent");
+    var Name = "";
+    var urlpath = Bringly.DomainLogic.CommonDomainLogic.GetCurrentDomain;
 }
 
 @foreach (Bringly.Domain.Email email in Model.Emails)
 {
     <div divemailguid="@email.EmailGuid" class="emails-count">
-        <a class="shadow-box @(!issent?email.Read?"":"unreaded":"")" href="javascript:void(0)">
+        <div class="cursor-pointer shadow-box @(!isSentBox?email.Read?"":"unreaded":"")" href="javascript:void(0)">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label class="custom-control custom-checkbox">
-                        <input id="checkbox-@email.EmailGuid" EmailGuid="@email.EmailGuid" name="checkboxemail" type="checkbox" class="singlechecheckbox custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                    </label>
-                    <h4>@email.UserName</h4>
+                <div class="col-lg-10 col-md-6 col-sm-12 mail-name-div">
+
+                    @if (!isSentBox)
+                    {
+                        <label class="custom-control custom-checkbox">
+                            <input onclick="SelectEmail();" id="checkbox-@email.EmailGuid" EmailGuid="@email.EmailGuid" name="checkboxemail" type="checkbox" class="singlechecheckbox custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                        </label>
+                        <div data-toggle="collapse" onclick="MarkEmailasRead(this);" data-target="#@email.EmailGuid" class="name-col">
+                            <h4>
+                                <b> @email.FromName</b>
+                            </h4>
+                        </div>
+                    }
+                    else
+                    {
+                        <div data-toggle="collapse" onclick="MarkEmailasRead(this);" data-target="#@email.EmailGuid" class="name-col">
+                            <h4>
+                                <b> @email.ToName</b>
+                            </h4>
+                        </div>
+                    }
+
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                <div class="col-lg-2 col-md-6 col-sm-12">
                     <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
                 </div>
             </div>
-            <div data-toggle="collapse" data-target="#@email.EmailGuid">
+            <div id="divemaildetail" onclick="MarkEmailasRead(this);" data-toggle="collapse" data-target="#@email.EmailGuid" class="divemaildetail">
+
+                <div class="subject-tag" onclick="MarkEmailasRead(this);" data-toggle="collapse" data-target="#@email.EmailGuid">
+                    <h5>@email.Subject</h5>
+                </div>
+                <div class="clear"></div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    @if (!isSentBox)
+                    {
+                        <a title="Reply" href="#" onclick="replyandForwardMessage('@email.EmailGuid','reply')" class="btn btn-outline-primary">
+                            <i class="fa fa-reply " aria-hidden="true"></i>
+                        </a>
+                    }
+                    <a title="Forward" href="#" onclick="replyandForwardMessage('@email.EmailGuid','forward')" class="btn btn-outline-primary">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </a>
+                    <button type="button" class="email-header-btn  btn btn-outline-primary" onclick="DeleteSingleMessage('@email.EmailGuid');"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+            <div id="@email.EmailGuid" class="mail-detail-box collapse">
+                <span class=" close-link" title="Close"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="shadow-box" href="javascript:void(0)">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-12">
+                            @if (!isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+                            {
+                                <div class="user-profile">
+                                    <img src="@email.RestaurantImage" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="user-profile">
+                                    <img src="@(urlpath+ Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User, email.UserImage))" />
+                                </div>
+                            }
+                        </div>
 
 
-                <h5>@email.Subject</h5>
-                <p>
-                   @email.PlainText
-                </p>
-                <div id="@email.EmailGuid" class="collapse">
+                        <div class="col-lg-10 col-md-9 col-sm-12">
+
+                            <div class="user-detail">
+                                <h3><b></b>@email.FromName</h3>
+                                <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
+                                <h5>@email.Subject</h5>
+                                <p>
+                                    <b>To :</b>
+                                    @if (email.EmailToList != null && email.EmailToList.Count > 0)
+                                    {
+                                        foreach (var str in email.EmailToList)
+                                        {
+                                            if (!Name.Contains(str.Name))
+                                            { Name += str.Name + ", "; }
+                                        }
+                                        <b> @Name.Remove(Name.Length - 2)</b>
+                                    }
+                                    else
+                                    {
+                                        <b>@email.ToName</b>
+                                    }
+
+                                </p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <hr />
                     @Html.Raw(email.Body)
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 }
 @{

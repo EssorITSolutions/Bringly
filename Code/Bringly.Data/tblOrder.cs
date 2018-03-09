@@ -17,17 +17,22 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblOrder()
         {
+            this.tblOrderItems = new HashSet<tblOrderItem>();
             this.tblReviews = new HashSet<tblReview>();
         }
     
         public System.Guid OrderGuid { get; set; }
-        public System.Guid UserGuid { get; set; }
-        public System.Guid RestaurantGuid { get; set; }
+        public System.Guid CreatedByGuid { get; set; }
+        public decimal OrderDiscount { get; set; }
+        public decimal OrderSubTotal { get; set; }
+        public decimal OrderTotal { get; set; }
+        public string OrderStatus { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
     
-        public virtual tblRestaurant tblRestaurant { get; set; }
         public virtual tblUser tblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrderItem> tblOrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews { get; set; }
     }

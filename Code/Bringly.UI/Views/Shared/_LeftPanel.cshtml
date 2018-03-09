@@ -12,7 +12,6 @@
                 <p class="edit-profil-img position-absolute">
                     <input type="file" id="fileUserProfileImage" style="display:none" />
                 </p>
-
             </form>
             <p class="text-center">@Model.FullName</p>
             <p class="text-center"><span>@Bringly.DomainLogic.UserVariables.UserRole.ToString()</span></p>
@@ -21,16 +20,29 @@
         <div class="shadow-box dashboard-menu">
             
                 <ul class="list-unstyled user-menu">
-                    <li><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                    <li id="liHome"><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
                     @if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
                     {
-                        <li><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
-                        <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
-                        <li><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
-                        <li><a href="/User/RestaurantReview"><i class="fa fa-star"></i> My Reviews</a></li>
-                        <li><a href="#"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
-                        <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                        <li id="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                        <li id="liMyOrders"><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                        <li class="mail">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-envelope">
+                                </i> Messages
+                                <span class="alter-message message-count">
+                                    (0)
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li id="liinbox" class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
+                                <li id="lisent" class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
+                                <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
+                            </ul>
+                        </li>
+                        <li id="liFavourites"><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
+                        <li id="liMyReviews"><a href="/User/RestaurantReview"><i class="fa fa-star"></i> My Reviews</a></li>
+                        <li id="liWalletAccount"><a href="#"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
+                        <li id="liOrderTracking" class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
                     }
                     else
                     {
@@ -45,8 +57,8 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li class="active inbox"><a href="/Email/Inbox?EmailGuid=@Guid.Empty" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
-                                <li><a href="/Email/Sent" class="sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
+                                <li class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
+                                <li class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
                                 <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
                             </ul>
                         </li>

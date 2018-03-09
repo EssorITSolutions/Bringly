@@ -185,5 +185,11 @@ namespace Bringly.UI.Controllers
             myreview.UserGuid = UserVariables.LoggedInUserGuid;
             return View(userDomainLogic.GetMyReviewMerchant(myreview));
         }
+
+        public List<Contact> GetAllBuyers()
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return userDomainLogic.GetAllBuyers();
+        }
     }
 }

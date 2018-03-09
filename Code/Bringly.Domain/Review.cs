@@ -18,7 +18,7 @@ namespace Bringly.Domain
         [Required(ErrorMessage="Please fill review.")]
         public string Review { get; set; }
         public string RestaurantImage { get; set; }
-        public int TotalRecords { get; set; }
+        public string RestaurantName { get; set; }
         public List<RestaurantReview> RestaurantReviews { get; set; }
     }
     public class RestaurantReview : BaseClasses.DomainBase

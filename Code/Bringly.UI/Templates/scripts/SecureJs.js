@@ -58,19 +58,54 @@
         }
     }
 });
-window.onload = function () {    
+$(function () {
+    $('.dashboard-menu ul.list-unstyled.user-menu li a').click(function () {
+        localStorage.setItem('thisLink', $(this).parent().attr("id"));
+        $(this).parent().removeClass('class');
+    });
+
+    var thisLink = localStorage.getItem('thisLink');
+    if (thisLink) {
+        $('#' + thisLink).addClass('active');
+    }
     var url = window.location.toString();
     if (url.indexOf("Sent") > -1 || url.indexOf("Inbox") > -1) {
-        $('.mail').addClass('show');
-        $('.mail ul.dropdown-menu').addClass('show');
-    }
+        $('li.mail').addClass('show');
+        $('li.mail ul.dropdown-menu').addClass('show');
+}
+});
+window.onload = function () {
+  
+    var url = window.location.toString();
+   
+   
     if (url.indexOf("?") > 0) {
-        //alert();
-        var clean_uri = url.substring(0, url.indexOf("?"));
-        window.history.replaceState({}, document.title, clean_uri);
+        var emailguiidarray = new Array();
+        var email= "";
+        var urlparts = url.split('?');  
+        if (urlparts[1].indexOf('EmailGuid') > -1) {
+            emailguiidarray = urlparts[1].split('=');
+            if (url.indexOf("Inbox") > -1 && urlparts[1].indexOf('0000') < 0) {
+                $('li.notification-' + urlparts[1].split('=')[1] + '').remove();
+                $('div[data-target="#' + urlparts[1].split('=')[1] + '"]').click();
+            }
+        }
+        emailguiidarray.forEach(function (querystring) {
+            email += querystring+"=";
+        });
+        window.history.replaceState({}, document.title, url.replace("?" + email.replace(/=\s*$/, ""), ""));
     }
-    if ($('.UnReadEmailCount').val() != '' && $('.UnReadEmailCount').val()!= undefined) {
+    
+    if ($('.UnReadEmailCount').val() != '' && $('.UnReadEmailCount').val() != undefined) {
         $('.message-count').text('(' + $('#UnReadEmailCount').val() + ')');
+    }
+    CKEDITOR.replace('EmailMessage_Body');
+    CKEDITOR.editorConfig = function (config) {
+        config.extraPlugins = 'maxlength';
+    };
+
+    if ($('#EmailMessage_EmailTo').val() != "") {
+        $(".chosen-select").val($('#EmailMessage_EmailTo').val()).trigger("liszt:updated");//chosen:updated.chosen
     }
 }
 
@@ -121,7 +156,7 @@ function OpenReviewPopUp(ReviewGuid) {
     $('#btnAddReviewPopUp').modelPopUp({
         windowId: "AddReviewPopUp",
         width: 900,
-        height: 395,
+        height: 450,
         url: "/User/AddReview?ReviewGuid=" + ReviewGuid,        
         closeOnOutSideClick: false,
     });
@@ -184,30 +219,30 @@ function getreviewcharcount(evt,maxlength) {
 $('.checkboxselectall').on('click', function () {    
     if ($(this).is(':checked')) {
         $('#partialEmaiList input[name="checkboxemail"]').prop('checked', true); // Checks it
-        enableemailbutton();
+        enableEmailHeaderButton();
        
     }
     else {
         $('#partialEmaiList input[name="checkboxemail"]').prop('checked', false); // Unchecks it
-        disableemailbutton();
+        disableEmailHeaderButton();
     }
 })
 
-function disableemailbutton() {
-    $('.refresh-email').addClass("btn-disabled").attr("disabled", "disabled");
+function disableEmailHeaderButton() {
+   
     $('.delete-data').addClass("btn-disabled").attr("disabled", "disabled");
     $('.mark-as-read').addClass("btn-disabled").attr("disabled", "disabled");
     $('.mark-as-unread').addClass("btn-disabled").attr("disabled", "disabled");
 }
 
-function enableemailbutton() {
-    $('.refresh-email').removeClass("btn-disabled").removeAttr("disabled", "disabled");
+function enableEmailHeaderButton() {
+  
     $('.delete-data').removeClass("btn-disabled").removeAttr("disabled", "disabled");
     $('.mark-as-read').removeClass("btn-disabled").removeAttr("disabled", "disabled");
     $('.mark-as-unread').removeClass("btn-disabled").removeAttr("disabled", "disabled");
 }
 
-$('.singlechecheckbox').on('click', function () {
+function SelectEmail() {
     if ($('.singlechecheckbox:checked').length == $('.singlechecheckbox').length) {
         $('.checkboxselectall').prop('checked', true); // Checks it
     }
@@ -215,18 +250,16 @@ $('.singlechecheckbox').on('click', function () {
         $('.checkboxselectall').prop('checked', false); // Unchecks it
     }
     if ($('.singlechecheckbox:checked').length > 0) {
-        $('.refresh-email').removeClass("btn-disabled").removeAttr("disabled", "disabled");
-        $('.delete-data').removeClass("btn-disabled").removeAttr("disabled", "disabled");
-        $('.mark-as-read').removeClass("btn-disabled").removeAttr("disabled", "disabled");
-        $('.mark-as-unread').removeClass("btn-disabled").removeAttr("disabled", "disabled");
+        enableEmailHeaderButton();
     }
     else {
-        $('.refresh-email').addClass("btn-disabled").attr("disabled", "disabled");
-        $('.delete-data').addClass("btn-disabled").attr("disabled", "disabled");
-        $('.mark-as-read').addClass("btn-disabled").attr("disabled", "disabled");
-        $('.mark-as-unread').addClass("btn-disabled").attr("disabled", "disabled");
+        disableEmailHeaderButton();
     }
-})
+}
+
+//$('.singlechecheckbox').on('click', function () {
+   
+//})
 
 function DeleteSentEmail()
 {
@@ -235,13 +268,11 @@ function DeleteSentEmail()
             EmailGuid.push($(this).attr("EmailGuid"));            
     });  
     if (EmailGuid.length > 0) {
-        Delete("You want to delete the email.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteSentEmailResponse);        
-    }
-    else {
-        ErrorBlock("Please select at least one checkbox.");
+        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteSentEmailResponse);        
     }
 }
 function DeleteSentEmailResponse(response, data) {
+    
     if (response) {
         $('.checkboxselectall').prop('checked', false);
 
@@ -253,25 +284,28 @@ function DeleteSentEmailResponse(response, data) {
         //alert($('.emails-count:hidden').length);
         if (!$('div#partialEmaiList div').hasClass('emails-count')) {
             PostDataWithSuccessParam("/Email/Sent", {str:""}, EmailListPartialView);
-            disableemailbutton();
+            disableEmailHeaderButton();
         }
     }
     else {
         ErrorBlock("Error while deleting email.");
     }
 }
-
+function DeleteSingleMessage(GuidEmail) {
+    var EmailGuid = new Array();
+    EmailGuid.push(GuidEmail);
+    if (EmailGuid.length > 0) {
+        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteInboxEmailResponse);
+    }
+}
 function DeleteInboxEmail() {
     var EmailGuid = new Array();
     $('.singlechecheckbox:checked').each(function () {
         EmailGuid.push($(this).attr("EmailGuid"));
     });
     if (EmailGuid.length > 0) {
-        Delete("You want to delete the email.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteInboxEmailResponse);
+        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteInboxEmailResponse);
 
-    }
-    else {
-        ErrorBlock("Please select at least one checkbox.");
     }
 }
 function DeleteInboxEmailResponse(response, data) {
@@ -286,11 +320,12 @@ function DeleteInboxEmailResponse(response, data) {
             PostDataWithSuccessParam("/Email/Inbox", {str:""}, EmailListPartialView);
         }
         PostData("/Email/GetUnReadEmailCount", {}, UnreadEmailResponse);
-        disableemailbutton();
+        disableEmailHeaderButton();
     }
     else {
         ErrorBlock("Error while deleting email.");
     }
+    
 }
 
 function UnreadEmailResponse(response, data) {
@@ -308,25 +343,33 @@ function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-$('.emaillist div[data-toggle="collapse"]').on("click", function () {  
-    var id = $(this).attr('data-target');
+function MarkEmailasRead(evt) {
+    var id = $(evt).attr('data-target');
     if (!$('#' + id.split('#')[1]).hasClass('show')) {
         $('.emaillist div.collapse').removeClass('show');
     }
     var EmailGuid = new Array();
-    if ($('div[divemailguid=' + id.split('#')[1] + '] a').hasClass('unreaded')) {        
+    if ($('div[divemailguid=' + id.split('#')[1] + '] div').hasClass('unreaded')) {
         EmailGuid.push(id.split('#')[1]);
-        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid },MarkasRead)
+        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasRead)
     }
-})
+}
+
+//$('.emaillist div[data-toggle="collapse"]').on("click", function () {  
+   
+//})
 
 function MarkasRead(response, data) {
     $('.message-count').text('(' + response + ')');  
     $.each(data.EmailGuid, function (key, value) {
-        $('div[divemailguid=' + value + '] a').removeClass('unreaded');
+        $('div[divemailguid=' + value + '] div').removeClass('unreaded');
     });
     $('.checkboxselectall').prop('checked', false);
     $('.singlechecheckbox').prop('checked', false);
+    if (response == 0) {
+        $('.all-notification').html("<div class='arrow-top'><span class='icon-up'></span></div>  <div class='notice-heading'><div class='float-left'><a>No unread notifications</a></div>");
+    }
+
 }
 
 $('.mark-as-read').on("click", function () {
@@ -337,9 +380,6 @@ $('.mark-as-read').on("click", function () {
     if (EmailGuid.length > 0) {
     PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasRead)
     }
-    else {
-        ErrorBlock("Please select at least one checkbox.");
-    }
 })
 $('.mark-as-unread').on("click", function () {
     var EmailGuid = new Array();
@@ -349,32 +389,39 @@ $('.mark-as-unread').on("click", function () {
     if (EmailGuid.length > 0) {
     PostDataWithSuccessParam("/Email/MarkAsUnRead", { EmailGuid: EmailGuid }, MarkasUnRead)
     }
-    else {
-        ErrorBlock("Please select at least one checkbox.");
-    }
 })
 function MarkasUnRead(response, data) {
     $('.message-count').text('(' + response + ')');
     $.each(data.EmailGuid, function (key, value) {
-        $('div[divemailguid=' + value + '] a').addClass('unreaded');
+        $('div[divemailguid=' + value + '] div').addClass('unreaded');
     });
     $('.checkboxselectall').prop('checked', false);
     $('.singlechecheckbox').prop('checked', false);
+    
 }
 
-$('.refresh-email').on('click', function () {
-    var url = window.location.href; 
-    var SentorInbox = "";
-    if (url.indexOf('Sent')>-1) { SentorInbox = "Sent"; } else { SentorInbox = "Inbox";}
-    PostDataWithSuccessParam("/Email/Get" + SentorInbox+"EmailPartial", {}, EmailListPartialView)
+$('.refresh-email').on('click', function () {    
+    PostDataWithSuccessParam("/Email/Inbox", { }, EmailListPartialView)
 })
+
+
 function EmailListPartialView(response, data) {
+    console.log(response);
     if (response) {        
-        $('#partialEmaiList').html(response);
+        if ($.trim(response) == "") {
+            $('.emaillist .shadow-box.top-bar-mail').remove();
+            GetData("/Email/NoRecordFoundPartial", {}, NoRecordFoundPartialView)
+        }
+        else {
+            $('#partialEmaiList').html(response);
+        }
     }
     else {
         ErrorBlock("Error while deleting email.");
     }
+}
+function NoRecordFoundPartialView(response) {
+    $('#partialEmaiList').html(response);
 }
 
 function EmailComposePopup() {
@@ -397,4 +444,73 @@ function NotificationPartialView(response,data) {
     $('li.notification-' + data.EmailGuid).fadeOut('slow');;
     var count =  parseInt($('.message-count').text().split('(')[1].split(')')[0])-1;     
     $('.message-count').text('(' + count + ')');
+   
 }
+
+$('form[name=compose-form]').submit(function (e) {
+    if ($('#EmailMessage_Body').val().length > 1000 || $('#EmailMessage_Subject').val().length > 50) { return false; }
+    else {
+        if ($('#EmailMessage_EmailTo').val() != '' && $('#EmailMessage_Body').val() != '' && $('#EmailMessage_Subject').val() != '') {
+            swal({
+                title: "Please wait...",
+                buttons: false,
+                showConfirmButton: false
+            });
+        }
+        return true;
+    }
+})
+
+function fillEmailTo() {
+    $('#EmailMessage_EmailTo').val($(".chosen-select").val());
+    var mailContents = CKEDITOR.instances['EmailMessage_Body'].getData();
+    $('#EmailMessage_Body').val(mailContents);
+}
+function replyandForwardMessage(EmailGuid, replyorforward) {
+    
+    var boolval = (replyorforward == 'forward') ? "false" : "true";
+    $('.EmailComposePopup').modelPopUp({
+        windowId: "ComposeEmail",
+        width: 900,
+        height: 620,
+        url: "/Email/ComposeEmail?EmailGuid=" + EmailGuid + "&Isreply=" + boolval+"",
+        closeOnOutSideClick: false,
+    });
+}
+
+$('a.decrease').on('click', function () {
+    var itemguid = $(this).attr('decreasequantity');
+    var quantity = parseInt($('#quantity_' + itemguid + ' .quanity-input').text());
+    if (quantity == 1) {
+        swal({
+            title: "Quantity Error",
+            text: "Quantity cannot be less than 1.",
+            type: "error",
+            buttons: false,
+            timer: 3000,
+            showConfirmButton: false
+        });
+    }
+    else {
+        $('#quantity_' + itemguid + ' .quanity-input').text(parseInt($('#quantity_' + itemguid + ' .quanity-input').text()) - 1);
+        var price = parseFloat($('.td-price-' + itemguid).text());        
+        var subtotal = parseFloat($('label[for="SubTotal"]').text());
+        var total = parseFloat($('label[for="Total"]').text());
+        var discount = parseFloat($('.td-discount-' + itemguid).text());
+        $('label[for="SubTotal"]').text(subtotal - price);
+        $('label[for="Total"]').text(total - price);
+    }
+})
+$('a.increase').on('click', function () {
+    var itemguid = $(this).attr('increasequantity');
+    var quantity = parseInt($('#quantity_' + itemguid + ' .quanity-input').text());
+
+    $('#quantity_' + itemguid + ' .quanity-input').text(parseInt($('#quantity_' + itemguid + ' .quanity-input').text()) + 1);
+    var price = $('.td-price-' + itemguid).text();
+    var subtotal = $('label[for="SubTotal"]').text();   
+    var total = $('label[for="Total"]').text();
+    var discount = parseFloat($('.td-discount-' + itemguid).text());
+    $('label[for="SubTotal"]').text(parseFloat(subtotal) + parseFloat(price));
+    $('label[for="Total"]').text(parseFloat(total) + parseFloat(price));
+
+})

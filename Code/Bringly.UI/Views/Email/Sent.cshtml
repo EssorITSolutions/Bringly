@@ -8,41 +8,23 @@
 
 @if (Model.Emails != null && Model.Emails.Count > 0)
 {
-    <div class="col-lg-9 col-md-7 col-sm-12 emaillist">
+    <div class="col-lg-9 col-md-7 col-sm-12 emaillist sent-email-list">
+        <h2>Sent Mail</h2>
         <div class="right-side mail-box">
-            <div class="shadow-box top-bar-mail">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <label class="custom-control custom-checkbox">
-                            <input id="checkboxselectall" name="checkboxselectall" type="checkbox" class="checkboxselectall custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                        </label>
-                        <button class="refresh-email btn btn-secondary"><i class="fa fa-refresh"></i></button>
-                        &nbsp;
-                        <button type="button" class="delete-data btn btn-danger btn-disabled" disabled="disabled" onclick="DeleteSentEmail();"><i class="fa fa-trash"></i></button>
-                    </div>
-
-                    <div class="col-lg-6 text-right">
-                        
-                    </div>
-                </div>
-            </div>
             <div id="partialEmaiList">
                 @Html.Partial("_EmailList", Model)
-
-            </div>
-           
+            </div>           
         </div>
-    </div>
-    
+    </div>    
 }
 else
 {
-    <div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="col-lg-9 col-md-7 col-sm-12 sent-email-list">
+        <h2>Sent Mail</h2>
         <div class="right-side mail-box">
             <div class="shadow-box top-bar-mail">
                 <div class="row">
-                    @Html.Partial("_NoRecordFound", "No sent email(s) found")
+                    @Html.Partial("_NoRecordFound", "No sent message(s) found")
                 </div>
             </div>
         </div>

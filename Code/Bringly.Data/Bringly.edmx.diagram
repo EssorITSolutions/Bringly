@@ -12,17 +12,13 @@
         <EntityTypeShape EntityType="BringlyModel.tblLookUpDomainValue" Width="1.5" PointX="4" PointY="8.625" />
         <EntityTypeShape EntityType="BringlyModel.tblCountry" Width="1.5" PointX="11.625" PointY="12.375" />
         <EntityTypeShape EntityType="BringlyModel.tblFavourite" Width="1.5" PointX="8.875" PointY="7.125" />
-        <EntityTypeShape EntityType="BringlyModel.tblItem" Width="1.5" PointX="5" PointY="13" />
         <EntityTypeShape EntityType="BringlyModel.tblRestaurant" Width="1.5" PointX="6.375" PointY="4.875" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblCity" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblCountry" />
         <AssociationConnector Association="BringlyModel.FK_tblFavourite_tblRestaurant" />
-        <AssociationConnector Association="BringlyModel.FK_tblItem_tblLookUpDomainValue" />
         <EntityTypeShape EntityType="BringlyModel.tblUser" Width="1.5" PointX="0.875" PointY="14.5" />
         <AssociationConnector Association="BringlyModel.FK_tblUser_tblCity" />
         <AssociationConnector Association="BringlyModel.FK_tblFavourite_tblUser" />
-        <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser" />
-        <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser1" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser1" />
         <AssociationConnector Association="BringlyModel.FK_tblRestaurant_tblUser2" />
@@ -39,6 +35,18 @@
         <AssociationConnector Association="BringlyModel.FK_tblEmail_tblTemplate" />
         <AssociationConnector Association="BringlyModel.FK_tblEmailTo_tblEmail" />
         <AssociationConnector Association="BringlyModel.FK_tblEmail_tblUser" />
+        <AssociationConnector Association="BringlyModel.FK_tblEmailTo_tblUser" />
+        <EntityTypeShape EntityType="BringlyModel.tblItem" Width="1.5" PointX="6.25" PointY="12.75" />
+        <EntityTypeShape EntityType="BringlyModel.tblOrderItem" Width="1.5" PointX="8.5" PointY="16" />
+        <AssociationConnector Association="BringlyModel.FK_tblItem_tblLookUpDomainValue" />
+        <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser" />
+        <AssociationConnector Association="BringlyModel.FK_tblItem_tblUser1" />
+        <AssociationConnector Association="BringlyModel.FK_tblOrderItem_tblItem" />
+        <AssociationConnector Association="BringlyModel.FK_tblOrderItem_tblUser" />
+        <EntityTypeShape EntityType="BringlyModel.tblOrder" Width="1.5" PointX="3.125" PointY="16.75" />
+        <AssociationConnector Association="BringlyModel.FK_tblOrder_tblUser" />
+        <AssociationConnector Association="BringlyModel.FK_tblOrderItem_tblOrder1" />
+        <AssociationConnector Association="BringlyModel.FK_tblReview_tblOrder" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

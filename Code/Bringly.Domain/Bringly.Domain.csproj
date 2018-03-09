@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllowHtmlAttribute.cs" />
     <Compile Include="BaseClasses\DomainBase.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Common.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="LookUps\LookUpDomainValues.cs" />
     <Compile Include="Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCart.cs" />
     <Compile Include="Restaurant.cs" />
     <Compile Include="Review.cs" />
     <Compile Include="User\ApplicationUserAssignedRoles.cs" />

@@ -171,18 +171,28 @@ namespace Bringly.DomainLogic.User
         public MyReview GetReviewByGuid(Guid ReviewGuid)
         {
             MyReview MyReview = new MyReview();
+            string urlpath = CommonDomainLogic.GetCurrentDomain;
             tblReview Review = bringlyEntities.tblReviews.Where(r => r.ReviewGuid == ReviewGuid && r.IsCompleted==false && r.IsSkipped==false).FirstOrDefault();
             MyReview.ReviewGuid = (Review != null && Review.ReviewGuid != Guid.Empty) ? Review.ReviewGuid : Guid.Empty;
             MyReview.UserGuid = (Review != null && Review.UserGuid != Guid.Empty) ? Review.UserGuid : Guid.Empty;
             MyReview.Review = (Review != null && !string.IsNullOrEmpty(Review.Review)) ? Review.Review : "";
-            MyReview.RestaurantImage = (Review != null && !string.IsNullOrEmpty(Review.tblRestaurant.RestaurantImage)) ? Review.tblRestaurant.RestaurantImage : "";
+            MyReview.RestaurantImage = (Review != null && !string.IsNullOrEmpty(Review.tblRestaurant.RestaurantImage)) ? urlpath+ CommonDomainLogic.GetImagePath(ImageType.Restaurant,Review.tblRestaurant.RestaurantImage) : CommonDomainLogic.GetImagePath(ImageType.Restaurant, "");
+            MyReview.RestaurantName = (Review != null && !string.IsNullOrEmpty(Review.tblRestaurant.RestaurantName)) ? Review.tblRestaurant.RestaurantName : ""; 
             return MyReview;
+        }
+
+        public List<string> GetUserGuidFromEmailAddress(string emailaddress)
+        {
+            List<string> guidlist = new List<string>();
+            guidlist.Add(bringlyEntities.tblUsers.Where(x => x.EmailAddress == emailaddress).FirstOrDefault().UserGuid.ToString());
+            return guidlist;
         }
 
         public MyReview InsertReview(MyReview myReview)
         {  
                 tblReview review = bringlyEntities.tblReviews.Where(u => u.ReviewGuid == myReview.ReviewGuid && u.IsDeleted == false).FirstOrDefault();
-                review.Review = string.IsNullOrEmpty(myReview.Review)?"": myReview.Review;
+            tblUser userfrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
+            review.Review = string.IsNullOrEmpty(myReview.Review)?"": myReview.Review;
                 review.IsSkipped = myReview.IsSkipped;
                 review.Rating = (byte)myReview.Rating;
                 review.IsCompleted = myReview.IsSkipped?false:true;
@@ -190,22 +200,26 @@ namespace Bringly.DomainLogic.User
             if (review.IsCompleted)
             {
                 EmailDomainLogic email = new EmailDomainLogic();
-                MyEmail myEmail = new MyEmail();
-                myEmail.TemplateType = Enum.GetName(typeof(TemplateType),TemplateType.Review);
-                tblTemplate templatereview = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.TemplateType).ToList().FirstOrDefault();
-                myEmail.Body = review.Review;
-                myEmail.EmailFrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault().EmailAddress;
-                myEmail.EmailTo = templatereview.EmailFrom;
-                myEmail.Subject = templatereview.Subject;
-                email.SendEmail(myEmail);
-                myEmail = new MyEmail();
-                myEmail.TemplateType = Enum.GetName(typeof(TemplateType), TemplateType.FeedBack);
-                tblTemplate templatefeedback = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.TemplateType).ToList().FirstOrDefault();
-                myEmail.Body = review.Review;
-                myEmail.EmailTo = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault().EmailAddress;
-                myEmail.EmailFrom = templatefeedback.EmailFrom;
-                myEmail.Subject = templatefeedback.Subject;
-                email.SendEmail(myEmail);
+                ComposeEmail myEmail = new ComposeEmail();
+                myEmail.EmailMessage = new Email();
+                myEmail.EmailMessage.TemplateType = Enum.GetName(typeof(TemplateType),TemplateType.Review);
+                tblTemplate templatereview = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.EmailMessage.TemplateType).ToList().FirstOrDefault();
+                myEmail.EmailMessage.Body = review.Review;
+                myEmail.EmailMessage.EmailFrom = userfrom.EmailAddress;
+                myEmail.EmailToGuid = GetUserGuidFromEmailAddress(templatereview.EmailFrom).ToArray();
+                myEmail.EmailMessage.Subject = templatereview.Subject;
+                myEmail.CreatedGuid= bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault().UserGuid;
+                email.SendReviewEmail(myEmail);
+                myEmail = new ComposeEmail();
+                myEmail.EmailMessage = new Email();
+                myEmail.EmailMessage.TemplateType = Enum.GetName(typeof(TemplateType), TemplateType.FeedBack);
+                tblTemplate templatefeedback = bringlyEntities.tblTemplates.Where(x => x.TemplateType == myEmail.EmailMessage.TemplateType).ToList().FirstOrDefault();
+                myEmail.EmailMessage.Body = review.Review;
+                myEmail.EmailToGuid = GetUserGuidFromEmailAddress(userfrom.EmailAddress).ToArray();
+                myEmail.EmailMessage.EmailFrom = templatefeedback.EmailFrom;
+                myEmail.EmailMessage.Subject = templatefeedback.Subject;
+                myEmail.CreatedGuid =  bringlyEntities.tblUsers.Where(x => x.EmailAddress == templatefeedback.EmailFrom).ToList().FirstOrDefault().UserGuid;
+                email.SendReviewEmail(myEmail);
             }
             bringlyEntities.SaveChanges();
            
@@ -221,7 +235,8 @@ namespace Bringly.DomainLogic.User
                 myReview.RestaurantGuid = restaurantReviews.RestaurantGuid;
                 myReview.UserGuid = restaurantReviews.UserGuid;
                 myReview.ReviewGuid = restaurantReviews.ReviewGuid;
-                myReview.RestaurantImage = restaurantReviews.tblRestaurant.RestaurantImage;
+                myReview.RestaurantName = restaurantReviews.tblRestaurant.RestaurantName;
+                myReview.RestaurantImage = CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Restaurant, restaurantReviews.tblRestaurant.RestaurantImage);
             }
             myReview.RestaurantReviews = bringlyEntities.tblReviews.Where(u => u.UserGuid == UserGuid && u.IsDeleted == false && u.IsCompleted==true)
                 .Select(f=>new RestaurantReview { IsProcessed=f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid,Review=f.Review,UserGuid=f.UserGuid,RestaurantGuid=f.RestaurantGuid,DateCreated=f.DateCreated,RestaurantName=f.tblRestaurant.RestaurantName,Rating=f.Rating })
@@ -236,7 +251,11 @@ namespace Bringly.DomainLogic.User
             myReview.CurrentPage = CurrentPage;
             myReview.SortBy = SortBy;
             myReview.RestaurantReviews = bringlyEntities.tblReviews.Where(u => u.CreatedByGuid == myReview.UserGuid && u.IsDeleted == false && u.IsCompleted == true)
-                .Select(f => new RestaurantReview { UserName = f.tblUser.FullName, IsProcessed = f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false, ReviewGuid = f.ReviewGuid, Review = f.Review, UserGuid = f.UserGuid, RestaurantGuid = f.RestaurantGuid, DateCreated = f.DateCreated, RestaurantName = f.tblRestaurant.RestaurantName, Rating = f.Rating })
+                .Select(f => new RestaurantReview {
+                    UserName = f.tblUser.FullName,
+                    //em.tblEmailToes.Where(z=>z.EmailGuid== em.EmailGuid).ToList().Select(a=> new EmailToClass { UserName = a.tblUser.FullName }).ToList()
+                    IsProcessed = f.IsProcessed.HasValue ? f.IsProcessed.Value : false, IsApproved = f.IsApproved.HasValue ? f.IsApproved.Value : false,
+                    ReviewGuid = f.ReviewGuid, Review = f.Review, UserGuid = f.UserGuid, RestaurantGuid = f.RestaurantGuid, DateCreated = f.DateCreated, RestaurantName = f.tblRestaurant.RestaurantName, Rating = f.Rating })
                 .OrderByDescending(x => x.IsApproved == true).OrderByDescending(x => x.IsProcessed == false)
                 .ToList();
             myReview.TotalRecords = myReview.RestaurantReviews.Count;
@@ -301,6 +320,19 @@ namespace Bringly.DomainLogic.User
             return message;
         }
 
-        
+        public List<Contact> GetAllBuyers()
+        {
+            List<Contact> UserContact = new List<Contact>();
+            UserContact = bringlyEntities.tblUsers.Where(x => x.UserRegistrationType == 2).
+                Select(up => new Contact { FullName = up.FullName, EmailAddress = up.EmailAddress, UserGuid = up.UserGuid }).ToList();
+            return UserContact;
+        }
+        public List<Contact> GetAllMerchants()
+        {
+            List<Contact> UserContact = new List<Contact>();
+            UserContact = bringlyEntities.tblUsers.Where(x => x.UserRegistrationType == 3).
+                Select(up => new Contact { FullName = up.FullName, EmailAddress = up.EmailAddress, UserGuid = up.UserGuid }).ToList();
+            return UserContact;
+        }
     }
 }

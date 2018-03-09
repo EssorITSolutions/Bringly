@@ -2,28 +2,40 @@
 @model Bringly.Domain.MyEmail
 @{int count = 0; string str = "<div class='arrow-top'><span class='icon-up'></span></div>";}
 
-    <ul class="dropdown-content list-unstyled">
-        @foreach (Bringly.Domain.Email email in Model.Emails)
-        {
-            TimeSpan span = (DateTime.Now - email.DateCreated);
-            <li class="notification-@email.EmailGuid">
-                @if (count > 0) { str = ""; }
-                @Html.Raw(str)
-                <div class="notice-heading">
-                    <div class="float-left"><h4>@email.UserName</h4></div>
-                    <div class="float-right">
-                        <p class="time-post">
-                            @email.TimeStamp
-                        </p><a class="close-icon notification-message" emailguid="@email.EmailGuid">&times;</a>
-                    </div>
+<ul class="dropdown-content list-unstyled">
+    @foreach (Bringly.Domain.Email email in Model.Emails)
+    {
+        TimeSpan span = (DateTime.Now - email.DateCreated);
+        <li class="notification-@email.EmailGuid">
+            @if (count > 0) { str = ""; }
+            @Html.Raw(str)
+            <div class="notice-heading">
+                <div class="float-left"><h4>@email.FromName</h4></div>
+                <div class="float-right">
+                    <p class="time-post">
+                        @email.TimeStamp
+                    </p><a class="close-icon notification-message" emailguid="@email.EmailGuid">&times;</a>
                 </div>
-                <p class="text-left">
-                    <a href="/Email/Inbox?EmailGuid=@email.EmailGuid">
-                        @email.PlainText
-                    </a>
-                </p>
-            </li>
-            count++;
-        }
-        <li class="text-center"><a href="/Email/Inbox?EmailGuid=@Guid.Empty">See all notifications</a></li>
-        </ul>
+            </div>
+            <p class="text-left">
+                <a href="/Email/Inbox?EmailGuid=@email.EmailGuid">
+                    @*@email.PlainText*@
+                </a>
+            </p>
+        </li>
+        count++;
+    }
+    @if (Model.Emails != null && Model.Emails.Count > 0)
+    {
+        <li class="text-center all-notification"><a href="/Email/Inbox">See all notifications</a></li>
+    }
+    else
+    {
+        <li>
+            @Html.Raw(str)
+            <div class="notice-heading">
+                <div class="float-left"><a href="/Email/Inbox">No unread notifications</a></div>                
+            </div>
+        </li>
+    }
+</ul>

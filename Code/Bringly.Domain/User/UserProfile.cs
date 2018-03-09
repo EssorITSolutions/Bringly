@@ -64,4 +64,10 @@ namespace Bringly.Domain.User
         [Required(ErrorMessage = "Please enter password.")]
         public string UserPassword { get; set; }
     }
+    public class Contact
+    {
+        public Guid UserGuid { get; set; }
+        public string FullName { get; set; }
+        public string EmailAddress { get; set; }
+    }
 }

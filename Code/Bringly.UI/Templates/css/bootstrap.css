@@ -2289,17 +2289,17 @@ fieldset[disabled] a.btn {
 }
 
 .btn-outline-primary {
-  color: #007bff;
-  background-color: transparent;
-  background-image: none;
-  border-color: #007bff;
+    color: #fa5342;
+    background-color: transparent;
+    background-image: none;
+    border-color: #fa5342;
 }
 
-.btn-outline-primary:hover {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-}
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #fa5342;
+        border-color: #fa5342;
+    }
 
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
@@ -2307,12 +2307,13 @@ fieldset[disabled] a.btn {
   background-color: transparent;
 }
 
-.btn-outline-primary:active, .btn-outline-primary.active,
-.show > .btn-outline-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-}
+    .btn-outline-primary:active, .btn-outline-primary.active,
+    .show > .btn-outline-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #fa5342;
+        border-color: #fa5342;
+       
+    }
 
 .btn-outline-secondary {
   color: #333333;

@@ -14,6 +14,7 @@ nav.navbar.navbar-light{
 }
 body {
     padding-top: 72px;
+    position:relative;
 }
 
 .Navbar-logo {
@@ -2201,7 +2202,9 @@ footer .bottom-footer {
     text-align:left !important;
 }
 }
-
+.buyer_review .text-center.m-2 {
+    padding-bottom: 10px;
+}
 @media only screen and (max-width:767px) and (min-width:150px) {
     body {
         padding-top: 88px;
@@ -2808,12 +2811,12 @@ color:red;
 
 .modal-window {
     top: 50%;
-    position: absolute;
+    position: fixed;
     left: 50%;
-    transform: translate(-50%, 50%);
+    /*transform: translate(-50%, 50%);
     -webkit-transform: translate(-50% , -50%);
     -moz-transform: translate(-50% , -50%);
-    -ms-transform: translate(-50% , -  50%);
+    -ms-transform: translate(-50% , -  50%);*/
     max-width: 90%;
     margin: 0;
     padding: 0;
@@ -2873,7 +2876,7 @@ color:red;
     margin-bottom: 0;
     display: inline-block;
     vertical-align: top;
-    margin-left: 15px;
+    margin-left: 0px;
 }
 
 
@@ -2906,6 +2909,10 @@ ul.list-inline.top-bar a {
     line-height: 30px;
     text-align: center;
     color: #777777;
+}
+
+.subject-tag h5 {
+    padding-left: 34px;
 }
 
 
@@ -2949,23 +2956,28 @@ aside.left-side .mail ul.dropdown-menu {
         border: 1px solid rgba(0, 0, 0, 0.3);
     }
 
-        .top-bar-mail .btn-secondary:hover,
-        .top-bar-mail .btn-secondary:focus {
+        .top-bar-mail .btn-secondary:hover {
             box-shadow: none;
             border: 1px solid rgba(0, 0, 0, 0.3);
             background-color: rgba(0, 0, 0, 0.3);
             color: #fff;
         }
+        /*.top-bar-mail .btn-secondary:hover,
+        .top-bar-mail .btn-secondary:focus {
+            box-shadow: none;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }*/
 
-    .top-bar-mail .btn-danger {
+    .top-bar-mail .btn-danger, .emaillist .btn-danger {
         box-shadow: none;
         border: 1px solid #dc3545;
         background-color: transparent;
         color: #dc3545;
     }
 
-        .top-bar-mail .btn-danger:hover,
-        .top-bar-mail .btn-danger:focus {
+        .top-bar-mail .btn-danger:hover, .emaillist .btn-danger:hover {
             box-shadow: none;
             border: 1px solid #dc3545;
             background-color: #dc3545;
@@ -3003,9 +3015,9 @@ aside.left-side .mail ul.dropdown-menu {
         color: #777777;
     }
 
-    .user-detail h3 {
+    /*.user-detail h3 {
         color: #fa5342;
-    }
+    }*/
 
 
 
@@ -3028,14 +3040,19 @@ aside.left-side .mail ul.dropdown-menu {
     color: #4092d0;
     margin-left: 15px;
 }
-
-    .top-bar-mail .btn-success:hover,
-    .top-bar-mail .btn-success:focus {
+    .top-bar-mail .btn-success:hover {
         box-shadow: none;
         border: 1px solid #4092d0;
         background-color: #4092d0;
         color: #fff;
     }
+    /*.top-bar-mail .btn-success:hover,
+    .top-bar-mail .btn-success:focus {
+        box-shadow: none;
+        border: 1px solid #4092d0;
+        background-color: #4092d0;
+        color: #fff;
+    }*/
 
 .top-bar-mail .btn-primary {
     box-shadow: none;
@@ -3044,8 +3061,7 @@ aside.left-side .mail ul.dropdown-menu {
     margin-left: 10px;
 }
 
-    .top-bar-mail .btn-primary:hover,
-    .top-bar-mail .btn-primary:focus {
+    .top-bar-mail .btn-primary:hover {
         box-shadow: none;
         background-color: #fa5342;
         color: #fff;
@@ -3059,4 +3075,143 @@ aside.left-side .mail ul.dropdown-menu {
 .btn-disabled {
     opacity: 0.4;
     cursor: not-allowed;
+}
+.ui-widget-content.ui-autocomplete.ui-front {
+    list-style: none;
+    background-color: #ccc;
+    width: 680px;
+    cursor:pointer;
+}
+.cursor-pointer {
+    cursor:pointer;
+}
+
+
+body.popup-body {
+    padding-top: 0;
+}
+.popup-heading h1 {
+    font-size: 22px;
+    color: #fff;
+    line-height: 48px;
+}
+.popup-heading {
+    background-color: #fa5342;
+    height: 50px;
+    padding: 0 20px;
+}
+
+    .popup-heading .close-button {
+        position: absolute;
+        top: 14px;
+        right: 20px;
+    }
+
+        .popup-heading  .close-button button.btn-close {
+
+            background-color: #ffffff;
+            color: #fa5342;
+            
+        }
+.compose-form .mail-box {
+    padding: 20px;
+}
+
+
+.compose-form .chosen-container-multi .chosen-choices,
+.compose-form .chosen-container-active .chosen-choices {
+    padding: 7px 10px;
+}
+.form-group.form-button {
+    margin-top: 30px;
+}
+.form-group.form-button input[type="submit"]{
+    margin-right:10px;
+}
+.emails-count .collapse i{
+    margin-left:2%;
+}
+
+
+.mail-detail-box .shadow-box {
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+    box-shadow:none;
+}
+
+.emails-count .btn-group {
+    float: right;
+
+}
+
+.emails-count .shadow-box {
+    overflow: hidden;
+    margin-bottom:10px;
+}
+.mail-detail-box {
+    margin-top: 20px;
+    float: left;
+    position: relative;
+    border: 1px solid #e6e6e6;
+    width: 100%;
+}
+span.close-link {
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    color: #ffffff;
+    height: 18px;
+    width: 18px;
+    background-color: #999;
+    text-align: center;
+    line-height: 18px;
+    font-size: 12px;
+    border-radius: 50%;
+}
+
+body.popup-body .buyer_review {
+    padding: 30px;
+}
+    body.popup-body .buyer_review .review-lbllength {
+        float: right;
+        margin-right: 0;
+    }
+
+.user-profile img {
+    height: 100px;
+    width: 100px;
+}
+
+.mail-detail-box .user-detail h3 {
+    display: inline-block;
+    width: 75%;
+}
+
+.mail-detail-box .user-detail p {
+    display: inline-block;
+    width: 24%;
+}
+.mail-detail-box .user-detail {
+    margin-bottom: 0;
+    width: 100%;
+}
+.divemaildetail{
+    overflow:hidden;
+}
+.sent-email-list .subject-tag h5 {
+    padding-left: 0;
+}
+.mail-name-div .name-col {
+    display:inline-block;
+}
+.mail-detail-box hr {
+    margin-top:0;
+}
+.review-top-content {
+    padding-top: 14px;
+    padding-left: 30px;
+}
+.calculation-items .label-calculation {
+    margin-bottom:0;
 }

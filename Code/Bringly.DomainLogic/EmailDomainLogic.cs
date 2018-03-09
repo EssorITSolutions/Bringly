@@ -21,69 +21,140 @@ namespace Bringly.DomainLogic
 {
     public class EmailDomainLogic : BaseClass.DomainLogicBase
     {
-        public bool SendEmail(MyEmail MyEmail)
+        public bool SendEmail(ComposeEmail ComposeEmail)
         {
             EmailDomain EmailDomain = new EmailDomain();
-            if (MyEmail.EmailTo.Contains(","))
+            tblUser userfrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
+            tblTemplate template = new tblTemplate();
+            Restaurant tblRestaurant = new Restaurant();
+            string image = "<img src = " + CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Default, "") + ">";
+            string UserImageName = userfrom.ImageName;
+            int count = 0;
+            if (ComposeEmail.EmailToGuid != null && ComposeEmail.EmailToGuid.Count() > 0)
             {
-                ListOfMultipleEmailTo ListOfMultipleEmailTo = new ListOfMultipleEmailTo();
-                foreach (string str in MyEmail.EmailTo.Split(','))
+                foreach (string usertoguid in ComposeEmail.EmailToGuid)
                 {
-                    ListOfMultipleEmailTo.Add(str, str);
-                }
-                EmailDomain.ListOfMultpleEmailTo = ListOfMultipleEmailTo;
-            }
-            else
-            {
-                EmailDomain.EmailTo = MyEmail.EmailTo;
-            }
-            List<tblTemplate> t = !string.IsNullOrEmpty(MyEmail.TemplateType) ? bringlyEntities.tblTemplates.Where(x => x.TemplateType == MyEmail.TemplateType).ToList() : bringlyEntities.tblTemplates.ToList();
-            EmailDomain.EmailBody = (t != null && t.Count > 0) ? t.FirstOrDefault().Body : "";
-            EmailDomain.EmailFrom = (t != null && t.Count > 0) ? t.FirstOrDefault().EmailFrom : "noreply@essorsolutions.com";
-            EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{UserName}", "Sir/ Madam").Replace("{Description}", MyEmail.Body);// message body
-            EmailDomain.EmailSubject = !string.IsNullOrEmpty(MyEmail.Subject) ? MyEmail.Subject : (t != null && t.Count > 0) ? t.FirstOrDefault().Subject : "Order Subject" ;
-            string emailresponse=EmailSender.sendEmail(EmailDomain);
-            if (emailresponse=="")
-            {
-                tblEmail tblEmail = new tblEmail();
-                tblEmail = new tblEmail();
-                tblEmail.EmailGuid = Guid.NewGuid();
-                tblEmail.EmailFrom = EmailDomain.EmailFrom;
-                tblEmail.Subject = EmailDomain.EmailSubject;
-                tblEmail.Body = EmailDomain.EmailBody;
-                tblEmail.Sent = true;
-                tblEmail.TemplateGuid= (t != null && t.Count > 0) ? t.FirstOrDefault().TemplateGuid : Guid.NewGuid();
-                tblEmail.DateCreated = DateTime.Now;
-                tblEmail.CreatedByGuid = UserVariables.LoggedInUserGuid;
-                bringlyEntities.tblEmails.Add(tblEmail);//.SaveChanges();
-                //bringlyEntities.SaveChanges();
-                tblEmailTo tblEmailTo = new tblEmailTo();
-                if (EmailDomain.ListOfMultpleEmailTo != null && EmailDomain.ListOfMultpleEmailTo.Count > 0)
-                {
-                    foreach (KeyValuePair<string, string> to in EmailDomain.ListOfMultpleEmailTo)
+                    tblUser userto = bringlyEntities.tblUsers.Where(x => x.UserGuid == new Guid(usertoguid)).ToList().FirstOrDefault();
+                    EmailDomain.EmailTo = userto.EmailAddress;
+                    template = !string.IsNullOrEmpty(ComposeEmail.EmailMessage.TemplateType) ? bringlyEntities.tblTemplates.Where(x => x.TemplateType == ComposeEmail.EmailMessage.TemplateType).ToList().FirstOrDefault() : new tblTemplate();
+                    if (template != null && template.TemplateGuid != null && template.TemplateGuid != Guid.Empty)
                     {
-                        tblEmailTo = new tblEmailTo();
-                        tblEmailTo.EmailToGuid = Guid.NewGuid();
-                        tblEmailTo.EmailGuid = tblEmail.EmailGuid;
-                        tblEmailTo.EmailTo = to.Value;
-                        bringlyEntities.tblEmailToes.Add(tblEmailTo);
-                        //bringlyEntities.SaveChanges();
+                        EmailDomain.EmailFrom = userfrom.EmailAddress;
+                        EmailDomain.EmailSubject = ComposeEmail.EmailMessage.Subject;
+                        if (!ComposeEmail.Isemailreplyorforward)
+                        {
+                            tblRestaurant = bringlyEntities.tblRestaurants.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid).
+                                            Select(s => new Restaurant { RestaurantImage = s.RestaurantImage, RestaurantName = s.RestaurantName }).ToList().FirstOrDefault();
+                            EmailDomain.EmailBody = template.Body;
+                            EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{ToName}", userto.FullName).Replace("{Description}", ComposeEmail.EmailMessage.Body)
+                                .Replace("{FromName}", userfrom.FullName);                            
+                        }
+                        else
+                        {
+                            EmailDomain.EmailBody = ComposeEmail.EmailMessage.Body;
+                        }
+
+                        string emailresponse = "";//EmailSender.sendEmail(EmailDomain);
+
+                        tblEmail tblEmail = new tblEmail();
+                        tblEmail.EmailGuid = Guid.NewGuid();
+                        tblEmail.EmailFrom = EmailDomain.EmailFrom;
+                        tblEmail.Subject = EmailDomain.EmailSubject;
+                        tblEmail.Body = EmailDomain.EmailBody;
+                        tblEmail.Sent = (emailresponse == "") ? true : false;
+                        tblEmail.TemplateGuid = template.TemplateGuid;
+                        tblEmail.DateCreated = DateTime.Now;
+                        tblEmail.CreatedByGuid = UserVariables.LoggedInUserGuid;
+                        bringlyEntities.tblEmails.Add(tblEmail);
+                        if (tblEmail.Sent)
+                        {
+                            tblEmailTo tblEmailTo = new tblEmailTo();
+
+                            tblEmailTo.EmailToGuid = Guid.NewGuid();
+                            tblEmailTo.EmailGuid = tblEmail.EmailGuid;
+                            tblEmailTo.EmailTo = EmailDomain.EmailTo;
+                            tblEmailTo.UserGuid = new Guid(usertoguid);// new Guid(usertoguid);
+                            bringlyEntities.tblEmailToes.Add(tblEmailTo);
+                        }
+                        bringlyEntities.SaveChanges();
+                        count = count + ((emailresponse == "") ? 0 : 1);
                     }
                 }
-                else {
-                    tblEmailTo = new tblEmailTo();
-                    tblEmailTo.EmailToGuid = Guid.NewGuid();
-                    tblEmailTo.EmailGuid = tblEmail.EmailGuid;
-                    tblEmailTo.EmailTo = EmailDomain.EmailTo;
-                    bringlyEntities.tblEmailToes.Add(tblEmailTo);
-                    //bringlyEntities.SaveChanges();
-                }
-                bringlyEntities.SaveChanges();
-                return true;
             }
-            else {
+            else { count++; }
+
+            if (count > 0)
+            {
                 return false;
             }
+            else { return true; }            
+        }
+
+        public bool SendReviewEmail(ComposeEmail ComposeEmail)
+        {
+            EmailDomain EmailDomain = new EmailDomain();
+            tblUser userfrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
+            tblTemplate template = new tblTemplate();
+            Restaurant tblRestaurant = new Restaurant();
+            string image = "<img src = " + CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Default, "") + ">";
+            string UserImageName = userfrom.ImageName;
+            int count = 0;
+            if (ComposeEmail.EmailToGuid != null && ComposeEmail.EmailToGuid.Count() > 0)
+            {
+                foreach (string usertoguid in ComposeEmail.EmailToGuid)
+                {
+                    tblUser userto = bringlyEntities.tblUsers.Where(x => x.UserGuid == new Guid(usertoguid)).ToList().FirstOrDefault();
+                    EmailDomain.EmailTo = userto.EmailAddress;
+                    template = !string.IsNullOrEmpty(ComposeEmail.EmailMessage.TemplateType) ? bringlyEntities.tblTemplates.Where(x => x.TemplateType == ComposeEmail.EmailMessage.TemplateType).ToList().FirstOrDefault() : new tblTemplate();
+                    if (template != null && template.TemplateGuid != null && template.TemplateGuid != Guid.Empty)
+                    {
+                        EmailDomain.EmailFrom = ComposeEmail.EmailMessage.EmailFrom;
+                        EmailDomain.EmailSubject = ComposeEmail.EmailMessage.Subject;
+                        if (!ComposeEmail.Isemailreplyorforward)
+                        {
+                            tblRestaurant = bringlyEntities.tblRestaurants.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid).
+                                            Select(s => new Restaurant { RestaurantImage = s.RestaurantImage, RestaurantName = s.RestaurantName }).ToList().FirstOrDefault();
+                            EmailDomain.EmailBody = template.Body;
+                            EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{ToName}", userto.FullName).Replace("{Description}", ComposeEmail.EmailMessage.Body)
+                                .Replace("{FromName}", userfrom.FullName);
+
+                            if (ComposeEmail.EmailMessage.TemplateType == (Enum.GetName(typeof(TemplateType), TemplateType.Review)))
+                            { EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{RedirecttoReviewList}", "" + CommonDomainLogic.GetCurrentDomain + "\\User\\MerchantReview"); }
+                        }
+                        else { EmailDomain.EmailBody = ComposeEmail.EmailMessage.Body; }
+                        string emailresponse = "";//EmailSender.sendEmail(EmailDomain);
+                        tblEmail tblEmail = new tblEmail();
+                        tblEmail.EmailGuid = Guid.NewGuid();
+                        tblEmail.EmailFrom = EmailDomain.EmailFrom;
+                        tblEmail.Subject = EmailDomain.EmailSubject;
+                        tblEmail.Body = EmailDomain.EmailBody;
+                        tblEmail.Sent = (emailresponse == "") ? true : false;
+                        tblEmail.TemplateGuid = template.TemplateGuid;
+                        tblEmail.DateCreated = DateTime.Now;
+                        tblEmail.CreatedByGuid = ComposeEmail.CreatedGuid;
+                        bringlyEntities.tblEmails.Add(tblEmail);
+                        if (tblEmail.Sent)
+                        {
+                            tblEmailTo tblEmailTo = new tblEmailTo();
+
+                            tblEmailTo.EmailToGuid = Guid.NewGuid();
+                            tblEmailTo.EmailGuid = tblEmail.EmailGuid;
+                            tblEmailTo.EmailTo = EmailDomain.EmailTo;
+                            tblEmailTo.UserGuid = userto.UserGuid;
+                            bringlyEntities.tblEmailToes.Add(tblEmailTo);
+                        }
+                        bringlyEntities.SaveChanges();
+                        count = count + ((emailresponse == "") ? 0 : 1);
+                    }
+                }
+            }
+            else { count++; }
+
+            if (count > 0)
+            {
+                return false;
+            }
+            else { return true; }
         }
 
         public MyEmail GetSentEmail(int LatestPage=0)
@@ -92,14 +163,21 @@ namespace Bringly.DomainLogic
             Email.PageSize = PageSize;
             Email.CurrentPage = LatestPage > 0 ? LatestPage : CurrentPage;
             Email.SortBy = SortBy;
+
+
+            string restaurantimagepath = CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Restaurant, bringlyEntities.tblRestaurants.Where(x => x.CreatedByGuid == x.tblUser.UserGuid).FirstOrDefault().RestaurantImage);
             Email.Emails = bringlyEntities.tblEmails.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.IsDeleted==false && x.Sent==true).
-                Select(em=>new Email { EmailGuid=em.EmailGuid,TemplateGuid=em.TemplateGuid,Subject=em.Subject,Body=em.Body,EmailFrom=em.EmailFrom, Sent=em.Sent,DateCreated=em.DateCreated,UserName=em.tblUser.FullName })
-                .OrderByDescending(x => x.DateCreated).ToList();
-            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read == false)
+                Select(em=>new Email { EmailGuid=em.EmailGuid,TemplateGuid=em.TemplateGuid,Subject=em.Subject,Body=em.Body,EmailFrom=em.EmailFrom,DateCreated=em.DateCreated
+                ,FromName =em.tblUser.FullName,ToName= em.tblEmailToes.Where(x => x.UserGuid == x.tblUser.UserGuid).ToList().FirstOrDefault().tblUser.FullName
+                ,EmailToList=em.tblEmailToes.Where(x => x.UserGuid == x.tblUser.UserGuid).ToList().Select(t=>new EmailTo {UserGuid=t.UserGuid, Name = t.tblUser.FullName }).ToList()
+                }).OrderByDescending(x => x.DateCreated).ToList();
+            Email.Emails.ForEach(z => z.RestaurantImage = restaurantimagepath);
+            
+            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
                 .ToList().Count;
             Email.TotalRecords = Email.Emails.Count;
             int Skip = 0;
-            int Take = 5;
+            int Take = PageSize;
             if (Email.CurrentPage == 1)
                 Skip = 0;
             else
@@ -109,7 +187,7 @@ namespace Bringly.DomainLogic
             }
             Email.Emails = Email.Emails.Skip(Skip).Take(Take).ToList();
             return Email;
-        }
+        }        
 
         public bool DeleteEmail(Guid[] EmailGuidArray)
         {                
@@ -122,64 +200,63 @@ namespace Bringly.DomainLogic
                 return true;                   
         }        
 
-        public MyEmail GetInboxEmail(Guid EmailGuid,int LatestPage=0)
+        public MyEmail GetInboxEmail(int LatestPage=0)
         {
             MyEmail Email = new MyEmail();
             Email.PageSize = PageSize;
             Email.CurrentPage = LatestPage > 0 ? LatestPage : CurrentPage; ;//ViewBag.CurrentPage
             Email.SortBy = SortBy;
-
-            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false).
+            string restaurantimagepath = CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Restaurant, bringlyEntities.tblRestaurants.Where(x => x.CreatedByGuid == x.tblUser.UserGuid).FirstOrDefault().RestaurantImage) ;
+            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid==x.tblEmail.EmailGuid && x.tblEmail.IsDeleted == false && x.UserGuid== UserVariables.LoggedInUserGuid).
                 Select(em => new Email { EmailGuid = em.tblEmail.EmailGuid, TemplateGuid = em.tblEmail.TemplateGuid, Subject = em.tblEmail.Subject, Body = em.tblEmail.Body, EmailFrom = em.tblEmail.EmailFrom
-                , Sent = em.tblEmail.Sent, DateCreated = em.tblEmail.DateCreated, UserName = em.tblEmail.tblUser.FullName,Read=em.Read })
-                .OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read==false).ToList();
-            if (EmailGuid != Guid.Empty) {
-                Email.Emails = Email.Emails.Where(x => x.EmailGuid == EmailGuid).ToList();
-                //Guid[] guidArrayList=new Guid[1];
-                //guidArrayList[0]=EmailGuid;
-               // MarkAsRead(guidArrayList);
-            }
-            Email.UnReadCount= bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read==false)
+                , DateCreated = em.tblEmail.DateCreated
+                , FromName = bringlyEntities.tblUsers.Where(zx=>zx.UserGuid==em.tblEmail.CreatedByGuid).ToList().FirstOrDefault().FullName
+                ,Read=em.Read,ToName = em.tblUser.FullName
+                 ,
+                    UserImage = bringlyEntities.tblUsers.Where(zx => zx.UserGuid == em.tblEmail.CreatedByGuid).ToList().FirstOrDefault().ImageName
+                }).OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read==false).ToList();
+            Email.Emails.ForEach(z => z.RestaurantImage = restaurantimagepath);
+            Email.UnReadCount= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read==false)
                 .ToList().Count;
             
             Email.TotalRecords = Email.Emails.Count;
             int Skip = 0;
-            int Take = 5;
+            int Take = PageSize;
             if (Email.CurrentPage == 1)
                 Skip = 0;
             else
                 Skip = ((Email.CurrentPage * Email.PageSize) - Email.PageSize);
+
             if (Email.TotalRecords == 0 && Skip > 0)
             {
                 Skip = Skip - 1;
             }
-            Email.Emails = Email.Emails.Skip(Skip).Take(Take).ToList();
-
+            Email.Emails = Email.Emails.Skip(Skip).Take(Take).ToList(); 
             return Email;
         }
 
         public int MarkAsRead(Guid[] EmailGuidArray)
         {
-            List<tblEmailTo> EmailGuidMarkAsRead = bringlyEntities.tblEmailToes.Where(x => EmailGuidArray.Contains(x.EmailGuid)).ToList();
+            List<tblEmailTo> EmailGuidMarkAsRead = bringlyEntities.tblEmailToes.Where(x => EmailGuidArray.Contains(x.EmailGuid) && x.UserGuid==UserVariables.LoggedInUserGuid).ToList();
             foreach (tblEmailTo email in EmailGuidMarkAsRead)
             {
                 email.Read = true;
             }
             bringlyEntities.SaveChanges();
-            int count= bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read == false)
+            int count= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
                 .ToList().Count;
             return count ;
         }
 
         public int MarkAsUnRead(Guid[] EmailGuidArray)
         {
-            List<tblEmailTo> EmailGuidMarkAsRead = bringlyEntities.tblEmailToes.Where(x => EmailGuidArray.Contains(x.EmailGuid)).ToList();
+            List<tblEmailTo> EmailGuidMarkAsRead = bringlyEntities.tblEmailToes.Where(x => EmailGuidArray.Contains(x.EmailGuid) && x.UserGuid == UserVariables.LoggedInUserGuid).ToList();
             foreach (tblEmailTo email in EmailGuidMarkAsRead)
             {
                 email.Read = false;
             }
             bringlyEntities.SaveChanges();
-            int count = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read == false)
+            int count = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
                 .ToList().Count;
             return count;
         }
@@ -193,23 +270,32 @@ namespace Bringly.DomainLogic
         public MyEmail GetNotificationEmail(Guid EmailGuid)
         {
             MyEmail Email = new MyEmail();
-            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false).
+            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid == x.tblEmail.EmailGuid && x.tblEmail.IsDeleted == false && x.UserGuid == UserVariables.LoggedInUserGuid && x.Read == false).
                 Select(em => new Email
                 {
                     EmailGuid = em.tblEmail.EmailGuid,
                     TemplateGuid = em.tblEmail.TemplateGuid,
-                    Subject = em.tblEmail.Subject,
-                    Body = em.tblEmail.Body,
-                    EmailFrom = em.tblEmail.EmailFrom,
-                    Sent = em.tblEmail.Sent,
+                    Subject = em.tblEmail.Subject,                    
                     DateCreated = em.tblEmail.DateCreated,
-                    UserName = em.tblEmail.tblUser.FullName,
+                    FromName = em.tblEmail.tblUser.FullName,
                     Read = em.Read
                 })
                 .OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read == false).Take(2).ToList();
-            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read == false)
-              .ToList().Count;
+            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
+                .ToList().Count;
             return Email;
         }
+
+        public ComposeEmail GetEmailByEmailGuid(Guid EmailGuid)
+        {
+            ComposeEmail myemail = new ComposeEmail();
+            List<tblEmailTo> emailto = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid == EmailGuid).ToList();//.Select(up => new tblEmailTo { EmailTo = up.EmailTo});
+            myemail.EmailMessage = bringlyEntities.tblEmails.Where(x => x.EmailGuid == EmailGuid).Select(em=> new Email { EmailGuid=em.EmailGuid ,TemplateGuid=em.TemplateGuid ,Subject= em.Subject,Body=em.Body
+                ,EmailFrom=em.EmailFrom,DateCreated=em.DateCreated}).ToList().FirstOrDefault();                        
+          //  myemail.EmailMessage.EmailToGuid = bringlyEntities.tblEmails.Where(x => x.EmailGuid == EmailGuid).Select(x => x.EmailFrom).ToList().FirstOrDefault();
+            myemail.EmailMessage.EmailFrom= string.Join(",", emailto.Select(x => x.EmailTo));
+            return myemail;
+        }
+      
     }
 }
