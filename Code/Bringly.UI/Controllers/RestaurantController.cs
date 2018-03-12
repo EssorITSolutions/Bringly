@@ -37,5 +37,6 @@ namespace Bringly.UI.Controllers
         public ActionResult MyRestaurant() {
             return View();
         }
+       
     }
 }

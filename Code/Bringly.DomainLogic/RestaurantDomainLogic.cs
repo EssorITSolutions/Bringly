@@ -32,5 +32,7 @@ namespace Bringly.DomainLogic
             }
             return _restaurantSearch;
         }
+
+        
     }
 }

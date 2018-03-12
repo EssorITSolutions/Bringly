@@ -76,7 +76,7 @@ $(function () {
 });
 window.onload = function () {
   
-   
+    var url = window.location.toString();
    
     if (url.indexOf("?") > 0) {
         var emailguiidarray = new Array();
@@ -188,18 +188,6 @@ function ReviewApprovalResponse(response, data) {
 $('.skip-review').on('click', function () {
     var guid = $(this).attr('reviewguid');
     Delete("You want to skip the review.", "Yes, skip it!", "/User/SkipReview", { reviewguid: guid }, SkipReviewResponse)
-    //swal({
-    //    title: "Are you sure?",
-    //    text: "You want to skip the review.",
-    //    type: "warning",
-    //    showCancelButton: true,
-    //    confirmButtonClass: "btn-danger",
-    //    confirmButtonText: "Yes, skip it!",
-    //    closeOnConfirm: false
-    //},
-    //    function () {
-    //        PostData("/User/SkipReview", { reviewguid: guid }, SkipReviewResponse)
-    //    });
 })
 
 function SkipReviewResponse(response) {
@@ -255,10 +243,6 @@ function SelectEmail() {
         disableEmailHeaderButton();
     }
 }
-
-//$('.singlechecheckbox').on('click', function () {
-   
-//})
 
 function DeleteSentEmail()
 {
@@ -354,10 +338,6 @@ function MarkEmailasRead(evt) {
     }
 }
 
-//$('.emaillist div[data-toggle="collapse"]').on("click", function () {  
-   
-//})
-
 function MarkasRead(response, data) {
     $('.message-count').text('(' + response + ')');  
     $.each(data.EmailGuid, function (key, value) {
@@ -368,7 +348,6 @@ function MarkasRead(response, data) {
     if (response == 0) {
         $('.all-notification').html("<div class='arrow-top'><span class='icon-up'></span></div>  <div class='notice-heading'><div class='float-left'><a>No unread notifications</a></div>");
     }
-
 }
 
 $('.mark-as-read').on("click", function () {
@@ -495,21 +474,19 @@ $('a.decrease').on('click', function () {
         var price = $('.td-price-' + itemguidoriginal + '  input[type="text"]').val(); 
         var subtotal = parseFloat($('#cart #SubTotal').val());
         var total = parseFloat($('#cart #Total').val());
-        var deliverycharge = 0;
         var discount = parseFloat($('.span-discount-' + itemguidoriginal).text());
-        var totaldiscountamount = 0;
+        var totaldiscount = 0;
         var itemguid = 0;
         $('table#cart tbody tr').each(function () {
             itemguid = $(this).attr('id');
             if (itemguid != undefined) {
                 itemguid = $(this).attr('id').split('_')[1];
-                totaldiscountamount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());
+                totaldiscount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());
             }
         });
-        deliverycharge = $('div[deliverycharge="delivery_' + itemguidoriginal + '"] input[type="hidden"]').val();
-        $('#cart #Discount').val(totaldiscountamount);
+        $('#cart #Discount').val(totaldiscount);
         $('#cart #SubTotal').val(parseFloat(subtotal) - parseFloat(price));
-        $('#cart #Total').val(parseFloat(total) - parseFloat(price) - discount);
+        $('#cart #Total').val(parseFloat(total) - parseFloat(price) + discount);
     }
 })
 $('a.increase').on('click', function () {
@@ -518,33 +495,18 @@ $('a.increase').on('click', function () {
     $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity+ 1);
     var price = $('.td-price-' + itemguidoriginal +'  input[type="text"]').val();
     var subtotal = $('#cart #SubTotal').val();   
-    var total = subtotal;
-    var deliverycharge = 0;;
-    var discountamount = 0;
+    var total = $('#cart #Total').val(); 
+    var totaldiscount = 0;
     var itemguid = "";
     $('table#cart tbody tr').each(function () {
         itemguid = $(this).attr('id');
         if (itemguid != undefined) {
             itemguid = $(this).attr('id').split('_')[1];
-            discountamount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());         
+            totaldiscount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());         
         }
-    });
-   
-    deliverycharge = $('div[deliverycharge="delivery_' + itemguidoriginal + '"] input[type="hidden"]').val();
-    
-    $('#cart #Discount').val(parseFloat(discountamount));
-    $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));
-    
-    $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discountamount + parseFloat(deliverycharge));
+    });   
+    var discount = parseFloat($('.span-discount-' + itemguidoriginal).text());
+    $('#cart #Discount').val(parseFloat(totaldiscount));
+    $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));    
+    $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discount );
 })
-
-function CalculatCartTotal() {
-    //var deliverycharge = 0;
-    //$('table#cart tbody tr .DeliveryCharge').each(function () {
-    //    deliverycharge += parseFloat($(this).val());
-    //});
-    //alert(parseFloat($('#cart #Total').val()));
-    //alert(deliverycharge)
-    //$('#cart #Total').val(parseFloat($('#cart #Total').val()) + deliverycharge);
-
-}

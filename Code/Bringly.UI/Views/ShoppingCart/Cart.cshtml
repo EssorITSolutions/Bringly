@@ -27,14 +27,12 @@
                         <tbody>
                             @foreach (Bringly.Domain.Items item in Model.ItemsList)
                             {
-                                <tr class="align-items-center" id="tr_@item.ItemGuid" DeliveryCharge="DeliveryCharge_@item.ItemGuid">
+                                <tr class="align-items-center" id="tr_@item.ItemGuid">
                                     <td class="Product">
                                         <div class="row align-items-center">
                                             <div class="col-4">
                                                 @Html.HiddenFor(m => m.ItemsList[i].ItemGuid, new { @id = "ItemGuid_" + i })
-                                                <div deliverycharge="delivery_@item.ItemGuid">
-                                                    @Html.HiddenFor(m => m.ItemsList[i].DeliveryCharge, new { @id = "DeliveryCharge_" + i, @class = "DeliveryCharge" })
-                                                </div>
+                                                @Html.HiddenFor(m => m.ItemsList[i].DeliveryCharge, new { @id = "DeliveryCharge_" + i, @class = "DeliveryCharge" })
                                                 <img src="@(domainpath+ Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,item.ItemImage))" class="img-fluid" />
                                             </div>
                                             <div class="col-8">

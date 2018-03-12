@@ -42,6 +42,8 @@ namespace Bringly.DomainLogic
                 }
               
                 tblOrder.OrderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Inprogress);
+                tblOrder.OrderSubTotal = shoppingCart.SubTotal;
+                tblOrder.OrderTotal = shoppingCart.Total;
                 bringlyEntities.SaveChanges();
                 return true;
             }

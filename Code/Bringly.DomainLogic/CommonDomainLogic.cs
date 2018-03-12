@@ -93,12 +93,13 @@ namespace Bringly.DomainLogic
             get
             {
                 var current = HttpContext.Current;
+                var issecureconn = HttpContext.Current.Request.IsSecureConnection;
                 if (current.Request.IsLocal)
                 {
                     var fulluri = current.Request.Url;
                     return fulluri.Scheme + "://" + fulluri.Host + ":" + fulluri.Port + "/";
-                }
-                return current.Request.Url.Host.ToLower();
+                }                
+                return (issecureconn?"https://":"http://")+current.Request.Url.Host.ToLower();
             }
         }
     }

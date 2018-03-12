@@ -1,3 +1,4 @@
+
 FTP Details
 bringly2.essorsolutions.com
 Bringly2Essor/Bringly2@2018
@@ -5,7 +6,34 @@ Bringly2Essor/Bringly2@2018
 bringly2admin.essorsolutions.com
 BringlyAdmin2/Bringly2@2018
 
-DEV SQL Server
+SQL Server
 148.72.232.166
 bringlyEssor
 Bringly@2018
+
+
+QA environment details
+
+url: bringlyqa.essorsolutions.com
+admin url: bringlyqaadmin.essorsolutions.com
+Database details
+Server: 148.72.232.166:1433
+Database: BringlyQA
+Username: BringlyQA
+Password: BringlyQA2018
+
+
+FTP Details
+
+
+FrontEnd
+
+Host/Url: bringlyqa.essorsolutions.com
+Username:  bringlyqa
+Password: BringlyQA2018
+
+Admin
+
+Host/Url:bringlyqaadmin.essorsolutions.com
+Username:  bringlyqaadmin
+Password: BringlyQA2018

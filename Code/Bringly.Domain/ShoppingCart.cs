@@ -9,6 +9,8 @@ namespace Bringly.Domain
     public class Items : BaseClasses.DomainBase
     {
         public Guid ItemGuid { get; set; }
+        public Guid RestaurantGuid { get; set; }
+      //  public Guid CategoryGuid { get; set; }
         public string ItemName { get; set; }
         public Guid CategoryGuid { get; set; }
         public decimal DeliveryCharge { get; set; }
