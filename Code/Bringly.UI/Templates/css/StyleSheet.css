@@ -3215,3 +3215,20 @@ body.popup-body .buyer_review {
 .calculation-items .label-calculation {
     margin-bottom:0;
 }
+span.quanity-input input {
+    width: 40px;
+    text-align: center;
+}
+.shopping-table table td span.td-content input {
+    width: 90px;
+}
+.shopping-table table td span.td-content input:focus {
+    outline: none;
+}
+#cart tr .no-border {
+    border: none;
+    background-color: none;
+}
+#cart .total-amount input[type="text"] {
+    width: 80%;
+}

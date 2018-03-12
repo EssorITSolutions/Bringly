@@ -76,7 +76,6 @@ $(function () {
 });
 window.onload = function () {
   
-    var url = window.location.toString();
    
    
     if (url.indexOf("?") > 0) {
@@ -479,8 +478,8 @@ function replyandForwardMessage(EmailGuid, replyorforward) {
 }
 
 $('a.decrease').on('click', function () {
-    var itemguid = $(this).attr('decreasequantity');
-    var quantity = parseInt($('#quantity_' + itemguid + ' .quanity-input').text());
+    var itemguidoriginal = $(this).attr('decreasequantity');
+    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input input[type="text"]').val());    
     if (quantity == 1) {
         swal({
             title: "Quantity Error",
@@ -492,25 +491,60 @@ $('a.decrease').on('click', function () {
         });
     }
     else {
-        $('#quantity_' + itemguid + ' .quanity-input').text(parseInt($('#quantity_' + itemguid + ' .quanity-input').text()) - 1);
-        var price = parseFloat($('.td-price-' + itemguid).text());        
-        var subtotal = parseFloat($('label[for="SubTotal"]').text());
-        var total = parseFloat($('label[for="Total"]').text());
-        var discount = parseFloat($('.td-discount-' + itemguid).text());
-        $('label[for="SubTotal"]').text(subtotal - price);
-        $('label[for="Total"]').text(total - price);
+        quantity = $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity - 1);
+        var price = $('.td-price-' + itemguidoriginal + '  input[type="text"]').val(); 
+        var subtotal = parseFloat($('#cart #SubTotal').val());
+        var total = parseFloat($('#cart #Total').val());
+        var deliverycharge = 0;
+        var discount = parseFloat($('.span-discount-' + itemguidoriginal).text());
+        var totaldiscountamount = 0;
+        var itemguid = 0;
+        $('table#cart tbody tr').each(function () {
+            itemguid = $(this).attr('id');
+            if (itemguid != undefined) {
+                itemguid = $(this).attr('id').split('_')[1];
+                totaldiscountamount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());
+            }
+        });
+        deliverycharge = $('div[deliverycharge="delivery_' + itemguidoriginal + '"] input[type="hidden"]').val();
+        $('#cart #Discount').val(totaldiscountamount);
+        $('#cart #SubTotal').val(parseFloat(subtotal) - parseFloat(price));
+        $('#cart #Total').val(parseFloat(total) - parseFloat(price) - discount);
     }
 })
 $('a.increase').on('click', function () {
-    var itemguid = $(this).attr('increasequantity');
-    var quantity = parseInt($('#quantity_' + itemguid + ' .quanity-input').text());
-
-    $('#quantity_' + itemguid + ' .quanity-input').text(parseInt($('#quantity_' + itemguid + ' .quanity-input').text()) + 1);
-    var price = $('.td-price-' + itemguid).text();
-    var subtotal = $('label[for="SubTotal"]').text();   
-    var total = $('label[for="Total"]').text();
-    var discount = parseFloat($('.td-discount-' + itemguid).text());
-    $('label[for="SubTotal"]').text(parseFloat(subtotal) + parseFloat(price));
-    $('label[for="Total"]').text(parseFloat(total) + parseFloat(price));
-
+    var itemguidoriginal = $(this).attr('increasequantity');
+    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val());    
+    $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity+ 1);
+    var price = $('.td-price-' + itemguidoriginal +'  input[type="text"]').val();
+    var subtotal = $('#cart #SubTotal').val();   
+    var total = subtotal;
+    var deliverycharge = 0;;
+    var discountamount = 0;
+    var itemguid = "";
+    $('table#cart tbody tr').each(function () {
+        itemguid = $(this).attr('id');
+        if (itemguid != undefined) {
+            itemguid = $(this).attr('id').split('_')[1];
+            discountamount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());         
+        }
+    });
+   
+    deliverycharge = $('div[deliverycharge="delivery_' + itemguidoriginal + '"] input[type="hidden"]').val();
+    
+    $('#cart #Discount').val(parseFloat(discountamount));
+    $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));
+    
+    $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discountamount + parseFloat(deliverycharge));
 })
+
+function CalculatCartTotal() {
+    //var deliverycharge = 0;
+    //$('table#cart tbody tr .DeliveryCharge').each(function () {
+    //    deliverycharge += parseFloat($(this).val());
+    //});
+    //alert(parseFloat($('#cart #Total').val()));
+    //alert(deliverycharge)
+    //$('#cart #Total').val(parseFloat($('#cart #Total').val()) + deliverycharge);
+
+}

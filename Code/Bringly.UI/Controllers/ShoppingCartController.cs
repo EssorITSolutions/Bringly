@@ -19,5 +19,13 @@ namespace Bringly.UI.Controllers
             ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
             return View(shoppingCartDomainLogic.GetItemsIncart());
         }
+        [HttpPost]
+        public ActionResult Cart(ShoppingCart ShoppingCart)
+        {
+            ShoppingCart OrderItems = new ShoppingCart();
+            ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
+            shoppingCartDomainLogic.CartCheckout(ShoppingCart);
+            return View(shoppingCartDomainLogic.GetItemsIncart());
+        }
     }
 }

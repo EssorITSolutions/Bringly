@@ -2,134 +2,159 @@
 @model Bringly.Domain.ShoppingCart
 @{
     ViewBag.Title = "Cart";
-    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
     string domainpath = Bringly.DomainLogic.CommonDomainLogic.GetCurrentDomain;
+    int i = 0;
 }
 
-<div class="col-lg-9 col-md-7 col-sm-12">
-    <div class="right-side">
-        <div class="shadow-box shopping-cart">
-            <h3>Shopping Cart</h3>
-            @if (Model.ItemsList != null && Model.ItemsList.Count>0)
-            {
-            <div class="shopping-table">
-                <table id="cart" class="table table-responsive">
-                    <thead class="table-head">
-                        <tr>
-                            <th style="width:40%">Item</th>
-                            <th style="width:15%">Quantity</th>
-                            <th style="width:15%">Price</th>
-                            <th style="width:15%">Discount</th>
-                            <th style="width:15%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Bringly.Domain.Items item in Model.ItemsList)
-                        {
-                            <tr class="align-items-center" id="tr_@item.ItemGuid">
-                                <td class="Product">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-                                            <img src="@(domainpath+ Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,item.ItemImage))" class="img-fluid" />
+<div class="inner-margin">
+    <div class="shadow-box shopping-cart ">
+        <h3>Shopping Cart</h3>
+        @if (Model.ItemsList != null && Model.ItemsList.Count > 0)
+        {
+            <form method="post">
+                <div class="shopping-table">
+                    <table id="cart" class="table table-responsive">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width:40%">Item</th>
+                                <th style="width:15%">Quantity</th>
+                                <th style="width:15%">Price</th>
+                                <th style="width:15%">Discount</th>
+                                <th style="width:15%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Bringly.Domain.Items item in Model.ItemsList)
+                            {
+                                <tr class="align-items-center" id="tr_@item.ItemGuid" DeliveryCharge="DeliveryCharge_@item.ItemGuid">
+                                    <td class="Product">
+                                        <div class="row align-items-center">
+                                            <div class="col-4">
+                                                @Html.HiddenFor(m => m.ItemsList[i].ItemGuid, new { @id = "ItemGuid_" + i })
+                                                <div deliverycharge="delivery_@item.ItemGuid">
+                                                    @Html.HiddenFor(m => m.ItemsList[i].DeliveryCharge, new { @id = "DeliveryCharge_" + i, @class = "DeliveryCharge" })
+                                                </div>
+                                                <img src="@(domainpath+ Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,item.ItemImage))" class="img-fluid" />
+                                            </div>
+                                            <div class="col-8">
+                                                <h5 class="product-name">@item.ItemName</h5>
+                                                <p>@(!string.IsNullOrEmpty(item.ItemWeight) ? item.ItemWeight + "/ " + item.ItemSize : item.ItemSize)</p>
+                                            </div>
                                         </div>
-                                        <div class="col-8">
-                                            <h5 class="product-name">@item.ItemName</h5>
-                                            <p>@(!string.IsNullOrEmpty(item.ItemWeight)?item.ItemWeight+"/ "+item.ItemSize: item.ItemSize)</p>
+                                    </td>
+                                    <td class="Quantity" id="quantity_@item.ItemGuid">
+                                        <div class="row align-items-center">
+                                            <a href="#" class="add-minus-icon decrease" decreasequantity="@item.ItemGuid"><i class="fa fa-minus"></i></a>
+                                            <span class="quanity-input">@Html.TextBoxFor(m => m.ItemsList[i].Quantity, new { @readonly = "readonly", @value = "1", @style = "border:none;background-color:none;", @id = "Quantity_" + i }) </span>
+                                            <a href="#" class="add-minus-icon increase" increasequantity="@item.ItemGuid"><i class="fa fa-plus"></i></a>
                                         </div>
-                                    </div>
+                                    </td>
+                                    <td class="Price">
+                                        <div class="row align-items-center">
+                                            <span class="td-content td-price-@item.ItemGuid">@Html.TextBoxFor(m => m.ItemsList[i].ItemPrice, new { @readonly = "readonly", @style = "border:none;background-color:none;", @id = "ItemPrice_" + i })</span><sub>$</sub>
+                                        </div>
+                                    </td>
+                                    <td class="discout">
+                                        <div class="row align-items-center">
+                                            <span class="td-content span-discount-@item.ItemGuid">@item.Discount</span><sub>$</sub>
+                                        </div>
+                                    </td>
+                                    <td class="text-center action-button">
+                                        <div class="row align-items-center">
+                                            <a href="" class="trash-icon" deleteguid="@item.ItemGuid"><i class="fa fa-trash"></i> </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    @*<form>*@
+                                        <div class="form-group coupon-from">
+                                            <label class="form-control-label">Enter coupon code</label>
+                                            <input type="text" class="form-control" placeholder="Coupon Code">
+                                        </div>
+                                    @*</form>*@
                                 </td>
-                                <td class="Quantity" id="quantity_@item.ItemGuid">
-                                    <div class="row align-items-center">
-                                        <a href="#" class="add-minus-icon decrease" decreasequantity="@item.ItemGuid"><i class="fa fa-minus"></i></a>
-                                        <span class="quanity-input">1</span>
-                                        <a href="#" class="add-minus-icon increase" increasequantity="@item.ItemGuid"><i class="fa fa-plus"></i></a>
-                                    </div>
+                                <td colspan="2" class="hidden-xs"></td>
+                                <td>
+                                    <table class="no-border">
+                                        <tr>
+                                            <td>Subtotal:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delivery: </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Discount: </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total: </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="Price">
-                                    <div class="row align-items-center">
-                                        <span class="td-content td-price-@item.ItemGuid">@item.ItemPrice<sub>$</sub></span>
-                                    </div>
+                                <td>
+                                    <table class="no-border calculation-items">
+                                        <tr>
+                                            <td>
+                                                <span class="total-amount">
+                                                    $ @Html.TextBoxFor(m => m.SubTotal, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="total-amount">
+                                                    $ @Html.TextBoxFor(m => m.DeliveryCharge, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="total-amount">
+                                                    $ @Html.TextBoxFor(m => m.Discount, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="total-amount">
+                                                    $ @Html.TextBoxFor(m => m.Total, new { @readonly = "readonly", @class = "no-border label-calculation" })
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="discout">
-                                    <div class="row align-items-center">
-                                        <span class="td-content td-discount-@item.ItemGuid">@item.Discount<sub>$</sub></span>
-                                    </div>
-                                </td>
-                                <td class="text-center action-button">
-                                    <div class="row align-items-center">
-                                        <a href="" class="trash-icon" deleteguid="@item.ItemGuid"><i class="fa fa-trash"></i> Delete</a>
-                                    </div>
-                                </td>
-                            </tr>                        
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>
-                                <form>
-                                    <div class="form-group coupon-from">
-                                        <label class="form-control-label">Enter coupon code</label>
-                                        <input type="text" class="form-control" placeholder="Coupon Code">
-                                    </div>
-                                </form>
-                            </td>
-                            <td colspan="2" class="hidden-xs"></td>
-                            <td>
-                                <table class="no-border">
-                                    <tr>
-                                        <td>Subtotal:</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Delivery: </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Discount: </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total: </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td>
-                                <table class="no-border calculation-items">
-                                    <tr>
-                                        <td><span class="total-amount"><label class="label-calculation" for="SubTotal" id="SubTotal">@Model.SubTotal</label> $</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="total-amount"><label class="label-calculation" for="DeliveryCharge" id="DeliveryCharge">@Model.DeliveryCharge $</label></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="total-amount"><label class="label-calculation" for="Discount" id="Discount">@Model.Discount</label> $</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="total-amount"><label class="label-calculation" for="Total" id="Total">@Model.Total</label> $</span></td>
-                                    </tr>
-                                </table>
-                            </td>
 
-                        </tr>
+                            </tr>
 
-                        <tr class="foot-button">
-                            <td>
-                                <button class="btn btn-secondary btn-lg">ADD MEALS</button>
-                            </td>
-                            <td colspan="3"></td>
-                            <td>
-                                <button class="btn btn-primary btn-lg">CHECKOUT <i class="fa fa-angle-double-right"></i></button>
-                            </td>
-                        </tr>
+                            <tr class="foot-button">
+                                <td>
+                                    <button class="btn btn-secondary btn-lg">ADD MEALS</button>
+                                </td>
+                                <td colspan="3"></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary btn-lg">CHECKOUT <i class="fa fa-angle-double-right"></i></button>
+                                </td>
+                            </tr>
 
-                    </tfoot>
-                </table>
-            </div>
-            }
-            else
-            {
+                        </tfoot>
+                    </table>
+                </div>
+            </form>
+        }
+        else
+        {
             <div class="shopping-table">
                 @Html.Partial("_NoRecordFound", "No item(s) found.")
-            </div>                    
-            }
-        </div>
+            </div>
+        }
     </div>
+
 </div>
+
+
 

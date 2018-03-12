@@ -23,7 +23,7 @@ namespace Bringly.Domain.Enums
     }
     public enum OrderStatus
     {
-        Incomplete,Inprogress,completed,Cancelled
+        Incomplete,Inprogress,Completed,Cancelled
     }
 
 }

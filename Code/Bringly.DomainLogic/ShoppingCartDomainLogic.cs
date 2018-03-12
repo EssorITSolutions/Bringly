@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bringly.Data;
 using Bringly.Domain;
 using Bringly.Domain.Enums;
 using Bringly.DomainLogic.User;
@@ -26,14 +27,28 @@ namespace Bringly.DomainLogic
 
             return OrderItemList;
         }
-        public bool AddItemToCart(Items items)
+        public bool CartCheckout(ShoppingCart shoppingCart)
         {
-            ShoppingCart orderItemList = GetItemsIncart();
-            if (orderItemList.ItemsList != null && orderItemList.ItemsList.Count > 0)
+            if (shoppingCart.ItemsList != null && shoppingCart.ItemsList.Count > 0)
             {
-
+                string orderstatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Completed);
+                tblOrder tblOrder = bringlyEntities.tblOrders.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.OrderStatus != orderstatus).FirstOrDefault();
+               
+                foreach (Items item in shoppingCart.ItemsList)
+                {
+                    tblOrderItem tblItem = bringlyEntities.tblOrderItems.Where(x => x.ItemGuid == item.ItemGuid && x.OrderGuid == x.tblOrder.OrderGuid && x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblOrder.OrderStatus != orderstatus).FirstOrDefault();
+                    tblItem.Quantity = item.Quantity;
+                    bringlyEntities.SaveChanges();
+                }
+              
+                tblOrder.OrderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Inprogress);
+                bringlyEntities.SaveChanges();
+                return true;
             }
-            return true;
+            else {
+                return false;
+            }
+         
         }
     }
 }
