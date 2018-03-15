@@ -294,7 +294,7 @@ namespace Bringly.DomainLogic
             ComposeEmail myemail = new ComposeEmail();
             List<tblEmailTo> emailto = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid == EmailGuid).ToList();//.Select(up => new tblEmailTo { EmailTo = up.EmailTo});
             myemail.EmailMessage = bringlyEntities.tblEmails.Where(x => x.EmailGuid == EmailGuid).Select(em=> new Email { EmailGuid=em.EmailGuid ,TemplateGuid=em.TemplateGuid ,Subject= em.Subject,Body=em.Body
-                ,EmailFrom=em.EmailFrom,DateCreated=em.DateCreated}).ToList().FirstOrDefault();                        
+                ,EmailFrom=em.EmailFrom,DateCreated=em.DateCreated,CreatedByGuid=em.CreatedByGuid,ToName = bringlyEntities.tblUsers.Where(x=>x.UserGuid== em.CreatedByGuid).ToList().FirstOrDefault().FullName}).ToList().FirstOrDefault();                        
           //  myemail.EmailMessage.EmailToGuid = bringlyEntities.tblEmails.Where(x => x.EmailGuid == EmailGuid).Select(x => x.EmailFrom).ToList().FirstOrDefault();
             myemail.EmailMessage.EmailFrom= string.Join(",", emailto.Select(x => x.EmailTo));
             return myemail;

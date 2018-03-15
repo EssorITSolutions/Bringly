@@ -19,6 +19,7 @@
             <div class="row" style="display:@((Model.ReviewGuid != Guid.Empty) ? "block" : "none")">
                 <div class="col-lg-4 col-md-8 col-sm-12">
                     <div class="shadow-box buyer_review">
+                        @*<label>@Model.RestaurantName Restaurant</label>*@
                         <img src="@Model.RestaurantImage" class="m-auto d-block" />
                         <div class="text-center m-2">
                             <input value="Leave Review" type="button"  class="btn btn-primary btn-lg" onclick="OpenReviewPopUp('@(Model.ReviewGuid)')" id="btnAddReviewPopUp" />
