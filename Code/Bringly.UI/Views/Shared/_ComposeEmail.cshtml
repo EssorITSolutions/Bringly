@@ -12,11 +12,9 @@ else
 {
     //using (@Html.BeginForm("ComposeEmail", "Email", FormMethod.Post))
     <form method="post" action="/Email/ComposeEmail" style="width:100%;" ValidateRequest="false" class="compose-form">
-        @Html.HiddenFor(m => m.EmailMessage.ToName)
-        @Html.HiddenFor(m => m.EmailMessage.CreatedByGuid)
         @Html.HiddenFor(m => m.Isemailreplyorforward)
         <div class="popup-heading">
-            <h1>Send Message</h1>
+            <h1>Send Email</h1>
             <div class="close-button">
                 <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
             </div>
@@ -47,9 +45,7 @@ else
     <script>
         $(document).ready(function () {
             CKEDITOR.replace('EmailMessage_Body');
-            if ($('#EmailMessage_Body').val() == '') {
-                $('#EmailMessage_Body').val('Message');
-            }
+            $('#EmailMessage_Body').val('Message');
             CKEDITOR.on('instanceReady', function () {
                 $.each(CKEDITOR.instances, function (instance) {
                     CKEDITOR.instances[instance].on("change",

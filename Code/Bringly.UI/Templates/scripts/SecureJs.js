@@ -85,15 +85,15 @@ function checkComposeEmailTo(){
 }
 $(function () {
     $('.dashboard-menu ul.list-unstyled.user-menu li a').click(function () {
-        localStorage.setItem('thisLink', $(this).parent().attr("class"));       
+        localStorage.setItem('thisLink', $(this).parent().attr("class"));
+       
         $(this).parent().removeClass('class');
     });
+
     var thisLink = localStorage.getItem('thisLink');
-    if (thisLink == 'undefined') {    
-        $('.lidashboard').addClass('active');
-    }
-    else {
+    if (thisLink) {
         $('.' + thisLink).addClass('active');
+       
     }
     var url = window.location.toString();
     if (url.indexOf("Sent") > -1 || url.indexOf("Inbox") > -1) {
@@ -126,21 +126,13 @@ window.onload = function () {
         $('.message-count').text('(' + $('#UnReadEmailCount').val() + ')');
     }
     if ($('.CartCount').val() != '' && $('.CartCount').val() != undefined) {
-        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');       
-    }  
-     
-  
+        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');
+       
+    }    
+   
     if ($('#EmailMessage_EmailTo').val() != "") {
         $(".chosen-select").val($('#EmailMessage_EmailTo').val()).trigger("liszt:updated");//chosen:updated.chosen
     }
-    if ($('#EmailMessage_ToName').val() != '' && $('#EmailMessage_ToName').val() != undefined) {
-        var selectedUserRole = document.getElementById('EmailMessage_CreatedByGuid').value;
-        var str_array = selectedUserRole.split(',');
-        for (var i = 0; i < str_array.length; i++) {
-            str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-        }
-        $('.chosen-select option[value = "' + str_array+'"]').attr("selected","selected");
-    }  
 }
 
 function getParameterByName(name, url) {
