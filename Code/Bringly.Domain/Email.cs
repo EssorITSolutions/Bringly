@@ -14,6 +14,7 @@ namespace Bringly.Domain
     {
         public Guid EmailGuid { get; set; }
         public int UnReadCount { get; set; }
+        public int CartCount { get; set; }
         public string TemplateType { get; set; }
         public List<Email> Emails { get; set; }
         public bool Isemailreplyorforward { get; set; }
@@ -32,8 +33,7 @@ namespace Bringly.Domain
         [Required(ErrorMessage = "Please enter subject.")]
         public string Subject { get; set; }
         [Required(ErrorMessage = "Please enter message.")]
-        [AllowHtml] 
-        [MaxLength(1000)]
+        
         public string Body { get; set; }
         public string EmailFrom { get; set; }
         public bool Read { get; set; }

@@ -2,10 +2,11 @@
 @model Bringly.Domain.MyEmail
 
 <input type="hidden" value="@Model.UnReadCount" class="UnReadEmailCount" name="UnReadEmailCount" id="UnReadEmailCount" />
+<input type="hidden" value="@Model.CartCount" class="CartCount" name="CartCount" id="CartCount" />
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <div class="Navbar-logo admin-logo">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/User/Dashboard">
                 <img src="~/Templates/images/logo-2.png" />
             </a>
             @if (Bringly.DomainLogic.UserVariables.IsAuthenticated && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
@@ -31,7 +32,6 @@
                 </li>
             </ul>
         </div>
-
         <div class="Navbar-Right-content dashboard-nav">
             <div class="notification-dropdown">
                 <a class="dropbtn"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="message-count">(3)</span></a>
@@ -39,19 +39,8 @@
                     <div class="notification-data">
 
                         @Html.Partial("_NotificationMessage", Model)
-                        </div>
-
-                        @*<li>
-            <div class="notice-heading">
-                <div class="float-left"><h4>Seller 1</h4></div>
-                <div class="float-right"><p class="time-post">1 hour ago</p><a class="close-icon">&times;</a></div>
-            </div>
-            <p class="text-left">Lorem ipsum dolor sit am consectetur adipiscing elit. Ut euismod lacinia erat, non interdum </p>
-        </li>*@
-
-
                     </div>
-
+                </div>
             </div>
             <div class="dropdown dashboard-menu">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,42 +49,54 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <ul class="list-unstyled user-menu">
-                        <li><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                        <li class="lidashboard"><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
                         @if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
                         {
-                            <li class="active"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
-                            <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
-                            <li><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
-                            <li><a href="My-Reviews_buyer.html"><i class="fa fa-star"></i> My Reviews</a></li>
-                            <li><a href="#"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
-                            <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                            <li class="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                            <li class="liMyOrders"><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li class="liinbox">
+                                <a href="/Email/Inbox">
+                                    <i class="fa fa-envelope"></i> Messages
+                                    <span class="alter-message message-count">
+                                        (0)
+                                    </span>
+                                </a>
+                            </li>
 
+                            <li class="liFavourites"><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li class="liMyReviews"><a href="/User/RestaurantReview"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li class="liWalletAccount"><a href="#"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
+                            <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
                         }
                         else
                         {
-                            <li><a href="/Restaurant/MyRestaurant"><img src="/templates/images/restaurant-icon.png" /> My Restaurant</a></li>
-                            <li><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> Messages <span class="alter-message message-count">(1)</span></a></li>
-                            <li><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
-                            <li><a href="#"><i class="fa fa-star"></i> My Reviews</a></li>
-                            <li><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>
-                            <li><a href="#"><i class="fa fa-pencil"></i> Manage Users</a></li>
-                            <li class="tracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                            <li class="liMyRestaurant"><a href="/Restaurant/MyRestaurant"><img src="/templates/images/restaurant-icon.png" /> My Restaurant</a></li>
+                            <li class="liMenu"><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
+                            <li class="liinbox">
+                                <a href="/Email/Inbox">
+                                    <i class="fa fa-envelope"></i> Messages
+                                    <span class="alter-message message-count">
+                                        (0)
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="liMyOrder"><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
+                            <li class="liMyReview"><a href="/User/MerchantReview"><i class="fa fa-star"></i> My Reviews</a></li>
+                            <li class="liMyTransaction"><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>
+                            <li class="liUsers"><a href="#"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                            <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
                         }
-                        <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                        <li class="lisetting"><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                         <li><a href="/User/SignOut"><i class="fa fa-cog"></i> SignOut</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="cart-notice">
                 <p>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
+                    <a href="/ShoppingCart/Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <sub>(2)</sub></a>
                 </p>
             </div>
-
-
         </div>
     </div>
 </nav>

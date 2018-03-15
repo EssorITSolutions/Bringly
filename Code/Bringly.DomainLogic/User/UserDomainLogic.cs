@@ -54,6 +54,8 @@ namespace Bringly.DomainLogic.User
             tblUser user = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Where(x => x.UserGuid == userProfile.UserGuid).FirstOrDefault();
             user.FullName = userProfile.FullName;
             user.MobileNumber = userProfile.MobileNumber;
+            //UserVariables.UserName = "";
+            AuthencationTicket(user);
             foreach (UserAddress usrAddress in userProfile.UserAddresses)
             {
                 if (usrAddress.UserAddressGuid != Guid.Empty)
@@ -70,11 +72,13 @@ namespace Bringly.DomainLogic.User
                     user.tblUserAddresses.Add(
                         new tblUserAddress
                         {
+                            UserAddressGuid=Guid.NewGuid(),
                             UserGuid = userProfile.UserGuid,
                             Address = usrAddress.Address,
                             AddressType = usrAddress.AddressType,
                             CityGuid = usrAddress.CityGuid,
-                            PostCode = usrAddress.PostCode
+                            PostCode = usrAddress.PostCode,
+                            DateCreated=DateTime.Now
                         });
                 }
             }
@@ -193,10 +197,11 @@ namespace Bringly.DomainLogic.User
                 tblReview review = bringlyEntities.tblReviews.Where(u => u.ReviewGuid == myReview.ReviewGuid && u.IsDeleted == false).FirstOrDefault();
             tblUser userfrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
             review.Review = string.IsNullOrEmpty(myReview.Review)?"": myReview.Review;
-                review.IsSkipped = myReview.IsSkipped;
-                review.Rating = (byte)myReview.Rating;
-                review.IsCompleted = myReview.IsSkipped?false:true;
-                review.IsProcessed = false;
+            review.IsSkipped = myReview.IsSkipped;
+            review.Rating = (byte)myReview.Rating;
+            review.IsCompleted = myReview.IsSkipped?false:true;
+            review.IsProcessed = false;
+            review.DateCreated = DateTime.Now;
             if (review.IsCompleted)
             {
                 EmailDomainLogic email = new EmailDomainLogic();
@@ -312,6 +317,7 @@ namespace Bringly.DomainLogic.User
                 message.MessageText = "";
             }
             catch (Exception ex) {
+                var ss = ex;
                 message.MessageType = Domain.Enums.MessageType.Error;
                 if(Isapprove)
                 message.MessageText = "Error while approving the review";

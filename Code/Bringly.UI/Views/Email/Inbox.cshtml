@@ -14,18 +14,18 @@
         <div class="shadow-box top-bar-mail">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label class="custom-control custom-checkbox">
+                    <label class="custom-control custom-checkbox" title="Select all">
                         <input id="checkboxselectall" name="checkboxselectall" type="checkbox" class="checkboxselectall custom-control-input">
                         <span class="custom-control-indicator"></span>
                     </label>
-                    <button class="email-header-btn refresh-email btn btn-secondary"><i class="fa fa-refresh"></i></button>
-                    <button class="email-header-btn btn btn-success mark-as-read margin-zero btn-disabled" disabled="disabled">
+                    <button title="Refresh" class="email-header-btn refresh-email btn btn-secondary"><i class="fa fa-refresh"></i></button>
+                    <button onclick="markEmailReadOnClickHeader()" title="Mark As Read" class="email-header-btn btn btn-success mark-as-read margin-zero btn-disabled" disabled="disabled">
                         <i class="fa fa-envelope-open" aria-hidden="true"></i>
                     </button>
-                    <button class="email-header-btn btn btn-primary mark-as-unread margin-zero btn-disabled" disabled="disabled">
+                    <button onclick="MarkEmailasUnReadHeader()" title="Mark As Unread" class="email-header-btn btn btn-primary mark-as-unread margin-zero btn-disabled" disabled="disabled">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                     </button>
-                    <button type="button" class="email-header-btn delete-data btn btn-danger btn-disabled" disabled="disabled" onclick="DeleteInboxEmail();"><i class="fa fa-trash"></i></button>
+                    <button title="Delete" type="button" class="email-header-btn delete-data btn btn-danger btn-disabled" disabled="disabled" onclick="DeleteInboxEmail();"><i class="fa fa-trash"></i></button>
                 </div>
 
                 <div class="col-lg-6 text-right">

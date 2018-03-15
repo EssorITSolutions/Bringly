@@ -1,37 +1,50 @@
 ﻿@model List<Bringly.Domain.Restaurant>
 @{Layout = null;}
-@foreach (var restaurant in Model)
+@if (Model != null && Model.Count > 0)
 {
-<div class="col-lg-6 col-md-12 col-sm-12" asas="sasaS" id="restaurant-@restaurant.RestaurantGuid">
-    <div class="shadow-box restaurant-info">
-        <div class="row">
-            <div class="col-lg-5 col-md-4 col-sm-12">
-                <div class="brand-logo">
-                    <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant,restaurant.RestaurantImage))" class="img-fluid" />
-                </div>
-            </div>
-            <div class="col-lg-7 col-md-8 col-sm-12">
-                <div class="content-inner">
-                    @Html.Hidden("restaurant_RestaurantGuid", restaurant.RestaurantGuid)
-                    <h4>
-                        <span class="company-name">
-                            @restaurant.RestaurantName
-                        </span>
-                        <span class="like-link">
-                            <i class='fa @(restaurant.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite"  onclick="addRemoveToFavourite(@("'" + restaurant.RestaurantGuid + "'"),1)"></i>
-                        </span>
-                    </h4>
-                    <p>
-                        <span class="tag-star">
-                            <a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a>
-                        </span>
-                    </p>
-                    <p class="address-area">Italian cuisine, European</p>
-                    <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, Kyiv</p>
+    foreach (var restaurant in Model)
+    {
+        <div class="col-lg-6 col-md-12 col-sm-12" id="restaurant-@restaurant.RestaurantGuid">
+            <div class="shadow-box restaurant-info">
+                <div class="row">
+                    <div class="col-lg-5 col-md-4 col-sm-12">
+                        <div class="brand-logo">
+                            <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant, restaurant.RestaurantImage))" class="img-fluid" />
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-8 col-sm-12">
+                        <div class="content-inner">
+                            @Html.Hidden("restaurant_RestaurantGuid", restaurant.RestaurantGuid)
+                            <h4>
+                                <span class="company-name">
+                                    @restaurant.RestaurantName
+                                </span>
+                                <span class="like-link"  title="@(restaurant.IsFavorite?"Remove from favourite":"Add to favourite")">
+                                    <i class='fa @(restaurant.IsFavorite ? "fa-heart" : "fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + restaurant.RestaurantGuid + "'"),1)"></i>
+                                </span>
+                            </h4>
+                            <p>
+                                <span class="tag-star">
+                                    <a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a>
+                                </span>
+                            </p>
+                            <p class="address-area">Italian cuisine, European</p>
+                            <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, Kyiv</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+    }
+}
+else
+{
+    <div class="col-lg-9 col-md-12 col-sm-12">
+        <div class="shadow-box restaurant-info">
+            <div class="row">
+                @Html.Partial("_NoRecordFound", "No favourite restaurant(s) found.")
+            </div>
+        </div>
+    </div>
 }

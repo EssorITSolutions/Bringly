@@ -30,19 +30,7 @@ namespace Bringly.UI.Controllers
             EmailDomainLogic email = new EmailDomainLogic();
             return View(email.GetInboxEmail(Currentpage));
         }
-        //[HttpPost]
-        //public ActionResult Inbox(MyEmail MyEmail)
-        //{
-        //    EmailDomainLogic email = new EmailDomainLogic();
-        //   // email.SendEmail(MyEmail); compose email
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Sent(List<Email> MyEmail)
-        //{
-        //    return View();
-        //}
+        
         public ActionResult Sent()
         {
             TempData["CurrentPage"] = null;
@@ -92,7 +80,10 @@ namespace Bringly.UI.Controllers
         public ActionResult MarkNotificationRead(Guid[] EmailGuid)
         {
             EmailDomainLogic email = new EmailDomainLogic();
-            email.MarkAsRead(EmailGuid);
+            if (EmailGuid != null && EmailGuid.Count() > 0)
+            {
+                email.MarkAsRead(EmailGuid);
+            }
             return PartialView("_NotificationMessage", email.GetNotificationEmail(Guid.Empty));
         }
         public ActionResult ComposeEmail(Nullable<Guid> EmailGuid,Nullable<bool> Isreply)

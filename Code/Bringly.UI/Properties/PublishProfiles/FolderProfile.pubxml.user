@@ -22,34 +22,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:20</publishTime>
     </File>
     <File Include="bin/Bringly.Data.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/14/2018 12:03:10</publishTime>
     </File>
     <File Include="bin/Bringly.Data.dll.config">
       <publishTime>02/19/2018 15:24:09</publishTime>
     </File>
     <File Include="bin/Bringly.Data.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/14/2018 12:03:10</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/15/2018 16:16:52</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll.config">
       <publishTime>02/19/2018 15:24:15</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/15/2018 16:16:52</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/15/2018 16:16:52</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/15/2018 16:16:52</publishTime>
     </File>
     <File Include="bin/Bringly.UI.dll">
-      <publishTime>03/12/2018 16:34:58</publishTime>
+      <publishTime>03/15/2018 16:16:55</publishTime>
     </File>
     <File Include="bin/Bringly.UI.pdb">
-      <publishTime>03/12/2018 16:34:58</publishTime>
+      <publishTime>03/15/2018 16:16:55</publishTime>
     </File>
     <File Include="bin/Elmah.dll">
       <publishTime>02/19/2018 15:24:40</publishTime>
@@ -262,34 +262,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:35</publishTime>
     </File>
     <File Include="bin/Utilities.Conversion.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.Conversion.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.EmailSender.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.EmailSender.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.ErrorLog.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.ErrorLog.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.Helper.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.Helper.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.QueryStringHelper.dll">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/Utilities.QueryStringHelper.pdb">
-      <publishTime>03/12/2018 16:34:52</publishTime>
+      <publishTime>03/13/2018 19:03:41</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>02/19/2018 15:24:39</publishTime>
@@ -307,7 +307,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:20</publishTime>
     </File>
     <File Include="Templates/css/StyleSheet.css">
-      <publishTime>03/12/2018 13:20:31</publishTime>
+      <publishTime>03/15/2018 16:04:44</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.eot">
       <publishTime>02/19/2018 15:24:21</publishTime>
@@ -574,7 +574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Templates/Scripts/commonJs.js">
-      <publishTime>03/08/2018 20:07:10</publishTime>
+      <publishTime>03/13/2018 15:58:08</publishTime>
     </File>
     <File Include="Templates/Scripts/Jquery/jquery-3.2.1.js">
       <publishTime>02/19/2018 15:24:22</publishTime>
@@ -1145,6 +1145,192 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/pastefromword/filter/default.js">
       <publishTime>03/12/2018 16:37:35</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/dev/placeholder.html">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/dialogs/placeholder.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/icons/hidpi/placeholder.png">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/icons/placeholder.png">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/af.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ar.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/az.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/bg.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ca.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/cs.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/cy.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/da.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/de-ch.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/de.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/el.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en-au.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en-gb.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/eo.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/es-mx.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/es.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/et.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/eu.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fa.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fi.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fr-ca.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fr.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/gl.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/he.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/hr.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/hu.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/id.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/it.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ja.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/km.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ko.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ku.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/lv.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/nb.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/nl.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/no.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/oc.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pl.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pt-br.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pt.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ro.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ru.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/si.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sk.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sl.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sq.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sv.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/th.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/tr.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/tt.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ug.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/uk.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/vi.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/zh-cn.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/zh.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/plugin.js">
+      <publishTime>03/14/2018 11:08:20</publishTime>
+    </File>
+    <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/samples/placeholder.html">
+      <publishTime>03/14/2018 11:08:20</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/preview/preview.html">
       <publishTime>03/12/2018 16:37:35</publishTime>
@@ -1867,7 +2053,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Templates/Scripts/SecureJs.js">
-      <publishTime>03/12/2018 16:17:16</publishTime>
+      <publishTime>03/15/2018 15:44:51</publishTime>
     </File>
     <File Include="Templates/Scripts/validation/jquery-migrate-1.1.0.js">
       <publishTime>02/19/2018 15:24:22</publishTime>
@@ -1918,13 +2104,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/Controls/Paging.cshtml">
-      <publishTime>03/05/2018 12:54:56</publishTime>
+      <publishTime>03/15/2018 11:13:42</publishTime>
     </File>
     <File Include="Views/Email/Inbox.cshtml">
-      <publishTime>03/07/2018 15:46:18</publishTime>
+      <publishTime>03/14/2018 15:31:32</publishTime>
     </File>
     <File Include="Views/Email/Sent.cshtml">
-      <publishTime>03/09/2018 12:23:51</publishTime>
+      <publishTime>03/13/2018 17:33:14</publishTime>
     </File>
     <File Include="Views/Errors/Error404.cshtml">
       <publishTime>02/21/2018 16:51:11</publishTime>
@@ -1939,34 +2125,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2018 15:55:27</publishTime>
     </File>
     <File Include="Views/Home/UserRegistration.cshtml">
-      <publishTime>02/20/2018 10:59:11</publishTime>
+      <publishTime>03/12/2018 16:59:57</publishTime>
     </File>
     <File Include="Views/Home/_socialMediaLogin.cshtml">
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/Menu/_chooseCity.cshtml">
-      <publishTime>02/20/2018 10:59:11</publishTime>
+      <publishTime>03/14/2018 15:56:50</publishTime>
     </File>
     <File Include="Views/Menu/_topMenu.cshtml">
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/Menu/_topUserMenu.cshtml">
-      <publishTime>03/01/2018 12:31:03</publishTime>
+      <publishTime>03/15/2018 14:46:22</publishTime>
     </File>
     <File Include="Views/Restaurant/ListRestaurants.cshtml">
-      <publishTime>02/21/2018 10:13:38</publishTime>
+      <publishTime>03/13/2018 10:27:05</publishTime>
     </File>
     <File Include="Views/Restaurant/MyRestaurant.cshtml">
       <publishTime>02/21/2018 10:13:38</publishTime>
+    </File>
+    <File Include="Views/Restaurant/RestaurantItems.cshtml">
+      <publishTime>03/13/2018 10:38:52</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/AnonymousUser.cshtml">
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/AuthorizeUserMaster.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>03/13/2018 15:40:59</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/PartialMaster.cshtml">
-      <publishTime>03/07/2018 14:46:40</publishTime>
+      <publishTime>03/13/2018 12:18:42</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/PartialMasterCommon.cshtml">
       <publishTime>03/08/2018 10:43:51</publishTime>
@@ -1974,29 +2163,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/MasterPages/RestaurantMaster.cshtml">
       <publishTime>02/20/2018 16:20:26</publishTime>
     </File>
+    <File Include="Views/Shared/UnauthorizedAccess.cshtml">
+      <publishTime>03/15/2018 11:09:18</publishTime>
+    </File>
     <File Include="Views/Shared/_AddReview.cshtml">
-      <publishTime>03/09/2018 15:09:20</publishTime>
+      <publishTime>03/14/2018 16:10:32</publishTime>
     </File>
     <File Include="Views/Shared/_ComposeEmail.cshtml">
-      <publishTime>03/08/2018 18:28:57</publishTime>
+      <publishTime>03/14/2018 13:19:39</publishTime>
     </File>
     <File Include="Views/Shared/_EmailList.cshtml">
-      <publishTime>03/09/2018 12:41:14</publishTime>
+      <publishTime>03/15/2018 15:43:40</publishTime>
     </File>
     <File Include="Views/Shared/_FavouriteRestaurantsList.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>03/14/2018 15:55:52</publishTime>
     </File>
     <File Include="Views/Shared/_filterRestaurants.cshtml">
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
+    <File Include="Views/Shared/_ItemsList.cshtml">
+      <publishTime>03/15/2018 16:04:56</publishTime>
+    </File>
     <File Include="Views/Shared/_LeftPanel.cshtml">
-      <publishTime>03/08/2018 20:22:49</publishTime>
+      <publishTime>03/14/2018 10:26:53</publishTime>
     </File>
     <File Include="Views/Shared/_NoRecordFound.cshtml">
       <publishTime>02/27/2018 11:13:51</publishTime>
     </File>
     <File Include="Views/Shared/_NotificationMessage.cshtml">
-      <publishTime>03/08/2018 18:31:31</publishTime>
+      <publishTime>03/15/2018 10:49:19</publishTime>
     </File>
     <File Include="Views/Shared/_pageFooter.cshtml">
       <publishTime>02/19/2018 15:24:22</publishTime>
@@ -2008,25 +2203,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/28/2018 16:14:42</publishTime>
     </File>
     <File Include="Views/Shared/_RestaurantReviewList.cshtml">
-      <publishTime>02/27/2018 11:13:46</publishTime>
+      <publishTime>03/15/2018 15:39:23</publishTime>
     </File>
     <File Include="Views/Shared/_RestaurantsList.cshtml">
-      <publishTime>02/21/2018 10:13:38</publishTime>
+      <publishTime>03/14/2018 13:15:35</publishTime>
     </File>
     <File Include="Views/Shared/_ReviewContent.cshtml">
       <publishTime>02/23/2018 15:34:24</publishTime>
     </File>
     <File Include="Views/ShoppingCart/Cart.cshtml">
-      <publishTime>03/12/2018 15:57:12</publishTime>
+      <publishTime>03/15/2018 16:06:36</publishTime>
     </File>
     <File Include="Views/User/Dashboard.cshtml">
-      <publishTime>02/19/2018 17:02:26</publishTime>
+      <publishTime>03/13/2018 16:24:24</publishTime>
     </File>
     <File Include="Views/User/EditPersonalInformation.cshtml">
       <publishTime>02/20/2018 16:20:26</publishTime>
     </File>
     <File Include="Views/User/Favourites.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>03/14/2018 13:08:25</publishTime>
     </File>
     <File Include="Views/User/MerchantReview.cshtml">
       <publishTime>02/23/2018 17:32:31</publishTime>
@@ -2035,7 +2230,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/User/RestaurantReview.cshtml">
-      <publishTime>03/09/2018 14:40:56</publishTime>
+      <publishTime>03/14/2018 15:04:32</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/19/2018 15:24:22</publishTime>

@@ -3,11 +3,13 @@
     Layout = "~/Views/Shared/MasterPages/PartialMaster.cshtml";
 }
 
-@if (ViewBag.IspopUp != null)
+@if (TempData["IspopUp"] != null)
 {
+    TempData.Keep();
     <script>
         window.parent.closeModelPopUpForm(true);
     </script>
+
 }
 else
 {

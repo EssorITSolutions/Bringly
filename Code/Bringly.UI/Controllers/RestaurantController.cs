@@ -37,6 +37,30 @@ namespace Bringly.UI.Controllers
         public ActionResult MyRestaurant() {
             return View();
         }
-       
+        public ActionResult RestaurantItems(Nullable<Guid> RestaurantGuid)
+        {
+            RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+            RestaurantGuid = new Guid("7B9D0CFF-F15F-49CA-95EF-EA81CDEA4E34");
+            List<Items> itemslist = new List<Items>();
+            itemslist=restaurantDomainLogic.GetItemsByRestaurantGuid(RestaurantGuid.HasValue?RestaurantGuid.Value:Guid.Empty);
+            return View(itemslist);
+        }
+        [HttpPost]
+        public ActionResult addToCart(Items item)
+        {
+            ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
+            return Json(shoppingCartDomainLogic.addToCart(item),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getCartCount()
+        {
+            ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
+            return Json(shoppingCartDomainLogic.getCartCount(),JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult deleteItemFromCart(Guid ItemGuid)
+        {
+            ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
+            return Json(shoppingCartDomainLogic.deleteItemFromCart(ItemGuid), JsonRequestBehavior.AllowGet);
+        }
     }
 }

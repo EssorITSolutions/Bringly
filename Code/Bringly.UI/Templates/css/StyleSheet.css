@@ -32,7 +32,7 @@ body {
     }
 
     .Navbar-dropdown .dropdown-menu {
-        width: 415px;
+        width: 505px;
         padding: 0;
         border: 0px none;
         top: 45px;
@@ -93,6 +93,9 @@ body {
                 margin: 8px 0 0;
                 font-size: 16px;
                 padding: 8px 0;
+                word-wrap: break-word;
+                width: 100%;
+                vertical-align: top;
             }
 
             .Navbar-dropdown .dropdown-menu ul.list-unstyled li.active a {
@@ -1109,6 +1112,9 @@ li.list-inline-item.product-status .fa{
     font-size:14px;
     color:#b8b8b8;
     padding:6px 0;
+}
+.restaurant-item ul.order-detail li {
+    width: 100%;
 }
 .brand-detail ul.order-detail li span{
     color:#333333;
@@ -3231,4 +3237,22 @@ span.quanity-input input {
 }
 #cart .total-amount input[type="text"] {
     width: 80%;
+}
+.buyer_review img {
+    padding-top:10px;
+}
+#formReview .page-sub-title p a:hover {
+    color: #FA5342;
+}
+.personal-information #EmailAddress {
+    cursor:not-allowed;
+}
+.width-100 {
+    width:100%;
+}
+.emails-count .normal-cursor {
+    cursor:auto;
+}
+.restaurant-item .order-detail .order-quantity {
+    padding-top:25px;
 }

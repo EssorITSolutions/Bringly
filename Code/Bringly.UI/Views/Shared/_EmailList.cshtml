@@ -18,10 +18,10 @@
                     @if (!isSentBox)
                     {
                         <label class="custom-control custom-checkbox">
-                            <input onclick="SelectEmail();" id="checkbox-@email.EmailGuid" EmailGuid="@email.EmailGuid" name="checkboxemail" type="checkbox" class="singlechecheckbox custom-control-input">
+                            <input onclick="SelectSingleEmailCheckbox();" id="checkbox-@email.EmailGuid" EmailGuid="@email.EmailGuid" name="checkboxemail" type="checkbox" class="singlechecheckbox custom-control-input">
                             <span class="custom-control-indicator"></span>
                         </label>
-                        <div data-toggle="collapse" onclick="MarkEmailasRead(this);" data-target="#@email.EmailGuid" class="name-col">
+                        <div data-toggle="collapse" onclick="MarkEmailasReadOnInboxClick(this);" data-target="#@email.EmailGuid" class="name-col">
                             <h4>
                                 <b> @email.FromName</b>
                             </h4>
@@ -29,44 +29,46 @@
                     }
                     else
                     {
-                        <div data-toggle="collapse" onclick="MarkEmailasRead(this);" data-target="#@email.EmailGuid" class="name-col">
+                        <div data-toggle="collapse" onclick="MarkEmailasReadOnInboxClick(this);" data-target="#@email.EmailGuid" class="name-col">
                             <h4>
                                 <b> @email.ToName</b>
                             </h4>
                         </div>
                     }
-
                 </div>
-
-                <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="col-lg-2 col-md-6 col-sm-12 normal-cursor">
                     <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
                 </div>
             </div>
-            <div id="divemaildetail" onclick="MarkEmailasRead(this);" data-toggle="collapse" data-target="#@email.EmailGuid" class="divemaildetail">
+            <div id="divemaildetail" onclick="MarkEmailasReadOnInboxClick(this);" data-toggle="collapse" data-target="#@email.EmailGuid" class="divemaildetail">
 
-                <div class="subject-tag" onclick="MarkEmailasRead(this);" data-toggle="collapse" data-target="#@email.EmailGuid">
+                <div class="subject-tag" onclick="MarkEmailasReadOnInboxClick(this);" data-toggle="collapse" data-target="#@email.EmailGuid">
                     <h5>@email.Subject</h5>
                 </div>
-                <div class="clear"></div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    @if (!isSentBox)
-                    {
-                        <a title="Reply" href="#" onclick="replyandForwardMessage('@email.EmailGuid','reply')" class="btn btn-outline-primary">
-                            <i class="fa fa-reply " aria-hidden="true"></i>
-                        </a>
-                    }
-                    <a title="Forward" href="#" onclick="replyandForwardMessage('@email.EmailGuid','forward')" class="btn btn-outline-primary">
-                        <i class="fa fa-share" aria-hidden="true"></i>
+
+            </div>
+            <div class="clear"></div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                @if (!isSentBox)
+                {
+                    <a title="Reply" href="#" onclick="replyandForwardMessage('@email.EmailGuid','reply')" class="btn btn-outline-primary">
+                        <i class="fa fa-reply " aria-hidden="true"></i>
                     </a>
+                }
+                <a title="Forward" href="#" onclick="replyandForwardMessage('@email.EmailGuid','forward')" class="btn btn-outline-primary">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </a>
+                @if (!isSentBox)
+                {
                     <button type="button" class="email-header-btn  btn btn-outline-primary" onclick="DeleteSingleMessage('@email.EmailGuid');"><i class="fa fa-trash"></i></button>
-                </div>
+                }
             </div>
             <div id="@email.EmailGuid" class="mail-detail-box collapse">
-                <span class=" close-link" title="Close"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <span data-toggle="collapse" data-target="#@email.EmailGuid" class=" close-link" title="Close"><i class="fa fa-times" aria-hidden="true"></i></span>
                 <div class="shadow-box" href="javascript:void(0)">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-12">
-                            @if (!isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+                            @if ((!isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer) || (isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Merchant))
                             {
                                 <div class="user-profile">
                                     <img src="@email.RestaurantImage" />
@@ -79,10 +81,7 @@
                                 </div>
                             }
                         </div>
-
-
                         <div class="col-lg-10 col-md-9 col-sm-12">
-
                             <div class="user-detail">
                                 <h3><b></b>@email.FromName</h3>
                                 <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
@@ -102,13 +101,9 @@
                                     {
                                         <b>@email.ToName</b>
                                     }
-
                                 </p>
                             </div>
                         </div>
-
-
-
                     </div>
                     <hr />
                     @Html.Raw(email.Body)

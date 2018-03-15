@@ -10,7 +10,7 @@
             @if (count > 0) { str = ""; }
             @Html.Raw(str)
             <div class="notice-heading">
-                <div class="float-left"><h4>@email.FromName</h4></div>
+                <div class="float-left"><h4> <a href="/Email/Inbox?EmailGuid=@email.EmailGuid">@email.FromName </a></h4></div>
                 <div class="float-right">
                     <p class="time-post">
                         @email.TimeStamp

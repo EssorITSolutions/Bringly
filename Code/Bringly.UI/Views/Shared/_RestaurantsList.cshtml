@@ -17,7 +17,7 @@
                             @Html.Hidden("restaurant_RestaurantGuid", restaurant.RestaurantGuid)
                             <h4>@restaurant.RestaurantName</h4>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-6 col-md-6 col-sm-12" id="divfavourite_@restaurant.RestaurantGuid" title="@(restaurant.IsFavorite?"Remove from favourite":"Add to favourite")">
                             <p class="timing"><i class='fa @(restaurant.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + restaurant.RestaurantGuid + "'"),0)"></i></p>
 
                         </div>

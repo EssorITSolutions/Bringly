@@ -52,6 +52,7 @@
           <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblFavourite">
           <Key>
@@ -1163,6 +1164,7 @@
           <NavigationProperty Name="tblEmail" Relationship="BringlyModel.FK_tblEmailTo_tblEmail" FromRole="tblEmailTo" ToRole="tblEmail" />
           <Property Name="UserGuid" Type="Guid" Nullable="false" />
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblEmailTo_tblUser" FromRole="tblEmailTo" ToRole="tblUser" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tblEmail">
           <Key>
@@ -1549,6 +1551,7 @@
           <EntitySetMapping Name="tblEmailToes">
             <EntityTypeMapping TypeName="BringlyModel.tblEmailTo">
               <MappingFragment StoreEntitySet="tblEmailTo">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="Read" ColumnName="Read" />
                 <ScalarProperty Name="EmailGuid" ColumnName="EmailGuid" />

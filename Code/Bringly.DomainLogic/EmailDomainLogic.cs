@@ -116,10 +116,13 @@ namespace Bringly.DomainLogic
                                             Select(s => new Restaurant { RestaurantImage = s.RestaurantImage, RestaurantName = s.RestaurantName }).ToList().FirstOrDefault();
                             EmailDomain.EmailBody = template.Body;
                             EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{ToName}", userto.FullName).Replace("{Description}", ComposeEmail.EmailMessage.Body)
-                                .Replace("{FromName}", userfrom.FullName);
+                                ;
 
                             if (ComposeEmail.EmailMessage.TemplateType == (Enum.GetName(typeof(TemplateType), TemplateType.Review)))
-                            { EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{RedirecttoReviewList}", "" + CommonDomainLogic.GetCurrentDomain + "\\User\\MerchantReview"); }
+                            { EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{RedirecttoReviewList}", "" + CommonDomainLogic.GetCurrentDomain + "\\User\\MerchantReview").Replace("{FromName}", userfrom.FullName); }
+                            else {
+                                EmailDomain.EmailBody = EmailDomain.EmailBody.Replace("{FromName}", bringlyEntities.tblUsers.Where(x=>x.EmailAddress==template.EmailFrom).ToList().FirstOrDefault().FullName);
+                            }
                         }
                         else { EmailDomain.EmailBody = ComposeEmail.EmailMessage.Body; }
                         string emailresponse = "";//EmailSender.sendEmail(EmailDomain);
@@ -170,10 +173,11 @@ namespace Bringly.DomainLogic
                 Select(em=>new Email { EmailGuid=em.EmailGuid,TemplateGuid=em.TemplateGuid,Subject=em.Subject,Body=em.Body,EmailFrom=em.EmailFrom,DateCreated=em.DateCreated
                 ,FromName =em.tblUser.FullName,ToName= em.tblEmailToes.Where(x => x.UserGuid == x.tblUser.UserGuid).ToList().FirstOrDefault().tblUser.FullName
                 ,EmailToList=em.tblEmailToes.Where(x => x.UserGuid == x.tblUser.UserGuid).ToList().Select(t=>new EmailTo {UserGuid=t.UserGuid, Name = t.tblUser.FullName }).ToList()
+                ,UserImage = em.tblUser.ImageName
                 }).OrderByDescending(x => x.DateCreated).ToList();
             Email.Emails.ForEach(z => z.RestaurantImage = restaurantimagepath);
             
-            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
+            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid)
                 .ToList().Count;
             Email.TotalRecords = Email.Emails.Count;
             int Skip = 0;
@@ -191,8 +195,8 @@ namespace Bringly.DomainLogic
 
         public bool DeleteEmail(Guid[] EmailGuidArray)
         {                
-                List<tblEmail> EmailGuidToBeDelete= bringlyEntities.tblEmails.Where(x => EmailGuidArray.Contains(x.EmailGuid)).ToList();
-                foreach (tblEmail email in EmailGuidToBeDelete)
+                List<tblEmailTo> EmailGuidToBeDelete= bringlyEntities.tblEmailToes.Where(x => EmailGuidArray.Contains(x.EmailGuid)).ToList();
+                foreach (tblEmailTo email in EmailGuidToBeDelete)
                 {                   
                     email.IsDeleted = true;                    
                 }
@@ -207,16 +211,16 @@ namespace Bringly.DomainLogic
             Email.CurrentPage = LatestPage > 0 ? LatestPage : CurrentPage; ;//ViewBag.CurrentPage
             Email.SortBy = SortBy;
             string restaurantimagepath = CommonDomainLogic.GetCurrentDomain + CommonDomainLogic.GetImagePath(ImageType.Restaurant, bringlyEntities.tblRestaurants.Where(x => x.CreatedByGuid == x.tblUser.UserGuid).FirstOrDefault().RestaurantImage) ;
-            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid==x.tblEmail.EmailGuid && x.tblEmail.IsDeleted == false && x.UserGuid== UserVariables.LoggedInUserGuid).
+            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid==x.tblEmail.EmailGuid && x.IsDeleted == false && x.UserGuid== UserVariables.LoggedInUserGuid).
                 Select(em => new Email { EmailGuid = em.tblEmail.EmailGuid, TemplateGuid = em.tblEmail.TemplateGuid, Subject = em.tblEmail.Subject, Body = em.tblEmail.Body, EmailFrom = em.tblEmail.EmailFrom
                 , DateCreated = em.tblEmail.DateCreated
                 , FromName = bringlyEntities.tblUsers.Where(zx=>zx.UserGuid==em.tblEmail.CreatedByGuid).ToList().FirstOrDefault().FullName
                 ,Read=em.Read,ToName = em.tblUser.FullName
                  ,
                     UserImage = bringlyEntities.tblUsers.Where(zx => zx.UserGuid == em.tblEmail.CreatedByGuid).ToList().FirstOrDefault().ImageName
-                }).OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read==false).ToList();
+                }).OrderByDescending(x => x.DateCreated).ToList().OrderByDescending(x => x.Read == false).ToList();
             Email.Emails.ForEach(z => z.RestaurantImage = restaurantimagepath);
-            Email.UnReadCount= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read==false)
+            Email.UnReadCount= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid)
                 .ToList().Count;
             
             Email.TotalRecords = Email.Emails.Count;
@@ -227,10 +231,6 @@ namespace Bringly.DomainLogic
             else
                 Skip = ((Email.CurrentPage * Email.PageSize) - Email.PageSize);
 
-            if (Email.TotalRecords == 0 && Skip > 0)
-            {
-                Skip = Skip - 1;
-            }
             Email.Emails = Email.Emails.Skip(Skip).Take(Take).ToList(); 
             return Email;
         }
@@ -243,7 +243,7 @@ namespace Bringly.DomainLogic
                 email.Read = true;
             }
             bringlyEntities.SaveChanges();
-            int count= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
+            int count= bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid)
                 .ToList().Count;
             return count ;
         }
@@ -256,21 +256,21 @@ namespace Bringly.DomainLogic
                 email.Read = false;
             }
             bringlyEntities.SaveChanges();
-            int count = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
+            int count = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid)
                 .ToList().Count;
             return count;
         }
 
         public int GetUnReadEmailCount()
         {
-            return bringlyEntities.tblEmailToes.Where(x => x.tblEmail.CreatedByGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.tblEmail.Sent == false && x.Read == false)
+            return bringlyEntities.tblEmailToes.Where(x => x.UserGuid== UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid==x.tblEmail.EmailGuid)
                 .ToList().Count;
         }
 
         public MyEmail GetNotificationEmail(Guid EmailGuid)
         {
             MyEmail Email = new MyEmail();
-            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.EmailGuid == x.tblEmail.EmailGuid && x.tblEmail.IsDeleted == false && x.UserGuid == UserVariables.LoggedInUserGuid && x.Read == false).
+            Email.Emails = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid).
                 Select(em => new Email
                 {
                     EmailGuid = em.tblEmail.EmailGuid,
@@ -281,8 +281,11 @@ namespace Bringly.DomainLogic
                     Read = em.Read
                 })
                 .OrderByDescending(x => x.DateCreated).OrderByDescending(x => x.Read == false).Take(2).ToList();
-            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.tblEmail.IsDeleted == false && x.Read == false)
+            Email.UnReadCount = bringlyEntities.tblEmailToes.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid && x.IsDeleted == false && x.tblEmail.Sent == true && x.Read == false && x.EmailGuid == x.tblEmail.EmailGuid)
                 .ToList().Count;
+            string orderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);
+            Email.CartCount = bringlyEntities.tblOrderItems.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.OrderGuid==x.tblOrder.OrderGuid && x.tblOrder.OrderStatus == orderStatus)
+              .ToList().Sum(x => x.Quantity);
             return Email;
         }
 

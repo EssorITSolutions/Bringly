@@ -20,7 +20,7 @@
                                 @if (ismerchant)
                                 {@review.UserName}
                             else
-                            { <a href="#">@review.RestaurantName</a>}
+                            { @review.RestaurantName}
                                 <span class="tag-date">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(review.DateCreated) @Bringly.Domain.BaseClasses.DomainBase.Time24hr(review.DateCreated) </span>
                             </h4>
                         </div>

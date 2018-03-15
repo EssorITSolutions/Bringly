@@ -1,0 +1,52 @@
+﻿@model List<Bringly.Domain.Items>
+@{Layout = null;}
+@foreach (var item in Model)
+{
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="shadow-box restaurant-info restaurant-item">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="brand-logo">
+                        <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,item.ItemImage))" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail" id="restaurant-@item.RestaurantGuid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.Hidden("restaurant_RestaurantGuid", item.RestaurantGuid)
+                                <h4>@item.ItemName</h4>
+                            </div>
+                        </div>
+                        <p>Italian cuisine, European</p>
+                        <p class="address-point">@(!string.IsNullOrEmpty(item.ItemWeight) && !string.IsNullOrEmpty(item.ItemSize) ? item.ItemWeight + "/ " + item.ItemSize : (!string.IsNullOrEmpty(item.ItemWeight) ? item.ItemWeight : ""))</p>
+                        <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <div class="brand-detail">
+                        <ul class="list-inline order-detail">
+                            <li class="list-inline-item">
+                                Delivery cost<br />
+                                <span class="DeliveryCharge_@item.ItemGuid">@(item.DeliveryCharge.ToString() != "0.00" ? item.DeliveryCharge.ToString() + " $" : "Free")</span>
+                            </li>
+                        </ul>
+                    </div>
+                   
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 order-detail">
+                    <div class="align-items-center order-quantity" id="div_@item.ItemGuid">
+                        <a href="#" class="add-minus-icon" onclick="decreaseItemQuantity('@item.ItemGuid')"><i class="fa fa-minus"></i></a>
+                        <span class="quanity-input"><label for="lblQuantity" class="lblQuantity_@item.ItemGuid">1</label></span>
+                        <a href="#" class="add-minus-icon" onclick="increaseItemQuantity('@item.ItemGuid')"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="float-right" style="padding-top:12px;">
+                            <button onclick="Addtocart('@item.ItemGuid')" type="button" class="btn btn-primary btn-lg">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+}

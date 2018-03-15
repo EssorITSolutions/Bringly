@@ -16,6 +16,7 @@ namespace Bringly.Domain
         [Range(1, int.MaxValue,ErrorMessage = "Please provide rating.")]
         public int Rating { get; set; }
         [Required(ErrorMessage="Please fill review.")]
+        [MaxLength(500)]
         public string Review { get; set; }
         public string RestaurantImage { get; set; }
         public string RestaurantName { get; set; }

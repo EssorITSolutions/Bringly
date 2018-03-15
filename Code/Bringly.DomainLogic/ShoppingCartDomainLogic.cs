@@ -12,7 +12,7 @@ namespace Bringly.DomainLogic
 {
     public class ShoppingCartDomainLogic : BaseClass.DomainLogicBase
     {
-        public ShoppingCart GetItemsIncart()
+        public ShoppingCart fillCart()
         {
             ShoppingCart OrderItemList = new ShoppingCart();
             string orderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);            
@@ -51,6 +51,69 @@ namespace Bringly.DomainLogic
                 return false;
             }
          
+        }
+
+        public bool addToCart(Items item)
+        {
+            Guid OrderGuid = Guid.Empty;
+            string orderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Completed);
+            tblOrder tblOrder = bringlyEntities.tblOrders.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.OrderStatus != orderStatus).ToList().FirstOrDefault();
+            if (tblOrder != null && tblOrder.OrderGuid != Guid.Empty)
+            {
+                OrderGuid = tblOrder.OrderGuid;
+                tblOrder.OrderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);
+            }
+            else
+            {
+                tblOrder = new tblOrder();
+                tblOrder.OrderGuid = Guid.NewGuid();
+                OrderGuid = tblOrder.OrderGuid;
+                tblOrder.CreatedByGuid = UserVariables.LoggedInUserGuid;
+                tblOrder.OrderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);
+                tblOrder.OrderDiscount = 0;
+                tblOrder.OrderSubTotal = 0;
+                tblOrder.OrderTotal = 0;
+                tblOrder.IsDeleted = false;
+                bringlyEntities.tblOrders.Add(tblOrder);
+            }
+            bringlyEntities.SaveChanges();
+            tblOrderItem OrderItem = bringlyEntities.tblOrderItems.Where(x => x.ItemGuid == item.ItemGuid && x.OrderGuid == OrderGuid && x.CreatedByGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
+            if (OrderItem != null && OrderItem.OrderItemGuid != Guid.Empty)
+            {
+                OrderItem.Quantity = item.Quantity+ OrderItem.Quantity;
+            }
+            else
+            {
+                OrderItem = new tblOrderItem();
+                OrderItem.OrderItemGuid = Guid.NewGuid();
+                OrderItem.OrderGuid = OrderGuid;
+                OrderItem.ItemGuid = item.ItemGuid;
+                OrderItem.Quantity = item.Quantity;
+                OrderItem.UnitPrice = 0;
+                OrderItem.CreatedByGuid = UserVariables.LoggedInUserGuid;
+                OrderItem.DateCreated = DateTime.Now;
+                bringlyEntities.tblOrderItems.Add(OrderItem);
+            }
+
+            bringlyEntities.SaveChanges();
+            return true;
+        }
+        public int getCartCount()
+        {
+            string orderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);
+            return bringlyEntities.tblOrderItems.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.OrderGuid == x.tblOrder.OrderGuid && x.tblOrder.OrderStatus == orderStatus)
+              .ToList().Sum(x => x.Quantity);
+        }
+
+        public bool deleteItemFromCart(Guid ItemGuid)
+        {
+            string orderStatus = Enum.GetName(typeof(OrderStatus), OrderStatus.Incomplete);
+            tblOrder tblOrder = bringlyEntities.tblOrders.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.OrderStatus == orderStatus).ToList().FirstOrDefault();           
+            tblOrderItem OrderItem = bringlyEntities.tblOrderItems.Where(x => x.ItemGuid == ItemGuid && x.OrderGuid == tblOrder.OrderGuid && x.CreatedByGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
+            bringlyEntities.tblOrderItems.Attach(OrderItem);
+            bringlyEntities.tblOrderItems.Remove(OrderItem);
+            bringlyEntities.SaveChanges();
+            return true;
         }
     }
 }

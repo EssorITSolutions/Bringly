@@ -33,6 +33,28 @@ namespace Bringly.DomainLogic
             return _restaurantSearch;
         }
 
-        
+        public List<Items> GetItemsByRestaurantGuid(Guid restaurantGuid)
+        {
+            List<Items> itemslist = new List<Items>();
+            if (restaurantGuid != Guid.Empty)
+            {
+                itemslist = bringlyEntities.tblItems.Where(x => x.RestaurantGuid == restaurantGuid && x.IsActive == true && x.IsDeleted == false).ToList().
+                    Select(itm => new Items
+                    {
+                        ItemGuid = itm.ItemGuid,
+                        ItemName = itm.ItemName,
+                        ItemImage = itm.ItemImage,
+                        RestaurantGuid = itm.RestaurantGuid,
+                        CategoryGuid = itm.CategoryGuid.HasValue ? itm.CategoryGuid.Value : Guid.NewGuid(),
+                        DeliveryCharge = itm.DeliveryCharge.HasValue ? itm.DeliveryCharge.Value : 0,
+                        ItemWeight = itm.ItemWeight,
+                        ItemSize = itm.ItemSize,
+                        ItemPrice = itm.ItemPrice,
+                        Discount = itm.Discount,
+                        IsActive = itm.IsActive
+                    }).ToList();
+            }
+            return itemslist;
+        }
     }
 }

@@ -8,14 +8,16 @@
 
 
 
-               
-
-                @RenderBody()
 
 
-           
+    @RenderBody()
+
+
+
 
     <div class="clearfix"></div>
     @{Html.RenderPartial("_partialpageFooter");}
+
+    @RenderSection("PageFooterResources", false)
 </body>
 </html>

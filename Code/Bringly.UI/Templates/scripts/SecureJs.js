@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $('#OpenImgUpload').click(function () { $('#fileUserProfileImage').trigger('click'); });
     $('#stars li').on('mouseover', function () {
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -56,17 +57,43 @@
                 ErrorBlock(getParameterByName('Message'));
             }
         }
-    }
+    }   
+    //$(".compose-form .chosen-select").chosen().change(function () {
+    //    if ($(this).val() == '') {
+    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
+    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('<span for="EmailMessage_EmailToGuid" generated="true" class="">Please select user.</span>');
+    //        return false;
+    //    }
+    //    else {
+    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
+    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('');
+    //        return true;
+    //    }
+    //});
 });
+function checkComposeEmailTo(){
+        if ($(".compose-form .chosen-select").val() == '') {
+            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
+            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('<span for="EmailMessage_EmailToGuid" generated="true" class="">Please select user.</span>');
+            return false;
+        }
+        else {
+            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
+            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('');
+            return true;
+        }
+}
 $(function () {
     $('.dashboard-menu ul.list-unstyled.user-menu li a').click(function () {
-        localStorage.setItem('thisLink', $(this).parent().attr("id"));
+        localStorage.setItem('thisLink', $(this).parent().attr("class"));
+       
         $(this).parent().removeClass('class');
     });
 
     var thisLink = localStorage.getItem('thisLink');
     if (thisLink) {
-        $('#' + thisLink).addClass('active');
+        $('.' + thisLink).addClass('active');
+       
     }
     var url = window.location.toString();
     if (url.indexOf("Sent") > -1 || url.indexOf("Inbox") > -1) {
@@ -88,21 +115,21 @@ window.onload = function () {
                 $('li.notification-' + urlparts[1].split('=')[1] + '').remove();
                 $('div[data-target="#' + urlparts[1].split('=')[1] + '"]').click();
             }
+            emailguiidarray.forEach(function (querystring) {
+                email += querystring + "=";
+            });
+            window.history.replaceState({}, document.title, url.replace(email.replace(/=\s*$/, ""), ""));            
         }
-        emailguiidarray.forEach(function (querystring) {
-            email += querystring+"=";
-        });
-        window.history.replaceState({}, document.title, url.replace("?" + email.replace(/=\s*$/, ""), ""));
     }
     
     if ($('.UnReadEmailCount').val() != '' && $('.UnReadEmailCount').val() != undefined) {
         $('.message-count').text('(' + $('#UnReadEmailCount').val() + ')');
     }
-    CKEDITOR.replace('EmailMessage_Body');
-    CKEDITOR.editorConfig = function (config) {
-        config.extraPlugins = 'maxlength';
-    };
-
+    if ($('.CartCount').val() != '' && $('.CartCount').val() != undefined) {
+        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');
+       
+    }    
+   
     if ($('#EmailMessage_EmailTo').val() != "") {
         $(".chosen-select").val($('#EmailMessage_EmailTo').val()).trigger("liszt:updated");//chosen:updated.chosen
     }
@@ -127,9 +154,11 @@ function addRemoveToFavourite(restaurantGuid, IsFavourite) {
 
     if ($("div#restaurant-" + restaurantGuid + " [name=favourite]").hasClass("fa-heart-o")) {
         PostDataWithSuccessParam("/user/addtofavourite/", { restaurantGuid: restaurantGuid, IsFavourite: IsFavourite }, addToFavouriteSuccess)
+        $('#divfavourite_' + restaurantGuid).attr('title', 'Remove from favourite');
     }
     else {
         PostDataWithSuccessParam("/user/RemoveFavourite/", { restaurantGuid: restaurantGuid, IsFavourite: IsFavourite }, addToFavouriteSuccess)
+        $('#divfavourite_' + restaurantGuid).attr('title', 'Add to favourite');
     }
 }
 
@@ -146,10 +175,15 @@ function addToFavouriteSuccess(response, data) {
 
         if (data.IsFavourite == 1) {
             $('#restaurant-' + data.restaurantGuid).remove();
+            if ($.trim($('#divfavouritelist').html())=='') {
+                GetData("/Email/NoRecordFoundPartial", {}, NoRecordFoundPartialViewFavourite)
+            }
         }
     }
 }
-
+function NoRecordFoundPartialViewFavourite(response) {
+    $('#divfavouritelist').html(response);
+}
 function OpenReviewPopUp(ReviewGuid) {
     console.log(ReviewGuid);
     $('#btnAddReviewPopUp').modelPopUp({
@@ -229,7 +263,7 @@ function enableEmailHeaderButton() {
     $('.mark-as-unread').removeClass("btn-disabled").removeAttr("disabled", "disabled");
 }
 
-function SelectEmail() {
+function SelectSingleEmailCheckbox() {
     if ($('.singlechecheckbox:checked').length == $('.singlechecheckbox').length) {
         $('.checkboxselectall').prop('checked', true); // Checks it
     }
@@ -244,36 +278,9 @@ function SelectEmail() {
     }
 }
 
-function DeleteSentEmail()
-{
-    var EmailGuid = new Array();
-    $('.singlechecheckbox:checked').each(function () {
-            EmailGuid.push($(this).attr("EmailGuid"));            
-    });  
-    if (EmailGuid.length > 0) {
-        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteSentEmailResponse);        
-    }
-}
-function DeleteSentEmailResponse(response, data) {
-    
-    if (response) {
-        $('.checkboxselectall').prop('checked', false);
 
-        $.each(data.EmailGuid, function (key, value) {
-            $('div[divemailguid=' + value + ']').remove();
-        });
-        $('div.sweet-overlay').css('display', 'none');
-        $('.sweet-alert.showSweetAlert.visible').removeAttr('class');
-        //alert($('.emails-count:hidden').length);
-        if (!$('div#partialEmaiList div').hasClass('emails-count')) {
-            PostDataWithSuccessParam("/Email/Sent", {str:""}, EmailListPartialView);
-            disableEmailHeaderButton();
-        }
-    }
-    else {
-        ErrorBlock("Error while deleting email.");
-    }
-}
+
+
 function DeleteSingleMessage(GuidEmail) {
     var EmailGuid = new Array();
     EmailGuid.push(GuidEmail);
@@ -297,13 +304,22 @@ function DeleteInboxEmailResponse(response, data) {
         $.each(data.EmailGuid, function (key, value) {
             $('div[divemailguid=' + value + ']').remove();
         });
-        $('div.sweet-overlay').css('display', 'none');
-        $('.sweet-alert.showSweetAlert.visible').removeAttr('class');
         if (!$('div#partialEmaiList div').hasClass('emails-count')) {
-            PostDataWithSuccessParam("/Email/Inbox", {str:""}, EmailListPartialView);
+            PostDataWithSuccessParam("/Email/Inbox", {}, EmailListPartialView);
         }
         PostData("/Email/GetUnReadEmailCount", {}, UnreadEmailResponse);
         disableEmailHeaderButton();
+        //$('.sa-button-container .cancel').click();
+        swal({
+            title: "Success",
+            text: "Email deleted successfully.",
+            type: "success",
+            buttons: false,
+            timer: 2000,
+            showConfirmButton: false
+        });
+        disableEmailHeaderButton();
+       // Success("Email deleted successfully.");
     }
     else {
         ErrorBlock("Error while deleting email.");
@@ -311,22 +327,25 @@ function DeleteInboxEmailResponse(response, data) {
     
 }
 
+//Mark as Read start
+
 function UnreadEmailResponse(response, data) {
+    console.log(response);
+    console.log(data);
     $('.message-count').text('(' + response + ')');
-    $('.checkboxselectall').prop('checked', false);
-    $('.singlechecheckbox').prop('checked', false);
+    UncheckEmailCheckbox();
 }
 
-function guid() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
+function markEmailReadOnClickHeader() {
+    var EmailGuid = new Array();
+    $('.singlechecheckbox:checked').each(function () {
+        EmailGuid.push($(this).attr("EmailGuid"));
+    });
+    if (EmailGuid.length > 0) {
+        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasReadResponse)
     }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
-
-function MarkEmailasRead(evt) {
+function MarkEmailasReadOnInboxClick(evt) {
     var id = $(evt).attr('data-target');
     if (!$('#' + id.split('#')[1]).hasClass('show')) {
         $('.emaillist div.collapse').removeClass('show');
@@ -334,57 +353,70 @@ function MarkEmailasRead(evt) {
     var EmailGuid = new Array();
     if ($('div[divemailguid=' + id.split('#')[1] + '] div').hasClass('unreaded')) {
         EmailGuid.push(id.split('#')[1]);
-        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasRead)
+        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasReadResponse)     
     }
 }
-
-function MarkasRead(response, data) {
-    $('.message-count').text('(' + response + ')');  
-    $.each(data.EmailGuid, function (key, value) {
-        $('div[divemailguid=' + value + '] div').removeClass('unreaded');
-    });
-    $('.checkboxselectall').prop('checked', false);
-    $('.singlechecheckbox').prop('checked', false);
+function MarkasReadResponse(response, data) {
+ 
+    var EmailGuid = new Array();
+    PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid }, NotifPartialViewOnInboxClick)
     if (response == 0) {
         $('.all-notification').html("<div class='arrow-top'><span class='icon-up'></span></div>  <div class='notice-heading'><div class='float-left'><a>No unread notifications</a></div>");
     }
+    $('.message-count').text('(' + response + ')');
+    $.each(data.EmailGuid, function (key, value) {
+        $('div[divemailguid=' + value + '] div').removeClass('unreaded');        
+    });
+    disableEmailHeaderButton();
+    UncheckEmailCheckbox();
+}
+function NotifPartialViewOnInboxClick(response, data) {
+    $('.notification-dropdown .notification-data').html(response);    
 }
 
-$('.mark-as-read').on("click", function () {
+//Mark as Read end
+
+
+//Mark as UnRead start
+
+function MarkEmailasUnReadHeader() {
     var EmailGuid = new Array();
     $('.singlechecheckbox:checked').each(function () {
         EmailGuid.push($(this).attr("EmailGuid"));
     });
     if (EmailGuid.length > 0) {
-    PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasRead)
+        PostDataWithSuccessParam("/Email/MarkAsUnRead", { EmailGuid: EmailGuid }, MarkasUnReadResponse)
     }
-})
-$('.mark-as-unread').on("click", function () {
-    var EmailGuid = new Array();
-    $('.singlechecheckbox:checked').each(function () {
-        EmailGuid.push($(this).attr("EmailGuid"));
-    });
-    if (EmailGuid.length > 0) {
-    PostDataWithSuccessParam("/Email/MarkAsUnRead", { EmailGuid: EmailGuid }, MarkasUnRead)
-    }
-})
-function MarkasUnRead(response, data) {
-    $('.message-count').text('(' + response + ')');
+}
+
+function MarkasUnReadResponse(response, data) {    
+    var EmailGuid = new Array();  
+    PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid }, NotifiPartViewUnreadEmail)
     $.each(data.EmailGuid, function (key, value) {
         $('div[divemailguid=' + value + '] div').addClass('unreaded');
     });
-    $('.checkboxselectall').prop('checked', false);
-    $('.singlechecheckbox').prop('checked', false);
-    
+    console.log(response);
+    $('.message-count').text('(' + response + ')');
+    UncheckEmailCheckbox();
+    disableEmailHeaderButton();
 }
+function NotifiPartViewUnreadEmail(response, data) {
+    $('.notification-dropdown .notification-data').html(response);    
+}
+//Mark as UnRead end
 
 $('.refresh-email').on('click', function () {    
     PostDataWithSuccessParam("/Email/Inbox", { }, EmailListPartialView)
 })
-
+function UncheckEmailCheckbox() {
+    $('.checkboxselectall').prop('checked', false);
+    $('.singlechecheckbox').prop('checked', false);
+}
 
 function EmailListPartialView(response, data) {
     console.log(response);
+    disableEmailHeaderButton();
+    UncheckEmailCheckbox();
     if (response) {        
         if ($.trim(response) == "") {
             $('.emaillist .shadow-box.top-bar-mail').remove();
@@ -394,13 +426,20 @@ function EmailListPartialView(response, data) {
             $('#partialEmaiList').html(response);
         }
     }
-    else {
-        ErrorBlock("Error while deleting email.");
-    }
 }
 function NoRecordFoundPartialView(response) {
     $('#partialEmaiList').html(response);
 }
+function NotificationPartialView(response, data) {
+    $('li.notification-' + data.EmailGuid).fadeOut('slow');;
+    var count = parseInt($('.message-count').text().split('(')[1].split(')')[0]) - 1;
+
+    $('.message-count').text('(' + count + ')');
+
+}
+
+
+
 
 function EmailComposePopup() {
     $('.EmailComposePopup').modelPopUp({
@@ -417,13 +456,6 @@ $('.notification-message').on('click', function () {
     EmailGuid.push($(this).attr('emailguid'))
     PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid}, NotificationPartialView)
 })
-
-function NotificationPartialView(response,data) {
-    $('li.notification-' + data.EmailGuid).fadeOut('slow');;
-    var count =  parseInt($('.message-count').text().split('(')[1].split(')')[0])-1;     
-    $('.message-count').text('(' + count + ')');
-   
-}
 
 $('form[name=compose-form]').submit(function (e) {
     if ($('#EmailMessage_Body').val().length > 1000 || $('#EmailMessage_Subject').val().length > 50) { return false; }
@@ -456,6 +488,7 @@ function replyandForwardMessage(EmailGuid, replyorforward) {
     });
 }
 
+// Calculation price cart start
 $('a.decrease').on('click', function () {
     var itemguidoriginal = $(this).attr('decreasequantity');
     var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input input[type="text"]').val());    
@@ -510,3 +543,107 @@ $('a.increase').on('click', function () {
     $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));    
     $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discount );
 })
+// Calculation price cart end
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+
+function DeleteSentEmail() {
+    var EmailGuid = new Array();
+    $('.singlechecheckbox:checked').each(function () {
+        EmailGuid.push($(this).attr("EmailGuid"));
+    });
+    if (EmailGuid.length > 0) {
+        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: EmailGuid }, DeleteSentEmailResponse);
+    }
+
+}
+function DeleteSentEmailResponse(response, data) {
+
+    if (response) {
+        $('.checkboxselectall').prop('checked', false);
+        $('body').removeClass('stop-scrolling');
+        $.each(data.EmailGuid, function (key, value) {
+            $('div[divemailguid=' + value + ']').remove();
+        });
+        if (!$('div#partialEmaiList div').hasClass('emails-count')) {
+            PostDataWithSuccessParam("/Email/Sent", { str: "" }, EmailListPartialView);
+            disableEmailHeaderButton();
+            $('.sa-button-container .cancel').click();
+        }
+    }
+    else {
+        ErrorBlock("Error while deleting email.");
+    }
+}
+
+
+// Item quantity decrease and increase and add to cart start
+
+function decreaseItemQuantity(itemguid) {
+    var quantity = parseInt($('.lblQuantity_'+itemguid).text());
+    if (quantity == 1) {
+        swal({
+            title: "Quantity Error",
+            text: "Quantity cannot be less than 1.",
+            type: "error",
+            buttons: false,
+            timer: 3000,
+            showConfirmButton: false
+        });
+    }
+    else {
+        quantity = parseInt($('.lblQuantity_' + itemguid).text());
+        $('.lblQuantity_' + itemguid).text(quantity-1);    
+    }
+}
+
+function increaseItemQuantity(itemguid) {
+    var quantity = parseInt($('.lblQuantity_' + itemguid).text());
+    $('.lblQuantity_' + itemguid).text(quantity + 1);
+}
+
+function Addtocart(itemguid) {
+    var item = {
+        ItemGuid: itemguid,
+        Quantity: parseInt($('.lblQuantity_' + itemguid).text())
+    }
+    PostDataWithSuccessParam("/Restaurant/addToCart", { item: item }, addToCartResponse)
+
+
+    
+}
+function addToCartResponse(response) {
+    if (response) {
+        //Success("Item added to cart.");
+        PostDataWithSuccessParam("/Restaurant/getCartCount", {}, cartCountResponse)
+    }
+    else {
+        Error("Error while adding item to cart");
+    }
+}
+function cartCountResponse(response) {
+    $('.cart-notice sub').text('(' + response + ')');
+}
+function deleteCartItem(ItemGuid) {
+   
+    PostDataWithSuccessParam("/Restaurant/deleteItemFromCart", { ItemGuid: ItemGuid }, deleteItemFromCartResponse)
+}
+function deleteItemFromCartResponse(response, data) {   
+    if (response) {
+        $('#tr_' + data.ItemGuid).remove();
+        PostDataWithSuccessParam("/Restaurant/getCartCount", {}, cartCountResponse)
+       // Success("Item deleted successfully.");
+    }
+    else {
+        Error("Error while deleting item from cart");
+    }
+}
+
+// Item quantity decrease and increase and add to cart start end

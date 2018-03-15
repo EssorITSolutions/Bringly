@@ -1,0 +1,23 @@
+﻿@model List<Bringly.Domain.Items>
+@{
+    ViewBag.Title = "Restaurant Menu";
+    Layout = "~/Views/Shared/MasterPages/RestaurantMaster.cshtml";
+    ViewBag.HideLeftSection = true;
+}
+
+@section BreadCrum{
+    <li class="breadcrumb-item active"> Menu</li>
+}
+@if (Model != null && Model.Count > 0)
+{
+
+    Html.RenderPartial("_ItemsList", Model);
+}
+else
+{
+    <div>
+        <p style="color:red;font-size:16px;">No restaurant found.</p>
+    </div>
+}
+
+

@@ -2,12 +2,13 @@
 @model Bringly.Domain.ShoppingCart
 @{
     ViewBag.Title = "Cart";
-    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
     string domainpath = Bringly.DomainLogic.CommonDomainLogic.GetCurrentDomain;
     int i = 0;
+    ViewBag.HideLeftSection = true;
 }
 
-<div class="inner-margin">
+<div class="inner-margin width-100">
     <div class="shadow-box shopping-cart ">
         <h3>Shopping Cart</h3>
         @if (Model.ItemsList != null && Model.ItemsList.Count > 0)
@@ -37,7 +38,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <h5 class="product-name">@item.ItemName</h5>
-                                                <p>@(!string.IsNullOrEmpty(item.ItemWeight) ? item.ItemWeight + "/ " + item.ItemSize : item.ItemSize)</p>
+                                                <p>@((!string.IsNullOrEmpty(item.ItemWeight) && !string.IsNullOrEmpty(item.ItemSize)) ? item.ItemWeight + "/ " + item.ItemSize : item.ItemWeight)</p>
                                             </div>
                                         </div>
                                     </td>
@@ -60,7 +61,7 @@
                                     </td>
                                     <td class="text-center action-button">
                                         <div class="row align-items-center">
-                                            <a href="" class="trash-icon" deleteguid="@item.ItemGuid"><i class="fa fa-trash"></i> </a>
+                                            <a href="" class="trash-icon" onclick="deleteCartItem('@item.ItemGuid')"><i class="fa fa-trash"></i> </a>
                                         </div>
                                     </td>
                                 </tr>

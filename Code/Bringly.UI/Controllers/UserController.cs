@@ -57,7 +57,8 @@ namespace Bringly.UI.Controllers
             Success("Saved successfully");
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
             userProfile.Cities = commonDomainLogic.GetCities();
-            return View(userProfile);
+            return RedirectToAction("EditPersonalInformation", "User");
+            //return View(userProfile);
         }
 
         public ActionResult UpdatePreferedCity(Guid CityGuid)
@@ -123,6 +124,9 @@ namespace Bringly.UI.Controllers
 
         public ActionResult RestaurantReview()
         {
+            if (TempData["IspopUp"] != null) {
+                Success("Review added successfully");
+            }
             UserDomainLogic userDomainLogic = new UserDomainLogic();
             return View(userDomainLogic.GetMyReviewBuyer(UserVariables.LoggedInUserGuid));
         }
@@ -158,7 +162,7 @@ namespace Bringly.UI.Controllers
             {                
                 myReview.IsSkipped = false;
                 userDomainLogic.InsertReview(myReview);
-                ViewBag.IspopUp = true;               
+                TempData["IspopUp"] = true;
             }
             return PartialView("_AddReview", userDomainLogic.GetReviewByGuid(myReview.ReviewGuid));
         }
@@ -181,9 +185,18 @@ namespace Bringly.UI.Controllers
         }
         public ActionResult MerchantReview(MyReview myreview)
         {
-            UserDomainLogic userDomainLogic = new UserDomainLogic();
-            myreview.UserGuid = UserVariables.LoggedInUserGuid;
-            return View(userDomainLogic.GetMyReviewMerchant(myreview));
+            if (UserVariables.UserRole == Domain.Enums.User.UserRoles.Merchant)
+            {
+                UserDomainLogic userDomainLogic = new UserDomainLogic();
+                myreview.UserGuid = UserVariables.LoggedInUserGuid;
+                return View(userDomainLogic.GetMyReviewMerchant(myreview));
+            }
+            else {
+                //Unauthorize unauthorize = new Unauthorize();
+                //string url = Request.Url.AbsoluteUri;
+                //unauthorize.ReturnUrl = url.Split(new[] { '?' })[0];
+                return View("UnauthorizedAccess");
+            }
         }
 
         public List<Contact> GetAllBuyers()

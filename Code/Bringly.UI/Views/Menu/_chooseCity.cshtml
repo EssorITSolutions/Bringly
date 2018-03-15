@@ -1,6 +1,7 @@
 ﻿@model Bringly.Domain.ChooseCity
 @{
     Layout = null;
+    string cityname = "";
 }
 
 <div class="Navbar-dropdown dropdown-menu-form">
@@ -13,9 +14,13 @@
                 <a href="#" class="close-icon">&times;</a>
                 <h4>Choose your city</h4>
                 <ul class="list-unstyled">
-                    @foreach (Bringly.Domain.City city in Model.TopCities)
+                    @foreach (Bringly.Domain.City city in Model.TopCities.Distinct())
                     {
-                        <li class="@(Model.SelectedCity.CityGuid==city.CityGuid? "active":"")"><a href="/restaurant/city/@city.CityUrlName">@city.CityName</a></li>
+                        if (!cityname.Contains(city.CityName))
+                        {
+                            <li class="@(Model.SelectedCity.CityGuid == city.CityGuid ? "active" : "")"><a href="/restaurant/city/@city.CityUrlName">@city.CityName</a></li>
+                                cityname += city.CityName+",";
+                        }
                     }
                 </ul>
 
@@ -32,8 +37,7 @@
                         </select>
                         <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
                     </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nunc dui, ultrices ut magna vel, lobortis pharetra nisi.</p>
+                </div>                
             </div>
         </div>
     </div>

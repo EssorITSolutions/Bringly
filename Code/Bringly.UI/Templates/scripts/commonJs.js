@@ -329,7 +329,7 @@ function closeModelPopUpFormCompose(Ismessagesent) {
         });
     }
     window.setTimeout(function () {
-        window.location.href = "/Email/Inbox";
+        window.location.href = window.location.toString();
     }, 3000);
 
 }

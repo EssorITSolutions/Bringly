@@ -18,5 +18,9 @@ namespace Bringly.Domain.Common
         public string Body { get; set; }
         public string Subject { get; set; }
     }
+    public class Unauthorize
+    {
+        public string ReturnUrl { get; set; }
+    }
 
 }
