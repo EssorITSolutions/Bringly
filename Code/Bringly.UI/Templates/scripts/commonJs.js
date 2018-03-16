@@ -267,6 +267,42 @@ $(function () {
         }
     });
 });
+$(function () {
+    $("#fileItemImage").change(function () {
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+            if (window.FormData !== undefined) {
+
+                var fileData = new FormData();
+                fileData.append("FileToUpload", $(this).get(0).files[0]);
+                $.ajax({
+                    url: '/Restaurant/UploadMenuItemImage',
+                    type: "POST",
+                    contentType: false, // Not to set any content header  
+                    processData: false, // Not to process data  
+                    data: fileData,
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                          //  Success(result.Message);
+                            $('img[name=imgItemImage]').attr("src", result.NewImage);
+                            $('#ItemImage').val(result.NewImage.substr(result.NewImage.lastIndexOf('/') + 1));
+                        }
+                        else {
+                            ErrorBlock(result.Message);
+                        }
+                    },
+                    error: function (err) {
+                        ErrorBlock(err.statusText);
+                    }
+                })
+            } else {
+                ErrorBlock("FormData is not supported.");
+            }
+        } else {
+            ErrorBlock("Please upload a valid image file.");
+        }
+    });
+});
 
 function fileImageSuccess(response) {
 

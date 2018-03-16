@@ -31,25 +31,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/14/2018 12:03:10</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll">
-      <publishTime>03/15/2018 16:16:52</publishTime>
+      <publishTime>03/15/2018 18:22:32</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll.config">
       <publishTime>02/19/2018 15:24:15</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.pdb">
-      <publishTime>03/15/2018 16:16:52</publishTime>
+      <publishTime>03/15/2018 18:22:32</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.dll">
-      <publishTime>03/15/2018 16:16:52</publishTime>
+      <publishTime>03/15/2018 18:22:32</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.pdb">
-      <publishTime>03/15/2018 16:16:52</publishTime>
+      <publishTime>03/15/2018 18:22:32</publishTime>
     </File>
     <File Include="bin/Bringly.UI.dll">
-      <publishTime>03/15/2018 16:16:55</publishTime>
+      <publishTime>03/15/2018 18:22:35</publishTime>
     </File>
     <File Include="bin/Bringly.UI.pdb">
-      <publishTime>03/15/2018 16:16:55</publishTime>
+      <publishTime>03/15/2018 18:22:35</publishTime>
     </File>
     <File Include="bin/Elmah.dll">
       <publishTime>02/19/2018 15:24:40</publishTime>
@@ -2053,7 +2053,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Templates/Scripts/SecureJs.js">
-      <publishTime>03/15/2018 15:44:51</publishTime>
+      <publishTime>03/15/2018 18:21:59</publishTime>
     </File>
     <File Include="Templates/Scripts/validation/jquery-migrate-1.1.0.js">
       <publishTime>02/19/2018 15:24:22</publishTime>
@@ -2110,13 +2110,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/14/2018 15:31:32</publishTime>
     </File>
     <File Include="Views/Email/Sent.cshtml">
-      <publishTime>03/13/2018 17:33:14</publishTime>
+      <publishTime>03/15/2018 16:46:26</publishTime>
     </File>
     <File Include="Views/Errors/Error404.cshtml">
       <publishTime>02/21/2018 16:51:11</publishTime>
     </File>
     <File Include="Views/Home/ForgotPassword.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>03/15/2018 16:43:21</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>03/01/2018 10:24:40</publishTime>
@@ -2170,7 +2170,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/14/2018 16:10:32</publishTime>
     </File>
     <File Include="Views/Shared/_ComposeEmail.cshtml">
-      <publishTime>03/14/2018 13:19:39</publishTime>
+      <publishTime>03/15/2018 18:18:30</publishTime>
     </File>
     <File Include="Views/Shared/_EmailList.cshtml">
       <publishTime>03/15/2018 15:43:40</publishTime>
@@ -2230,7 +2230,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 15:24:22</publishTime>
     </File>
     <File Include="Views/User/RestaurantReview.cshtml">
-      <publishTime>03/14/2018 15:04:32</publishTime>
+      <publishTime>03/15/2018 16:54:43</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/19/2018 15:24:22</publishTime>

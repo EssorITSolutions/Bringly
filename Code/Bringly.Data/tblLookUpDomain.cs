@@ -14,8 +14,17 @@ namespace Bringly.Data
     
     public partial class tblLookUpDomain
     {
-        public System.Guid LookDomainGuid { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblLookUpDomain()
+        {
+            this.tblLookUpDomainValues = new HashSet<tblLookUpDomainValue>();
+        }
+    
+        public System.Guid LookUpDomainGuid { get; set; }
         public string LookUpDomainCode { get; set; }
         public string LookUpDomainDescription { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
     }
 }

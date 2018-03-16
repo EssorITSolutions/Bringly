@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     $('#OpenImgUpload').click(function () { $('#fileUserProfileImage').trigger('click'); });
+    $('#itemImageUpload').click(function () { $('#fileItemImage').trigger('click'); });
     $('#stars li').on('mouseover', function () {
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
@@ -57,19 +58,7 @@
                 ErrorBlock(getParameterByName('Message'));
             }
         }
-    }   
-    //$(".compose-form .chosen-select").chosen().change(function () {
-    //    if ($(this).val() == '') {
-    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
-    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('<span for="EmailMessage_EmailToGuid" generated="true" class="">Please select user.</span>');
-    //        return false;
-    //    }
-    //    else {
-    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
-    //        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('');
-    //        return true;
-    //    }
-    //});
+    }       
 });
 function checkComposeEmailTo(){
         if ($(".compose-form .chosen-select").val() == '') {
@@ -85,15 +74,16 @@ function checkComposeEmailTo(){
 }
 $(function () {
     $('.dashboard-menu ul.list-unstyled.user-menu li a').click(function () {
-        localStorage.setItem('thisLink', $(this).parent().attr("class"));
-       
+        localStorage.setItem('thisLink', $(this).parent().attr("class"));       
         $(this).parent().removeClass('class');
     });
-
     var thisLink = localStorage.getItem('thisLink');
-    if (thisLink) {
+    
+    if (thisLink == 'undefined') {    
+        $('.lidashboard').addClass('active');
+    }
+    else {
         $('.' + thisLink).addClass('active');
-       
     }
     var url = window.location.toString();
     if (url.indexOf("Sent") > -1 || url.indexOf("Inbox") > -1) {
@@ -126,13 +116,32 @@ window.onload = function () {
         $('.message-count').text('(' + $('#UnReadEmailCount').val() + ')');
     }
     if ($('.CartCount').val() != '' && $('.CartCount').val() != undefined) {
-        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');
-       
-    }    
-   
+        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');       
+    }  
+     
+  
     if ($('#EmailMessage_EmailTo').val() != "") {
         $(".chosen-select").val($('#EmailMessage_EmailTo').val()).trigger("liszt:updated");//chosen:updated.chosen
     }
+    if ($('#EmailMessage_CreatedByGuid').val() != '' && $('#EmailMessage_CreatedByGuid').val() != undefined) {
+        var selectedUserRole = document.getElementById('EmailMessage_CreatedByGuid').value;
+        var str_array = selectedUserRole.split(',');
+        for (var i = 0; i < str_array.length; i++) {
+            str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        }
+        $('.compose-form .chosen-select option[value = "' + str_array+'"]').attr("selected","selected");
+    } 
+    if ($('#CategoryGuid').val() != '' && $('#CategoryGuid').val() != undefined) {
+        var selectedUserRole = document.getElementById('CategoryGuid').value;
+        var str_array = selectedUserRole.split(',');
+        for (var i = 0; i < str_array.length; i++) {
+            str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        }
+        $('.add-item-form .chosen-select option[value = "' + str_array + '"]').attr("selected", "selected");
+    }
+    $(".add-item-form .chosen-select#CategoryGuid").chosen().change(function () {
+        $('#CategoryGuid').val($(this).val());
+    });
 }
 
 function getParameterByName(name, url) {
@@ -647,3 +656,15 @@ function deleteItemFromCartResponse(response, data) {
 }
 
 // Item quantity decrease and increase and add to cart start end
+
+
+function OpenMenuItemPopUp(ItemGuid) {
+    console.log(ItemGuid);
+    $('#anchorAddMenuItemPopUp').modelPopUp({
+        windowId: "AddMenuItemPopUp",
+        width: 900,
+        height: 600,
+        url: "/Restaurant/AddItem?ItemGuid=" + ItemGuid,
+        closeOnOutSideClick: false,
+    });
+}

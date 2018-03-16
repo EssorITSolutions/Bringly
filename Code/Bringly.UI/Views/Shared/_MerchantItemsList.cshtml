@@ -1,0 +1,82 @@
+﻿
+@model List<Bringly.Domain.Items>
+@{
+    Layout = null;
+    var urlpath = Bringly.DomainLogic.CommonDomainLogic.GetCurrentDomain;
+}
+@foreach (var itm in Model)
+{
+<div class="shadow-box restaurant-info">
+    <div class="row">
+
+        <div class="clear"></div>
+        <div class="col-lg-2 col-md-3 col-sm-12">
+            <div class="brand-logo">
+                <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,itm.ItemImage))" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <div class="brand-detail">
+                <div class="row menu-heading">
+                    <div class="col-lg-3 col-md-8 col-sm-8">
+                        <p class="menu-name">@itm.ItemName</p>
+                    </div>
+                    <div class="col-lg-2 col-md-12 col-sm-12">
+                        <p class="text-weight text-center">Veg</p>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <p class="text-weight">Menu Group: <span>@itm.CategoryName</span></p>
+                    </div>
+                </div>
+                <p>Ketchup, pickled cucumbers, mushrooms, greens, sesame, cheese, onion, tomato, sweet pepper, mushrooms, DorBlue</p>
+                <p><span style="font-weight:500;">Toppings:</span> cheese, nushrooms, garlic, onion, greeny, sausages, lemon, carrot, potato, greens, sesame, cheese, onion, tomato, sweet pepper</p>
+                <p><span style="font-weight:500;">Size:</span> 25cm/450g  (M)</p>
+
+                <ul class="list-inline order-detail">
+                    <li class="list-inline-item Full-prices">
+                        Full Price<br>
+                        <span class="span_@itm.ItemGuid">@itm.ItemPrice $</span>
+                    </li>
+                    <li class="list-inline-item Full-prices">
+                        Half Price<br>
+                        <span>@(itm.ItemPrice != 0 ? itm.ItemPrice / 2 : 0)$</span>
+                    </li>
+                    <li class="list-inline-item">
+                        Small Servings<br>
+                        <span>@(itm.ItemPrice != 0 ? itm.ItemPrice / 2 : 0)$</span>
+                    </li>
+                    <li class="list-inline-item">
+                        Medium Servings<br>
+                        <span>@(itm.ItemPrice != 0 ? itm.ItemPrice / 2 : 0)$</span>
+                    </li>
+                    <li class="list-inline-item">
+                        Large Servings<br>
+                        <span>@(itm.ItemPrice != 0 ? itm.ItemPrice / 2 : 0)$</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="Edit-link">
+            <p class="text-right">
+                <a onclick="OpenMenuItemPopUp('@itm.ItemGuid');" id="anchorAddMenuItemPopUp" href="#"><i class="fa fa-pencil"></i> Edit</a>                
+            </p>
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@{
+   // Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+}

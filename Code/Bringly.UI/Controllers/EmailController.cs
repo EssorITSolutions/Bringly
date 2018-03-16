@@ -11,7 +11,7 @@ using Bringly.DomainLogic.User;
 
 namespace Bringly.UI.Controllers
 {
-    public class EmailController : Controller
+    public class EmailController : BaseClasses.AuthoriseUserControllerBase
     {
         // GET: Email
         public ActionResult Inbox(Nullable<Guid> EmailGuid)

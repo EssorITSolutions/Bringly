@@ -21,14 +21,15 @@ namespace Bringly.Data
         }
     
         public System.Guid LookUpDomainValueGuid { get; set; }
-        public System.Guid FK_LookDomainValueGuid { get; set; }
-        public string LookupDomainValue { get; set; }
-        public string LookupDomainText { get; set; }
+        public System.Guid LookUpDomainGuid { get; set; }
+        public string LookUpDomainValue { get; set; }
+        public string LookUpDomainText { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblItem> tblItems { get; set; }
+        public virtual tblLookUpDomain tblLookUpDomain { get; set; }
     }
 }

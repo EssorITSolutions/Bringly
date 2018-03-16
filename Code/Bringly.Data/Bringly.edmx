@@ -70,7 +70,7 @@
           <Property Name="ItemGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="RestaurantGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CategoryGuid" Type="uniqueidentifier" />
+          <Property Name="CategoryGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DeliveryCharge" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ItemImage" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ItemWeight" Type="nvarchar" MaxLength="50" />
@@ -88,9 +88,9 @@
         </EntityType>
         <EntityType Name="tblLookUpDomain">
           <Key>
-            <PropertyRef Name="LookDomainGuid" />
+            <PropertyRef Name="LookUpDomainGuid" />
           </Key>
-          <Property Name="LookDomainGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LookUpDomainGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LookUpDomainCode" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="LookUpDomainDescription" Type="nvarchar(max)" />
         </EntityType>
@@ -99,9 +99,9 @@
             <PropertyRef Name="LookUpDomainValueGuid" />
           </Key>
           <Property Name="LookUpDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_LookDomainValueGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="LookupDomainValue" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="LookupDomainText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LookUpDomainGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LookUpDomainValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LookUpDomainText" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
@@ -286,7 +286,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblItem_tblLookUpDomainValue">
-          <End Role="tblLookUpDomainValue" Type="Self.tblLookUpDomainValue" Multiplicity="0..1" />
+          <End Role="tblLookUpDomainValue" Type="Self.tblLookUpDomainValue" Multiplicity="1" />
           <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblLookUpDomainValue">
@@ -318,6 +318,18 @@
             </Principal>
             <Dependent Role="tblItem">
               <PropertyRef Name="DeletedByGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLookUpDomainValue_tblLookUpDomain">
+          <End Role="tblLookUpDomain" Type="Self.tblLookUpDomain" Multiplicity="1" />
+          <End Role="tblLookUpDomainValue" Type="Self.tblLookUpDomainValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLookUpDomain">
+              <PropertyRef Name="LookUpDomainGuid" />
+            </Principal>
+            <Dependent Role="tblLookUpDomainValue">
+              <PropertyRef Name="LookUpDomainGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -585,6 +597,10 @@
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblItem" EntitySet="tblItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblLookUpDomainValue_tblLookUpDomain" Association="Self.FK_tblLookUpDomainValue_tblLookUpDomain">
+            <End Role="tblLookUpDomain" EntitySet="tblLookUpDomain" />
+            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValue" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblOrder_tblUser" Association="Self.FK_tblOrder_tblUser">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblOrder" EntitySet="tblOrder" />
@@ -710,8 +726,6 @@
             <End Role="tblCity" EntitySet="tblCities" />
             <End Role="tblUserAddress" EntitySet="tblUserAddresses" />
           </AssociationSet>
-          <EntitySet Name="tblLookUpDomains" EntityType="BringlyModel.tblLookUpDomain" />
-          <EntitySet Name="tblLookUpDomainValues" EntityType="BringlyModel.tblLookUpDomainValue" />
           <EntitySet Name="tblCountries" EntityType="BringlyModel.tblCountry" />
           <EntitySet Name="tblFavourites" EntityType="BringlyModel.tblFavourite" />
           <EntitySet Name="tblRestaurants" EntityType="BringlyModel.tblRestaurant" />
@@ -794,10 +808,6 @@
           </AssociationSet>
           <EntitySet Name="tblItems" EntityType="BringlyModel.tblItem" />
           <EntitySet Name="tblOrderItems" EntityType="BringlyModel.tblOrderItem" />
-          <AssociationSet Name="FK_tblItem_tblLookUpDomainValue" Association="BringlyModel.FK_tblItem_tblLookUpDomainValue">
-            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValues" />
-            <End Role="tblItem" EntitySet="tblItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblItem_tblUser" Association="BringlyModel.FK_tblItem_tblUser">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblItem" EntitySet="tblItems" />
@@ -827,28 +837,17 @@
             <End Role="tblOrder" EntitySet="tblOrders" />
             <End Role="tblReview" EntitySet="tblReviews" />
           </AssociationSet>
+          <EntitySet Name="tblLookUpDomains" EntityType="BringlyModel.tblLookUpDomain" />
+          <EntitySet Name="tblLookUpDomainValues" EntityType="BringlyModel.tblLookUpDomainValue" />
+          <AssociationSet Name="FK_tblItem_tblLookUpDomainValue" Association="BringlyModel.FK_tblItem_tblLookUpDomainValue">
+            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValues" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLookUpDomainValue_tblLookUpDomain" Association="BringlyModel.FK_tblLookUpDomainValue_tblLookUpDomain">
+            <End Role="tblLookUpDomain" EntitySet="tblLookUpDomains" />
+            <End Role="tblLookUpDomainValue" EntitySet="tblLookUpDomainValues" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="tblLookUpDomain">
-          <Key>
-            <PropertyRef Name="LookDomainGuid" />
-          </Key>
-          <Property Name="LookDomainGuid" Type="Guid" Nullable="false" />
-          <Property Name="LookUpDomainCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LookUpDomainDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tblLookUpDomainValue">
-          <Key>
-            <PropertyRef Name="LookUpDomainValueGuid" />
-          </Key>
-          <Property Name="LookUpDomainValueGuid" Type="Guid" Nullable="false" />
-          <Property Name="FK_LookDomainValueGuid" Type="Guid" Nullable="false" />
-          <Property Name="LookupDomainValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LookupDomainText" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tblItems" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblLookUpDomainValue" ToRole="tblItem" />
-        </EntityType>
         <EntityType Name="tblCountry">
           <Key>
             <PropertyRef Name="CountryGUID" />
@@ -1238,7 +1237,7 @@
           <Property Name="ItemGuid" Type="Guid" Nullable="false" />
           <Property Name="ItemName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="RestaurantGuid" Type="Guid" Nullable="false" />
-          <Property Name="CategoryGuid" Type="Guid" />
+          <Property Name="CategoryGuid" Type="Guid" Nullable="false" />
           <Property Name="DeliveryCharge" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ItemImage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ItemWeight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1253,10 +1252,10 @@
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Modifiedby" Type="Guid" />
-          <NavigationProperty Name="tblLookUpDomainValue" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblItem" ToRole="tblLookUpDomainValue" />
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblItem_tblUser" FromRole="tblItem" ToRole="tblUser" />
           <NavigationProperty Name="tblUser1" Relationship="BringlyModel.FK_tblItem_tblUser1" FromRole="tblItem" ToRole="tblUser" />
           <NavigationProperty Name="tblOrderItems" Relationship="BringlyModel.FK_tblOrderItem_tblItem" FromRole="tblItem" ToRole="tblOrderItem" />
+          <NavigationProperty Name="tblLookUpDomainValue" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblItem" ToRole="tblLookUpDomainValue" />
         </EntityType>
         <EntityType Name="tblOrderItem">
           <Key>
@@ -1273,18 +1272,6 @@
           <NavigationProperty Name="tblUser" Relationship="BringlyModel.FK_tblOrderItem_tblUser" FromRole="tblOrderItem" ToRole="tblUser" />
           <NavigationProperty Name="tblOrder" Relationship="BringlyModel.FK_tblOrderItem_tblOrder1" FromRole="tblOrderItem" ToRole="tblOrder" />
         </EntityType>
-        <Association Name="FK_tblItem_tblLookUpDomainValue">
-          <End Type="BringlyModel.tblLookUpDomainValue" Role="tblLookUpDomainValue" Multiplicity="0..1" />
-          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLookUpDomainValue">
-              <PropertyRef Name="LookUpDomainValueGuid" />
-            </Principal>
-            <Dependent Role="tblItem">
-              <PropertyRef Name="CategoryGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblItem_tblUser">
           <End Type="BringlyModel.tblUser" Role="tblUser" Multiplicity="1" />
           <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
@@ -1385,6 +1372,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblLookUpDomain">
+          <Key>
+            <PropertyRef Name="LookUpDomainGuid" />
+          </Key>
+          <Property Name="LookUpDomainGuid" Type="Guid" Nullable="false" />
+          <Property Name="LookUpDomainCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LookUpDomainDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLookUpDomainValues" Relationship="BringlyModel.FK_tblLookUpDomainValue_tblLookUpDomain" FromRole="tblLookUpDomain" ToRole="tblLookUpDomainValue" />
+        </EntityType>
+        <EntityType Name="tblLookUpDomainValue">
+          <Key>
+            <PropertyRef Name="LookUpDomainValueGuid" />
+          </Key>
+          <Property Name="LookUpDomainValueGuid" Type="Guid" Nullable="false" />
+          <Property Name="LookUpDomainGuid" Type="Guid" Nullable="false" />
+          <Property Name="LookUpDomainValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LookUpDomainText" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblItems" Relationship="BringlyModel.FK_tblItem_tblLookUpDomainValue" FromRole="tblLookUpDomainValue" ToRole="tblItem" />
+          <NavigationProperty Name="tblLookUpDomain" Relationship="BringlyModel.FK_tblLookUpDomainValue_tblLookUpDomain" FromRole="tblLookUpDomainValue" ToRole="tblLookUpDomain" />
+        </EntityType>
+        <Association Name="FK_tblItem_tblLookUpDomainValue">
+          <End Type="BringlyModel.tblLookUpDomainValue" Role="tblLookUpDomainValue" Multiplicity="1" />
+          <End Type="BringlyModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLookUpDomainValue">
+              <PropertyRef Name="LookUpDomainValueGuid" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="CategoryGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLookUpDomainValue_tblLookUpDomain">
+          <End Type="BringlyModel.tblLookUpDomain" Role="tblLookUpDomain" Multiplicity="1" />
+          <End Type="BringlyModel.tblLookUpDomainValue" Role="tblLookUpDomainValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLookUpDomain">
+              <PropertyRef Name="LookUpDomainGuid" />
+            </Principal>
+            <Dependent Role="tblLookUpDomainValue">
+              <PropertyRef Name="LookUpDomainGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1414,28 +1448,6 @@
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblLookUpDomains">
-            <EntityTypeMapping TypeName="BringlyModel.tblLookUpDomain">
-              <MappingFragment StoreEntitySet="tblLookUpDomain">
-                <ScalarProperty Name="LookUpDomainDescription" ColumnName="LookUpDomainDescription" />
-                <ScalarProperty Name="LookUpDomainCode" ColumnName="LookUpDomainCode" />
-                <ScalarProperty Name="LookDomainGuid" ColumnName="LookDomainGuid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblLookUpDomainValues">
-            <EntityTypeMapping TypeName="BringlyModel.tblLookUpDomainValue">
-              <MappingFragment StoreEntitySet="tblLookUpDomainValue">
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LookupDomainText" ColumnName="LookupDomainText" />
-                <ScalarProperty Name="LookupDomainValue" ColumnName="LookupDomainValue" />
-                <ScalarProperty Name="FK_LookDomainValueGuid" ColumnName="FK_LookDomainValueGuid" />
-                <ScalarProperty Name="LookUpDomainValueGuid" ColumnName="LookUpDomainValueGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1623,6 +1635,28 @@
                 <ScalarProperty Name="OrderDiscount" ColumnName="OrderDiscount" />
                 <ScalarProperty Name="CreatedByGuid" ColumnName="CreatedByGuid" />
                 <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLookUpDomains">
+            <EntityTypeMapping TypeName="BringlyModel.tblLookUpDomain">
+              <MappingFragment StoreEntitySet="tblLookUpDomain">
+                <ScalarProperty Name="LookUpDomainDescription" ColumnName="LookUpDomainDescription" />
+                <ScalarProperty Name="LookUpDomainCode" ColumnName="LookUpDomainCode" />
+                <ScalarProperty Name="LookUpDomainGuid" ColumnName="LookUpDomainGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLookUpDomainValues">
+            <EntityTypeMapping TypeName="BringlyModel.tblLookUpDomainValue">
+              <MappingFragment StoreEntitySet="tblLookUpDomainValue">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LookUpDomainText" ColumnName="LookUpDomainText" />
+                <ScalarProperty Name="LookUpDomainValue" ColumnName="LookUpDomainValue" />
+                <ScalarProperty Name="LookUpDomainGuid" ColumnName="LookUpDomainGuid" />
+                <ScalarProperty Name="LookUpDomainValueGuid" ColumnName="LookUpDomainValueGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

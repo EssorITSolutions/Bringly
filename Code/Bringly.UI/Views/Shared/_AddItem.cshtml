@@ -1,0 +1,75 @@
+﻿@model Bringly.Domain.Items
+@{
+    Layout = "~/Views/Shared/MasterPages/PartialMaster.cshtml";
+    var sss = TempData["IspopUp"];
+}
+@if (TempData["IspopUp"] != null)
+{
+    <script>
+        window.parent.closeModelPopUpForm(true);
+    </script>
+}
+else
+{
+    //using (@Html.BeginForm("ComposeEmail", "Email", FormMethod.Post))
+    <div class="popup-heading">
+        <h1>Item Detail</h1>
+        <div class="close-button">
+            <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
+        </div>
+    </div>
+    <div>
+        <form enctype="multipart/form-data">
+            <p class="edit-profil-img edit">
+                <a href="javascript:void(0)" id="itemImageUpload" style="cursor:pointer;"><i class="fa fa-pencil"></i></a>
+            </p>
+            <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item,Model.ItemImage))" name="imgItemImage" style="width:92px;height:93px;" class="m-auto d-block" />
+            <p class="edit-profil-img position-absolute">
+                <input type="file" id="fileItemImage" style="display:none" />
+            </p>
+        </form>
+    </div>
+    <form method="post" action="/Restaurant/AddEditItem" style="width:100%;" class="add-item-form">
+
+        @Html.HiddenFor(m => m.ItemGuid)
+        @Html.HiddenFor(m => m.RestaurantGuid)
+        @Html.HiddenFor(m => m.ItemImage)
+        @Html.HiddenFor(m => m.CategoryGuid)
+
+        <div class="mail-box">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control", @placeholder = "Item Name", @maxlength = "200" })
+                @Html.ValidationMessageFor(m => m.ItemName)
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.CategoryGuid, Model.CategoryList.Select(x => new SelectListItem { Text = x.LookUpDomainText, Value = x.LookUpDomainValueGuid.ToString() }), "--Choose a category--", new { @class = "chosen-select", @placeholder = "Choose a category.." })
+                @Html.ValidationMessageFor(m => m.CategoryGuid)
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ItemWeight, new { @class = "form-control", @placeholder = "Item Weight", @maxlength = "50" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ItemSize, new { @class = "form-control", @placeholder = "Item Size", @maxlength = "50" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ItemPrice, new { @class = "form-control", @placeholder = "Item Price", @maxlength = "20" })
+                @Html.ValidationMessageFor(m => m.ItemPrice)
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @placeholder = "Item Discount(if any)", @maxlength = "20" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.DeliveryCharge, new { @class = "form-control", @placeholder = "Delivery Charge(if any)", @maxlength = "20" })
+            </div>
+            <div class="form-group">
+                @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control", @checked = "checked", @placeholder = "Subject", @maxlength = "200" })
+            </div>
+            <div class="form-group form-button">
+                <input type="submit" class="btn btn-primary" value="Send" />
+                <input type="button" onclick="window.parent.closeModelPopUpForm(false)" class="btn btn-primary" value="Cancel" />
+            </div>
+        </div>
+
+    </form>
+
+}

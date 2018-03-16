@@ -52,6 +52,7 @@ namespace Bringly.Domain
 , (DateTime.Now - DateCreated).Minutes) + " ago";
             }
         }
+        public Guid CreatedByGuid { get; set; }
     }
     public class ComposeEmail
     {

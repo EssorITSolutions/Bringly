@@ -843,11 +843,13 @@
     <Content Include="Templates\Scripts\Plugins\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Templates\Scripts\Plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Templates\Scripts\Plugins\ckeditor\skins\moono-lisa\readme.md" />
-    <Content Include="Views\Shared\MasterPages\PartialMasterCommon.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
     <Content Include="Views\Restaurant\RestaurantItems.cshtml" />
     <Content Include="Views\Shared\_ItemsList.cshtml" />
     <Content Include="Views\Shared\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Restaurant\MerchantMenuItems.cshtml" />
+    <Content Include="Views\Shared\_MerchantItemsList.cshtml" />
+    <Content Include="Views\Shared\_AddItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.Data\Bringly.Data.csproj">

@@ -62,5 +62,56 @@ namespace Bringly.UI.Controllers
             ShoppingCartDomainLogic shoppingCartDomainLogic = new ShoppingCartDomainLogic();
             return Json(shoppingCartDomainLogic.deleteItemFromCart(ItemGuid), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult MerchantMenuItems()
+        {
+            RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+            Nullable<Guid> RestaurantGuid = new Guid("7B9D0CFF-F15F-49CA-95EF-EA81CDEA4E34");
+            List<Items> itemslist = new List<Items>();
+            itemslist = restaurantDomainLogic.GetMerchantItems(RestaurantGuid.HasValue ? RestaurantGuid.Value : Guid.Empty);
+            return View(itemslist);
+        }
+        public ActionResult AddItem(Nullable<Guid> ItemGuid)
+        {
+            RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+            return PartialView("_AddItem", restaurantDomainLogic.GetMenuItem(ItemGuid));
+        }
+        [HttpPost]
+        public ActionResult AddEditItem(Items Item)
+        {
+            RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+            if (ModelState.IsValid)
+            {
+                if (restaurantDomainLogic.AddEditItem(Item))
+                {
+                    TempData["IspopUp"] = true;
+                }
+            }
+            return PartialView("_AddItem", restaurantDomainLogic.GetMenuItem(Item.ItemGuid));
+        }
+        public ActionResult UploadMenuItemImage(FormCollection frm)
+        {
+            if (Request.Files.Count > 0)
+            {
+                try
+                {
+                    string imageName = "";
+                    if (Request.Files.Count > 0)
+                    {
+                        RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+                        imageName = restaurantDomainLogic.UploadMenuItemImage(Request);
+                    }
+                    return Json(new { NewImage = imageName, Message = "File uploaded successfully", IsSuccess = true });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { NewImage = "", Message = "Error occurred. Error details: " + ex.Message, IsSuccess = false });
+                }
+            }
+            else
+            {
+                return Json(new { NewImage = "", Message = "No image selected.", IsSuccess = false });
+            }
+
+        }
     }
 }
