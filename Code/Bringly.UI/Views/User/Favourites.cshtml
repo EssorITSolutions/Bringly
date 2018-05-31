@@ -1,4 +1,4 @@
-﻿@model List<Bringly.Domain.Restaurant>
+﻿@model List<Bringly.Domain.Business.BusinessObject>
 @{
     ViewBag.Title = "Favourites";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
@@ -12,7 +12,7 @@
             <h3>Favourites</h3>
         </div>
         <div class="row" id="divfavouritelist">
-            @{Html.RenderPartial("_FavouriteRestaurantsList", Model);}
+            @{Html.RenderPartial("_FavouriteLocationList", Model);}
         </div>
     </div>
 </div>

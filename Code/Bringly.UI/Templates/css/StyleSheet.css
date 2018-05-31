@@ -1113,6 +1113,15 @@ li.list-inline-item.product-status .fa{
     color:#b8b8b8;
     padding:6px 0;
 }
+    .brand-detail ul.order-detail.spa-time li {
+        width: 47%;       
+    }
+        .brand-detail ul.order-detail.spa-time li ul.chosen-results li {
+            width: 100%;
+        }
+    .brand-detail ul.order-detail li a.chosen-single span {
+        font-size: 16px;
+    }
 .restaurant-item ul.order-detail li {
     width: 100%;
 }
@@ -2847,6 +2856,7 @@ color:red;
     text-align: center;
     display: block;
     padding: 0;
+    cursor:pointer;
 }
    
 
@@ -3113,11 +3123,10 @@ body.popup-body {
         right: 20px;
     }
 
-        .popup-heading  .close-button button.btn-close {
-
+        .popup-heading .close-button button.btn-close {
             background-color: #ffffff;
             color: #fa5342;
-            
+            cursor: pointer;
         }
 .compose-form .mail-box {
     padding: 20px;
@@ -3244,7 +3253,7 @@ span.quanity-input input {
 #formReview .page-sub-title p a:hover {
     color: #FA5342;
 }
-.personal-information #EmailAddress {
+.personal-information.info #EmailAddress {
     cursor:not-allowed;
 }
 .width-100 {
@@ -3255,4 +3264,60 @@ span.quanity-input input {
 }
 .restaurant-item .order-detail .order-quantity {
     padding-top:25px;
+}
+.businesstypetextbox input[type="text"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #c7c7c7;
+    border-radius: 0.25rem;
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+.disabled-textbox {
+    border: none;
+    background: #fff !important;
+}
+.divprofiledata td label {
+    padding: 0.5rem 0.75rem;
+}
+textarea{resize:none;}
+.cvr-add-location {
+    margin-top: 10px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+.locationlist .first-child td:first-child {
+    width:80%;
+}
+#formrestaurent td.data {
+    padding-right: 0;
+    padding-bottom: 4px;
+    padding-left: 0;
+    width: 70%;
+}
+#formrestaurent td.label-data {
+    padding-right: 2px;
+}
+#selectBusinessHeader_chosen {
+    float: left;
+    width:30% !important;
+}
+#lbl-business-header {
+    margin-top: 2%;
+}
+#partialBusinessInfo .disabled-textbox {
+    background-color:transparent !important;
 }

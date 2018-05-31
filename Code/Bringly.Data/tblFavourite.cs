@@ -15,11 +15,11 @@ namespace Bringly.Data
     public partial class tblFavourite
     {
         public System.Guid FavouriteGuid { get; set; }
-        public System.Guid RestaurantGuid { get; set; }
+        public System.Guid LocationGuid { get; set; }
         public System.Guid CreatedByGuid { get; set; }
         public System.DateTime DateCreated { get; set; }
     
-        public virtual tblRestaurant tblRestaurant { get; set; }
+        public virtual tblLocation tblLocation { get; set; }
         public virtual tblUser tblUser { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Bringly.Data;
 using Bringly.Domain;
+using Bringly.Domain.Business;
 using Bringly.DomainLogic.User;
 
 namespace Bringly.DomainLogic
@@ -37,6 +38,64 @@ namespace Bringly.DomainLogic
             return _restaurantSearch;
         }
 
+        public BusinessObject GetRestaurantByRestaurantGuid(Guid businessGuid)
+        {
+            BusinessObject business = new BusinessObject();
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            List<City> list = commonDomainLogic.GetCities();
+            business = bringlyEntities.tblBusinesses.Where(x => x.BusinessGuid == businessGuid).Select(r => new BusinessObject {
+                BusinessImage = r.BusinessImage
+                , BusinessGuid = r.BusinessGuid
+                , BusinessName = r.BusinessName
+                , CityGuid = r.CityGuid
+                , BusinessTypeGuid = r.BusinessTypeGuid
+                , PNumber = r.PNumber
+                , Phone = r.Phone
+                , PinCode = r.PinCode
+                , CreatedByGuid = r.CreatedByGuid
+                , ManagerGuid=r.ManagerUserGuid
+                , Address = r.Address
+                , Email = r.Email
+                , OrderTiming=r.OrderTiming
+                , PickUpTiming= r.PickUpTiming
+                , ServiceCharge=r.ServiceCharge
+                , ServiceTax=r.ServiceTax
+                , FlatRate=r.FlatRate
+                , RateAfterKm=r.RateAfterKm
+                , Description=r.Description
+            }).FirstOrDefault();
+            business.CityList = list;
+            business.CityName = business.CityGuid != Guid.Empty ? bringlyEntities.tblCities.Where(x => x.CityGuid == business.CityGuid).FirstOrDefault().CityName:"";
+            return business;
+        }
+
+        public string UpdateRestaurantProfile(BusinessObject BusinessObject)
+        {
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            tblBusiness business = bringlyEntities.tblBusinesses.Where(x => x.BusinessGuid == BusinessObject.BusinessGuid).FirstOrDefault();
+            business.BusinessName = BusinessObject.BusinessName;
+            business.CityGuid = BusinessObject.CityGuid;
+            business.PNumber = BusinessObject.PNumber;
+            business.Phone = BusinessObject.Phone;
+            business.PinCode = BusinessObject.PinCode;
+            business.ModifiedBy = UserVariables.LoggedInUserGuid;
+            business.ModifiedDate = DateTime.Now;
+            business.Address = BusinessObject.Address;
+            business.Email = BusinessObject.Email;
+
+            business.OrderTiming = BusinessObject.OrderTiming;
+            business.PickUpTiming = BusinessObject.PickUpTiming;
+            business.ServiceCharge = BusinessObject.ServiceCharge;
+            business.ServiceTax = BusinessObject.ServiceTax;
+            business.FlatRate = BusinessObject.FlatRate;
+            business.RateAfterKm = BusinessObject.RateAfterKm;
+            business.Description = BusinessObject.Description;
+
+            bringlyEntities.SaveChanges();
+            string cityname = bringlyEntities.tblCities.Where(x => x.CityGuid == BusinessObject.CityGuid).FirstOrDefault().CityName;
+            return cityname;
+        }
+
         public List<Items> GetItemsByRestaurantGuid(Guid restaurantGuid)
         {
             List<Items> itemslist = new List<Items>();
@@ -60,6 +119,8 @@ namespace Bringly.DomainLogic
             }
             return itemslist;
         }
+
+      
 
         public List<Items> GetMerchantItems(Guid restaurantGuid)
         {
@@ -206,5 +267,6 @@ namespace Bringly.DomainLogic
             }
 
         }
+       
     }
 }

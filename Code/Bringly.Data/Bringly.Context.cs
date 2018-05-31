@@ -28,9 +28,7 @@ namespace Bringly.Data
         public virtual DbSet<tblCity> tblCities { get; set; }
         public virtual DbSet<tblUserAddress> tblUserAddresses { get; set; }
         public virtual DbSet<tblCountry> tblCountries { get; set; }
-        public virtual DbSet<tblFavourite> tblFavourites { get; set; }
         public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
-        public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblReview> tblReviews { get; set; }
         public virtual DbSet<tblTemplate> tblTemplates { get; set; }
         public virtual DbSet<tblEmailTo> tblEmailToes { get; set; }
@@ -40,5 +38,14 @@ namespace Bringly.Data
         public virtual DbSet<tblOrder> tblOrders { get; set; }
         public virtual DbSet<tblLookUpDomain> tblLookUpDomains { get; set; }
         public virtual DbSet<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
+        public virtual DbSet<tblRole> tblRoles { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblBusinessType> tblBusinessTypes { get; set; }
+        public virtual DbSet<tblBusiness> tblBusinesses { get; set; }
+        public virtual DbSet<tblLocation> tblLocations { get; set; }
+        public virtual DbSet<tblCustomProperty> tblCustomProperties { get; set; }
+        public virtual DbSet<tblFavourite> tblFavourites { get; set; }
+        public virtual DbSet<tblSaloonTimeMaster> tblSaloonTimeMasters { get; set; }
+        public virtual DbSet<tblSaloonAppointment> tblSaloonAppointments { get; set; }
     }
 }

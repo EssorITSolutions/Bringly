@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AllowHtmlAttribute.cs" />
     <Compile Include="BaseClasses\DomainBase.cs" />
+    <Compile Include="Business.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Email.cs" />

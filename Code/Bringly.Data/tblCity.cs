@@ -20,6 +20,7 @@ namespace Bringly.Data
             this.tblUserAddresses = new HashSet<tblUserAddress>();
             this.tblRestaurants = new HashSet<tblRestaurant>();
             this.tblUsers = new HashSet<tblUser>();
+            this.tblLocations = new HashSet<tblLocation>();
         }
     
         public System.Guid CityGuid { get; set; }
@@ -34,5 +35,7 @@ namespace Bringly.Data
         public virtual ICollection<tblRestaurant> tblRestaurants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUser> tblUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblLocation> tblLocations { get; set; }
     }
 }

@@ -29,5 +29,9 @@ namespace Bringly.UI.Controllers
             EmailDomainLogic email = new EmailDomainLogic();
             return PartialView("_topUserMenu",email.GetNotificationEmail(Guid.Empty));
         }
+        public PartialViewResult SocialUserTopMenu()
+        {
+            return PartialView("_topSocialUserMenu");
+        }
     }
 }

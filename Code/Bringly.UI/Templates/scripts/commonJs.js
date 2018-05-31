@@ -165,6 +165,22 @@ function PostDataWithSuccessParam(url, _data, _successHandler, ShowBlackImage) {
     });
 }
 /************************************** *AJAX Custom POST Ends***************************************/
+/************************************** *AJAX Custom POST Starts***************************************/
+function PostDataWithFormSuccessParam(url,form, _data, _successHandler, ShowBlackImage) {
+    if (ShowBlackImage == null || ShowBlackImage == undefined) {
+        ShowBlackImage = true;
+    }
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { businessObject: form, _data: _data},
+        success: function successHandler(result) {
+            _successHandler(result, _data)
+        },
+        global: ShowBlackImage
+    });
+}
+/************************************** *AJAX Custom POST Ends***************************************/
 /************************************** *AJAX Custom GET Starts***************************************/
 function GetData(url, _data, _successHandler, ShowBlackImage) {
     if (ShowBlackImage == null || ShowBlackImage == undefined) {
@@ -322,6 +338,7 @@ function closeModelPopUpForm(refereshPreviousPage) {
     if (refereshPreviousPage == true) {
         window.parent.location.reload();
     }
+   // alert(model_windowId + "!" + model_DivModalOverlayId);
     $("#" + model_windowId).remove();
     $("#" + model_DivModalOverlayId).remove();
     $(window).scroll(function () { return true; });
@@ -454,7 +471,3 @@ function Delete(text, confirmButtonText, url,param, Response) {
         });
 }
 
-//$('.dashboard-menu ul.list-unstyled.user-menu li').on('click', function () {
-//    $('.dashboard-menu ul.list-unstyled.user-menu li').removeClass('active');
-//    $(this).addClass('active');
-//})

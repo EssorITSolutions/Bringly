@@ -18,6 +18,8 @@ namespace Bringly.Admin.Controllers
         {
             return View();
         }
+
+        #region Manage City
         public ActionResult ManageCities()
         {
             CityDomainLogic cityDomainLogic = new CityDomainLogic();
@@ -88,6 +90,88 @@ namespace Bringly.Admin.Controllers
             }
             return Json(message, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+        #region Manage Role
+        public ActionResult ManageRoles()
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            return View(userDomainLogic.GetRoles());
+        }
+        public ActionResult AddRole()
+        {
+            return View("SaveRole", new UserRole());
+        }
+        [HttpPost]
+        public ActionResult AddRole(UserRole role)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            Message message = new Message();
+            if (userDomainLogic.AddRole(role))
+            {
+                ModelState.Clear();
+                role = new UserRole();
+                message.MessageText = "Role added successfully.";
+                message.MessageType = MessageType.Success;
+            }
+            else
+            {
+                message.MessageText = "Role already exists.";
+                message.MessageType = MessageType.Error;
+            }
+            return Json(message, JsonRequestBehavior.AllowGet); ;
+        }
+
+        [HttpGet]
+        public ActionResult EditRole(Guid id)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            UserRole role = userDomainLogic.GetRole(id);
+            return PartialView("SaveRole", role);
+        }
+        [HttpPost]
+        public ActionResult EditRole(UserRole role)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            Message message = new Message();
+            if (userDomainLogic.UpdateRole(role))
+            {
+                ModelState.Clear();
+                role = new UserRole();
+                message.MessageText = "Role updated successfully.";
+                message.MessageType = MessageType.Success;
+            }
+            else
+            {
+                message.MessageText = "Role already exists.";
+                message.MessageType = MessageType.Error;
+            }
+            return Json(message, JsonRequestBehavior.AllowGet); ;
+        }
+        public ActionResult DeleteRole(string roleGuid)
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            Message message = new Message();
+            if (userDomainLogic.DeleteRoleLogic(new Guid(roleGuid)))
+            {
+                ModelState.Clear();
+                message.MessageText = "Role has been deleted successfully.";
+                message.MessageType = MessageType.Success;
+            }
+            else
+            {
+                message.MessageText = "Role deletion failed.";
+                message.MessageType = MessageType.Error;
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        #endregion
+
+
+
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

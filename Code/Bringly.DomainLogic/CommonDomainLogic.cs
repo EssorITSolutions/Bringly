@@ -38,12 +38,12 @@ namespace Bringly.DomainLogic
         }
         public Guid FindCityGuid(string CityUrlName)
         {
-            tblCity _city = bringlyEntities.tblCities.Where(x => x.CityUrlName == CityUrlName).FirstOrDefault();
+            tblCity _city = bringlyEntities.tblCities.Where(x => x.CityUrlName == CityUrlName && x.IsDeleted == false).FirstOrDefault();
             return _city != null ? _city.CityGuid : Guid.Empty;
         }
         public List<City> GetCityByGUID(Guid _cityguid)
         {
-            return bringlyEntities.tblCities.Where(x => x.CityGuid == _cityguid).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).ToList();
+            return bringlyEntities.tblCities.Where(x => x.CityGuid == _cityguid && x.IsDeleted == false).Select(t => new City { CityGuid = t.CityGuid, CityName = t.CityName, CityUrlName = t.CityUrlName }).ToList();
         }
         public City GetPreferedCity()
         {
@@ -57,6 +57,7 @@ namespace Bringly.DomainLogic
             }
             else
             {
+                if (string.IsNullOrEmpty(_FindUser.PreferedCity)) { _FindUser.PreferedCity = bringlyEntities.tblCities.Where(x => x.IsDeleted == false).ToList().FirstOrDefault().CityGuid.ToString(); }
                 _City = commonDomainLogic.GetCityByGUID(new Guid(_FindUser.PreferedCity)).FirstOrDefault();
             }
             return _City;
@@ -101,6 +102,12 @@ namespace Bringly.DomainLogic
                 }                
                 return (issecureconn?"https://":"http://")+current.Request.Url.Host.ToLower();
             }
+        }
+
+        public List<Role> GetAllRoles()
+        {
+            return bringlyEntities.tblRoles.Select(x=> new Role { RoleGuid=x.RoleGuid,RoleName=x.RoleName}).ToList();
+
         }
     }
 }

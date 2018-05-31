@@ -17,8 +17,8 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblRestaurant()
         {
-            this.tblFavourites = new HashSet<tblFavourite>();
             this.tblReviews = new HashSet<tblReview>();
+            this.tblItems = new HashSet<tblItem>();
         }
     
         public System.Guid RestaurantGuid { get; set; }
@@ -42,11 +42,11 @@ namespace Bringly.Data
         public virtual tblCity tblCity { get; set; }
         public virtual tblCountry tblCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblFavourite> tblFavourites { get; set; }
+        public virtual ICollection<tblReview> tblReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblItem> tblItems { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblReview> tblReviews { get; set; }
     }
 }

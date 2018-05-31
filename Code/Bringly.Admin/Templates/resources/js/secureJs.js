@@ -1,5 +1,16 @@
 ﻿var currentLeftMenuClick;
+window.onload = function () {
 
+    var url = window.location.toString();
+
+    if (url.indexOf("?") > -1) {
+        var emailguiidarray = new Array();
+        var email = "";
+        var urlparts = url.split('?');
+        window.history.replaceState({}, document.title, urlparts[0]);
+
+    }
+}
 $(document).ready(function () {
     bindLeftMenuEvents();
     InitCustomDropdown();
@@ -89,7 +100,7 @@ function GetURLParameter() {
     else
         return 0;
 }
-
+///////////////   City JS    //////////////////
 function DeleteCity(cityguid) {
     swal({
         title: "Are you sure?",
@@ -131,8 +142,6 @@ $('#btnupdatecity').on('click', function () {
         errorBlock("Please enter city name.");
     }
 });
-
-
 function EditCityHandler(response) {
     if (response.MessageType == "0") {//0 for success
         window.location.href = "/Admin/ManageCities?MessageType=Success&Message=" + response.MessageText;
@@ -149,6 +158,68 @@ function SaveCityHandler(response) {
         errorBlock(response.MessageText);
     }
 }
+
+///////////////   Role JS    //////////////////
+function DeleteRole(roleguid) {
+    swal({
+        title: "Are you sure?",
+        text: "You want to delete the role.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    },
+        function () {
+            PostData("/Admin/DeleteRole", { roleGuid: roleguid }, DeleteRoleHandler)
+        });
+}
+function DeleteRoleHandler(response) {
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageRoles?MessageType=Success&Message=" + response.MessageText;
+    }
+    else {
+        errorBlock(response.MessageText);
+    }
+}
+function EditRole(roleguid, rolename) {
+    $('#RoleName').val(rolename);
+    $('#RoleGuid').val(roleguid);
+    $('#btnupdaterole').val('Update');
+}
+$('#btnupdaterole').on('click', function () {
+    if ($.trim($('#RoleName').val()) != '') {
+        var formcity = $('#formRole').serialize();
+        if ($('#btnupdaterole').val() == 'Update') {
+            PostData("/Admin/EditRole", formcity, EditRoleHandler)
+        }
+        else {
+            PostData("/Admin/AddRole", formcity, SaveRoleHandler)
+        }
+    }
+    else {
+        errorBlock("Please enter role name.");
+    }
+});
+function EditRoleHandler(response) {
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageRoles?MessageType=Success&Message=" + response.MessageText;
+    }
+    else {
+        errorBlock(response.MessageText);
+    }
+}
+function SaveRoleHandler(response) {
+    if (response.MessageType == "0") {//0 for success
+        window.location.href = "/Admin/ManageRoles?MessageType=Success&Message=" + response.MessageText;
+    }
+    else {
+        errorBlock(response.MessageText);
+    }
+}
+
+
+
 function CreateGuid() {
     function _p8(s) {
         var p = (Math.random().toString(16) + "000000000").substr(2, 8);

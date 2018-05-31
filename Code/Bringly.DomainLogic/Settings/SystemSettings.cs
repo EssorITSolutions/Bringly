@@ -16,5 +16,12 @@
                 return 5;
             }
         }
+        public static int DefaultPageSizeBusiness
+        {
+            get
+            {
+                return 6;
+            }
+        }
     }
 }

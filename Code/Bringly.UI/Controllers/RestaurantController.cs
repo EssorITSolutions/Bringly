@@ -7,6 +7,7 @@ using Bringly.DomainLogic;
 using Bringly.Domain;
 using Bringly.DomainLogic.User;
 using Bringly.Domain.User;
+using Bringly.Domain.Business;
 
 namespace Bringly.UI.Controllers
 {
@@ -34,8 +35,12 @@ namespace Bringly.UI.Controllers
 
             return View("ListRestaurants", restaurantDomainLogic.GetRestaurantsByCity(chooseCity.SelectedCity));
         }
-        public ActionResult MyRestaurant() {
-            return View();
+        public ActionResult MyRestaurant(Restaurant restaurant)
+        {
+            RestaurantDomainLogic restaurantDomainLogic = new RestaurantDomainLogic();
+            BusinessObject restaurantSearch = new BusinessObject();
+            restaurantSearch = restaurantDomainLogic.GetRestaurantByRestaurantGuid(new Guid("C37FB6CE-E2F5-4893-BB92-21136A3E5756"));
+            return View(restaurantSearch);
         }
         public ActionResult RestaurantItems(Nullable<Guid> RestaurantGuid)
         {
@@ -113,5 +118,13 @@ namespace Bringly.UI.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult UpdateRestaurentProfile(BusinessObject BusinessObject)
+        {
+            RestaurantDomainLogic restaurantDomailLogic = new RestaurantDomainLogic();
+            return Json(restaurantDomailLogic.UpdateRestaurantProfile(BusinessObject), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

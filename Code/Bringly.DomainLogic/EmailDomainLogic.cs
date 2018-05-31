@@ -23,6 +23,7 @@ namespace Bringly.DomainLogic
     {
         public bool SendEmail(ComposeEmail ComposeEmail)
         {
+
             EmailDomain EmailDomain = new EmailDomain();
             tblUser userfrom = bringlyEntities.tblUsers.Where(x => x.UserGuid == UserVariables.LoggedInUserGuid).ToList().FirstOrDefault();
             tblTemplate template = new tblTemplate();

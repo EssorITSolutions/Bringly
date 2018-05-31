@@ -23,7 +23,7 @@ namespace Bringly.Data
         public System.DateTime DateCreated { get; set; }
     
         public virtual tblItem tblItem { get; set; }
-        public virtual tblUser tblUser { get; set; }
         public virtual tblOrder tblOrder { get; set; }
+        public virtual tblUser tblUser { get; set; }
     }
 }

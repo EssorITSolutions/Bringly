@@ -13,11 +13,81 @@ using System.Web;
 using System.Web.Security;
 using Bringly.Domain.Common;
 using Bringly.Domain.Enums;
+using DotNetOpenAuth.AspNet.Clients;
+using System.Configuration;
+using Utilities.EmailSender;
+using Utilities.EmailSender.Domain;
+using Bringly.Domain.Business;
 
 namespace Bringly.DomainLogic.User
 {
     public class UserDomainLogic : BaseClass.DomainLogicBase
     {
+        public bool AddUserProfile(UserRegistration userRegistration)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random random = new Random();
+            tblUser user = new tblUser();
+            user.UserGuid = Guid.NewGuid();
+            user.FullName = userRegistration.FullName;
+            user.EmailAddress = userRegistration.EmailAddress;
+            user.CompanyorIndividual = string.IsNullOrEmpty(userRegistration.CompanyorIndividual)?"": userRegistration.CompanyorIndividual;
+            user.Password = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
+            user.UserRegistrationType = TypeCast.ToType<int>(userRegistration.UserRegistrationType);
+            user.DateCreated = DateTime.Now;
+            user.IsDeleted = false;
+            user.IsActive = true;
+            user.PreferedCity = bringlyEntities.tblCities.Where(x => x.IsDeleted == false).ToList().FirstOrDefault().CityGuid;
+            user.GoogleLoginEmail = "";
+            user.FacebookLoginEmail ="";
+            bringlyEntities.tblUsers.Add(user);
+            bringlyEntities.SaveChanges();
+            foreach (UserAddress usrAddress in userRegistration.UserAddresses)
+            {
+                    user.tblUserAddresses.Add(
+                        new tblUserAddress
+                        {
+                            UserAddressGuid = Guid.NewGuid(),
+                            UserGuid = user.UserGuid,
+                            Address = usrAddress.Address,
+                            AddressType = usrAddress.AddressType,
+                            CityGuid = usrAddress.CityGuid,
+                            PostCode = usrAddress.PostCode,
+                            DateCreated = DateTime.Now
+                        });
+            }
+            bringlyEntities.SaveChanges();
+            if (user.UserRegistrationType == 3)
+            {
+                tblBusiness business = new tblBusiness();
+                business.BusinessGuid = Guid.NewGuid();
+                business.BusinessTypeGuid = userRegistration.BusinessTypeGuid;
+                business.DateCreated = DateTime.Now;
+                business.Email = user.EmailAddress;
+                business.Address = "";
+                business.PinCode = "";
+                business.BusinessName = "";
+                business.PNumber = "";
+                business.Phone = "";
+                business.CreatedByGuid = user.UserGuid;
+                business.IsDeleted = false;
+                business.ManagerUserGuid = user.UserGuid;
+                bringlyEntities.tblBusinesses.Add(business);
+                bringlyEntities.SaveChanges();
+            }
+            UserLogin userLogin = new Domain.User.UserLogin();
+            userLogin.Username = user.EmailAddress;
+            userLogin.UserPassword = user.Password;
+            UserLogin(userLogin);
+            EmailDomain emailDomain = new EmailDomain();
+            emailDomain.EmailTo = user.EmailAddress;
+            emailDomain.EmailFrom = user.EmailAddress;
+            tblTemplate Template= bringlyEntities.tblTemplates.Where(x => x.TemplateType == "LoginCredentials").ToList().FirstOrDefault();
+            emailDomain.EmailSubject = Template.Subject;
+            emailDomain.EmailBody = Template.Body.Replace("{ToName}", user.FullName).Replace("{username}", user.EmailAddress).Replace("password", user.Password);
+           // EmailSender.sendEmail(emailDomain);
+            return true;
+        }
 
         public UserProfile FindUser(Guid userGuid)
         {
@@ -31,6 +101,9 @@ namespace Bringly.DomainLogic.User
                 userProfile.FullName = User.FullName;
                 userProfile.EmailAddress = User.EmailAddress;
                 userProfile.MobileNumber = User.MobileNumber;
+                userProfile.CVRNumber = User.CVRNumber;
+                userProfile.RoleGuid = (User.RoleGuid!=null && User.RoleGuid.HasValue)? User.RoleGuid.Value: Guid.Empty;
+                userProfile.UserRegistrationType = User.UserRegistrationType.ToString();
                 userProfile.PreferedCity = User.PreferedCity != null ? User.PreferedCity.ToString() : "";
                 userProfile.ProfileImage = string.IsNullOrEmpty(User.ImageName) ? CommonDomainLogic.DefaultProfileImage : User.ImageName;
                 foreach (tblUserAddress usrAddress in User.tblUserAddresses)
@@ -40,7 +113,47 @@ namespace Bringly.DomainLogic.User
             }
             return userProfile;
         }
-       
+
+        public UserProfile FindUsertoberegistered(string email,int UserRegistrationType,Guid BusinessGuid)
+        {
+            tblUser User = new tblUser();
+            tblBusiness Business = new tblBusiness();
+            UserProfile userProfile = new UserProfile();
+            userProfile.UserAddresses = new List<UserAddress>();
+            bool alreadyregistered = false;
+            if (UserRegistrationType == 3)
+            {
+                User = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Include(i => i.tblUserAddresses.Select(c => c.tblCity)).Where(x => x.EmailAddress == email).FirstOrDefault();
+                if(User!=null)
+                {
+                    Business = bringlyEntities.tblBusinesses.Where(x => x.CreatedByGuid == User.UserGuid && x.BusinessGuid== BusinessGuid && x.IsDeleted==false).FirstOrDefault();
+                    alreadyregistered = (Business == null) ? false : true;
+                }
+            }
+            else {
+                User = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Include(i => i.tblUserAddresses.Select(c => c.tblCity)).Where(x => x.EmailAddress == email).FirstOrDefault();
+            }
+            
+           
+            if (User != null && !alreadyregistered)
+            {
+                userProfile.UserGuid = User.UserGuid;
+                userProfile.FullName = User.FullName;
+                userProfile.EmailAddress = User.EmailAddress;
+                userProfile.MobileNumber = User.MobileNumber;
+                userProfile.CVRNumber = User.CVRNumber;
+                userProfile.RoleGuid = (User.RoleGuid != null && User.RoleGuid.HasValue) ? User.RoleGuid.Value : Guid.Empty;
+                userProfile.UserRegistrationType = User.UserRegistrationType.ToString();
+                userProfile.PreferedCity = User.PreferedCity != null ? User.PreferedCity.ToString() : "";
+                userProfile.ProfileImage = string.IsNullOrEmpty(User.ImageName) ? CommonDomainLogic.DefaultProfileImage : User.ImageName;
+                foreach (tblUserAddress usrAddress in User.tblUserAddresses)
+                {
+                    userProfile.UserAddresses.Add(new UserAddress { UserAddressGuid = usrAddress.UserAddressGuid, Address = usrAddress.Address, CityGuid = usrAddress.CityGuid, CityName = usrAddress.tblCity.CityName, PostCode = usrAddress.PostCode, AddressType = usrAddress.AddressType });
+                }
+            }
+            return userProfile;
+        }
+
         public bool UpdatePreferedCity(Guid cityGuid)
         {
             tblUser user = bringlyEntities.tblUsers.Where(u => u.UserGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
@@ -54,6 +167,7 @@ namespace Bringly.DomainLogic.User
             tblUser user = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Where(x => x.UserGuid == userProfile.UserGuid).FirstOrDefault();
             user.FullName = userProfile.FullName;
             user.MobileNumber = userProfile.MobileNumber;
+            user.CVRNumber = string.IsNullOrEmpty(userProfile.CVRNumber)?"": userProfile.CVRNumber;
             //UserVariables.UserName = "";
             AuthencationTicket(user);
             foreach (UserAddress usrAddress in userProfile.UserAddresses)
@@ -88,24 +202,35 @@ namespace Bringly.DomainLogic.User
 
         public List<Restaurant> FavouriteRestaurants()
         {
-            List<Guid> favouriteRestaurantGuids = bringlyEntities.tblFavourites.Where(f => f.CreatedByGuid == UserVariables.LoggedInUserGuid).Select(t => t.RestaurantGuid).ToList();
+            List<Guid> favouriteRestaurantGuids = bringlyEntities.tblFavourites.Where(f => f.CreatedByGuid == UserVariables.LoggedInUserGuid).Select(t => t.LocationGuid).ToList();
             return bringlyEntities.tblRestaurants.Where(r => favouriteRestaurantGuids.Contains(r.RestaurantGuid)).Select(f => new Restaurant { RestaurantImage = f.RestaurantImage, RestaurantGuid = f.RestaurantGuid, RestaurantName = f.RestaurantName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
         }
-
-        public bool AddFavourite(Guid restaurantGuid, string IsFavourite)
+        public List<BusinessObject> FavouriteLocations()
         {
-            tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
+            List<Guid> favouriteLocationGuids = bringlyEntities.tblFavourites.Where(f => f.CreatedByGuid == UserVariables.LoggedInUserGuid).Select(t => t.LocationGuid).ToList();
+            var s = bringlyEntities.tblLocations.Where(r => favouriteLocationGuids.Contains(r.LocationGuid) && r.IsDeleted == false).Select(f => new BusinessObject { BusinessImage = f.LocationImage, BusinessGuid = f.LocationGuid, BusinessName = f.LocationName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
+            return bringlyEntities.tblLocations.Where(r => favouriteLocationGuids.Contains(r.LocationGuid) && r.IsDeleted == false).Select(f => new BusinessObject { BusinessImage = f.LocationImage, BusinessGuid = f.LocationGuid, BusinessName = f.LocationName, CityName = f.tblCity.CityName, IsFavorite = true, DateCreated = f.DateCreated }).ToList();
+        }
+
+        public bool AddFavourite(Guid locationGuid, string IsFavourite)
+        {
+            tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.LocationGuid == locationGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite == null)
             {
-                bringlyEntities.tblFavourites.Add(new tblFavourite { FavouriteGuid = Guid.NewGuid(), RestaurantGuid = restaurantGuid, CreatedByGuid = UserVariables.LoggedInUserGuid, DateCreated = DateTime.Now });
-                bringlyEntities.SaveChanges();
+                bringlyEntities.tblFavourites.Add(new tblFavourite { FavouriteGuid = Guid.NewGuid(), LocationGuid = locationGuid, CreatedByGuid = UserVariables.LoggedInUserGuid, DateCreated = DateTime.Now });
+                try
+                {
+                    bringlyEntities.SaveChanges();
+                }
+                catch (Exception ex)
+                { }
             }
             return true;
         }
 
-        public bool RemoveFavourite(Guid restaurantGuid, string IsFavourite)
+        public bool RemoveFavourite(Guid locationGuid, string IsFavourite)
         {
-            tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.RestaurantGuid == restaurantGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
+            tblFavourite userFavourite = bringlyEntities.tblFavourites.Where(f => f.LocationGuid == locationGuid && f.CreatedByGuid == UserVariables.LoggedInUserGuid).FirstOrDefault();
             if (userFavourite != null)
             {
                 bringlyEntities.tblFavourites.Remove(userFavourite);
@@ -141,14 +266,22 @@ namespace Bringly.DomainLogic.User
 
         }
 
-        public Message UserLogin(UserLogin userLogin)
+        public Message UserLogin(UserLogin userLogin,bool IsNewUser=false)
         {
-            Message message = new Message();
+            Message message = new Message();            
             tblUser user = bringlyEntities.tblUsers.Where(u => u.EmailAddress == userLogin.Username && u.Password == userLogin.UserPassword && u.IsDeleted == false).FirstOrDefault();
             if (user != null && user.IsActive)
             {
                 AuthencationTicket(user);
-                message.MessageType = Domain.Enums.MessageType.Success;
+                if (IsNewUser)
+                {
+                    message.MessageType = Domain.Enums.MessageType.NewUser;
+                }
+                else
+                {
+                    message.MessageType = Domain.Enums.MessageType.Success;
+                }
+                
             }
             else if (user != null && user.IsActive == false)
             {
@@ -163,6 +296,7 @@ namespace Bringly.DomainLogic.User
             return message;
 
         }
+        
 
         public MyReview IsPendingReview(Guid UserGuid)
         {
@@ -340,5 +474,158 @@ namespace Bringly.DomainLogic.User
                 Select(up => new Contact { FullName = up.FullName, EmailAddress = up.EmailAddress, UserGuid = up.UserGuid }).ToList();
             return UserContact;
         }
+
+        public Message RegisterUserthroughSociallogin(SocialLogin socialLogin)
+        {
+            
+            tblUser User = bringlyEntities.tblUsers.Where(x => x.EmailAddress.ToLower() == socialLogin.EmailAddress.ToLower()).FirstOrDefault();
+            bool IsNewUser = false;
+            UserLogin userLogin = new Domain.User.UserLogin();
+            if (User == null)
+            {
+                User = new tblUser();
+                Random random = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                User.UserGuid = Guid.NewGuid();
+                User.FullName = socialLogin.FullName;
+                User.UserRegistrationType = 2;
+                User.EmailAddress = socialLogin.EmailAddress;
+                User.DateCreated = DateTime.Now;
+                User.IsDeleted = false;
+                User.IsActive = true;
+                User.PreferedCity = bringlyEntities.tblCities.Where(x => x.IsDeleted == false).ToList().FirstOrDefault().CityGuid;
+                User.Password = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
+                User.GoogleLoginEmail = socialLogin.IsGoogleLogin ? socialLogin.EmailAddress : "";
+                User.FacebookLoginEmail = !socialLogin.IsGoogleLogin ? socialLogin.EmailAddress : "";
+                bringlyEntities.tblUsers.Add(User);
+                bringlyEntities.SaveChanges();
+                IsNewUser = true;
+                userLogin.Username = socialLogin.EmailAddress;
+                userLogin.UserPassword = User.Password;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(User.FacebookLoginEmail) && !socialLogin.IsGoogleLogin)
+                {
+                    User.FacebookLoginEmail = socialLogin.EmailAddress;
+                    bringlyEntities.SaveChanges();
+                }
+                else if (string.IsNullOrEmpty(User.GoogleLoginEmail) && socialLogin.IsGoogleLogin)
+                {
+                    User.GoogleLoginEmail = socialLogin.EmailAddress;
+                    bringlyEntities.SaveChanges();
+                }
+                userLogin.Username = User.EmailAddress;
+                userLogin.UserPassword = User.Password;
+            }
+
+
+            return UserLogin(userLogin, IsNewUser);
+        }
+
+        public string FacebookLogin(Uri uri)
+        {
+
+            var fb = new Facebook.FacebookClient();
+            //string aa = "https://www.facebook.com/v2.6/dialog/oauth?client_id="+id+ "&client_secret="+key+"&scope=public_profile,email&response_type=code&redirect_uri=" + uri.AbsoluteUri + "&state=STATE_TOKEN";
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["AppId"],
+                client_secret = ConfigurationManager.AppSettings["AppSecret"],
+                redirect_uri = uri.AbsoluteUri.Replace("http", "https"),
+                response_type = "code",
+                scope = "email"
+            });
+
+            return loginUrl.AbsoluteUri;
+        }
+
+        public List<City> GetCities()
+        {
+            return bringlyEntities.tblCities.Where(c => c.IsDeleted == false).Select(c => new City { CityGuid = c.CityGuid, CityName = c.CityName, CityUrlName = c.CityUrlName }).ToList();
+        }
+
+        public bool AddUpdateUser(UserProfile userProfile)
+        {
+            tblUser user = new tblUser();
+            if (userProfile.UserGuid != Guid.Empty)
+            {
+                user = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Where(x => x.UserGuid == userProfile.UserGuid).FirstOrDefault();
+                user.FullName = userProfile.FullName;
+                user.MobileNumber = userProfile.MobileNumber;
+                user.EmailAddress = userProfile.EmailAddress;
+                user.RoleGuid = userProfile.RoleGuid;
+            }
+            else
+            {
+                user.FullName = userProfile.FullName;
+                user.MobileNumber = userProfile.MobileNumber;
+                user.EmailAddress = userProfile.EmailAddress;
+                user.RoleGuid = userProfile.RoleGuid;
+                user.UserGuid = Guid.NewGuid();
+                user.UserRegistrationType = 4;
+                user.IsActive = true;
+                user.IsDeleted = false;
+                user.ParentGuid = UserVariables.LoggedInUserGuid;
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                Random random = new Random();
+                user.Password = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
+                userProfile.UserGuid = user.UserGuid;
+                user.DateCreated = DateTime.Now;
+                bringlyEntities.tblUsers.Add(user);
+            }
+            
+            foreach (UserAddress usrAddress in userProfile.UserAddresses)
+            {
+                if (usrAddress.UserAddressGuid != Guid.Empty)
+                {
+                    tblUserAddress userExistingAddress = user.tblUserAddresses.Where(x => x.UserAddressGuid == usrAddress.UserAddressGuid).FirstOrDefault();
+                    userExistingAddress.UserGuid = userProfile.UserGuid;
+                    userExistingAddress.Address = usrAddress.Address;
+                    userExistingAddress.AddressType = usrAddress.AddressType;
+                    userExistingAddress.CityGuid = usrAddress.CityGuid;
+                    userExistingAddress.PostCode = usrAddress.PostCode;
+                }
+                else
+                {
+                    user.tblUserAddresses.Add(
+                        new tblUserAddress
+                        {
+                            UserAddressGuid = Guid.NewGuid(),
+                            UserGuid = userProfile.UserGuid,
+                            Address = usrAddress.Address,
+                            AddressType = usrAddress.AddressType,
+                            CityGuid = usrAddress.CityGuid,
+                            PostCode = usrAddress.PostCode,
+                            DateCreated = DateTime.Now
+                        });
+                }
+            }
+            bringlyEntities.SaveChanges();
+            return true;
+        }
+        public List<UserProfile> GetAllUsers()
+        {
+            List<UserProfile> user = bringlyEntities.tblUsers.Include(a => a.tblUserAddresses).Where(x => x.ParentGuid == UserVariables.LoggedInUserGuid && x.UserRegistrationType==4 && x.IsDeleted==false)
+                .Select(z => new UserProfile {
+                    UserGuid=z.UserGuid,
+                    FullName=z.FullName,
+                    RoleGuid=z.RoleGuid.Value,
+                    RoleName=bringlyEntities.tblRoles.Where(x=>x.RoleGuid==z.RoleGuid.Value).FirstOrDefault().RoleName
+
+                })
+                .ToList();
+
+            return user;
+        }
+
+        public bool DeleteUser(Guid userGuid)
+        {
+            tblUser user = bringlyEntities.tblUsers.Where(x => x.UserGuid == userGuid).FirstOrDefault();
+            user.IsDeleted = true;
+            bringlyEntities.SaveChanges();
+            return true;
+        }
+
     }
 }

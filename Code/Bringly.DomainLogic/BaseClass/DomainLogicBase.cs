@@ -74,6 +74,13 @@ namespace Bringly.DomainLogic.BaseClass
                 return Settings.SystemSettings.DefaultPageSize;
             }
         }
+        protected int PageSizeBusiness
+        {
+            get
+            {
+                return Settings.SystemSettings.DefaultPageSizeBusiness;
+            }
+        }
         #endregion
         /// <summary>
         /// 

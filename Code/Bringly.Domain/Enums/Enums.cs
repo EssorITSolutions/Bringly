@@ -15,7 +15,7 @@ namespace Bringly.Domain.Enums
     }
     public enum MessageType
     {
-        Success, Error, Info
+        Success, Error, Info,NewUser
     }
     public enum TemplateType
     {

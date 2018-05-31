@@ -11,9 +11,11 @@ namespace Bringly.Domain.User
     {
         public Guid UserAddressGuid { get; set; }
         public Guid UserGuid { get; set; }
+        [Required(ErrorMessage = "Please enter address")]
         public string Address { get; set; }
         [Required(ErrorMessage = "Please select city")]
         public Guid CityGuid { get; set; }
+        [Required(ErrorMessage = "Please enter post code")]
         public string PostCode { get; set; }
         public string AddressType { get; set; }
         public string CityName { get; set; }

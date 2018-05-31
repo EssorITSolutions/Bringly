@@ -39,10 +39,11 @@ namespace Bringly.Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<System.Guid> Modifiedby { get; set; }
     
-        public virtual tblUser tblUser { get; set; }
-        public virtual tblUser tblUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrderItem> tblOrderItems { get; set; }
         public virtual tblLookUpDomainValue tblLookUpDomainValue { get; set; }
+        public virtual tblRestaurant tblRestaurant { get; set; }
+        public virtual tblUser tblUser { get; set; }
+        public virtual tblUser tblUser1 { get; set; }
     }
 }

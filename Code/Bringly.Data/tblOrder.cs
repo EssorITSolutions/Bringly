@@ -30,10 +30,10 @@ namespace Bringly.Data
         public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
     
-        public virtual tblUser tblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrderItem> tblOrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews { get; set; }
+        public virtual tblUser tblUser { get; set; }
     }
 }

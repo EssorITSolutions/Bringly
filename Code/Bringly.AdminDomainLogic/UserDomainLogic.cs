@@ -40,6 +40,69 @@ namespace Bringly.AdminDomainLogic
         /// 
         /// </summary>
         /// <param name="users"></param>
+        /// 
+        #region User Role
+        public List<UserRole> GetRoles()
+        {
+            return bringlyEntities.tblRoles.Where(c => c.CreatedByGuid == UserVariables.LoggedInUserGuid).Select(c => new UserRole { RoleGuid = c.RoleGuid, RoleName = c.RoleName, DateCreated = c.DateCreated }).ToList();
+        }
+        public UserRole GetRole(Guid roleGuid)
+        {
+            return bringlyEntities.tblRoles.Where(c => c.RoleGuid == roleGuid).Select(c => new UserRole { RoleGuid = c.RoleGuid, RoleName = c.RoleName, DateCreated = c.DateCreated }).FirstOrDefault();
+        }
+        public bool AddRole(UserRole role)
+        {
+            if (!IsRolexists(role))
+            {
+                bringlyEntities.tblRoles.Add(new tblRole { RoleGuid = Guid.NewGuid(), RoleName = role.RoleName, DateCreated = DateTime.Now, CreatedByGuid = UserVariables.LoggedInUserGuid });
+                bringlyEntities.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool UpdateRole(UserRole role)
+        {
+            if (!IsRolexists(role))
+            {
+                tblRole roleObject = bringlyEntities.tblRoles.Where(x => x.RoleGuid == role.RoleGuid).FirstOrDefault();
+                roleObject.RoleName = role.RoleName;
+                roleObject.ModifiedBy = UserVariables.LoggedInUserGuid;
+                roleObject.ModifiedDate = DateTime.Now;
+                bringlyEntities.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool IsRolexists(UserRole role)
+        {
+            bool roleExists = false;
+            tblRole roleObject = bringlyEntities.tblRoles.Where(x => x.CreatedByGuid == UserVariables.LoggedInUserGuid && x.RoleName == role.RoleName&& x.RoleGuid != role.RoleGuid).FirstOrDefault();
+            if (roleObject != null && !string.IsNullOrEmpty(roleObject.RoleName))
+            {
+                roleExists = true;
+            }
+            return roleExists;
+        }
+        public bool DeleteRoleLogic(Guid roleGuid)
+        {
+            tblRole role = bringlyEntities.tblRoles.Where(c => c.RoleGuid == roleGuid).FirstOrDefault();
+            bringlyEntities.Entry(role).State = System.Data.Entity.EntityState.Deleted;
+            bringlyEntities.SaveChanges();
+            return true;
+        }
+
+
+        #endregion
+
+
+
+
         private void AuthencationTicket(tblUser user)
         {
             string userData =

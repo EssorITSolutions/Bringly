@@ -11,6 +11,7 @@ using System.Web.Security;
 using Bringly.Domain;
 using System.Web.UI;
 using Bringly.Domain.Common;
+using Bringly.Domain.Enums;
 
 namespace Bringly.UI.Controllers
 {
@@ -57,7 +58,8 @@ namespace Bringly.UI.Controllers
             Success("Saved successfully");
             CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
             userProfile.Cities = commonDomainLogic.GetCities();
-            return RedirectToAction("EditPersonalInformation", "User");
+            // return RedirectToAction("EditPersonalInformation", "User");
+            return RedirectToAction("PersonalInformation");
             //return View(userProfile);
         }
 
@@ -83,7 +85,7 @@ namespace Bringly.UI.Controllers
         public ActionResult Favourites()
         {
             UserDomainLogic userDomainLogic = new UserDomainLogic();
-            return View(userDomainLogic.FavouriteRestaurants());
+            return View(userDomainLogic.FavouriteLocations());
         }
         public ActionResult partialLeftPanel()
         {
@@ -204,5 +206,124 @@ namespace Bringly.UI.Controllers
             UserDomainLogic userDomainLogic = new UserDomainLogic();
             return userDomainLogic.GetAllBuyers();
         }
+
+        public ActionResult NewRegistrationfromSocialPage()
+        {
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            UserProfile userProfile = userDomainLogic.FindUser(UserVariables.LoggedInUserGuid);
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            userProfile.Cities = commonDomainLogic.GetCities();
+            return View(userProfile);
+        }
+        [HttpPost]
+        public ActionResult NewRegistrationfromSocialPage(UserProfile userProfile)
+        {
+            UserDomainLogic userdomainLogic = new UserDomainLogic();
+            userProfile.UserAddresses = new List<UserAddress>();
+            UserAddress usrAddress = new UserAddress();
+            usrAddress.Address = Convert.ToString(HttpContext.Request.Form["BillingAddress.Address"]);
+            usrAddress.PostCode = Convert.ToString(HttpContext.Request.Form["BillingAddress.PostCode"]);
+            usrAddress.CityGuid = Guid.Parse(HttpContext.Request.Form["BillingAddress_CityGuid"]);
+            usrAddress.AddressType = Bringly.Domain.Enums.User.UserAddressType.Billing.ToString();
+            userProfile.UserAddresses.Add(usrAddress);
+            usrAddress = new UserAddress();
+            usrAddress.Address = Convert.ToString(HttpContext.Request.Form["ShippingAddress.Address"]);
+            usrAddress.PostCode = Convert.ToString(HttpContext.Request.Form["ShippingAddress.PostCode"]);
+            usrAddress.CityGuid = Guid.Parse(HttpContext.Request.Form["ShippingAddress_CityGuid"]);
+            usrAddress.AddressType = Bringly.Domain.Enums.User.UserAddressType.Shipping.ToString();
+            userProfile.UserAddresses.Add(usrAddress);
+            userdomainLogic.UpdateUserProfile(userProfile);
+            Success("Saved successfully");
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            userProfile.Cities = commonDomainLogic.GetCities();
+            return RedirectToAction("Dashboard", "User");
+            //return View(userProfile);
+        }
+
+        #region User
+
+        public ActionResult AddEditManager(Nullable<Guid> guid)
+        {
+            UserProfile userProfile = new UserProfile();
+            UserDomainLogic userDomainLogic = new UserDomainLogic();
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            if (guid != null && guid != Guid.Empty)
+            {
+                userProfile = userDomainLogic.FindUser(guid.Value);
+                userProfile.Cities = commonDomainLogic.GetCities();
+                userProfile.RolesList = commonDomainLogic.GetAllRoles();
+            }
+            else {
+                userProfile.Cities = commonDomainLogic.GetCities();
+                userProfile.RolesList = commonDomainLogic.GetAllRoles();
+            }
+
+            return View(userProfile);
+        }
+        [HttpPost]
+        public ActionResult AddEditManager(UserProfile userProfile)
+        {
+            UserDomainLogic userdomainLogic = new UserDomainLogic();
+            userProfile.UserAddresses = new List<UserAddress>();
+            UserAddress usrAddress = new UserAddress();
+            usrAddress.UserAddressGuid = Guid.Parse(HttpContext.Request.Form["BillingAddress_UserAddressGuid"]);
+            usrAddress.Address = Convert.ToString(HttpContext.Request.Form["BillingAddress_Address"]);
+            usrAddress.PostCode = Convert.ToString(HttpContext.Request.Form["BillingAddress_PostCode"]);
+            usrAddress.CityGuid = Guid.Parse(HttpContext.Request.Form["BillingAddress_CityGuid"]);
+            usrAddress.AddressType = Bringly.Domain.Enums.User.UserAddressType.Billing.ToString();
+            userProfile.UserAddresses.Add(usrAddress);
+            userProfile.UserAddresses.Add(usrAddress);
+            userdomainLogic.AddUpdateUser(userProfile);
+            Success("Saved successfully");
+            CommonDomainLogic commonDomainLogic = new CommonDomainLogic();
+            userProfile.Cities = commonDomainLogic.GetCities();
+            userProfile.RolesList = commonDomainLogic.GetAllRoles();
+            //return RedirectToAction("ManageManagers", "User");
+            return RedirectToAction("ManageManagers");
+        }
+
+        public ActionResult ManageManagers()
+        {
+            ManageUserProfiles manageUserProfiles = new ManageUserProfiles();
+            UserDomainLogic userdomainLogic = new UserDomainLogic();
+            manageUserProfiles.UserProfiles = userdomainLogic.GetAllUsers();
+            return View(manageUserProfiles);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser(Guid UserGuid)
+        {
+            Message message = new Message();
+            UserDomainLogic userdomainLogic = new UserDomainLogic();
+            if (userdomainLogic.DeleteUser(UserGuid))
+            {
+                ModelState.Clear();
+                message.MessageText = "User has been deleted successfully.";
+                message.MessageType = MessageType.Success;
+            }
+            else
+            {
+                message.MessageText = "User deletion failed.";
+                message.MessageType = MessageType.Error;
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult NoRecordFoundPartial()
+        {
+            return PartialView("_NoRecordFound", "No user(s) found.");
+        }
+
+        [HttpPost]
+        public ActionResult FindUsertoberegistered(string email, int UserRegistrationType, Guid BusinessGuid)
+        {
+            if(BusinessGuid==null)
+            { BusinessGuid = Guid.Empty; }
+            UserDomainLogic userdomainLogic = new UserDomainLogic();
+            return Json(userdomainLogic.FindUsertoberegistered(email, UserRegistrationType, BusinessGuid),JsonRequestBehavior.AllowGet);
+            //return View(userProfile);
+        }
+
+        #endregion
     }
 }
