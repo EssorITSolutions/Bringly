@@ -1,0 +1,51 @@
+﻿
+@model Bringly.Domain.Business.MyBusiness
+@{Layout = null;}
+<div style="width:100%;" id="divappointment">
+    @foreach (var business in Model.BusinessObjects)
+    {
+        <div class="col-lg-12 col-md-12 col-sm-12 userappointment">
+            <div class="shadow-box restaurant-info">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <input type="text" id="" value="@business.BusinessName" disabled="disabled" class="form-control disabled-textbox" />
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <input type="text" id="AppointmentDate_@business.SaloonAppointmentGuid" value="@business.AppointmentDate" disabled="disabled" class="form-control data disabled-textbox datetimepicker appointmentdate" />
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <input type="text" value="@business.SaloonTime" id="textsaloontime_@business.SaloonAppointmentGuid" disabled="disabled" class="form-control data disabled-textbox textsaloontime" />
+                        <div class="display-none timeslotdropdown">
+                            @Html.DropDownList("SaloonTimeGuid_" + business.SaloonAppointmentGuid, Model.SaloonSlotList.Select(t => new SelectListItem { Text = t.SlotTime, Value = t.SaloonTimeGuid.ToString(), Selected = (t.SaloonTimeGuid == business.SaloonTimeGuid) }), " ", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
+                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updateapppointment('@business.SaloonAppointmentGuid','@business.BusinessGuid','@business.SaloonAppointmentGuid');"> Update</a></p>
+                        </div><div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
+                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelapppointment();"> Cancel</a></p>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 float-left">
+                                <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="editappointment();"><i class="fa fa-pencil"></i> Edit</a></p>
+                            </div><div class="col-lg-6 col-md-6 col-sm-6 float-left">
+                                <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="DeleteAppointment('@business.SaloonAppointmentGuid');"> Delete</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        @{
+            Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+        }
+    </div>
+</div>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js' type='text/javascript'></script>

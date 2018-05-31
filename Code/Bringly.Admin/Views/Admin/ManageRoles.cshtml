@@ -1,0 +1,87 @@
+﻿
+@model List<Bringly.AdminDomain.UserRole>
+@{
+    Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+    Guid guid = Guid.NewGuid();
+}
+
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span class="floatleft">Manage Roles</span>
+
+    </div>
+    <div class="mws-panel-body no-padding">
+        <div class="dataTables_wrapper">
+
+            <div id="AddEditRole">
+                <div>
+                    @*<div class="mws-panel-header header-color">
+                            <span id="cityHeader">Add City</span>
+                        </div>*@
+                    <div class="mws-panel-body no-padding no-margin">
+                        <form method="post" class="mws-form" id="formRole">
+                            <div class="mws-form-block">
+                                <div class="mws-form-row">
+                                    <div class="mws-form-cols">
+                                        <div class="mws-form-col-4-8">
+                                            <label class="mws-form-label">Role Name<span class="required">*</span></label>
+                                            <div class="mws-form-item">
+                                                @Html.TextBox("RoleName")
+                                                @Html.ValidationMessage("RoleName")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mws-button-row">
+                                    @Html.Hidden("RoleGuid", guid)
+                                    <input type="button" id="btnupdaterole" name="submit" value="Add" title="Add" class="btn btn-inverse">                                    
+                                    <a href="/Admin/ManageCities" class="btn btn-inverse">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="dataTables_filter" style="background-color:#fff;border-bottom:1px solid #fff;">
+                <label>
+                    Search:
+                    <input type="text" data-filter-grid-id="viewRoles" data-filter-grid="true">
+                </label>
+            </div>
+            <table class="mws-datatable-fn mws-table dataTable">
+                <thead>
+                    <tr role="row">
+                        <th>
+                            Role Name
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="viewRoles">
+                    @foreach (Bringly.AdminDomain.UserRole role in Model)
+                    {
+                        <tr>
+                            <td>@role.RoleName </td>
+                            <td>@role.DateCreated.ToShortDateString() </td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="DeleteRole('@role.RoleGuid')"><i class="fa fa-trash-o"></i></a>  &nbsp;
+                                <a href="javascript:void(0);" id="btnAddEditRole" onclick="EditRole('@role.RoleGuid','@role.RoleName')"><i style="" class="fa fa-pencil"></i></a>
+
+                                @*<a href="/Admin/EditCity/@city.CityGuid">
+                                        Edit
+                                    </a>*@
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

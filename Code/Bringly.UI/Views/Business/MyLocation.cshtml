@@ -1,0 +1,298 @@
+﻿@using Bringly.Domain.Business
+@model Bringly.Domain.Business.BusinessObject
+@{
+    ViewBag.Title = "My Location";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+
+
+}
+@section BreadCrum{
+    <li class="breadcrumb-item active">My Location</li>
+}
+
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="shadow-box MyRestaurantInfo">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-8">
+                        <h2 class="heading-sub">My Location</h2>
+                    </div>
+                    <div class="col-lg-5 col-md-4 col-sm-4 cvr-add-location">
+                        <h4>  CVR Number : @Model.CVRNumber</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12">
+                        <a href="/Business/LocationList" class="mr-4 btn btn-primary" value="">Show Locations</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row-block">
+                <form method="post" class="mws-form" id="formrestaurent">
+                    <div class="table-order divprofiledata">
+                        <div class="sub-title">
+                            <div class="row restaurentprofile">
+                                <div class="col-lg-8 col-md-7 col-sm-12">
+                                    <h5 class="m-0 text-weight">Basic Info</h5>
+                                </div>
+                                @*<div class="col-lg-4 col-md-5 col-sm-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
+                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updatebusinessprofile();"> Update</a></p>
+                                        </div><div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofilecancel">
+                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelbusinessprofile();"> Cancel</a></p>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
+                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="editbusinessprofile();"><i class="fa fa-pencil"></i> Edit</a></p>
+                                        </div>
+                                    </div>*@
+                                <div class="col-lg-4 col-md-5 col-sm-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
+                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updatelocation();"> Update</a></p>
+                                    </div><div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofilecancel">
+                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelbusinessprofile();"> Cancel</a></p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
+                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="editbusinessprofile();"><i class="fa fa-pencil"></i> Edit</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="hidden" name="BusinessGuid" value="@Model.BusinessGuid" id="BusinessGuid" />
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="label-data"><label>Name:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-data"><label>Address:</label></td>
+                                            <td class="data">
+                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control disabled-textbox", @disabled = "disabled" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-data"><label>City:</label></td>
+                                            <td class="data citydropdown display-none">
+                                                @Html.DropDownListFor(m => m.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", new { @class = "chosen-select", @placeholder = "Choose a category.." }))
+                                            </td>
+                                            <td class="data cityname">
+                                                <label id="CityName"> @Model.CityName</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-data"><label>P-number:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.PNumber, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="label-data"><label>Zip Code:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.PinCode, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-data"><label>Phone:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.Phone, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="label-data"><label>E-mail:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "email" })</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-order divrestaurenttime">
+                        <div class="sub-title">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-7 col-sm-12">
+                                    <h5 class="m-0 text-weight">Timings</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:67%"><label>Order Timings:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.OrderTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:67%"><label>Pick Up Timings:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.PickUpTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-order">
+                        <div class="sub-title">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-12">
+                                    <h5 class="m-0 text-weight">Tax Charges</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:67%"><label>Service Charge(%):</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.ServiceCharge, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:67%"><label>Service Tax(%):</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-order">
+                        <div class="sub-title">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-12">
+                                    <h5 class="m-0 text-weight">Delivery Charges</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:67%"><label>Flat Rate Upto 2.5 Kms:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.FlatRate, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:67%"><label>Rate for each ½ kms after 2.5 Kms:</label></td>
+                                            <td class="data">@Html.TextBoxFor(m => m.RateAfterKm, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-order">
+                        <div class="sub-title">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-12">
+                                    <h5 class="m-0 text-weight">Description</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <p class="px-3">
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control disabled-textbox", @disabled = "disabled", @style = "height: 150px;" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divNewField" class="table-order">
+                        @if (Model.CustomPropertyList != null && Model.CustomPropertyList.Count > 0)
+                        {
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                        <h5 class="m-0 text-weight">Other Properties</h5>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            foreach (var customField in Model.CustomPropertyList)
+                            {
+                                <div class="col-md-12 dynamicdata div-@customField.CustomPropertyGuid">
+                                    <div class="row">
+                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                            <input type="text" class="dynamicfieldguid display-none" value="@customField.CustomPropertyGuid" />
+                                            <input type="text" class="dynamicfieldname form-control  disabled-textbox" disabled="disabled" placeholder="Field Name" value="@customField.Field" />
+                                        </label>
+                                        <div class="col-xl-6 col-lg-6 col-md-5 col-sm-10 col-form-label">
+                                            <input type="text" class="dynamicfieldvalue form-control  disabled-textbox" disabled="disabled" placeholder="Value" value="@customField.Value" />
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-form-label text-center">
+                                            <img style="width:15%; margin-top:15%;cursor:pointer;" class="display-none" title="Delete field" src="~/Templates/images/cross-icon.png" onclick="removeParentDiv('@customField.CustomPropertyGuid',this)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <div class="divaddproperty table-order display-none">
+                                <div class="sub-title">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-9 col-sm-12">
+                                            <h5 class="m-0 text-weight">Add More Fields</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 divaddproperty display-none">
+                        <input type="button" class="mr-4 btn btn-primary" onclick="addNewField()" value="Add More" />
+                    </div>
+
+                </form>
+                <div class="table-order">
+                    <div class="sub-title">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-9 col-sm-12">
+                                <h5 class="m-0 text-weight">Location Images</h5>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                                <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#"><i class="fa fa-pencil"></i> Edit</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="Image-panel">
+                        <div class="Add-Images">
+                            <label class="custom-file">
+                                <input type="file" id="file2" class="custom-file-input">
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+                        <div class="thumbnail-card">
+                            <img src="/templates/images/img-1.jpg" class="m-auto d-block" />
+                        </div>
+                        <div class="thumbnail-card">
+                            <img src="/templates/images/img-2.jpg" class="m-auto d-block" />
+                        </div>
+                        <div class="thumbnail-card">
+                            <img src="/templates/images/img-3.jpg" class="m-auto d-block" />
+                        </div>
+                        <div class="thumbnail-card">
+                            <img src="/templates/images/img-4.jpg" class="m-auto d-block" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

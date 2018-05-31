@@ -1,0 +1,195 @@
+﻿@using Bringly.Domain.Business
+@model Bringly.Domain.Business.BusinessObject
+@{
+    ViewBag.Title = "Business Info";
+    Layout = "~/Views/Shared/MasterPages/PartialMaster.cshtml";
+}
+<div class="close-button" style="z-index:9999;">
+
+    <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">×</button>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12" id="partialBusinessInfo">
+    <div class=" MyRestaurantInfo">
+        <div class="row-block">
+            <div class="table-order divprofiledata">
+                <div class="sub-title">
+                    <div class="row restaurentprofile">
+                        <div class="col-lg-8 col-md-7 col-sm-12">
+                            <h2 class="m-0 text-weight">@Model.BusinessTypeName Details</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-order divprofiledata">
+            <div class="sub-title">
+                <div class="row restaurentprofile">
+                    <div class="col-lg-8 col-md-7 col-sm-12">
+                        <h5 class="m-0 text-weight">Basic Info</h5>
+                    </div>                  
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">Name:</label></td>
+                                <td class="data"><label class="form-control disabled-textbox">@Model.BusinessName</label></td>
+                            </tr>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">Address:</label></td>
+                                <td class="data">
+                                    <label class="form-control disabled-textbox">@Model.Address</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">City:</label></td>
+                                <td class="data cityname">
+                                    <label id="CityName" class="form-control disabled-textbox"> @Model.CityName</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">Zip Code:</label></td>
+                                <td class="data"><label class="form-control disabled-textbox">@Model.PinCode</label></td>
+                            </tr>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">Phone:</label></td>
+                                <td class="data"><label class="form-control disabled-textbox">@Model.Phone</label></td>
+
+                            </tr>
+                            <tr>
+                                <td class="label-data"><label class="form-control disabled-textbox">E-mail:</label></td>
+                                <td class="data"><label class="form-control disabled-textbox">@Model.Email</label></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="table-order divrestaurenttime">
+            <div class="sub-title">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12">
+                        <h5 class="m-0 text-weight">Timings</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="width:67%"><label>Order Timings:</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.OrderTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                            <tr>
+                                <td style="width:67%"><label>Pick Up Timings:</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.PickUpTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="table-order">
+            <div class="sub-title">
+                <div class="row">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
+                        <h5 class="m-0 text-weight">Tax Charges</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="width:67%"><label>Service Charge(%):</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.ServiceCharge, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                            <tr>
+                                <td style="width:67%"><label>Service Tax(%):</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="table-order">
+            <div class="sub-title">
+                <div class="row">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
+                        <h5 class="m-0 text-weight">Delivery Charges</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="width:67%"><label>Flat Rate Upto 2.5 Kms:</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.FlatRate, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                            <tr>
+                                <td style="width:67%"><label>Rate for each ½ kms after 2.5 Kms:</label></td>
+                                <td class="data">@Html.TextBoxFor(m => m.RateAfterKm, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="table-order">
+            <div class="sub-title">
+                <div class="row">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
+                        <h5 class="m-0 text-weight">Description</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <p class="px-3">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control disabled-textbox", @disabled = "disabled", @style = "height: 150px;background-color:transparent" })
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="divNewField" class="table-order">
+            @if (Model.CustomPropertyList != null && Model.CustomPropertyList.Count > 0)
+            {
+                <div class="sub-title">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-9 col-sm-12">
+                            <h5 class="m-0 text-weight">Other Properties</h5>
+                        </div>
+                    </div>
+                </div>
+                foreach (var customField in Model.CustomPropertyList)
+                {
+                    <div class="col-md-12 dynamicdata">
+                        <div class="row">
+                            <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                <input type="text" class="dynamicfieldname form-control  disabled-textbox" disabled="disabled" placeholder="Field Name" value="@customField.Field" />
+                            </label>
+                            <div class="col-xl-6 col-lg-6 col-md-5 col-sm-10 col-form-label">
+                                <input type="text" class="dynamicfieldvalue form-control  disabled-textbox" disabled="disabled" placeholder="Value" value="@customField.Value" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+    </div>

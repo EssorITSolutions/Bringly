@@ -1,0 +1,44 @@
+﻿@model List<Bringly.Domain.Business.BusinessObject>
+@{Layout = null;}
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var business in Model)
+    {
+        <div class="col-lg-6 col-md-12 col-sm-12" id="restaurant-@business.BusinessGuid">
+            <div class="shadow-box restaurant-info">
+                <div class="row">
+                    <div class="col-lg-5 col-md-4 col-sm-12">
+                        <div class="brand-logo">
+                            <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant, business.BusinessImage))" class="img-fluid" />
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-8 col-sm-12">
+                        <div class="content-inner">
+                            @Html.Hidden("restaurant_RestaurantGuid", business.BusinessGuid)
+                            <h4>
+                                <span class="company-name">
+                                    @business.BusinessName
+                                </span>
+                                <span class="like-link" title="@(business.IsFavorite ? "Remove from favourite" : "Add to favourite")">
+                                    <i class='fa @(business.IsFavorite ? "fa-heart" : "fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + business.BusinessGuid + "'"),1)"></i>
+                                </span>
+                            </h4>
+                            <p>
+                                <span class="tag-star">
+                                    <a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a>
+                                </span>
+                            </p>
+                            <p class="address-area">Italian cuisine, European</p>
+                            <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, Kyiv</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    @Html.Partial("_NoRecordFound", "No favourite location(s) found.")
+}

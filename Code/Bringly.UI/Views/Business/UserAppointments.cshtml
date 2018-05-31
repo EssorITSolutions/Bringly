@@ -1,0 +1,22 @@
+﻿@model  Bringly.Domain.Business.MyBusiness
+@{
+
+    var cityname = string.IsNullOrEmpty(Model.CityName) ? "" : Model.CityName;
+    var businessname = string.IsNullOrEmpty(Model.BusinessName) ? "" : Model.BusinessName;
+    ViewBag.Title = "List of Appointment(s)";
+    Layout = "~/Views/Shared/MasterPages/RestaurantMaster.cshtml";
+    ViewBag.HideLeftSection = true;
+
+}
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <a href="/business/LocationListUser?BusinessTypeGuid=@Model.BusinessObjects.FirstOrDefault().BusinessTypeGuid" class="float-right btn btn-primary">Make Appointments</a>
+</div>
+@if (Model.BusinessObjects != null && Model.BusinessObjects.Count > 0)
+{
+    Html.RenderPartial("_UserAppointments", Model);
+}
+else
+{
+    @Html.Partial("_NoRecordFound", "No appointment(s) found.")
+}
+

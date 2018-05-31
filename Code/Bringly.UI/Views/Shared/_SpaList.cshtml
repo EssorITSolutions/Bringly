@@ -1,0 +1,74 @@
+﻿@model Bringly.Domain.Business.MyBusiness
+@{Layout = null;}
+@foreach (var business in Model.BusinessObjects)
+{
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="shadow-box restaurant-info">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="brand-logo">
+                        <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant,business.BusinessImage))" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail" id="restaurant-@business.BusinessGuid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <h4 title="@business.BusinessName">@(business.BusinessName.Length > 13 ? business.BusinessName.Substring(0, 11) + " ....." : business.BusinessName)</h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12" id="divfavourite_@business.BusinessGuid" title="@(business.IsFavorite?"Remove from favourite":"Add to favourite")">
+                                <p class="timing"><i class='fa @(business.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + business.BusinessGuid + "'"),0)"></i></p>
+
+                            </div>
+                        </div>
+                        <p class="rating-star"><span class="tag-star"><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a></span> &nbsp; 5.0 (27)</p>
+                        <p>Italian cuisine, European</p>
+                        <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, @business.CityName</p>
+                        <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail">
+                        <ul class="list-inline order-detail spa-time">
+                            <li class="list-inline-item">
+                                Appointment Date
+                                <br />
+                                <span>
+                                    @Html.TextBox("AppointmentDate_"+business.BusinessGuid,"",  new { @class = "form-control datetimepicker appointmentdate", @value=""})
+                                    @Html.ValidationMessage("AppointmentDate")
+                                    @*<input type="text" id="" class="form-control datetimepicker appointmentdate" value="@(string.IsNullOrEmpty(business.AppointmentDate)?"":business.AppointmentDate)" placeholder="Appintment Date" />*@
+                                </span>
+                            </li>
+                            <li class="list-inline-item">
+                                Time Slot<br />
+                                         <span>
+                                             @Html.DropDownList("SaloonTimeGuid_"+ @business.BusinessGuid, Model.SaloonSlotList.Select(t => new SelectListItem { Text = t.SlotTime, Value = t.SaloonTimeGuid.ToString() }), " ", new { @class = "form-control" })
+                                             @Html.ValidationMessage("SaloonTimeGuid")
+                                         </span>
+                            </li>
+                            @*<li class="list-inline-item">
+                                Delivery time<br />
+                                <span>90 <sub>min</sub></span>
+                            </li>*@
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="float-right" style="padding-top:12px;">
+                        <button class="btn btn-primary btn-lg" onclick="Checkandmakeappointment('@business.BusinessGuid')" id="btn_@business.BusinessGuid">ORDER NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="col-lg-12 col-md-12 col-sm-12">
+    @{
+        Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+    }
+</div>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js' type='text/javascript'></script>

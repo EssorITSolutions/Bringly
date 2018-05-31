@@ -1,0 +1,58 @@
+﻿@model  Bringly.Domain.User.ManageUserProfiles
+@{
+    ViewBag.Title = "ManageManagers";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+@if (Model.UserProfiles != null && Model.UserProfiles.Count > 0)
+{
+<div class="col-lg-9 col-md-7 col-sm-12 locationlist">
+    <div>
+        <div class="col-md-10 float-left"> <h2>Manage Users</h2></div>
+        <div class="mb-2"><a class="btn btn-primary" href="/User/AddEditManager">Add User</a></div>
+    </div>
+    <div class="right-side mail-box">
+        <div class="shadow-box" id="divlocationlist">
+            <table id="tableuserlist" class="table table-responsive dataTable">
+                <tr>
+                    <td>User Name</td>
+                    <td>Role</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                @foreach (var obj in Model.UserProfiles)
+                {
+                    <tr class="tr-@obj.UserGuid">
+                        <td>
+                            @obj.FullName
+                        </td>
+                        <td>
+                            @obj.RoleName
+                        </td>
+                        <td>
+                            <a href="/User/AddEditManager?guid=@obj.UserGuid"><i class="fa fa-pencil"></i>Edit</a>
+                        </td>
+                        <td>
+                            <a href="#" onclick="DeleteUser('@obj.UserGuid')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <div class="col-lg-9 col-md-7 col-sm-12">
+        <h2>Manage Users</h2>
+        <div class="right-side mail-box">
+            <div class="shadow-box">
+                <div class="row">
+                    @Html.Partial("_NoRecordFound", "No user(s) found.")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

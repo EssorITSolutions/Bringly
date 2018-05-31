@@ -1,0 +1,53 @@
+﻿@model  List<Bringly.Domain.Business.BusinessObject>
+@{
+    ViewBag.Title = "LocationList";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="col-lg-9 col-md-7 col-sm-12 locationlist">
+        <div class="col-md-10 float-left"> <h2>Manage Locations</h2></div>
+        <div class="mb-2"><a class="btn btn-primary" href="/Business/AddLocation">Add Location</a></div>
+
+        <div class="right-side mail-box">
+            <div class="shadow-box" id="divlocationlist">
+                <table id="tablelocationlist" class="table table-responsive dataTable">
+                    <tr>
+                        <td>Location Name</td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                    </tr>
+                    @foreach (var obj in Model)
+                    {
+                        <tr class="first-child tr-@obj.BusinessGuid">
+                            <td>
+                                @obj.BusinessName
+                            </td>
+                            <td>
+                                <a href="/Business/MyLocation?businessGuid=@obj.BusinessGuid"><i class="fa fa-pencil"></i>Edit</a>
+                            </td>
+                            <td>
+                                <a href="#" onclick="DeleteLocation('@obj.BusinessGuid')">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-lg-9 col-md-7 col-sm-12">
+        <h2>Location List</h2>
+        <div class="right-side mail-box">
+            <div class="shadow-box">
+                <div class="row">
+                    @Html.Partial("_NoRecordFound", "No location(s) found.")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

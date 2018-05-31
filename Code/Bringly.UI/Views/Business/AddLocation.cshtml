@@ -1,0 +1,257 @@
+﻿@model Bringly.Domain.Business.BusinessObject
+@{
+    ViewBag.Title = "AddBusiness";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+@section BreadCrum{
+    <li class="breadcrumb-item active">Location</li>
+}
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form  method="post" id="frmaddlocation">
+                    @Html.HiddenFor(m => m.BusinessGuid)
+                    <div class="card personal-information">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6 col-sm-8">
+                                    <h2 class="heading-sub">Add Location</h2>
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-4 cvr-add-location">
+                                    <h4>  CVR Number : @(string.IsNullOrEmpty(Model.CVRNumber)?"": Model.CVRNumber)</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Name<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.BusinessName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Manager :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.DropDownListFor(m => m.ManagerGuid, Model.UserList.Select(x => new SelectListItem { Text = x.FullName, Value = x.UserGuid.ToString() }), "", new { @class = "chosen-select" })
+                                    @*@Html.ValidationMessageFor(m => m.ManagerGuid)*@
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Email :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                        <h5 class="m-0 text-weight">Location Information</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>p-Number<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.PNumber, new { @class = "form-control", @onKeyPress = "if(this.value.length==10) return false;", @type = "number" })
+                                    @Html.ValidationMessageFor(m => m.PNumber)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                        <h5 class="m-0 text-weight">Address</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Address<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Address)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>City<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.DropDownListFor(m => m.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", new { @class = "chosen-select", @placeholder = "Choose a City.." }))
+                                    @Html.ValidationMessageFor(m => m.CityGuid)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>PostCode:</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onKeyPress = "if(this.value.length==4) return false;", @type = "number" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Phone:</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @onKeyPress = "if(this.value.length==8) return false;", @type = "number" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-order divrestaurenttime">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                        <h5 class="m-0 text-weight">Timings</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:67%"><label>Order Timings:</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.OrderTiming, new { @class = "form-control" })</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:67%"><label>Pick Up Timings:</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.PickUpTiming, new { @class = "form-control" })</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                        <h5 class="m-0 text-weight">Tax Charges</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:67%"><label>Service Charge(%):</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.ServiceCharge, new { @class = "form-control", @onKeyPress = "if(this.value.length==5) return false;", @type = "number" })</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:67%"><label>Service Tax(%):</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control", @onKeyPress = "if(this.value.length==5) return false;", @type = "number" })</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                        <h5 class="m-0 text-weight">Delivery Charges</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:67%"><label>Flat Rate Upto 2.5 Kms:</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.FlatRate, new { @class = "form-control", @onKeyPress = "if(this.value.length==5) return false;", @type = "number" })</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:67%"><label>Rate for each ½ kms after 2.5 Kms:</label></td>
+                                                <td class="data">@Html.TextBoxFor(m => m.RateAfterKm, new { @class = "form-control", @onKeyPress = "if(this.value.length==5) return false;", @type = "number" })</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                        <h5 class="m-0 text-weight">Description</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <p class="px-3">
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "height: 150px;" })
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="table-order">
+                            <div class="sub-title">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                        <h5 class="m-0 text-weight">Other Properties</h5>
+                                    </div>
+                                   
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.TextBoxFor(m => m.CustomProperty, new { @style = "display:none" })
+                                <div class="col-lg-12 col-md-12 col-sm-12" id="divNewField">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input type="button" class="ml-3 float-left btn btn-primary" onclick="addNewField()" value="Add More" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label"></div>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    <button onclick="return Getcustomfields('@Model.BusinessGuid');" id="btnsubmit" type="button" value="Save Location" class="btn btn-primary btn-lg">Save Location</button>  <a href="/Business/LocationList" class="btn btn-primary btn-lg">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model Bringly.Domain.Business.BusinessType
+
+@{
+    ViewBag.Title = "Edit BusinessType";
+    //Layout = "~/Views/Shared/MasterPages/_AuthoriseUserMaster.cshtml";
+    Layout = null;
+}
+
+
+<div class="mws-panel grid_8">
+    <div class="">
+        <span id="BusinessTypeHeader">@((Model != null) ? "Edit" : "Add") Business Type</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <form method="post" class="mws-form">
+            <div class="mws-form-block">
+                <div class="mws-form-row">
+                    <div class="mws-form-cols">
+                        <div class="mws-form-col-4-8">
+                            <label class="mws-form-label">Business Type Name<span class="required">*</span></label>
+                            <div class="mws-form-item">
+                                @Html.TextBoxFor(m => m.BusinessTypeName)
+                                @Html.ValidationMessageFor(v => v.BusinessTypeName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mws-button-row">
+                    @Html.HiddenFor(m => m.BusinessTypeGuid)
+                    <input type="submit" name="submit" value="Save" title="Save" class="btn btn-inverse">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

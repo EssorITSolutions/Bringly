@@ -1,0 +1,64 @@
+﻿@model Bringly.Domain.Business.MyBusiness
+@{Layout = null;}
+@foreach (var business in Model.BusinessObjects)
+{
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="shadow-box restaurant-info">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="brand-logo">
+                        <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant,business.BusinessImage))" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail" id="restaurant-@business.BusinessGuid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.Hidden("restaurant_RestaurantGuid", business.BusinessGuid)
+                                <h4 title="@business.BusinessName">@(business.BusinessName.Length > 13 ? business.BusinessName.Substring(0, 11) + " ....." : business.BusinessName)</h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12" id="divfavourite_@business.BusinessGuid" title="@(business.IsFavorite?"Remove from favourite":"Add to favourite")">
+                                <p class="timing"><i class='fa @(business.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + business.BusinessGuid + "'"),0)"></i></p>
+
+                            </div>
+                        </div>
+                        <p class="rating-star"><span class="tag-star"><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a></span> &nbsp; 5.0 (27)</p>
+                        <p>Italian cuisine, European</p>
+                        <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, @business.CityName</p>
+                        <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="brand-detail">
+                        <ul class="list-inline order-detail">
+                            <li class="list-inline-item">
+                                Min order<br />
+                                <span>25<sub>$</sub></span>
+                            </li>
+                            <li class="list-inline-item">
+                                Delivery cost<br />
+                                <span>Free</span>
+                            </li>
+                            <li class="list-inline-item">
+                                Delivery time<br />
+                                <span>90 <sub>min</sub></span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="float-right" style="padding-top:12px;">
+                        <button class="btn btn-primary btn-lg">ORDER NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        @{
+        Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+        }
+    </div>

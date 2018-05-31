@@ -1,0 +1,74 @@
+﻿
+@model List<Bringly.Domain.Business.BusinessType>
+@{
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+    Guid guid = Guid.NewGuid();
+}
+
+
+
+<div class="col-lg-9 col-md-7 col-sm-12 emaillist">
+    <h2>Business Types</h2>
+    <div class="right-side mail-box">
+        <div class="shadow-box top-bar-mail">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="AddEditBusinessType">
+                        <div>
+                            <form method="post" class="mws-form" id="formBusinessType">
+                                <div>
+                                    <label class="">Business Type Name<span class="required">*</span></label>
+                                    <div class="businesstypetextbox">
+                                        @Html.TextBox("BusinessTypeName")
+                                        @Html.ValidationMessage("BusinessTypeName")
+                                    </div>
+
+                                    <div class="mws-button-row">
+                                        @Html.Hidden("BusinessTypeGuid", guid)
+                                        <input type="button" id="btnupdateBusinessType" name="submit" value="Add" title="Add" class="btn btn-inverse">
+                                        <a href="/Business/ManageBusinessType" class="btn btn-inverse">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataTables_filter" style="background-color:#fff;border-bottom:1px solid #fff;">
+            <label class="col-lg-1">Search:</label>
+            <div class="col-lg-11 float-right">
+                <input class="form-control" type="text" data-filter-grid-id="viewBusinessType" data-filter-grid="true">
+            </div>
+        </div>
+        <table class="table table-responsive dataTable">
+            <thead>
+                <tr role="row">
+                    <th>
+                        Business Type Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="viewBusinessType">
+                @foreach (Bringly.Domain.Business.BusinessType businessstype in Model)
+            {
+                <tr>
+                    <td>@businessstype.BusinessTypeName </td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="DeleteBusinessType('@businessstype.BusinessTypeGuid')"><i class="fa fa-trash-o"></i></a>  &nbsp;
+                        <a href="javascript:void(0);" id="btnAddEditBusinessType" onclick="EditBusinessType('@businessstype.BusinessTypeGuid','@businessstype.BusinessTypeName')"><i style="" class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
