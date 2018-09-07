@@ -1,0 +1,444 @@
+﻿
+
+<div class="page-sub-title">
+    <h3>My Orders</h3>
+</div>
+
+<div class="card tabs-detail tabs-card">
+    <div class="card-header" style="margin-bottom:10px;">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a [ngClass]="{'nav-link': true, 'active':(activeTab == 'pending')}" data-toggle="tab" href="#pending" (click)="onTabChange($event,'pending')" role="tab" aria-expanded="false">In Process</a>
+            </li>
+            <li class="nav-item">
+                <a  [ngClass]="{'nav-link': true, 'active':(activeTab == 'completed')}" data-toggle="tab" href="#completed" (click)="onTabChange($event,'completed')" role="tab" aria-expanded="true">Successfully Completed</a>
+            </li>
+            <li class="nav-item">
+                <a  [ngClass]="{'nav-link': true, 'active':(activeTab == 'cancelled')}" data-toggle="tab" href="#cancelled" (click)="onTabChange($event,'cancelled')" role="tab">Unsuccessfully Completed</a>
+            </li>
+        </ul>
+    </div>
+    <!--<div class="card-block"
+         infiniteScroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="300"
+         (scrolled)="onScroll()">-->
+    <div class="card-block">
+        <div class="tab-content">
+            <div [ngClass]="{'tab-pane':true, 'active':(activeTab == 'pending')}" id="pending" role="tabpanel" aria-expanded="true">
+                <div id="accordion" role="tablist" class="my-order_marchent">
+                    <div *ngIf="myOrderData && myOrderData.PendingOrders">
+                        <div class="card shadow-box" *ngFor="let order of myOrderData.PendingOrders; let idx = index;trackBy: trackByFnOrders">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item id-item">
+                                        <a data-toggle="collapse" href="#collapse_pending_{{idx}}" aria-expanded="true">
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i> <span>{{' ' + order.OrderNumber}}</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item timing-pickup">
+                                        <span>
+                                            {{getDate(order.OrderDate) | amDateFormat: 'YYYY-MM-DD  HH:mm A'}}
+                                        </span>
+                                    </li>
+                                    <li class="list-inline-item status-detail">
+                                        <span>{{order.OrderType}}</span>
+                                    </li>
+                                    <li class="list-inline-item total-amount">
+                                        <span>{{order.Total | number:'.2'}}$</span>
+                                    </li>
+                                    <li class="list-inline-item status-show">
+                                        <span class="status">{{order.OrderStatus}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="collapse_pending_{{idx}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="order-timing">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Date:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryDate) | amDateFormat: 'YYYY-MM-DD'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Time:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryTime) | amDateFormat: 'HH:mm A'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Order Status:</label>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control or-status" (change)="orderStatusChangeHandler($event, order.OrderGuid);">
+                                                                    <option *ngFor="let status of orderStatusList;let idx - index" [selected]="order.OrderStatus == status.StatusName" value="{{status.StatusName}}">{{status.StatusDisplayName}}</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Bill Amount:</label>
+                                                            </td>
+                                                            <td><span>{{order.Total | number:'.2'}}$</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="Order_detail">
+                                                <p class="text-weight">Order Details</p>
+                                                <table>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of order.OrderItems;">
+                                                            <td class="title-product">{{item.ItemName}}</td>
+                                                            <td>x{{item.Quantity}}</td>
+                                                            <td class="text-right"> {{item.ItemPrice * item.Quantity}}$</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="text-weight text-right">Total</td>
+                                                            <td class="text-weight text-right">{{order.Total | number:'.2'}}$</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div *ngIf="order.UserProfile" class="Customer-Detail">
+                                                <p class="text-weight">Customer Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.FullName}}
+                                                    <br />
+                                                    {{order.UserProfile.MobileNumber}}
+                                                </p>
+                                            </div>
+
+                                            <div *ngIf="order.UserProfile.BillingAddress" class="Customer-Detail">
+                                                <p class="text-weight">Delivery Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.BillingAddress.Address}},
+                                                    <br />
+                                                    {{order.UserProfile.PostCode}}
+                                                    <br />
+                                                </p>
+                                            </div>
+
+                                            <div class="Customer-Detail">
+                                                <p class="text-weight">Payment Details:</p>
+                                                <p>{{order.PaymentMethod}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <p>
+                                        <span class="text-weight">Delivery Boy Details:</span>
+                                        <br />
+                                        Andre Huk, +38 515456 5
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="myOrderData && myOrderData.PendingOrders && myOrderData.PendingOrders.length <=0" class="row-block">
+                        <h5 class="text-weight">Pending Orders - 0</h5>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="{'tab-pane':true, 'active':(activeTab == 'completed')}" id="completed" role="tabpanel" aria-expanded="true">
+                <div id="accordion" role="tablist" class="my-order_marchent">
+                    <div *ngIf="myOrderData && myOrderData.CompletedOrders">
+                        <div class="card shadow-box" *ngFor="let order of myOrderData.CompletedOrders; let idx = index; trackBy: trackByFnOrders">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item id-item">
+                                        <a data-toggle="collapse" href="#collapse_completed_{{idx}}" aria-expanded="true">
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i> <span>{{' ' + order.OrderNumber}}</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item timing-pickup">
+                                        <span>
+                                            {{getDate(order.OrderDate) | amDateFormat: 'YYYY-MM-DD  HH:mm A'}}
+                                        </span>
+                                    </li>
+                                    <li class="list-inline-item status-detail">
+                                        <span>{{order.OrderStatus}}</span>
+                                    </li>
+                                    <li class="list-inline-item total-amount">
+                                        <span>{{order.Total | number:'.2'}}$</span>
+                                    </li>
+                                    <li class="list-inline-item status-show">
+                                        <span class="status">New</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="collapse_completed_{{idx}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="order-timing">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Date:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryDate) | amDateFormat: 'YYYY-MM-DD'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Time:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryTime) | amDateFormat: 'HH:mm A'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Order Status:</label>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control or-status" (change)="orderStatusChangeHandler($event, order.OrderGuid);">
+                                                                    <option *ngFor="let status of orderStatusList;let idx - index" [selected]="order.OrderStatus == status.StatusName" value="{{status.StatusName}}">{{status.StatusDisplayName}}</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Bill Amount:</label>
+                                                            </td>
+                                                            <td><span>{{order.Total | number:'.2'}}$</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="Order_detail">
+                                                <p class="text-weight">Order Details</p>
+                                                <table>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of order.OrderItems;">
+                                                            <td class="title-product">{{item.ItemName}}</td>
+                                                            <td>x{{item.Quantity}}</td>
+                                                            <td class="text-right"> {{item.ItemPrice * item.Quantity}}$</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="text-weight text-right">Total</td>
+                                                            <td class="text-weight text-right">{{order.Total | number:'.2'}}$</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div *ngIf="order.UserProfile" class="Customer-Detail">
+                                                <p class="text-weight">Customer Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.FullName}}
+                                                    <br />
+                                                    {{order.UserProfile.MobileNumber}}
+                                                </p>
+                                            </div>
+
+                                            <div *ngIf="order.UserProfile.BillingAddress" class="Customer-Detail">
+                                                <p class="text-weight">Delivery Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.BillingAddress.Address}},
+                                                    <br />
+                                                    {{order.UserProfile.PostCode}}
+                                                    <br />
+                                                </p>
+                                            </div>
+
+                                            <div class="Customer-Detail">
+                                                <p class="text-weight">Payment Details:</p>
+                                                <p>{{order.PaymentMethod}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <p>
+                                        <span class="text-weight">Delivery Boy Details:</span>
+                                        <br />
+                                        Andre Huk, +38 515456 5
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="myOrderData && myOrderData.CompletedOrders && myOrderData.CompletedOrders.length <= 0" class="row-block">
+                        <h5 class="text-weight">Successfully Completed Orders - 0</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div [ngClass]="{'tab-pane':true, 'active':(activeTab == 'cancelled')}" id="cancelled" role="tabpanel" aria-expanded="true">
+                <div id="accordion" role="tablist" class="my-order_marchent">
+                    <div *ngIf="myOrderData && myOrderData.CancelledOrders">
+                        <div class="card shadow-box" *ngFor="let order of myOrderData.CancelledOrders; let idx = index;trackBy: trackByFnOrders">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item id-item">
+                                        <a data-toggle="collapse" href="#collapse_cancelled_{{idx}}" aria-expanded="true">
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i> <span>{{' ' + order.OrderNumber}}</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item timing-pickup">
+                                        <span>
+                                            {{getDate(order.OrderDate) | amDateFormat: 'YYYY-MM-DD  HH:mm A'}}
+                                        </span>
+                                    </li>
+                                    <li class="list-inline-item status-detail">
+                                        <span>{{order.OrderType}}</span>
+                                    </li>
+                                    <li class="list-inline-item total-amount">
+                                        <span>{{order.Total | number:'.2'}}$</span>
+                                    </li>
+                                    <li class="list-inline-item status-show">
+                                        <span class="status">{{order.OrderStatus}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="collapse_cancelled_{{idx}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="order-timing">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Date:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryDate) | amDateFormat: 'YYYY-MM-DD'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Delivery Time:</label>
+                                                            </td>
+                                                            <td><span> {{getDate(order.DeliveryTime) | amDateFormat: 'HH:mm A'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Order Status:</label>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control or-status" (change)="orderStatusChangeHandler($event, order.OrderGuid);">
+                                                                    <option *ngFor="let status of orderStatusList;let idx - index" [selected]="order.OrderStatus == status.StatusName" value="{{status.StatusName}}">{{status.StatusDisplayName}}</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label>Bill Amount:</label>
+                                                            </td>
+                                                            <td><span>{{order.Total | number:'.2'}}$</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="Order_detail">
+                                                <p class="text-weight">Order Details</p>
+                                                <table>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of order.OrderItems;">
+                                                            <td class="title-product">{{item.ItemName}}</td>
+                                                            <td>x{{item.Quantity}}</td>
+                                                            <td class="text-right"> {{item.ItemPrice * item.Quantity}}$</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="text-weight text-right">Total</td>
+                                                            <td class="text-weight text-right">{{order.Total | number:'.2'}}$</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div *ngIf="order.UserProfile" class="Customer-Detail">
+                                                <p class="text-weight">Customer Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.FullName}}
+                                                    <br />
+                                                    {{order.UserProfile.MobileNumber}}
+                                                </p>
+                                            </div>
+
+                                            <div *ngIf="order.UserProfile.BillingAddress" class="Customer-Detail">
+                                                <p class="text-weight">Delivery Details:</p>
+                                                <p>
+                                                    {{order.UserProfile.BillingAddress.Address}},
+                                                    <br />
+                                                    {{order.UserProfile.PostCode}}
+                                                    <br />
+                                                </p>
+                                            </div>
+
+                                            <div class="Customer-Detail">
+                                                <p class="text-weight">Payment Details:</p>
+                                                <p>{{order.PaymentMethod}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <p>
+                                        <span class="text-weight">Delivery Boy Details:</span>
+                                        <br />
+                                        Andre Huk, +38 515456 5
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="myOrderData && myOrderData.CancelledOrders &&  myOrderData.CancelledOrders.length <= 0" class="row-block">
+                        <h5 class="text-weight">Unsuccessfully Completed Orders - 0</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+             size="large"
+             color="#d44c4c"
+             type="ball-running-dots"></ngx-spinner>
+
+<nav class="nav-pagination" *ngIf="this.paginationData && this.paginationData.buttonCounts > 1">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" *ngIf="this.paginationData && this.paginationData.currentPageNumber > 1 ">
+            <a class="page-link" href="#" tabindex="-1" (click)="onPageChange($event, this.paginationData.previousPage)"><i class="fa fa-angle-double-left"></i></a>
+        </li>
+        <li *ngFor="let button of this.paginationData.buttonCountArray"
+            [ngClass]="{'page-item':true, 'active':(button == this.paginationData.currentPageNumber)}">
+            <a *ngIf="button >=buttonStartFrom && button <= buttonEndTo" class="page-link" href="#" [attr.disabled]="button == this.paginationData.currentPageNumber" (click)="onPageChange($event, button)">{{button}}</a>
+        </li>
+        <li class="page-item" *ngIf="this.paginationData && (this.paginationData.buttonCounts > 1 && this.paginationData.currentPageNumber < this.paginationData.buttonCounts)">
+            <a class="page-link" href="#" (click)="onPageChange($event, this.paginationData.nextPage)"><i class="fa fa-angle-double-right"></i></a>
+        </li>
+        <!--<li>
+            <button type="button" class="btn btn-primary" (click)="onScroll();">Load More...</button>
+        </li>-->
+    </ul>
+</nav>

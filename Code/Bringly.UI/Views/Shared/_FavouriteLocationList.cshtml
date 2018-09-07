@@ -1,5 +1,6 @@
 ﻿@model List<Bringly.Domain.Business.BusinessObject>
 @{Layout = null;}
+
 @if (Model != null && Model.Count > 0)
 {
     foreach (var business in Model)
@@ -24,21 +25,24 @@
                                 </span>
                             </h4>
                             <p>
-                                <span class="tag-star">
-                                    <a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a>
-                                </span>
                             </p>
-                            <p class="address-area">Italian cuisine, European</p>
-                            <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, Kyiv</p>
+                            <p class="address-area">@business.CityName</p>
+                            <p class="address-point"><i class="fa fa-map-marker"></i>@business.Address</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     }
 }
 else
 {
-    @Html.Partial("_NoRecordFound", "No favourite location(s) found.")
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="media shadow-box">
+            <div class="media-body">
+                @Html.Partial("_NoRecordFound", "No record found.")
+            </div>
+        </div>
+    </div>
 }
+

@@ -1,0 +1,127 @@
+﻿@model Bringly.Domain.DeliveryOption
+@{
+    ViewBag.Title = "Delivery";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+<div class="container inner-margin">
+    <div class="wizard">
+
+        <ul class="nav nav-wizard">
+            <li>
+                <a class="active" href="#step1" data-toggle="tab">Delivery</a>
+            </li>
+            <li>
+                <a href="#step2" data-toggle="tab">Payment</a>
+            </li>
+
+            <li>
+                <a href="#step3" data-toggle="tab">Confirmation</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="bg-white section-shadow tab-pane active mt-5" id="step1">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <h5 class="text-weight">Delivery Method</h5>
+                        @using (Html.BeginForm("delivery", "orders", FormMethod.Post, new { @class = "form-sign-in" }))
+                        {
+                            @Html.HiddenFor(m => m.UserGuid)
+                            @Html.HiddenFor(m => m.OrderGuid)
+                            <div class="radio-option check-option">
+                                <label class="custom-control custom-radio">
+                                    <input id="radio3" name="DeliveryType" type="radio" value="1" checked="@(Bringly.Domain.Enums.OrderType.SelfDelivery == Model.DeliveryType ? true : false)" class="custom-control-input" onchange="onDeliveryTypeChange(event, this);">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description checked-label">Delivery</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="radio4" name="DeliveryType" type="radio" value="2"  checked="@(Bringly.Domain.Enums.OrderType.PickUp == Model.DeliveryType ? true : false)" class="custom-control-input"  onchange="onDeliveryTypeChange(event, this);">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Pick Up</span>
+                                </label>
+                            </div>
+                            <div id="divDelivery" class="@(Bringly.Domain.Enums.OrderType.SelfDelivery == Model.DeliveryType ? "" : "display-none")">
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.TextBoxFor(m => m.UserFullName, new { @class = "form-control", @placeholder = "Your Name", @readOnly = true })
+                                        <label class="icon-map"><i class="fa fa-user" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.UserFullName)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Your Email", @type = "email", @readOnly=true })
+                                        <label class="icon-map"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.EmailAddress)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Your Mobile Phone Number" })
+                                        <label class="icon-map"><i class="fa fa-phone" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.MobileNumber)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.DropDownListFor(m => m.ShippingAddress.Country, new SelectList(Model.CountryList, "CountryName", "CountryName", Model.ShippingAddress.Country), "Select Shipping Country", new { @class = "form-control" })
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.DropDownListFor(m => m.ShippingAddress.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", Model.ShippingAddress.CityGuid), "Select Shipping City", new { @class = "form-control" })
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.ShippingAddress.CityGuid)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.TextBoxFor(m => m.ShippingAddress.Address, new { @class = "form-control", @placeholder = "Your Address" })
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.ShippingAddress.Address)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="map-form form-icon">
+                                        @Html.TextBoxFor(m => m.ShippingAddress.PostCode, new { @class = "form-control", @placeholder = "Your Post Code" })
+                                        <label class="icon-map"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                        @Html.ValidationMessageFor(m => m.ShippingAddress.PostCode)
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <label>Delivery Time</label>
+                                    <div class="float-right">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio1" name="DeliveryTime" value="ASAP" checked type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">ASAP</span>
+                                        </label>
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-secondary btn-lg">CONTINUE</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function onDeliveryTypeChange($event, eleObj) {
+            debugger;
+            if ($event.target.value === "2") {
+                $("#divDelivery").addClass("display-none");
+            }
+            else {
+                $("#divDelivery").removeClass("display-none");
+            }
+        }
+    </script>
+}
+

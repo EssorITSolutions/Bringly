@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using DotNetOpenAuth.GoogleOAuth2;
+﻿using DotNetOpenAuth.GoogleOAuth2;
 using Microsoft.AspNet.Membership.OpenAuth;
 using Microsoft.Web.WebPages.OAuth;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace OAuth
 {

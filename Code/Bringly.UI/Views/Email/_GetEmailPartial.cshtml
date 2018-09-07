@@ -1,0 +1,50 @@
+﻿@model Bringly.Domain.Email
+@{
+    ViewBag.Title = "Email";
+    Layout = "~/Views/Shared/MasterPages/PartialMaster.cshtml";
+    var urlpath = Bringly.DomainLogic.CommonDomainLogic.GetCurrentDomain;
+    var Name = "";
+}
+@if (Model != null)
+{
+    <div divemailguid="@Model.EmailGuid" class="emails-count" id="email-popup">
+        <div class="cursor-pointer shadow-box @(Model.Read ?"":"unreaded")" href="javascript:void(0)">
+            <div id="@Model.EmailGuid" class="mail-detail-box collapse show">
+                <div class="shadow-box" href="javascript:void(0)">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-2 col-sm-12">
+                            <div class="user-profile">
+                                <img src="@(urlpath+ Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User, Model.UserImage))" />
+                            </div>
+                        </div>
+                        <div class="col-lg-11 col-md-10 col-sm-12">
+                            <div class="user-detail">
+                                <h3><b></b>@Model.FromName</h3>
+                                <p class="text-right">@Model.DateCreated</p>
+                                <h5>@Model.Subject</h5>
+                                <p>
+                                    <b>To :</b>
+                                    @if (Model.EmailToList != null && Model.EmailToList.Count > 0)
+                                    {
+                                        foreach (var str in Model.EmailToList)
+                                        {
+                                            if (!Name.Contains(str.Name))
+                                            { Name += str.Name + ", "; }
+                                        }
+                                        <b> @Name.Remove(Name.Length - 2)</b>
+                                    }
+                                    else
+                                    {
+                                        <b>@Model.ToName</b>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    @Html.Raw(Model.Body)
+                </div>
+            </div>
+        </div>
+    </div>
+}

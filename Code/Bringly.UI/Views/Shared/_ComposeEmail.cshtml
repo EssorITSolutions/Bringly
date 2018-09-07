@@ -10,20 +10,11 @@
 }
 else
 {
-    //using (@Html.BeginForm("ComposeEmail", "Email", FormMethod.Post))
     <form method="post" action="/Email/ComposeEmail" style="width:100%;" ValidateRequest="false" class="compose-form">
-        
-        @Html.HiddenFor(m => m.EmailMessage.CreatedByGuid)
         @Html.HiddenFor(m => m.Isemailreplyorforward)
-        <div class="popup-heading">
-            <h1>Send Message</h1>
-            <div class="close-button">
-                <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
-            </div>
-        </div>
         <div class="mail-box">
             <div class="form-group">
-                @Html.DropDownListFor(m => m.EmailToGuid, Model.UserContactList.Select(x => new SelectListItem { Text = x.FullName, Value = x.UserGuid.ToString() }), "--Select--", new { @class = "chosen-select", @placeholder = "Choose a user.." })
+                @Html.DropDownListFor(m => m.EmailToGuid, Model.UserContactList.Select(x => new SelectListItem { Text = x.FullName, Value = x.UserGuid.ToString() }), "To", new { @class = "chosen-select", @placeholder = "Choose a user.." })
                 @Html.ValidationMessageFor(m => m.EmailMessage.EmailToGuid)
             </div>
             <div class="form-group">
@@ -34,21 +25,19 @@ else
                 @Html.TextAreaFor(m => m.EmailMessage.Body, new { @class = "form-control", @placeholder = "Message" })
                 @Html.ValidationMessageFor(m => m.EmailMessage.Body)
             </div>
-            <div class="form-group form-button">
+            <div class="form-group form-button text-center">
                 <input type="submit" onclick="return checkComposeEmailTo();" class="btn btn-primary" value="Send" />
                 <input type="button" onclick="window.parent.closeModelPopUpForm(false)" class="btn btn-primary" value="Cancel" />
             </div>
         </div>
-
     </form>
-
 }
 @section PageFooterResources{
     <script>
         $(document).ready(function () {
-            CKEDITOR.replace('EmailMessage_Body');
+            var editor = CKEDITOR.replace('EmailMessage_Body');
             if ($('#EmailMessage_Body').val() == '') {
-                $('#EmailMessage_Body').val('Message');
+                $('#EmailMessage_Body').val('');
             }
             CKEDITOR.on('instanceReady', function () {
                 $.each(CKEDITOR.instances, function (instance) {
@@ -60,6 +49,9 @@ else
                         });
                 });
             });
-        })
+            CKEDITOR.autoGrow_onStartup = true;
+            CKEDITOR.config.height = 205;
+            CKEDITOR.config.resize_enabled = false;
+        });
     </script>
 }

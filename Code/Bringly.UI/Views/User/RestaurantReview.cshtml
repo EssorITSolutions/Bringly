@@ -3,6 +3,7 @@
     ViewBag.Title = "RestaurantReview";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
+
 @section BreadCrum{
     <li class="breadcrumb-item active">My Reviews</li>
 }
@@ -14,24 +15,20 @@
                 <p style="display:@((Model.ReviewGuid != Guid.Empty) ? "block" : "none")"
                    class="tag-line">
                     You can leave the comments or
-                    @*<input type="submit" id="btnskipreview" name="Command" value="Skip This" class="skip-btn">*@         <a reviewguid="@Model.ReviewGuid" class="skip-review" href="#">Skip This</a>
+                    <a reviewguid="@Model.ReviewGuid" class="skip-review" href="#">Skip This</a>
             </div>
             <div class="row" style="display:@((Model.ReviewGuid != Guid.Empty) ? "block" : "none")">
                 <div class="col-lg-4 col-md-8 col-sm-12">
                     <div class="shadow-box buyer_review">
-                        @*<label>@Model.RestaurantName Restaurant</label>*@
-                        <img src="@Model.RestaurantImage" class="m-auto d-block" />
+                        <img src="@Model.BusinessImage" class="m-auto d-block" />
                         <div class="text-center m-2">
-                            <input value="Leave Review" type="button"  class="btn btn-primary btn-lg" onclick="OpenReviewPopUp('@(Model.ReviewGuid)')" id="btnAddReviewPopUp" />
+                            <input value="Leave Review" type="button" class="btn btn-primary btn-lg" onclick="OpenReviewPopUp('@(Model.ReviewGuid)')" id="btnAddReviewPopUp" />
                         </div>
                     </div>
-               
-                   
                 </div>
             </div>
         </form>
         @Html.Partial("_RestaurantReviewList", Model)
-
     </div>
-
 </div>
+

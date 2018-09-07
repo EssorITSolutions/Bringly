@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 
-
 namespace Bringly.UI.Controllers.BaseClasses
 {
     public class AnonymousUserControllerBase : ControllerBase

@@ -20,7 +20,9 @@
                                 <h5 class="heading-sub">Personal Information</h5>
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-4">
-                                <p class="edit">@Html.ActionLink("Edit", "EditPersonalInformation", "User")</p>
+                                <p class="edit-btn">
+                                    <a href="/User/EditPersonalInformation"><i class="fa fa-pencil"></i>Edit</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -39,7 +41,6 @@
                                     <td width="30%"><span>Mobile Number:</span></td>
                                     <td width="75%">@Model.MobileNumber</td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -123,5 +124,4 @@
             </div>
         </div>
     </div>
-
 </div>

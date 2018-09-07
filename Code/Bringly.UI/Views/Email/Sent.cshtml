@@ -1,10 +1,8 @@
-﻿
-@model  Bringly.Domain.MyEmail
+﻿@model  Bringly.Domain.MyEmail
 @{
     ViewBag.Title = "Sent";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
-
 
 @if (Model.Emails != null && Model.Emails.Count > 0)
 {
@@ -13,9 +11,9 @@
         <div class="right-side mail-box">
             <div id="partialEmaiList">
                 @Html.Partial("_EmailList", Model)
-            </div>           
+            </div>
         </div>
-    </div>    
+    </div>
 }
 else
 {

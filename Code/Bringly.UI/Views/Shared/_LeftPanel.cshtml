@@ -1,4 +1,4 @@
-﻿<!-- Left Panel-->
+﻿
 @model Bringly.Domain.User.UserProfile
 
 <div class="col-lg-3 col-md-5 col-sm-12">
@@ -8,7 +8,14 @@
                 <p class="edit-profil-img edit">
                     <a href="javascript:void(0)" id="OpenImgUpload" style="cursor:pointer;"><i class="fa fa-pencil"></i></a>
                 </p>
-                <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User,Model.ProfileImage))" name="leftProfileImage" style="width:92px;height:93px;" class="m-auto d-block" />
+                @if (Model.ProfileImage != null && Model.ProfileImage.Contains("http"))
+                {
+                    <img src="@Model.ProfileImage" name="leftProfileImage" style="width:92px;height:93px;" class="m-auto d-block" />
+                }
+                else
+                {
+                    <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User,Model.ProfileImage))" name="leftProfileImage" style="width:92px;height:93px;" class="m-auto d-block" />
+                }
                 <p class="edit-profil-img position-absolute">
                     <input type="file" id="fileUserProfileImage" style="display:none" />
                 </p>
@@ -20,56 +27,58 @@
         <div class="shadow-box dashboard-menu">
             <input type="hidden" class="leftmenuliclass" id="leftmenuliclass" />
             <ul class="list-unstyled user-menu">
-                <li class="lidashboard"><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
+                <li class="liDashboard"><a href="/User/Dashboard"><i class="fa fa-th-large"></i> Dashboard</a></li>
                 @if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
-    {
-            <li class="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
-            <li class="liMyOrders"><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
-            <li class="mail">
-                <a class="dropdown-toggle dropdownMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-envelope">
-                    </i> Messages
-                    <span class="alter-message message-count">
-                        (0)
-                    </span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
-                    <li class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
-                    <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
-                </ul>
-            </li>
-            <li class="liFavourites"><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
-            <li class="liMyReviews"><a href="/User/RestaurantReview"><i class="fa fa-star"></i> My Reviews</a></li>
-            <li class="liWalletAccount"><a href="#"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
-            <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
-}
-else
-{
-            <li class="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
-            <li class="liMyUsers"><a href="/User/ManageManagers"><i class="fa fa-pencil"></i> Manage Users</a></li>
-            <li class="liMyRestaurant"><a href="/Business/LocationList"><img src="/templates/images/restaurant-icon.png" /> My Locations</a></li>
-            <li class="liMenu"><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
-            <li class="mail">
-                <a class="dropdown-toggle  dropdownMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-envelope">
-                    </i> Messages
-                    <span class="alter-message message-count">
-                        (0)
-                    </span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
-                    <li class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
-                    <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
-                </ul>
-            </li>
-            <li class="liMyOrder"><a href="#"><i class="fa fa-th-list"></i> My Orders</a></li>
-            <li class="liMyReview"><a href="/User/MerchantReview"><i class="fa fa-star"></i> My Reviews</a></li>
-            <li class="liMyTransaction"><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>
-            <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
-}
-                <li class="lisetting"><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                {
+                    <li class="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                    <li class="liMyOrders"><a href="/orders/myorders?activeTab=totalOrders"><i class="fa fa-th-list"></i> My Orders</a></li>
+                    <li class="mail">
+                        <a class="dropdown-toggle dropdownMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-envelope">
+                            </i> Messages
+                            <span class="alter-message message-count">
+                                (0)
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
+                            <li class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
+                            <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
+                        </ul>
+                    </li>
+                    <li class="liFavourites"><a href="/User/Favourites"><i class="fa fa-heart"></i> Favourites</a></li>
+                    <li class="liMyReviews"><a href="/User/RestaurantReview"><i class="fa fa-star"></i> My Reviews</a></li>
+                    <li class="liWalletAccount"><a href="/wallet/getwallethistory"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
+                    <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                }
+                else
+                {
+                    <li class="liPersonalInfomation"><a href="/User/PersonalInformation"><i class="fa fa-user"></i> Personal Infomation</a></li>
+                    <li class="liMyUsers"><a href="/User/ManageManagers"><i class="fa fa-pencil"></i> Manage Managers</a></li>
+                    <li class="liMyRestaurant"><a href="/Business/LocationList"><img src="/templates/images/restaurant-icon.png" /> My Branches</a></li>
+                    <li class="liMenu"><a href="#"><img src="/templates/images/menu-icon.png" /> My Menu</a></li>
+                    <li class="licoupons"><a href="/restaurant/coupons"><img src="/templates/images/menu-icon.png" /> My Discount Coupons</a></li>
+                    <li class="mail">
+                        <a class="dropdown-toggle  dropdownMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-envelope">
+                            </i> Messages
+                            <span class="alter-message message-count">
+                                (0)
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li class="liinbox"><a href="/Email/Inbox" class=""><i class="fa fa-envelope-open" aria-hidden="true"></i> Inbox </a></li>
+                            <li class="lisent"><a href="/Email/Sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent Items</a></li>
+                            <li><a href="#" class="EmailComposePopup" onclick="EmailComposePopup();"><i class="fa fa-pencil" aria-hidden="true"></i> Compose</a></li>
+                        </ul>
+                    </li>
+                    <li class="liMyOrder"><a href="/orders/myorders"><i class="fa fa-th-list"></i> My Orders</a></li>
+                    <li class="liMyReview"><a href="/User/MerchantReview"><i class="fa fa-star"></i> My Reviews</a></li>
+                    <li class="liWalletAccount"><a href="/wallet/getwallethistory"><img src="/templates/images/wallet-icon.png" /> Wallet Account</a></li>
+                    <li class="liMyTransaction"><a href="#"><i class="fa fa-usd"></i> My Transactions</a></li>
+                    <li class="liOrderTracking"><a href="#"><i class="fa fa-search"></i> Order Tracking</a></li>
+                }
+                <li class="lisetting"><a href="/user/settings"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="/User/SignOut"><i class="fa fa-cog"></i> SignOut</a></li>
             </ul>
         </div>

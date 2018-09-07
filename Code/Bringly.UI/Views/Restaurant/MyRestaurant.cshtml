@@ -3,6 +3,7 @@
     ViewBag.Title = "My Restaurant";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
+
 @section BreadCrum{
     <li class="breadcrumb-item active">My Restaurant</li>
 }
@@ -30,7 +31,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <input type="hidden" name="BusinessGuid" value="@Model.BusinessGuid" id="BusinessGuid" />
                         <div class="row">
@@ -73,13 +73,11 @@
                                         <tr>
                                             <td><label>Phone:</label></td>
                                             <td class="data">@Html.TextBoxFor(m => m.Phone, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-
                                         </tr>
                                         <tr>
                                             <td><label>E-mail:</label></td>
                                             <td class="data">@Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -171,7 +169,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p class="px-3">
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control disabled-textbox", @disabled = "disabled",@style= "height: 150px;" })                                   
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control disabled-textbox", @disabled = "disabled", @style = "height: 150px;" })
                                 </p>
                             </div>
                         </div>
@@ -189,7 +187,6 @@
                         </div>
 
                     </div>
-
                     <div class="Image-panel">
                         <div class="Add-Images">
                             <label class="custom-file">
@@ -210,10 +207,8 @@
                             <img src="/templates/images/img-4.jpg" class="m-auto d-block" />
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,0 +1,18 @@
+﻿@model Bringly.Domain.CMSPage
+@{
+    ViewBag.Title = "TermsConditions";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+<section class="bg-grey title-bar ">
+    <div class="container">
+        <h2 class="float-left">
+            Terms and Conditions
+        </h2>
+        <ol class="breadcrumb float-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Terms and Conditions </li>
+        </ol>
+    </div>
+</section>
+
+@Html.Raw(Model.PageDescription)

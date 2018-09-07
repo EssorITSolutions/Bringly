@@ -1,0 +1,182 @@
+﻿@model Bringly.Domain.Discount
+@{
+    ViewBag.Title = "Edit Coupon";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@if (Model != null)
+{
+    <div class="col-lg-9 col-md-7 col-sm-12">
+        <div class="right-side">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card personal-information">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-8">
+                                    <h5 class="heading-sub">My Coupons - Merchant</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            @using (Html.BeginForm("couponupdate", "restaurant", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(m => m.CouponId)
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Discount Type<span class="required"> *</span>:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.DropDownList("DiscountType",
+                                    new List<SelectListItem>
+                                     {
+                                           new SelectListItem { Value= "1", Text = "Assigned to total order", Selected = Model.DiscountType == 1 ? true: false  },
+                                           new SelectListItem { Value = "2", Text = "Assigned to product" , Selected = Model.DiscountType == 2 ? true: false}
+                                    }, "Select Branch", new { @class = "form-control", @disabled = "disabled", @onchange="onDiscountTypeChange(this);" })
+                                        @Html.ValidationMessageFor(m => m.DiscountType)
+                                        @Html.Hidden("DiscountType", Model.DiscountType)
+                                    </div>
+                                </div>
+                                if (Model.BranchList != null && Model.BranchList.Count > 0)
+                                {
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                            <span>Branch<span class="required"> *</span>:</span>
+                                        </label>
+                                        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                            @Html.DropDownListFor(m => m.BranchGuid, new SelectList(Model.BranchList, "Value", "Text"), new { @class = "form-control", @onchange = "bindProductList();", @disabled = "disabled" })
+                                            @Html.ValidationMessageFor(m => m.BranchGuid)
+                                            @Html.Hidden("BranchGuid", Model.BranchGuid)
+                                        </div>
+                                    </div>
+
+                                    <div id="divCouponProductList" class='@(Model.DiscountType == 2 ? "form-group row" : "form-group row display-none")'>
+                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                            <span>Select Products<span class="required"> *</span>:</span>
+                                        </label>
+                                        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                            @Html.ListBoxFor(m => m.ProductIds, new SelectList(Model.ProductList, "Value", "Text"), new { @class = "form-control", @readonly = "true" })
+                                            @Html.ValidationMessageFor(m => m.ProductIds)
+                                        </div>
+                                        @Html.Hidden("selectedIds", Model.ProductIdsString)
+                                    </div>
+                                }
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Coupon Name<span class="required"> *</span>:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.CouponName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CouponName)
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Coupon Description:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextAreaFor(m => m.CouponDescription, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Coupon Type<span class="required"> *</span>:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.DropDownList("DiscountPriceType",
+                                   new List<SelectListItem>
+                                    {
+                                          new SelectListItem { Value= "1", Text = "Percentage", Selected = Model.DiscountPriceType == 1 ? true: false  },
+                                          new SelectListItem { Value = "2", Text = "Flat" , Selected = Model.DiscountPriceType == 2 ? true: false}
+                                   }, "Select Discount Price Type", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.DiscountPriceType)
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Discount<span class="required"> *</span>:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.DiscountValue, new { @class = "form-control", placeholder = "Discount" })
+                                        @Html.ValidationMessageFor(m => m.DiscountValue)
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Start Date:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.StartDate, String.Format("{0:MM/dd/yyyy}",Model.StartDate), new { @class = "form-control calander-control" , @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.StartDate)
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>End Date:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.EndDate, String.Format("{0:MM/dd/yyyy}", Model.EndDate), new { @class = "form-control calander-control", @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.EndDate)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                        <span>Discount Limitation<span class="required"> *</span>:</span>
+                                    </label>
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.DropDownList("DiscountLimitationType",
+                                  new List<SelectListItem>
+                                   {
+                                         new SelectListItem { Value= "1", Text = "Unlimited", Selected = Model.DiscountLimitationType == 1 ? true: false  },
+                                         new SelectListItem { Value = "2", Text = "One Time Only" , Selected = Model.DiscountLimitationType == 2 ? true: false}
+                                  }, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.DiscountLimitationType)
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <button type="submit" class="btn btn-primary btn-lg text-uppercase">Save</button>
+                                        <a href="/restaurant/coupons" class="btn btn-primary btn-lg text-uppercase">Cancel</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        $(function () {
+            $('#EndDate').datepicker({
+                minDate: $('#StartDate').val(),
+                dateFormat: 'mm/dd/yy',
+                onSelect: function (dateText, int) {
+                    $('#StartDate').datepicker('option', 'maxDate', dateText);
+                },
+            });
+            $("#StartDate").datepicker({
+                maxDate: $('#EndDate').val(),
+                dateFormat: 'mm/dd/yy',
+                onSelect: function (dateText, int) {
+                    $('#EndDate').datepicker('option', 'minDate', dateText);
+                }
+            });
+            var selectedIds = $("#selectedIds").val();
+            $("#ProductIds").val(selectedIds.split(",")).trigger("chosen:updated");
+        });
+    </script>
+}

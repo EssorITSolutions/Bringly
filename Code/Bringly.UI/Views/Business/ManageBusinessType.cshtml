@@ -1,11 +1,8 @@
-﻿
-@model List<Bringly.Domain.Business.BusinessType>
+﻿@model List<Bringly.Domain.Business.BusinessType>
 @{
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
     Guid guid = Guid.NewGuid();
 }
-
-
 
 <div class="col-lg-9 col-md-7 col-sm-12 emaillist">
     <h2>Business Types</h2>
@@ -22,7 +19,6 @@
                                         @Html.TextBox("BusinessTypeName")
                                         @Html.ValidationMessage("BusinessTypeName")
                                     </div>
-
                                     <div class="mws-button-row">
                                         @Html.Hidden("BusinessTypeGuid", guid)
                                         <input type="button" id="btnupdateBusinessType" name="submit" value="Add" title="Add" class="btn btn-inverse">
@@ -54,15 +50,15 @@
             </thead>
             <tbody id="viewBusinessType">
                 @foreach (Bringly.Domain.Business.BusinessType businessstype in Model)
-            {
-                <tr>
-                    <td>@businessstype.BusinessTypeName </td>
-                    <td>
-                        <a href="javascript:void(0);" onclick="DeleteBusinessType('@businessstype.BusinessTypeGuid')"><i class="fa fa-trash-o"></i></a>  &nbsp;
-                        <a href="javascript:void(0);" id="btnAddEditBusinessType" onclick="EditBusinessType('@businessstype.BusinessTypeGuid','@businessstype.BusinessTypeName')"><i style="" class="fa fa-pencil"></i></a>
-                    </td>
-                </tr>
-        }
+                {
+                    <tr>
+                        <td>@businessstype.BusinessTypeName </td>
+                        <td>
+                            <a href="javascript:void(0);" onclick="DeleteBusinessType('@businessstype.BusinessTypeGuid')"><i class="fa fa-trash-o"></i></a>  &nbsp;
+                            <div class="edit-btn"> <a href="javascript:void(0);" id="btnAddEditBusinessType" onclick="EditBusinessType('@businessstype.BusinessTypeGuid','@businessstype.BusinessTypeName')"><i style="" class="fa fa-pencil"></i></a></div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

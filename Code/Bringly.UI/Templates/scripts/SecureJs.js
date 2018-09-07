@@ -3,13 +3,13 @@ $(document).ready(function () {
 
     $('.appointmentdate').click(function () {
         $(this).datepicker({ dateFormat: 'dd-mm-yy', minDate: 1 }).val()
-        $(this).datepicker('show');  
+        $(this).datepicker('show');
     })
 
 
 
     /*$('#ss123').datetimepicker();*/
-     
+
     $('#OpenImgUpload').click(function () { $('#fileUserProfileImage').trigger('click'); });
     $('#itemImageUpload').click(function () { $('#fileItemImage').trigger('click'); });
     $('#stars li').on('mouseover', function () {
@@ -68,19 +68,19 @@ $(document).ready(function () {
                 ErrorBlock(getParameterByName('Message'));
             }
         }
-    }       
+    }
 });
-function checkComposeEmailTo(){
-        if ($(".compose-form .chosen-select").val() == '') {
-            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
-            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('<span for="EmailMessage_EmailToGuid" generated="true" class="">Please select user.</span>');
-            return false;
-        }
-        else {
-            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
-            $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('');
-            return true;
-        }
+function checkComposeEmailTo() {
+    if ($(".compose-form .chosen-select").val() == '') {
+        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
+        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('<span for="EmailMessage_EmailToGuid" generated="true" class="">Please select user.</span>');
+        return false;
+    }
+    else {
+        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
+        $('.compose-form span[data-valmsg-for="EmailMessage.EmailToGuid"]').html('');
+        return true;
+    }
 }
 function checkselectedcity() {
     if ($(".formuserprofile .chosen-select.billing").val() == '' || $(".formuserprofile .chosen-select.shipping").val() == '') {
@@ -104,14 +104,18 @@ function checkselectedcity() {
     }
 }
 $(function () {
+
+    $('.carousel').carousel({
+        interval: 5000
+    })
     $('.dashboard-menu ul.list-unstyled.user-menu li a').click(function () {
-        localStorage.setItem('thisLink', $(this).parent().attr("class"));       
+        localStorage.setItem('thisLink', $(this).parent().attr("class"));
         $(this).parent().removeClass('class');
     });
     var thisLink = localStorage.getItem('thisLink');
-    
-    if (thisLink == 'undefined') {    
-        $('.lidashboard').addClass('active');
+
+    if (thisLink == 'undefined') {
+        $('.liDashboard').addClass('active');
     }
     else {
         $('.' + thisLink).addClass('active');
@@ -120,16 +124,16 @@ $(function () {
     if (url.indexOf("Sent") > -1 || url.indexOf("Inbox") > -1) {
         $('li.mail').addClass('show');
         $('li.mail ul.dropdown-menu').addClass('show');
-}
+    }
 });
 window.onload = function () {
-   
+
     var url = window.location.toString();
-   
+
     if (url.indexOf("?") > 0) {
         var emailguiidarray = new Array();
-        var email= "";
-        var urlparts = url.split('?');  
+        var email = "";
+        var urlparts = url.split('?');
         if (urlparts[1].indexOf('EmailGuid') > -1) {
             emailguiidarray = urlparts[1].split('=');
             if (url.indexOf("Inbox") > -1 && urlparts[1].indexOf('0000') < 0) {
@@ -140,7 +144,7 @@ window.onload = function () {
                 email += querystring + "=";
             });
             //window.history.replaceState({}, document.title, url.replace(email.replace(/=\s*$/, ""), ""));            
-            window.history.replaceState({}, document.title, url.split('?')[0]);        
+            window.history.replaceState({}, document.title, url.split('?')[0]);
         }
         else if (urlparts[1].indexOf('BusinessTypeGuid') > -1 && urlparts[1].indexOf('id') > -1) {
             $('#selectBusinessHeader').val("/business/LocationListUser?id=" + urlparts[1].split('&')[0].split('=')[1] + "&BusinessTypeGuid=" + urlparts[1].split('&')[1].split('=')[1]);
@@ -148,27 +152,27 @@ window.onload = function () {
             emailguiidarray.forEach(function (querystring) {
                 email += querystring + "?";
             });
-            window.history.replaceState({}, document.title, url.split('?')[0]);         
+            window.history.replaceState({}, document.title, url.split('?')[0]);
         }
         //email = "";
         //if (urlparts[1].indexOf('businessGuid') > -1 || urlparts[1].indexOf('guid') > -1) {
         //    businessGuidarray = urlparts[1].split('=');
-          
+
         //    businessGuidarray.forEach(function (querystring) {
         //        email += querystring + "=";
         //    });
         //    window.history.replaceState({}, document.title, url.replace(email.replace(/=\s*$/, ""), ""));
         //}
     }
-    
+
     if ($('.UnReadEmailCount').val() != '' && $('.UnReadEmailCount').val() != undefined) {
         $('.message-count').text('(' + $('#UnReadEmailCount').val() + ')');
     }
     if ($('.CartCount').val() != '' && $('.CartCount').val() != undefined) {
-        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');       
-    }  
-     
-  
+        $('.cart-notice sub').text('(' + $('.CartCount').val() + ')');
+    }
+
+
     if ($('#EmailMessage_EmailTo').val() != "") {
         $(".chosen-select").val($('#EmailMessage_EmailTo').val()).trigger("liszt:updated");//chosen:updated.chosen
     }
@@ -178,8 +182,8 @@ window.onload = function () {
         for (var i = 0; i < str_array.length; i++) {
             str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
         }
-        $('.compose-form .chosen-select option[value = "' + str_array+'"]').attr("selected","selected");
-    } 
+        $('.compose-form .chosen-select option[value = "' + str_array + '"]').attr("selected", "selected");
+    }
     if ($('#CategoryGuid').val() != '' && $('#CategoryGuid').val() != undefined) {
         var selectedUserRole = document.getElementById('CategoryGuid').value;
         var str_array = selectedUserRole.split(',');
@@ -233,7 +237,7 @@ function addToFavouriteSuccess(response, data) {
 
         if (data.IsFavourite == 1) {
             $('#restaurant-' + data.restaurantGuid).remove();
-            if ($.trim($('#divfavouritelist').html())=='') {
+            if ($.trim($('#divfavouritelist').html()) == '') {
                 GetData("/business/NoRecordFoundPartial", {}, NoRecordFoundPartialViewFavourite)
             }
         }
@@ -248,7 +252,7 @@ function OpenReviewPopUp(ReviewGuid) {
         windowId: "AddReviewPopUp",
         width: 900,
         height: 450,
-        url: "/User/AddReview?ReviewGuid=" + ReviewGuid,        
+        url: "/User/AddReview?ReviewGuid=" + ReviewGuid,
         closeOnOutSideClick: false,
     });
 }
@@ -265,7 +269,7 @@ $('.reject').on('click', function () {
 function ReviewApprovalResponse(response, data) {
     if (response.MessageType == 0) {
         $('a[reviewguid="' + data.reviewguid + '"]').css("display", "none");
-        if (data.Isapprove) {          
+        if (data.Isapprove) {
             $('p[id=review-' + data.reviewguid + '] label.review-status').css("display", "block").addClass('green-text').text("Approved");
         }
         else {
@@ -291,15 +295,15 @@ function SkipReviewResponse(response) {
     }
 }
 
-function getreviewcharcount(evt,maxlength) {
-    $('#lblreviewcharactercount').text(maxlength-$(evt).val().length);
+function getreviewcharcount(evt, maxlength) {
+    $('#lblreviewcharactercount').text(maxlength - $(evt).val().length);
 }
 
-$('.checkboxselectall').on('click', function () {    
+$('.checkboxselectall').on('click', function () {
     if ($(this).is(':checked')) {
         $('#partialEmaiList input[name="checkboxemail"]').prop('checked', true); // Checks it
         enableEmailHeaderButton();
-       
+
     }
     else {
         $('#partialEmaiList input[name="checkboxemail"]').prop('checked', false); // Unchecks it
@@ -308,14 +312,14 @@ $('.checkboxselectall').on('click', function () {
 })
 
 function disableEmailHeaderButton() {
-   
+
     $('.delete-data').addClass("btn-disabled").attr("disabled", "disabled");
     $('.mark-as-read').addClass("btn-disabled").attr("disabled", "disabled");
     $('.mark-as-unread').addClass("btn-disabled").attr("disabled", "disabled");
 }
 
 function enableEmailHeaderButton() {
-  
+
     $('.delete-data').removeClass("btn-disabled").removeAttr("disabled", "disabled");
     $('.mark-as-read').removeClass("btn-disabled").removeAttr("disabled", "disabled");
     $('.mark-as-unread').removeClass("btn-disabled").removeAttr("disabled", "disabled");
@@ -377,12 +381,13 @@ function DeleteInboxEmailResponse(response, data) {
             showConfirmButton: false
         });
         disableEmailHeaderButton();
-       // Success("Email deleted successfully.");
+        // Success("Email deleted successfully.");
+
     }
     else {
         ErrorBlock("Error while deleting email.");
     }
-    
+
 }
 
 //Mark as Read start
@@ -411,11 +416,11 @@ function MarkEmailasReadOnInboxClick(evt) {
     var EmailGuid = new Array();
     if ($('div[divemailguid=' + id.split('#')[1] + '] div').hasClass('unreaded')) {
         EmailGuid.push(id.split('#')[1]);
-        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasReadResponse)     
+        PostDataWithSuccessParam("/Email/MarkAsRead", { EmailGuid: EmailGuid }, MarkasReadResponse)
     }
 }
 function MarkasReadResponse(response, data) {
- 
+
     var EmailGuid = new Array();
     PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid }, NotifPartialViewOnInboxClick)
     if (response == 0) {
@@ -423,13 +428,13 @@ function MarkasReadResponse(response, data) {
     }
     $('.message-count').text('(' + response + ')');
     $.each(data.EmailGuid, function (key, value) {
-        $('div[divemailguid=' + value + '] div').removeClass('unreaded');        
+        $('div[divemailguid=' + value + '] div').removeClass('unreaded');
     });
     disableEmailHeaderButton();
     UncheckEmailCheckbox();
 }
 function NotifPartialViewOnInboxClick(response, data) {
-    $('.notification-dropdown .notification-data').html(response);    
+    $('.notification-dropdown .notification-data').html(response);
 }
 
 //Mark as Read end
@@ -447,8 +452,8 @@ function MarkEmailasUnReadHeader() {
     }
 }
 
-function MarkasUnReadResponse(response, data) {    
-    var EmailGuid = new Array();  
+function MarkasUnReadResponse(response, data) {
+    var EmailGuid = new Array();
     PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid }, NotifiPartViewUnreadEmail)
     $.each(data.EmailGuid, function (key, value) {
         $('div[divemailguid=' + value + '] div').addClass('unreaded');
@@ -459,12 +464,12 @@ function MarkasUnReadResponse(response, data) {
     disableEmailHeaderButton();
 }
 function NotifiPartViewUnreadEmail(response, data) {
-    $('.notification-dropdown .notification-data').html(response);    
+    $('.notification-dropdown .notification-data').html(response);
 }
 //Mark as UnRead end
 
-$('.refresh-email').on('click', function () {    
-    PostDataWithSuccessParam("/Email/Inbox", { }, EmailListPartialView)
+$('.refresh-email').on('click', function () {
+    PostDataWithSuccessParam("/Email/Inbox", {}, EmailListPartialView)
 })
 function UncheckEmailCheckbox() {
     $('.checkboxselectall').prop('checked', false);
@@ -475,7 +480,7 @@ function EmailListPartialView(response, data) {
     console.log(response);
     disableEmailHeaderButton();
     UncheckEmailCheckbox();
-    if (response) {        
+    if (response) {
         if ($.trim(response) == "") {
             $('.emaillist .shadow-box.top-bar-mail').remove();
             GetData("/Email/NoRecordFoundPartial", {}, NoRecordFoundPartialView)
@@ -512,7 +517,7 @@ function EmailComposePopup() {
 $('.notification-message').on('click', function () {
     var EmailGuid = new Array();
     EmailGuid.push($(this).attr('emailguid'))
-    PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid}, NotificationPartialView)
+    PostDataWithSuccessParam("/Email/MarkNotificationRead", { EmailGuid: EmailGuid }, NotificationPartialView)
 })
 
 $('form[name=compose-form]').submit(function (e) {
@@ -535,13 +540,14 @@ function fillEmailTo() {
     $('#EmailMessage_Body').val(mailContents);
 }
 function replyandForwardMessage(EmailGuid, replyorforward) {
-    
+    window.closeModelPopUpForm(false);
+
     var boolval = (replyorforward == 'forward') ? "false" : "true";
     $('.EmailComposePopup').modelPopUp({
         windowId: "ComposeEmail",
         width: 900,
         height: 620,
-        url: "/Email/ComposeEmail?EmailGuid=" + EmailGuid + "&Isreply=" + boolval+"",
+        url: "/Email/ComposeEmail?EmailGuid=" + EmailGuid + "&Isreply=" + boolval + "",
         closeOnOutSideClick: false,
     });
 }
@@ -549,7 +555,7 @@ function replyandForwardMessage(EmailGuid, replyorforward) {
 // Calculation price cart start
 $('a.decrease').on('click', function () {
     var itemguidoriginal = $(this).attr('decreasequantity');
-    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input input[type="text"]').val());    
+    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input input[type="text"]').val());
     if (quantity == 1) {
         swal({
             title: "Quantity Error",
@@ -562,7 +568,7 @@ $('a.decrease').on('click', function () {
     }
     else {
         quantity = $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity - 1);
-        var price = $('.td-price-' + itemguidoriginal + '  input[type="text"]').val(); 
+        var price = $('.td-price-' + itemguidoriginal + '  input[type="text"]').val();
         var subtotal = parseFloat($('#cart #SubTotal').val());
         var total = parseFloat($('#cart #Total').val());
         var discount = parseFloat($('.span-discount-' + itemguidoriginal).text());
@@ -582,24 +588,24 @@ $('a.decrease').on('click', function () {
 })
 $('a.increase').on('click', function () {
     var itemguidoriginal = $(this).attr('increasequantity');
-    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val());    
-    $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity+ 1);
-    var price = $('.td-price-' + itemguidoriginal +'  input[type="text"]').val();
-    var subtotal = $('#cart #SubTotal').val();   
-    var total = $('#cart #Total').val(); 
+    var quantity = parseInt($('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val());
+    $('#quantity_' + itemguidoriginal + ' .quanity-input  input[type="text"]').val(quantity + 1);
+    var price = $('.td-price-' + itemguidoriginal + '  input[type="text"]').val();
+    var subtotal = $('#cart #SubTotal').val();
+    var total = $('#cart #Total').val();
     var totaldiscount = 0;
     var itemguid = "";
     $('table#cart tbody tr').each(function () {
         itemguid = $(this).attr('id');
         if (itemguid != undefined) {
             itemguid = $(this).attr('id').split('_')[1];
-            totaldiscount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());         
+            totaldiscount += parseFloat($('#quantity_' + itemguid + ' .quanity-input  input[type="text"]').val()) * parseFloat($('.span-discount-' + itemguid).text());
         }
-    });   
+    });
     var discount = parseFloat($('.span-discount-' + itemguidoriginal).text());
     $('#cart #Discount').val(parseFloat(totaldiscount));
-    $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));    
-    $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discount );
+    $('#cart #SubTotal').val(parseFloat(subtotal) + parseFloat(price));
+    $('#cart #Total').val(parseFloat(total) + parseFloat(price) - discount);
 })
 // Calculation price cart end
 function guid() {
@@ -645,7 +651,7 @@ function DeleteSentEmailResponse(response, data) {
 // Item quantity decrease and increase and add to cart start
 
 function decreaseItemQuantity(itemguid) {
-    var quantity = parseInt($('.lblQuantity_'+itemguid).text());
+    var quantity = parseInt($('.lblQuantity_' + itemguid).text());
     if (quantity == 1) {
         swal({
             title: "Quantity Error",
@@ -658,7 +664,7 @@ function decreaseItemQuantity(itemguid) {
     }
     else {
         quantity = parseInt($('.lblQuantity_' + itemguid).text());
-        $('.lblQuantity_' + itemguid).text(quantity-1);    
+        $('.lblQuantity_' + itemguid).text(quantity - 1);
     }
 }
 
@@ -675,7 +681,7 @@ function Addtocart(itemguid) {
     PostDataWithSuccessParam("/Restaurant/addToCart", { item: item }, addToCartResponse)
 
 
-    
+
 }
 function addToCartResponse(response) {
     if (response) {
@@ -690,14 +696,14 @@ function cartCountResponse(response) {
     $('.cart-notice sub').text('(' + response + ')');
 }
 function deleteCartItem(ItemGuid) {
-   
+
     PostDataWithSuccessParam("/Restaurant/deleteItemFromCart", { ItemGuid: ItemGuid }, deleteItemFromCartResponse)
 }
-function deleteItemFromCartResponse(response, data) {   
+function deleteItemFromCartResponse(response, data) {
     if (response) {
         $('#tr_' + data.ItemGuid).remove();
         PostDataWithSuccessParam("/Restaurant/getCartCount", {}, cartCountResponse)
-       // Success("Item deleted successfully.");
+        // Success("Item deleted successfully.");
     }
     else {
         Error("Error while deleting item from cart");
@@ -719,36 +725,99 @@ function OpenMenuItemPopUp(ItemGuid) {
 
 function CheckIsMerchant(evt) {
     if ($(evt).val() == 3) {
+        $("#divMerchantMandatory").removeClass("display-none").addClass("display-block");
+        $("#divMerchantBusinessType").removeClass("display-none").addClass("display-block");
+        $("#divBusinessInfoRegister").removeClass("display-none").addClass("display-block");
         $('.checkboxcompany').prop("checked", "checked");
+        $("#divSocialMedia").addClass("display-none");
     }
     else {
         $('.checkboxcompany').prop("checked", false);
+        $("#divMerchantMandatory").removeClass("display-block").addClass("display-none");
+        $("#divMerchantBusinessType").removeClass("display-block").addClass("display-none");
+        $("#divBusinessInfoRegister").removeClass("display-block").addClass("display-none");
+        $("#divSocialMedia").removeClass("display-none");
     }
 }
+
+function checkUserEmailAlreadyExitsOrNot(userRegistrationType) {
+
+    var selectedUserType = $('input[name=UserRegistrationType]:checked').val();
+    if (userRegistrationType)
+        selectedUserType = userRegistrationType;
+    PostData("/User/FindUsertoberegistered", { email: $("#EmailAddress").val(), userRegistrationType: parseInt(selectedUserType), businessGuid: null }, emailAlreadyExistResponseHandler)
+}
+
+function emailAlreadyExistResponseHandler(response) {
+    if (response && response.isExists) {
+        $('.formusrregistration span[data-valmsg-for="EmailAddress"]').removeClass('field-validation-valid').addClass('field-validation-error').html('Emaill address is already exits.');
+        swal({
+            title: "Error",
+            text: "Emaill address is already exits.",
+            type: "error",
+            buttons: false,
+            timer: 3000,
+            showConfirmButton: true
+        });
+        return true;
+    }
+    $('.formusrregistration span[data-valmsg-for="EmailAddress"]').removeClass('field-validation-error').addClass('field-validation-valid').html('');
+    return false;
+}
+
+function onRegistrationCityChanges($event, value) {
+    if ($event) {
+        if ($event.value === "00000000-0000-0000-0000-000000000000") {
+            $("#txtEnterCityBox").removeClass("display-none").addClass("display-block");
+        }
+        else {
+            $("#txtEnterCityBox").removeClass("display-block").addClass("display-none");
+        }
+    }
+    else if (value) {
+        if (value === "00000000-0000-0000-0000-000000000000") {
+            $("#txtEnterCityBox").removeClass("display-none").addClass("display-block");
+        }
+        else {
+            $("#txtEnterCityBox").removeClass("display-block").addClass("display-none");
+        }
+    }
+}
+
 function Checkagreement() {
+    var selectedUserType = $('input[name=UserRegistrationType]:checked').val();
+    var isEmailAddressAlreadyExists = true;
     if ($('.useragreement').is(':checked')) {
-        if ($(".formusrregistration .chosen-select.businesstype").val() == '' || $(".formusrregistration .chosen-select.selectedcity").val() == '') {
-            if ($('.selectedcity').val() == '') {
+
+        if (selectedUserType == "3" && ($(".formusrregistration .chosen-select.businesstype").val() == '' || $(".formusrregistration .chosen-select.selectedcity").val() == '')) {
+            if ($("#BillingAddress_CityName").val() == '' || $('.selectedcity').val() == '') {
+                $(".formusrregistration .chosen-select.businesstype").val('').trigger("chosen:updated");
                 $('.formusrregistration span[data-valmsg-for="CityGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
                 $('.formusrregistration span[data-valmsg-for="CityGuid"]').html('<span for="CityGuid" generated="true" class="">Please select city.</span>');
+                return false;
             }
             else if ($('.businesstype').val() == '') {
                 $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-valid').addClass('field-validation-error');
                 $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').html('<span for="BusinessTypeGuid" generated="true" class="">Please select Business Type.</span>');
+                return false;
             }
+        }
+        //else if (selectedUserType && isEmailAddressAlreadyExists) {
+        //    //PostData("/User/FindUsertoberegistered", { email: $("#EmailAddress").val(), userRegistrationType: parseInt(selectedUserType), businessGuid: null }, FindUsertoberegisteredResponse)
+        //     checkUserEmailAlreadyExitsOrNot();
+        //    return false;
+        //}
+
+        if ($('.formusrregistration span[data-valmsg-for="EmailAddress"]').hasClass('field-validation-error')) {
             return false;
         }
-        else if ($('#UserRegistrationType').val() == 3 || $('#UserRegistrationType').val() == 2)
-        {
-            PostData("/User/FindUsertoberegistered", { ItemGuid: ItemGuid, businesstype: $(".formusrregistration .chosen-select.businesstype").val() }, FindUsertoberegisteredResponse)
-        }
-        else {
-            $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
-            $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').html('');
-            $('.formusrregistration span[data-valmsg-for="CityGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
-            $('.formusrregistration span[data-valmsg-for="CityGuid"]').html('');
-            return true;
-        }
+
+        $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
+        $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').html('');
+        $('.formusrregistration span[data-valmsg-for="CityGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
+        $('.formusrregistration span[data-valmsg-for="CityGuid"]').html('');
+        return true;
+
     }
     else {
         swal({
@@ -762,6 +831,22 @@ function Checkagreement() {
         return false;
     }
 }
+
+function continueSocialMediaRegistration() {
+    var selectedUserType = $('input[name=UserRegistrationType]:checked').val();
+    if (selectedUserType === "3") {
+        if ($("#BusinessTypeGuid").val() == '') {
+            $('.formuserprofile span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-valid').addClass('field-validation-error').html('Select Business Type.');
+            return;
+        }
+        else {
+            $('.formuserprofile span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-error').addClass('field-validation-valid').html('');
+        }
+    }
+    $("#divMerchantMandatoryFields").removeClass("display-block").addClass("display-none");
+    $("#divPersonalInfoRegister").removeClass("display-none").addClass("display-block");
+}
+
 function FindUsertoberegisteredResponse(response) {
     $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').removeClass('field-validation-error').addClass('field-validation-valid');
     $('.formusrregistration span[data-valmsg-for="BusinessTypeGuid"]').html('');
@@ -855,18 +940,41 @@ function SaveBusinessTypeHandler(response) {
 }
 
 function editbusinessprofile() {
-    $('.disabled-textbox').removeAttr('disabled').removeClass('disabled-textbox');
+    $('#formrestaurent .disabled-textbox').removeAttr('disabled').removeClass('disabled-textbox');
     $('#divNewField').removeAttr('disabled');
-    $('.divprofileedit').addClass('display-none');
-    $('.divprofileupdate').removeClass('display-none');
+    $('#formrestaurent .divprofileedit').addClass('display-none');
+    $('#formrestaurent .divprofileupdate').removeClass('display-none');
     $('.divaddproperty').removeClass('display-none');
     $('#divNewField img').removeClass('display-none');
-    $('.divprofilecancel').removeClass('display-none');
+    $('#formrestaurent .divprofilecancel').removeClass('display-none');
     $('.citydropdown').removeClass('display-none');
     $('.cityname').addClass('display-none');
+    $('.manager-dropdown').removeClass('display-none');
+    $('.manager-name').addClass('display-none');
+
+    googleMapObj.initializeMapEvents();
 }
+
+function editAboutUsPageMechant() {
+
+    $('.disabled-textbox.about-us-page-input').removeAttr('disabled').removeClass('disabled-textbox');
+    $('.divprofilecancel.about-us').removeClass('display-none');
+    $('.divprofileedit.about-us').addClass('display-none');
+    $('.divprofileupdate.about-us').removeClass('display-none');
+    toggleReadOnlyCKEditor(false);
+}
+
+function cancelAboutUsPageMerchant() {
+    $('.form-control.about-us-page-input').attr('disabled', 'disabled').addClass('disabled-textbox');
+    $('.divprofileedit.about-us').removeClass('display-none');
+    $('.divprofileupdate.about-us').addClass('display-none');
+    $('.divprofilecancel.about-us').addClass('display-none');
+    toggleReadOnlyCKEditor(true);
+}
+
 function cancelbusinessprofile() {
     addDisableClassProfile();
+    googleMapObj.destroidMapEvents();
 }
 function addDisableClassProfile() {
     $('table tr td.data input').attr('disabled', 'disabled').addClass('disabled-textbox');
@@ -875,14 +983,15 @@ function addDisableClassProfile() {
     $('.divaddproperty').addClass('display-none');
     $('#divNewField img').addClass('display-none');
     $('textarea').attr('disabled', 'disabled').addClass('disabled-textbox');
-    $('.divprofileedit').removeClass('display-none');
-    $('.divprofileupdate').addClass('display-none');
-    $('.divprofilecancel').addClass('display-none');
+    $('#formrestaurent .divprofileedit').removeClass('display-none');
+    $('#formrestaurent .divprofileupdate').addClass('display-none');
+    $('#formrestaurent .divprofilecancel').addClass('display-none');
     $('.cityname').removeClass('display-none');
     $('.citydropdown').addClass('display-none');
+    $('.manager-name').removeClass('display-none');
+    $('.manager-dropdown').addClass('display-none');
+
 }
-
-
 
 function updatelocation() {
     var CustomFiledList = {};
@@ -891,10 +1000,10 @@ function updatelocation() {
         $('.dynamicdata').each(function () {
             if ($(this).find('.dynamicfieldname').val() != "" && $(this).find('.dynamicfieldvalue').val() != "" && $(this).find('.dynamicfieldguid').val() != "") {
                 CustomFiledList[x] = { LocationGuid: $('#BusinessGuid').val(), CustomPropertyGuid: $(this).find('.dynamicfieldguid').val(), Field: $(this).find('.dynamicfieldname').val(), Value: $(this).find('.dynamicfieldvalue').val() };
-                
+
             }
             else {
-                CustomFiledList[x] = { LocationGuid: $('#BusinessGuid').val(),Field: $(this).find('.dynamicfieldname').val(), Value: $(this).find('.dynamicfieldvalue').val() };
+                CustomFiledList[x] = { LocationGuid: $('#BusinessGuid').val(), Field: $(this).find('.dynamicfieldname').val(), Value: $(this).find('.dynamicfieldvalue').val() };
             }
             x++;
         });
@@ -904,7 +1013,10 @@ function updatelocation() {
         var formBusinessType = $('#formrestaurent').serialize();
         PostData("/Business/UpdateLocation", formBusinessType, businessProfileHandler)
     }
-    
+}
+
+function updateAboutUsPageMerchant() {
+    $('#about_us_page_merchant_form').submit();
 }
 function CustomFieldHandler(response) {
     if (response) {
@@ -925,7 +1037,7 @@ function businessProfileHandler(response) {
     if (response != '') {
         addDisableClassProfile();
         $('#CityName').html(response);
-        window.location.href = "/Business/LocationList";
+        window.location.href = "/Business/LocationList?isSucess=true";
     }
     else {
         ErrorBlock("Error while updating restaurent profile.");
@@ -943,7 +1055,7 @@ function isNumber(evt) {
 function DeleteLocation(guid) {
     swal({
         title: "Are you sure?",
-        text: "You want to delete Location.",
+        text: "You want to delete Branch.",
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -974,10 +1086,13 @@ function NoRecordFoundPartialViewLocation(response) {
 }
 
 
-function DeleteUser(guid) {
+function DeleteUser(guid, message) {
+    if (!message) {
+        message = "You want to delete User.";
+    }
     swal({
         title: "Are you sure?",
-        text: "You want to delete User.",
+        text: message,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -1008,11 +1123,10 @@ function AddNewPropertyResponse(response) {
     $('#divNewField').append(response);
 }
 function Getcustomfields(BusinessGuid) {
-    var businessObject = $('#frmaddlocation').serialize();   
-    PostData("/Business/AddLocation", businessObject, AddLocationHandler)  
+    var businessObject = $('#frmaddlocation').serialize();
+    PostData("/Business/AddLocation", businessObject, AddLocationHandler)
 }
 function AddLocationHandler(response) {
-    console.log(response);
     if (response) {
         var CustomFiledList = {};
         var x = 0;
@@ -1027,9 +1141,13 @@ function AddLocationHandler(response) {
                 PostData("/Business/AddCustomField", { CustomFiledList: CustomFiledList }, AddCustomFieldHandler)
             }
         }
+        else {
+            Success("Saved successfully");
+            window.location.href = '/Business/LocationList';
+        }
     }
     else {
-        ErrorBlock("Error while adding location.");
+        ErrorBlock("Error while adding Branch.");
     }
 }
 
@@ -1037,20 +1155,20 @@ function AddCustomFieldHandler(response) {
     if (response) {
         var formBusinessType = $('#formrestaurent').serialize();
         PostData("/Business/UpdateLocation", formBusinessType, businessProfileHandler)
-       
+
     }
     else {
         ErrorBlock("Error while adding other properties.");
     }
 }
 
-function removeParentDiv(guid,evt) {
+function removeParentDiv(guid, evt) {
     if (guid == '') {
         $(evt).closest(".dynamicdata").remove();
     }
     else {
-        PostDataWithSuccessParam("/Business/DeleteCustomField", { CustomFieldGuid: guid }, DeleteCustomFieldHandler)    
-    }    
+        PostDataWithSuccessParam("/Business/DeleteCustomField", { CustomFieldGuid: guid }, DeleteCustomFieldHandler)
+    }
 }
 
 function DeleteCustomFieldHandler(response, data) {
@@ -1075,8 +1193,8 @@ function GetBusinessInfo(guid) {
 function Checkandmakeappointment(BusinessGuid) {
     PostDataWithSuccessParam("/Business/IsSaloonBooked", {
         BusinessGuid: BusinessGuid, SaloonTimeGuid: $("#SaloonTimeGuid_" + BusinessGuid).val(), SaloonTime: $("#SaloonTimeGuid_" + BusinessGuid + "  option:selected").text(), AppointmentDate: $('#AppointmentDate_' + BusinessGuid).val()
-    },IsSaloonBookedHandler)    
-   }
+    }, IsSaloonBookedHandler)
+}
 function IsSaloonBookedHandler(response, data) {
     if (response) {
         PostDataWithSuccessParam("/Business/MakeSaloonAppointment", {
@@ -1100,28 +1218,31 @@ function cancelapppointment() {
     enableDisableAppControls();
 }
 function enableDisableAppControls() {
-    $('.userappointment  input.data').attr('disabled', 'disabled').addClass('disabled-textbox');  
+    $('.userappointment  input.data').attr('disabled', 'disabled').addClass('disabled-textbox');
     $('.textsaloontime').removeClass('display-none');
     $('.timeslotdropdown').addClass('display-none');
     $('.divprofileupdate').addClass('display-none');
     $('.divprofileedit').removeClass('display-none');
 }
-function editappointment() {
-    $('.userappointment  input.data').removeAttr('disabled').removeClass('disabled-textbox');
-    $('.textsaloontime').addClass('display-none');
-    $('.timeslotdropdown').removeClass('display-none');
-    $('.divprofileedit').addClass('display-none');
-    $('.divprofileupdate').removeClass('display-none');
+function editappointment($event, targetParentId) {
+    if (targetParentId) {
+        cancelapppointment();
+        $('#' + targetParentId + '.userappointment  input.data').removeAttr('disabled').removeClass('disabled-textbox');
+        $('#' + targetParentId + ' .textsaloontime').addClass('display-none');
+        $('#' + targetParentId + ' .timeslotdropdown').removeClass('display-none');
+        $('#' + targetParentId + ' .divprofileedit').addClass('display-none');
+        $('#' + targetParentId + ' .divprofileupdate').removeClass('display-none');
+    }
 }
 function updateapppointment(SaloonAppointmentGuid, BusinessGuid, SaloonAppointmentGuid) {
     PostDataWithSuccessParam("/Business/IsSaloonBooked", {
         SaloonAppointmentGuid: SaloonAppointmentGuid, BusinessGuid: BusinessGuid, SaloonTimeGuid: $("#SaloonTimeGuid_" + SaloonAppointmentGuid).val(), SaloonTime: $("#SaloonTimeGuid_" + SaloonAppointmentGuid + "  option:selected").text(), AppointmentDate: $('#AppointmentDate_' + SaloonAppointmentGuid).val()
-    }, IsAlreadyBookedHandler)   
+    }, IsAlreadyBookedHandler)
 }
 function IsAlreadyBookedHandler(response, data) {
     if (response) {
         PostDataWithSuccessParam("/Business/MakeSaloonAppointment", {
-            SaloonAppointmentGuid:data.SaloonAppointmentGuid,BusinessGuid: data.BusinessGuid, SaloonTimeGuid: data.SaloonTimeGuid, SaloonTime: data.SaloonTime, AppointmentDate: data.AppointmentDate
+            SaloonAppointmentGuid: data.SaloonAppointmentGuid, BusinessGuid: data.BusinessGuid, SaloonTimeGuid: data.SaloonTimeGuid, SaloonTime: data.SaloonTime, AppointmentDate: data.AppointmentDate
         }, SaloonAppointmentHandler)
         $('#textsaloontime_' + data.SaloonAppointmentGuid).val(data.SaloonTime);
     }
@@ -1129,7 +1250,7 @@ function IsAlreadyBookedHandler(response, data) {
         ErrorBlock("This time slot is already booked. Please choose another time slot or date.");
     }
 }
-function DeleteAppointment(SaloonAppointmentGuid){
+function DeleteAppointment(SaloonAppointmentGuid) {
     swal({
         title: "Are you sure?",
         text: "You want to delete Appointment.",
@@ -1144,14 +1265,14 @@ function DeleteAppointment(SaloonAppointmentGuid){
         });
 
 }
-function DeleteAppointmentHandler(response,data) {
+function DeleteAppointmentHandler(response, data) {
     if (response.MessageType == "0") {//0 for success
         //Success('Appointment deleted successfully.')
         $('#AppointmentDate_' + data.SaloonAppointmentGuid).closest('.userappointment').remove();
         $('.sweet-alert.showSweetAlert').remove();
         $('.sweet-overlay').remove();
         if ($.trim($('.userappointment').length) == 0) {
-            GetData("/business/CommonNoRecordFoundPartial", { message:"No appointment(s) found."}, NoRecordAppointmentFavourite)
+            GetData("/business/CommonNoRecordFoundPartial", { message: "No appointment(s) found." }, NoRecordAppointmentFavourite)
         }
     }
     else {
@@ -1161,3 +1282,433 @@ function DeleteAppointmentHandler(response,data) {
 function NoRecordAppointmentFavourite(response) {
     $('#divappointment').html(response);
 }
+
+function InboxEmailSearchSortHandler($event) {
+    //var emailSortOrder = null;
+    //var emailSearchQuery = null;
+    //var emailSearchQueryObj = $("#InboxEmailSearchQuery");
+    //var emailSortOrderObj = $("#InboxEmailSortOrder");
+    //if (emailSearchQueryObj.val() && emailSearchQueryObj.val().trim() != '')
+    //    emailSearchQuery = emailSearchQueryObj.val();
+    //if (emailSortOrderObj.val())
+    //    emailSortOrder = emailSortOrderObj.val();
+    $("#searchSortEmailForm").submit();
+
+}
+
+function onCopyBillingAddressAsShippingAddressSocialMedia($event) {
+    if ($event && $event.checked) {
+        copyBillingAddressAsShippingAddressSocialMedia();
+    }
+    else {
+        clearCoppiedShippingAddressSocialMedia();
+    }
+}
+
+function copyBillingAddressAsShippingAddressSocialMedia() {
+    var BillingAddress_AddressObj = $("#BillingAddress_Address");
+    var BillingAddress_CityNameObj = $("#BillingAddress_CityName");
+    var BillingAddress_PostCodeObj = $("#BillingAddress_PostCode");
+
+    if (BillingAddress_AddressObj)
+        $("#ShippingAddress_Address").val(BillingAddress_AddressObj.val());
+
+    if ($("#BillingAddress_CityGuid").val()) {
+        $(".formuserprofile .chosen-select.shipping").val($("#BillingAddress_CityGuid").val()).trigger("chosen:updated");
+    }
+    else {
+        $(".formuserprofile .chosen-select.shipping").val($(".formuserprofile .chosen-select.billing").val()).trigger("chosen:updated");
+    }
+
+    if (BillingAddress_CityNameObj)
+        $("#ShippingAddress_CityName").val(BillingAddress_CityNameObj.val());
+
+    if (BillingAddress_PostCodeObj)
+        $("#ShippingAddress_PostCode").val(BillingAddress_PostCodeObj.val());
+
+}
+
+function clearCoppiedShippingAddressSocialMedia() {
+    $("#ShippingAddress_Address").val('');
+    $(".formuserprofile .chosen-select.shipping").val('').trigger("chosen:updated");
+    $("#ShippingAddress_CityName").val('');
+    $("#ShippingAddress_PostCode").val('');
+}
+
+function onCopyBillingAddressAsShippingAddress($event, isInEditModel) {
+    if ($event && $event.checked) {
+        copyBillingAddressAsShippingAddress(isInEditModel);
+    }
+    else {
+        clearCoppiedShippingAddress();
+    }
+}
+
+function copyBillingAddressAsShippingAddress(isInEditModel) {
+    var BillingAddress_CityGuid = "";
+    var BillingAddress_AddressObj = $("#BillingAddress_Address");
+    var BillingAddress_CityNameObj = $("#BillingAddress_CityName");
+    var BillingAddress_PostCodeObj = $("#BillingAddress_PostCode");
+    var ShippingAddress_CityGuidObj = $("#ShippingAddress_CityGuid");
+
+    $("#ShippingAddress_CityGuid").val($('#BillingAddress_CityGuid').val()).trigger("chosen:updated.chosen");
+
+    if (BillingAddress_AddressObj)
+        $("#ShippingAddress_Address").val(BillingAddress_AddressObj.val());
+
+    if (BillingAddress_CityNameObj)
+        $("#shippingaddress_cityname").val(BillingAddress_CityNameObj.val());
+
+    if (BillingAddress_PostCodeObj)
+        $("#ShippingAddress_PostCode").val(BillingAddress_PostCodeObj.val());
+}
+
+function clearCoppiedShippingAddress() {
+    $("#ShippingAddress_Address").val('');
+    $(".formuserprofile .chosen-select.shipping").val('').trigger("chosen:updated");
+    $("#ShippingAddress_CityName").val('');
+    $("#ShippingAddress_PostCode").val('');
+}
+
+
+
+function setAddress(address, locationObj) {
+    if (address && address.route && address.route != "Unnamed Road") {
+        $("#BillingAddress_Address").val(locationObj.formatted_address);
+    }
+    else
+        $("#BillingAddress_Address").val(address.city);
+
+    if (address && address.postal_code)
+        $("#BillingAddress_PostCode").val(address.postal_code);
+    else
+        $("#BillingAddress_PostCode").val('');
+    if (address && address.city) {
+
+        $(".formusrregistration .chosen-select.selectedcity").eq(0).val(address.city).trigger("chosen:updated");
+        if (!$(".formusrregistration .chosen-select.selectedcity").eq(0).val()) {
+            $(".formusrregistration .chosen-select.selectedcity").eq(0).val("00000000-0000-0000-0000-000000000000").trigger("chosen:updated");
+            onRegistrationCityChanges(null, "00000000-0000-0000-0000-000000000000");
+            $("#BillingAddress_CityName").val(address.city);
+        }
+    }
+    else {
+        $("#BillingAddress_CityName").val('');
+    }
+
+    if (address && address.country)
+        $(".formusrregistration .chosen-select.selectedcountry").val(address.country).trigger("chosen:updated");
+    else
+        $(".formusrregistration .chosen-select.selectedcountry").val("").trigger("chosen:updated");
+
+    $("#BillingAddress_Latitude").val(window.googleMapAddressLat);
+    $("#BillingAddress_Longitude").val(window.googleMapAddressLng);
+    $("#BillingAddress_PlaceId").val(window.placeId);
+}
+
+function onnewCityChanges($event, eleId) {
+    if ($event.value === "00000000-0000-0000-0000-000000000000") {
+        $("#" + eleId).removeClass("display-none").addClass("display-block");
+    }
+    else {
+        $("#" + eleId).removeClass("display-block").addClass("display-none");
+    }
+}
+
+function myOrderMoreItemToggle(element, event) {
+    if (event)
+        event.preventDefault();
+
+    if ($(element).siblings("div.order-item-none").hasClass("display-none")) {
+        $(element).siblings("div.order-item-none").removeClass("display-none");
+        $(element).html('Less Items <i class="fa fa-angle-up"></i>');
+        $(element).parents('tr').siblings("tr.order-item-row-none").removeClass("display-none");
+    }
+    else {
+        $(element).html('More Items <i class="fa fa-angle-down"></i>');
+        $(element).siblings("div.order-item-none").addClass("display-none");
+
+    }
+}
+
+
+function myOrderMoreRowToggle(element, event) {
+    if (event)
+        event.preventDefault();
+
+    if ($(element).parents('tr').siblings("tr.order-item-row-none").hasClass("display-none")) {
+        $(element).html('Show less <i class="fa fa-angle-up"></i>');
+        $(element).parents('tr').siblings("tr.order-item-row-none").removeClass("display-none");
+    }
+    else {
+        $(element).html('Show more <i class="fa fa-angle-down"></i>');
+        $(element).parents('tr').siblings("tr.order-item-row-none").addClass("display-none");
+    }
+}
+
+function sortmyOrderBuyer(element, event, orderStatusTable) {
+    if (event)
+        event.preventDefault();
+
+    var sorOrder;
+
+    var childElement = $(element).children().eq(1);
+    var parentElement = $(element).parents(".tab-pane");
+    var sortColumName = childElement.attr("column-name");
+    if (childElement.hasClass("fa-angle-down")) {
+        sorOrder = "desc";
+    }
+    else {
+        sorOrder = "asc";
+    }
+    var searchQuery = window.location.search;
+    if (searchQuery) {
+        searchQuery = searchQuery.split("&");
+        searchQuery = searchQuery[searchQuery.length - 1];
+    }
+    if (searchQuery)
+        window.location.href = `/orders/myorders?sortBy=${sortColumName}&sortOrder=${sorOrder}&orderStatus=${orderStatusTable}&activeTab=${parentElement.attr("id")}&${searchQuery}`;
+    else
+        window.location.href = `/orders/myorders?sortBy=${sortColumName}&sortOrder=${sorOrder}&orderStatus=${orderStatusTable}&activeTab=${parentElement.attr("id")}`;
+}
+
+function toggleReadOnlyCKEditor(isReadOnly) {
+    if (editor)
+        editor.setReadOnly(isReadOnly);
+}
+
+
+function onSelfDeliveryChange($event) {
+    PostDataWithSuccessParam("/user/setselfdelivery", { IsSelfDelivery: $event.target.checked }, setSelfDeliverySuccessHandler);
+}
+
+function setSelfDeliverySuccessHandler(response, data) {
+    if (response) {
+        Success("Self Delivery status has been updated.");
+    }
+    else {
+        ErrorBlock("Operation failled.");
+    }
+
+}
+
+function onChangePw(event) {
+    if (event)
+        event.preventDefault();
+    $(this).modelPopUp({
+        windowId: "settingsPopUp",
+        width: 650,
+        height: 480,
+        url: "/user/changepassword",
+        closeOnOutSideClick: false,
+    });
+}
+
+function onSubmitPwForm($event) {
+    PostDataWithSuccessParam("/user/changepassword", { cPw: $("#cPw").val(), nPw: $("#password").val() }, onSubmitPwFormSuccessHandler);
+}
+
+function onSubmitPwFormSuccessHandler(response, data) {
+    if (response) {
+        switch (response) {
+            case 0:
+                window.parent.ErrorBlock("User name not found.");
+                break;
+
+            case 1:
+                window.parent.ErrorBlock("Current password not matched.");
+                break;
+
+            case 2:
+                window.parent.Success("Password has been changed.");
+                break;
+            default:
+                window.parent.ErrorBlock("Some thing going wrong.");
+                break;
+        }
+        window.parent.closeModelPopUpForm(false);
+    }
+    else {
+        window.parent.ErrorBlock("Operation failled.");
+        window.parent.closeModelPopUpForm(false);
+    }
+}
+
+function onDeActiveAccount(event) {
+    if (event)
+        event.preventDefault();
+    $(this).modelPopUp({
+        windowId: "settingsPopUp",
+        width: 650,
+        height: 480,
+        url: "/user/deactivateaccount",
+        closeOnOutSideClick: false,
+    });
+}
+
+
+function onSubmitDeActivateAccountForm($event) {
+    PostDataWithSuccessParam("/user/deactivateaccount", { password: $("#password").val() }, onSubmitDeActivateAccountFormSucessHandler);
+}
+
+function onSubmitDeActivateAccountFormSucessHandler(response, data) {
+
+    if (response) {
+        window.parent.Success("Your account has been sucessfully de-activated.");
+        window.parent.closeModelPopUpForm(true);
+    }
+    else {
+        window.parent.ErrorBlock("Operation failled.");
+        window.parent.closeModelPopUpForm(true);
+    }
+}
+
+
+function onDeleteAccount(event) {
+    if (event)
+        event.preventDefault();
+    $(this).modelPopUp({
+        windowId: "settingsPopUp",
+        width: 650,
+        height: 480,
+        url: "/user/deleteaccount",
+        closeOnOutSideClick: false,
+    });
+}
+
+function onSubmitDeleteAccountForm($event) {
+    PostDataWithSuccessParam("/user/deleteaccount", { password: $("#password").val() }, onSubmitDeleteAccountFormSucessHandler);
+}
+
+function onSubmitDeleteAccountFormSucessHandler(response, data) {
+    if (response) {
+        window.parent.Success("Your account has been sucessfully deleted.");
+        window.parent.closeModelPopUpForm(true);
+    }
+    else {
+        window.parent.ErrorBlock("Operation failled.");
+        window.parent.closeModelPopUpForm(true);
+    }
+}
+
+
+function onDiscountTypeChange($event) {
+    var selectedValue = $event.value;
+    switch (selectedValue) {
+        case "1":
+            ShowHideBranchDiscountCoupon(true);
+            break;
+
+        case "2":
+            ShowHideBranchDiscountCoupon(false);
+            bindProductList();
+            break;
+
+        default:
+            ShowHideBranchDiscountCoupon(true);
+            break;
+    }
+}
+
+function ShowHideBranchDiscountCoupon(IsHide) {
+    if (IsHide) {
+        $("#divCouponProductList").addClass("display-none");
+    }
+    else {
+        $("#divCouponProductList").removeClass("display-none");
+    }
+}
+
+function deleteDiscountCoupon(event, ele, couponId) {
+    if (event)
+        event.preventDefault();
+    swal({
+        title: "Are you sure?",
+        text: "You want to delete it.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: false
+    },
+        function () {
+            $(ele).parents('form').submit();
+        });
+}
+
+function bindProductList() {
+    GetData("getproductsbranchguid?branchGuid=" + $("#BranchGuid").val(), null, function (response) {
+        var productList = response;
+        var ProductIdsObject = $("#ProductIds");
+        var optioList = '';
+        productList.forEach(function (opt) {
+            optioList += '<option value="' + opt.Value + '">' + opt.Text + '</option>'
+        })
+        ProductIdsObject.html(optioList);
+        ProductIdsObject.trigger("chosen:updated")
+    });
+}
+
+
+function redirectToHref(event, eleme) {
+    if (event)
+        event.preventDefault();
+    window.location.href = $(eleme).attr("href");
+}
+
+function openEmailMessagePopup($event, emailGuid) {
+    if ($event)
+        $event.preventDefault();
+
+    if (emailGuid) {
+
+        $(this).modelPopUp({
+            windowId: "emailMessagePopUp",
+            width: 900,
+            height: 620,
+            url: "/email/getemail?emailGuid=" + emailGuid,
+            closeOnOutSideClick: false,
+        });
+    }
+}
+
+function deleteEmailMessageFromPopup($event, emailGuid) {
+    if ($event)
+        $event.preventDefault();
+    if (emailGuid) {
+        Delete("You want to delete the message.", "Yes, delete it!", "/Email/DeleteEmail", { EmailGuid: emailGuid }, deleteEmailMessageFromPopupResponseHandler);
+    }
+}
+
+function deleteEmailMessageFromPopupResponseHandler(response, data) {
+    if (response) {
+        window.parent.swal({
+            title: "Success",
+            text: "Email deleted successfully.",
+            type: "success",
+            buttons: false,
+            timer: 2000,
+            showConfirmButton: false
+        });
+        window.parent.closeModelPopUpForm(true);
+    }
+    else {
+        window.parent.ErrorBlock("Error while deleting email.");
+    }
+}
+
+
+function getUserAgreementPopup($event) {
+    if ($event)
+        $event.preventDefault();
+
+    $(this).modelPopUp({
+        windowId: "userAgreementPopUp",
+        width: 900,
+        height: 620,
+        url: "/home/getuseragreement",
+        closeOnOutSideClick: false,
+    });
+}
+
+

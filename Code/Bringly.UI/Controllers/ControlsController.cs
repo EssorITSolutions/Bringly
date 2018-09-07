@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Utilities;
@@ -10,6 +8,7 @@ namespace Bringly.UI.Controllers
     public class ControlsController : Controller
     {
         #region Paging Control
+
         /// <summary>
         /// 
         /// </summary>
@@ -31,10 +30,6 @@ namespace Bringly.UI.Controllers
                 }
             }
 
-            //else if (!QueryStringHelper.getIntValue("page", out currentPage))
-            //{
-            //    currentPage = 1;
-            //}
             if (totalRecords <= 0 || totalRecords <= pageSize) { return PartialView(); }
 
             Bringly.Domain.Paging obj = new Bringly.Domain.Paging
@@ -64,6 +59,13 @@ namespace Bringly.UI.Controllers
             return PartialView(obj);
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         static string RemoveQueryStringByKey(string url, string key)
         {
             var uri = new Uri(url);
@@ -81,10 +83,18 @@ namespace Bringly.UI.Controllers
                 ? String.Format("{0}{1}", pagePathWithoutQueryString, newQueryString)
                 : pagePathWithoutQueryString;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public int PageCount(int total, int pageSize)
         {
             return total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
         }
+
         #endregion
     }
 }

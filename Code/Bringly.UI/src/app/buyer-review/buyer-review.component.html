@@ -1,0 +1,115 @@
+﻿<div class="right-side">
+    <form method="post" class="mws-form" id="formReview">
+        <div class="page-sub-title">
+            <h3>My Reviews</h3>
+            <p *ngIf="myreviewData && myreviewData.ReviewGuid != '00000000-0000-0000-0000-000000000000' "
+               class="tag-line">
+                You can leave the comments or
+                <a reviewguid="myreviewData.ReviewGuid" class="skip-review" href="#">Skip This</a>
+            </p>
+        </div>
+        <div class="row" *ngIf="myreviewData && myreviewData.ReviewGuid != '00000000-0000-0000-0000-000000000000' ">
+            <div class="col-lg-4 col-md-8 col-sm-12">
+                <div class="shadow-box buyer_review">
+                    <img [src]="myreviewData.BusinessImage" class="m-auto d-block" />
+                    <div class="text-center m-2">
+                        <!--<input value="Leave Review" type="button" class="btn btn-primary btn-lg" [ffg] onclick="OpenReviewPopUp('myreviewData.ReviewGuid')" id="btnAddReviewPopUp" />-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="review-panel marchent-review">
+        <div *ngIf="myreviewData && myreviewData.GivenBusinessReviews && myreviewData.GivenBusinessReviews.length">
+            <div class="media shadow-box" *ngFor="let review of myreviewData.GivenBusinessReviews">
+                <div class="media-body">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <h4 class="mt-0 m-0">
+                                <label>
+                                    {{ isMerchant ? "From:" : "To:"}}
+                                </label>
+
+                                {{ isMerchant ? review.UserName :review.BusinessName}}
+
+                                <!--<span class="tag-date">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(review.DateCreated) @Bringly.Domain.BaseClasses.DomainBase.Time24hr(review.DateCreated) </span>-->
+                                <span class="tag-date">{{getDate(review.DateCreated)}} </span>
+                            </h4>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 col-sm-12" *ngIf="isMerchant">
+                            <p class="text-left text-lg-right text-weight m-0 option-icon" id="review-{{review.ReviewGuid}}">
+                                <a *ngIf="review.IsProcessed"  approve="true"
+                                   id="reviewapprovalpending" class="approve btn btn-success" href='#'><i class="fa fa-thumbs-up" aria-hidden="true"></i>Approve</a>
+                                <a *ngIf="review.IsProcessed"  approve="false"
+                                   id="reviewapprovalreject" class="reject btn btn-danger" href='#'><i class="fa fa-thumbs-down" aria-hidden="true"></i>Reject</a>
+                                <label *ngIf="review.IsApproved && review.IsProcessed" approve="false" id="lblreviewapproved" class="green-text">Approved</label>
+
+                                <label *ngIf="!review.IsApproved && review.IsProcessed"  approve="false" id="lblreviewapproved" class="red-text">Rejected</label>
+                            </p>
+                        </div>
+                    </div>
+                    <section class='rating-widget '>
+                        <!-- Rating Stars Box -->
+                        <div class='rating-stars text-center'>
+                            <ul id='stars' class="review-list">
+                                <li [ngClass]="{'star': true, 'selected': review.Rating >= 1}" title='Poor' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li [ngClass]="{'star': true, 'selected': review.Rating >= 2}" title='Fair' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li [ngClass]="{'star': true, 'selected': review.Rating >= 3}" title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li [ngClass]="{'star': true, 'selected': review.Rating >= 4}" title='Excellent' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li [ngClass]="{'star': true, 'selected': review.Rating >= 5}" title='WOW!!!' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class="star-rating">Rating: {{review.Rating}}</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <div class="clearfix"></div>
+                    <!--@Html.Partial("_ReviewContent", review.Review)-->
+                    <div>
+                        <div class="limited-content">
+                            <a *ngIf="review.Review && review.Review.length > 150" class="read-more-link">{{review.Review.substring(0,150)}}... Read more</a>
+                            <div *ngIf="review.Review && review.Review.length <= 150">
+                                {{review.Review}}
+                            </div>
+                        </div>
+                        <div class="full-content display-none">
+                            {{review.Review}} <a class="read-more-link"> Read less</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="media shadow-box" *ngIf="!myreviewData || !myreviewData.GivenBusinessReviews || !myreviewData.GivenBusinessReviews.length">
+            <div class="media-body">
+                <div class="row">
+                    <!--@Html.Partial("_NoRecordFound", "No review found.")-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!--@Html.Partial("_RestaurantReviewList", Model)-->
+</div>

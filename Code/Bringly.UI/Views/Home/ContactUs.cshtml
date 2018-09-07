@@ -1,0 +1,110 @@
+﻿@model Bringly.Domain.ComposeEmail
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+
+<section class="bg-grey title-bar ">
+    <div class="container">
+        <h2 class="float-left">
+            Contact Us
+        </h2>
+        <ol class="breadcrumb float-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Contact us</li>
+        </ol>
+    </div>
+</section>
+
+<section id="contact-form" class="inner-margin bg-white">
+    <div class="container">
+        <p class="text-center">Customer Care Centre. Wherever you are in the world, know that we're only a call away. Contact us at anyone of our call centres with the contact details and numbers listed below.</p>
+        <div class="row c-form">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                @using (Html.BeginForm("contactus", "home", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.EmailMessage.FromName, new { @class = "form-control", @placeholder = "Your name", @maxlength = "200", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.EmailMessage.FromName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.EmailMessage.EmailFrom, new { @class = "form-control", @type = "email", @placeholder = "Your email", @maxlength = "200", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.EmailMessage.EmailFrom)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.EmailMessage.Subject, new { @class = "form-control", @placeholder = "Subject", @maxlength = "200", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.EmailMessage.Subject)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextAreaFor(m => m.EmailMessage.Body, new { @class = "form-control", @placeholder = "Message...", @required = "required", @rows="7" })
+                                    @Html.ValidationMessageFor(m => m.EmailMessage.Body)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group contact-captcha">
+                                <div class="input-group">
+                                    @Html.MathCaptcha("Try another one?", "Enter the result of equation you see above:", "Is required field", true)
+                                    @if (ViewBag.CaptchaErrMessage != null)
+                                    {
+                                        <span class="field-validation-error"  data-valmsg-replace="true">
+                                            <span  generated="true" class="">@ViewBag.CaptchaErrMessage</span>
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary" id="btnContactUs"> Send Message</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="media">
+                    <img src="~/Templates/images/location-icon.png" class="align-self-start mr-3">
+                    <div class="media-body">
+                        <strong class="text-primary"> ADDRESS STREET</strong><br> 123 Street name <br>
+                        xyz place, Countries
+                    </div>
+                </div>
+
+                <div class="media">
+                    <img src="~/Templates/images/call-icon.png" class="align-self-start mr-3">
+                    <div class="media-body">
+                        <strong class="text-primary">  PHONE NUMBER</strong><br> <a href="tel:1234567890">0(1234) 567 89012 </a> <br>
+                        <a href="tel:1234567890">0(007) 567 890 </a> <br>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <img src="~/Templates/images/mail-icon.png" class="align-self-start mr-3">
+                    <div class="media-body">
+                        <strong class="text-primary"> ADDRESS EMAIL</strong><br>
+                        <a href="mailto:#">first.last@example.com</a> <br> <a href="mailto:#">Nameyour@salina.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<section id="contact-location" class="bg-white">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13004088.060233325!2d-104.6575310030145!3d37.275548571126784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1534941802153" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+    </section>*@
+
+

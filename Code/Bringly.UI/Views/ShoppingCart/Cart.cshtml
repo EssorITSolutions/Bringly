@@ -14,6 +14,7 @@
         @if (Model.ItemsList != null && Model.ItemsList.Count > 0)
         {
             <form method="post">
+                @Html.HiddenFor(m => m.OrderGuid)
                 <div class="shopping-table">
                     <table id="cart" class="table table-responsive">
                         <thead class="table-head">
@@ -60,8 +61,8 @@
                                         </div>
                                     </td>
                                     <td class="text-center action-button">
-                                        <div class="row align-items-center">
-                                            <a href="" class="trash-icon" onclick="deleteCartItem('@item.ItemGuid')"><i class="fa fa-trash"></i> </a>
+                                        <div class="row align-items-center edit-btn">
+                                            <a href="" class="trash-icon" onclick="deleteCartItem('@item.ItemGuid')"><i class="fa fa-trash"></i>Remove </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -71,12 +72,10 @@
                         <tfoot>
                             <tr>
                                 <td>
-                                    @*<form>*@
-                                        <div class="form-group coupon-from">
-                                            <label class="form-control-label">Enter coupon code</label>
-                                            <input type="text" class="form-control" placeholder="Coupon Code">
-                                        </div>
-                                    @*</form>*@
+                                    <div class="form-group coupon-from">
+                                        <label class="form-control-label">Enter coupon code</label>
+                                        <input type="text" class="form-control" placeholder="Coupon Code">
+                                    </div>
                                 </td>
                                 <td colspan="2" class="hidden-xs"></td>
                                 <td>
@@ -100,21 +99,21 @@
                                         <tr>
                                             <td>
                                                 <span class="total-amount">
-                                                    $ @Html.TextBoxFor(m => m.SubTotal, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                    $ @Html.TextBoxFor(m => m.SubTotal, new { @readonly = "readonly", @class = "no-border label-calculation" })
                                                 </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span class="total-amount">
-                                                    $ @Html.TextBoxFor(m => m.DeliveryCharge, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                    $ @Html.TextBoxFor(m => m.DeliveryCharge, new { @readonly = "readonly", @class = "no-border label-calculation" })
                                                 </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span class="total-amount">
-                                                    $ @Html.TextBoxFor(m => m.Discount, new { @readonly = "readonly", @class = "no-border label-calculation" }) 
+                                                    $ @Html.TextBoxFor(m => m.Discount, new { @readonly = "readonly", @class = "no-border label-calculation" })
                                                 </span>
                                             </td>
                                         </tr>
@@ -127,9 +126,7 @@
                                         </tr>
                                     </table>
                                 </td>
-
                             </tr>
-
                             <tr class="foot-button">
                                 <td>
                                     <button class="btn btn-secondary btn-lg">ADD MEALS</button>
@@ -139,7 +136,6 @@
                                     <button type="submit" class="btn btn-primary btn-lg">CHECKOUT <i class="fa fa-angle-double-right"></i></button>
                                 </td>
                             </tr>
-
                         </tfoot>
                     </table>
                 </div>
@@ -152,7 +148,6 @@
             </div>
         }
     </div>
-
 </div>
 
 

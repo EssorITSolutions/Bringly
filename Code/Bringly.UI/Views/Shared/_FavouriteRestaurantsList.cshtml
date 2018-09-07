@@ -19,7 +19,7 @@
                                 <span class="company-name">
                                     @restaurant.RestaurantName
                                 </span>
-                                <span class="like-link"  title="@(restaurant.IsFavorite?"Remove from favourite":"Add to favourite")">
+                                <span class="like-link" title="@(restaurant.IsFavorite?"Remove from favourite":"Add to favourite")">
                                     <i class='fa @(restaurant.IsFavorite ? "fa-heart" : "fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + restaurant.RestaurantGuid + "'"),1)"></i>
                                 </span>
                             </h4>
@@ -35,7 +35,6 @@
                 </div>
             </div>
         </div>
-
     }
 }
 else
@@ -43,7 +42,7 @@ else
     <div class="col-lg-9 col-md-12 col-sm-12">
         <div class="shadow-box restaurant-info">
             <div class="row">
-                @Html.Partial("_NoRecordFound", "No favourite restaurant(s) found.")
+                @Html.Partial("_NoRecordFound", "No record found.")
             </div>
         </div>
     </div>

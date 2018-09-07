@@ -1,0 +1,22 @@
+﻿@model Bringly.Domain.MyOrder
+
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+@section BreadCrum{
+    <li class="breadcrumb-item active">My Orders</li>
+}
+
+@if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+{
+    Html.RenderPartial("_BuyerMyOrders", Model);
+}
+else if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Merchant || Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Manager)
+{
+    Html.RenderPartial("_MerchantMyOrders", Model);
+    @section scripts {
+        @Scripts.Render("~/NgLjs")
+    }
+}

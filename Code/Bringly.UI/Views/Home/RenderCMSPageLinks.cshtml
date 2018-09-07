@@ -1,0 +1,8 @@
+﻿@model List<Bringly.Domain.CMSPage>
+@if (Model != null)
+{
+    foreach (var page in Model)
+    {
+        <li class="list-unstyled-item"><a href="/cms/index?actioName=@page.PageAlias">@page.PageName</a></li>
+    }
+}

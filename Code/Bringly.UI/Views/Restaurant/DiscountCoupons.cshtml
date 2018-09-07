@@ -1,0 +1,79 @@
+﻿@model  Bringly.Domain.MyDiscount
+@using Bringly.Domain.Enums;
+@{
+    ViewBag.Title = "Discount Coupons";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="row">
+        <div class="col-md-9"> <h2>Manage Coupon</h2></div>
+        <div class="mb-3 col-md-3 d-flex justify-content-end"><a class="btn btn-primary" href="/restaurant/adddiscount">Add New Coupon</a></div>
+    </div>
+    <div class="right-side">
+
+        @if (Model != null && Model.Discounts != null && Model.Discounts.Count > 0)
+        {
+            <div class="shadow-box my-transactions manage_coupon">
+                <table class="table table-responsive">
+                    <thead class="table-head">
+                        <tr>
+                            <th> Coupon Name</th>
+                            <th>Branch</th>
+                            <th width="80">Price Type</th>
+                            <th width="100">Discount Value</th>
+                            <th> End Date</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var discount in Model.Discounts)
+                        {
+                            <tr class="first-child tr-@discount.BranchGuid">
+                                <td>
+                                    @discount.CouponName
+                                </td>
+                                <td>
+                                    @discount.BranchName
+                                </td>
+                                <td>
+                                    @(Enum.GetName(typeof(DiscountPriceType), discount.DiscountPriceType))
+                                </td>
+
+                                <td>
+                                    @(discount.DiscountPriceType == 1 ? string.Format("{0:0.00 }", discount.DiscountValue) + " %" : string.Format("{0:0.00 }", discount.DiscountValue) + " $")
+                                </td>
+                                <td>
+                                    @String.Format("{0:MM/dd/yyyy}", discount.EndDate)
+                                </td>
+                                <td class="group-btns">
+                                    <p class="edit-btn"><a href="/restaurant/editcoupon?couponId=@discount.CouponId"><i class="fa fa-pencil"></i> Edit</a></p>
+                                    <p class="delete">
+                                        @using (Html.BeginForm("deletecoupon", "restaurant", FormMethod.Post, new { @class = "remove-btn" }))
+                                        {
+                                            @Html.Hidden("couponId", discount.CouponId)
+                                            <a onclick="deleteDiscountCoupon(event, this);" href="#">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </a>
+                                        }
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+        }
+        else
+        {
+            <div class="right-side mail-box">
+                <div class="shadow-box">
+                    <div class="row">
+                        @Html.Partial("_NoRecordFound", "No discount coupon(s) found.")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

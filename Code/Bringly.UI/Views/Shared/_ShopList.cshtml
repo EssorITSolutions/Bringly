@@ -19,12 +19,11 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12" id="divfavourite_@business.BusinessGuid" title="@(business.IsFavorite?"Remove from favourite":"Add to favourite")">
                                 <p class="timing"><i class='fa @(business.IsFavorite?"fa-heart":"fa-heart-o")' name="favourite" onclick="addRemoveToFavourite(@("'" + business.BusinessGuid + "'"),0)"></i></p>
-
                             </div>
                         </div>
                         <p class="rating-star"><span class="tag-star"><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a><a href=""><i class="fa fa-star"></i></a></span> &nbsp; 5.0 (27)</p>
-                        <p>Italian cuisine, European</p>
-                        <p class="address-point"><i class="fa fa-map-marker"></i> 31 Sagaydachny Street, @business.CityName</p>
+                        <p>@business.CityName @*Italian cuisine, European*@</p>
+                        <p class="address-point"><i class="fa fa-map-marker"></i>@business.Address @*31 Sagaydachny Street, @business.CityName*@</p>
                         <p class="payment-method"><span>Payment method:</span> credit card, cash</p>
                     </div>
                 </div>
@@ -44,7 +43,6 @@
                                 <span>90 <sub>min</sub></span>
                             </li>
                         </ul>
-
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
@@ -55,10 +53,9 @@
             </div>
         </div>
     </div>
-
 }
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        @{
+<div class="col-lg-12 col-md-12 col-sm-12">
+    @{
         Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
-        }
-    </div>
+    }
+</div>

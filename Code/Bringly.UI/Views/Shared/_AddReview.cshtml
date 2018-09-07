@@ -9,70 +9,58 @@
     <script>
         window.parent.closeModelPopUpForm(true);
     </script>
-
 }
 else
 {
     using (@Html.BeginForm("AddReview", "User", FormMethod.Post))
     {
-    <div class="popup-heading">
-        <h1>Add Review for @Model.RestaurantName</h1>
-        <div class="close-button">
-
-            <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
+        <div class="review-top-content">
+            Please provide your valuable review.
         </div>
-    </div>
-    <div class="review-top-content">
-        Please provide your valuable review.
-    </div>
-    <div class="buyer_review">
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                @Html.HiddenFor(m => m.ReviewGuid)
+        <div class="buyer_review">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    @Html.HiddenFor(m => m.ReviewGuid)
+                    @Html.HiddenFor(m => m.UserGuid)
+                    @Html.TextAreaFor(m => m.Review, new { @class = "form-control", @maxlength = "500", @onkeyup = "getreviewcharcount(this,'500')", @placeholder = "Write your review here" })
+                    @Html.ValidationMessageFor(m => m.Review)
+                </div>
+            </div>
 
-                @Html.HiddenFor(m => m.UserGuid)
-                @Html.TextAreaFor(m => m.Review, new { @class = "form-control", @maxlength = "500", @onkeyup = "getreviewcharcount(this,'500')", @placeholder = "Write your review here" })
-                @Html.ValidationMessageFor(m => m.Review)
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <label class="review-lbllength">Character left: <label id="lblreviewcharactercount">500</label></label>
+            </div>
+            <div class="clearfix"></div>
+            <div style="text-align:center;">Please provide rating</div>
+            <section class='rating-widget'>
+                <!-- Rating Stars Box -->
+                <div class='rating-stars text-center'>
+                    <ul id='stars'>
+                        <li class='star onhover' title='Poor' data-value='1'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star onhover' title='Fair' data-value='2'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star onhover' title='Good' data-value='3'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star onhover' title='Excellent' data-value='4'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star onhover' title='WOW!!!' data-value='5'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                    </ul>
+                </div>
+                @Html.HiddenFor(m => m.Rating)
+                @Html.ValidationMessageFor(m => m.Rating)
+            </section>
+
+            <div class="clearfix"></div>
+            <div class="text-center m-2">
+                <input type="submit" id="btnrestaurantreview" value="Leave Review" title="Leave Review" class="btn btn-primary btn-lg">
             </div>
         </div>
-
-
-
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <label class="review-lbllength">Character left: <label id="lblreviewcharactercount">500</label></label>
-        </div>
-        <div class="clearfix"></div>
-        <div style="text-align:center;">Please provide rating</div>
-        <section class='rating-widget'>
-            <!-- Rating Stars Box -->
-            <div class='rating-stars text-center'>
-                <ul id='stars'>
-                    <li class='star onhover' title='Poor' data-value='1'>
-                        <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star onhover' title='Fair' data-value='2'>
-                        <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star onhover' title='Good' data-value='3'>
-                        <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star onhover' title='Excellent' data-value='4'>
-                        <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star onhover' title='WOW!!!' data-value='5'>
-                        <i class='fa fa-star fa-fw'></i>
-                    </li>
-                </ul>
-            </div>
-            @Html.HiddenFor(m => m.Rating)
-            @Html.ValidationMessageFor(m => m.Rating)
-        </section>
-
-        <div class="clearfix"></div>
-        <div class="text-center m-2">
-            <input type="submit" id="btnrestaurantreview" value="Leave Review" title="Leave Review" class="btn btn-primary btn-lg">
-        </div>
-    </div>
     }
-
 }

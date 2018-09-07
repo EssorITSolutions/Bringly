@@ -1,0 +1,750 @@
+﻿@model Bringly.Domain.MyOrder
+@{
+    int itemCount = 0;
+    string domainName = string.Empty;
+    Utilities.Helper.UtilityHelper.GetHostedDomainName(out domainName);
+}
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="page-sub-title">
+            <h3>My Orders</h3>
+        </div>@if (Model != null)
+        {
+            <div class="card tabs-detail MyOrderBuyer">
+                <div class="card-header">
+                    <ul class="nav nav-tabs" id="orderStatusTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewBag.ActiveTab == null || "totalOrders".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" data-toggle="tab" onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=totalOrders" role="tab">Total Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @("pending".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" data-toggle="tab" onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=pending" role="tab">Pending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @("completed".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" data-toggle="tab" onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=completed" role="tab">Completed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @("cancelled".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" data-toggle="tab" onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=cancelled" role="tab">Cancelled</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-block">
+                    <div class="tab-content">
+                        <div class="tab-pane @(ViewBag.ActiveTab == null || "totalOrders".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" id="totalOrders" role="tabpanel">
+                            <div class="row-block">
+                                <h5 class="text-weight">PENDING - @Model.PendingOrderCount</h5>
+                                @if (Model.PendingOrderCount > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var odr in Model.PendingOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                                @if (Model.PendingOrderCount > 2)
+                                                {
+                                                    <tr class="table-last">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=pending" class="table-link">Show more</a>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="row-block">
+                                <h5 class="text-weight">COMPLETED - @Model.CompletedOrderCount</h5>
+                                @if (Model.CompletedOrderCount > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var odr in Model.CompletedOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                                @if (Model.CompletedOrderCount > 5)
+                                                {
+                                                    <tr class="table-last">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=completed" class="table-link">Show more</a>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="row-block">
+                                <h5 class="text-weight">CANCELLED - @Model.CancelledOrderCount</h5>
+                                @if (Model.CancelledOrderCount > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var odr in Model.CancelledOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                                @if (Model.CancelledOrderCount > 5)
+                                                {
+                                                    <tr class="table-last">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a onclick="redirectToHref(event, this)" href="@domainName/orders/myorders?activeTab=cancelled" class="table-link">Show more</a>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane @("pending".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" id="pending" role="tabpanel">
+                            <div class="row-block">
+                                <h5 class="text-weight">PENDING - @Model.PendingOrderCount</h5>
+                                @if (Model.PendingOrders.Count > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'pending');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Pending)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var odr in Model.PendingOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                @{
+                                    Html.RenderAction("paging", "controls", new { totalRecords = Model.PendingOrderCount, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+                                }
+                            </div>
+                        </div>
+
+                        <div class="tab-pane @("completed".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" id="completed" role="tabpanel">
+                            <div class="row-block">
+                                <h5 class="text-weight">COMPLETED - @Model.CompletedOrderCount</h5>
+                                @if (Model.CompletedOrders.Count > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'completed');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Completed)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var odr in Model.CompletedOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+
+                                @{
+                                    Html.RenderAction("paging", "controls", new { totalRecords = Model.CompletedOrderCount, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+                                }
+                            </div>
+                        </div>
+
+                        <div class="tab-pane @("cancelled".Equals(ViewBag.ActiveTab, StringComparison.OrdinalIgnoreCase) ? "active" : "")" id="cancelled" role="tabpanel">
+                            <div class="row-block">
+                                <h5 class="text-weight">CANCELLED - @Model.CancelledOrderCount</h5>
+                                @if (Model.CancelledOrders.Count > 0)
+                                {
+                                    <div class="table-order">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Restaurant</span>
+                                                            @if (Model.SortByColumn == "business" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="business" class='fa @(Model.SortByColumn == "business" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="business" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Order #</span>
+                                                            @if (Model.SortByColumn == "order" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="order" class='fa @(Model.SortByColumn == "order" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="order" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>Items</th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span>Total Sum</span>
+                                                            @if (Model.SortByColumn == "totalsum" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="totalsum" class='fa @(Model.SortByColumn == "totalsum" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="totalsum" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a onclick="sortmyOrderBuyer(this, event, 'cancelled');" href="javascript:void(0)" class="table-link">
+                                                            <span> Order date</span>
+                                                            @if (Model.SortByColumn == "orderdate" && Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)//Model.SortingOrderStatus == Bringly.Domain.Enums.OrderStatus.Cancelled)
+                                                            {
+                                                                <i column-name="orderdate" class='fa @(Model.SortByColumn == "orderdate" && Model.SortOrder == "desc" ? "fa-angle-down" : "fa-angle-up")'></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i column-name="orderdate" class='fa none'></i>
+                                                            }
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var odr in Model.CancelledOrders)
+                                                {
+                                                    itemCount = 0;
+                                                    <tr>
+                                                        <td>@odr.BusinessName</td>
+                                                        <td>
+                                                            <a href='/orders/details?orderGuid=@odr.OrderGuid' class="table-link">
+                                                                @odr.OrderNumber
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                @foreach (var item in odr.OrderItems)
+                                                                {
+                                                                    itemCount = itemCount + 1;
+
+                                                                    if (itemCount > 2)
+                                                                    {
+                                                                        <div class="display-none order-item-none">
+                                                                            <span> @item.ItemName </span><br />
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span> @item.ItemName </span><br />
+                                                                    }
+                                                                }
+                                                                @if (itemCount > 2)
+                                                                {
+                                                                    <a onclick="myOrderMoreItemToggle(this, event);" href="javascript:void(0)" class="table-link"><span>More Items</span> <i class="fa fa-angle-down"></i></a>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td>@String.Format("{0:0.00}", odr.Total) $</td>
+                                                        <td>@odr.OrderDate</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                @{
+                                    Html.RenderAction("paging", "controls", new { totalRecords = Model.CancelledOrderCount, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+        else
+        {
+            <div class="card tabs-detail MyOrderBuyer">
+                <div class="card-block">
+                    <div class="tab-content">
+                        No record found.
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+

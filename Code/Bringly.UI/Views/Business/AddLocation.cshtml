@@ -5,22 +5,22 @@
 }
 
 @section BreadCrum{
-    <li class="breadcrumb-item active">Location</li>
+    <li class="breadcrumb-item active">Branch</li>
 }
 <div class="col-lg-9 col-md-7 col-sm-12">
     <div class="right-side">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <form  method="post" id="frmaddlocation">
+                <form method="post" id="frmaddlocation">
                     @Html.HiddenFor(m => m.BusinessGuid)
                     <div class="card personal-information">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-7 col-md-6 col-sm-8">
-                                    <h2 class="heading-sub">Add Location</h2>
+                                    <h2 class="heading-sub">Add Branch</h2>
                                 </div>
                                 <div class="col-lg-5 col-md-6 col-sm-4 cvr-add-location">
-                                    <h4>  CVR Number : @(string.IsNullOrEmpty(Model.CVRNumber)?"": Model.CVRNumber)</h4>
+                                    <h4>  CVR Number : @(string.IsNullOrEmpty(Model.CVRNumber) ? "" : Model.CVRNumber)</h4>
                                 </div>
                             </div>
                         </div>
@@ -34,21 +34,14 @@
                                     @Html.ValidationMessageFor(m => m.BusinessName)
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
                                     <span>Manager :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.DropDownListFor(m => m.ManagerGuid, Model.UserList.Select(x => new SelectListItem { Text = x.FullName, Value = x.UserGuid.ToString() }), "", new { @class = "chosen-select" })
-                                    @*@Html.ValidationMessageFor(m => m.ManagerGuid)*@
+                                    @Html.DropDownListFor(m => m.ManagerGuid, Model.Managers.Select(x => new SelectListItem { Text = x.Name, Value = x.ManagerGuid.ToString() }), "Select Manager", new { @class = "chosen-select" })
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
                                     <span>Email :</span>
@@ -58,20 +51,16 @@
                                     @Html.ValidationMessageFor(m => m.Email)
                                 </div>
                             </div>
-
                         </div>
-
-
                         <div class="table-order">
                             <div class="sub-title">
                                 <div class="row">
                                     <div class="col-lg-8 col-md-7 col-sm-12">
-                                        <h5 class="m-0 text-weight">Location Information</h5>
+                                        <h5 class="m-0 text-weight">Branch Information</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
@@ -83,7 +72,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="table-order">
                             <div class="sub-title">
                                 <div class="row">
@@ -110,14 +98,29 @@
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
                                     @Html.DropDownListFor(m => m.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", new { @class = "chosen-select", @placeholder = "Choose a City.." }))
                                     @Html.ValidationMessageFor(m => m.CityGuid)
+
+                                    @Html.HiddenFor(m => m.Latitude)
+                                    @Html.HiddenFor(m => m.Longitude)
+                                    @Html.HiddenFor(m => m.PlaceId)
+                                    @Html.HiddenFor(m => m.CountryName)
                                 </div>
                             </div>
+
+                            <div id="divCityName" class="form-group row display-none">
+                                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                </div>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.CityName, new { @class = "form-control", placeholder="Enter city name" })
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
                                     <span>PostCode:</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onKeyPress = "if(this.value.length==4) return false;", @type = "number" })
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @type = "number" })
+                                    @Html.ValidationMessageFor(m => m.PinCode)
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -125,7 +128,13 @@
                                     <span>Phone:</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @onKeyPress = "if(this.value.length==8) return false;", @type = "number" })
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @type = "number" })
+                                    @Html.ValidationMessageFor(m => m.Phone)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-form-label">
+                                    <div id="googleMap"></div>
                                 </div>
                             </div>
                         </div>
@@ -227,8 +236,6 @@
                                     <div class="col-lg-10 col-md-9 col-sm-12">
                                         <h5 class="m-0 text-weight">Other Properties</h5>
                                     </div>
-                                   
-
                                 </div>
                             </div>
                             <div class="row">
@@ -244,14 +251,208 @@
                             <div class="form-group row">
                                 <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label"></div>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    <button onclick="return Getcustomfields('@Model.BusinessGuid');" id="btnsubmit" type="button" value="Save Location" class="btn btn-primary btn-lg">Save Location</button>  <a href="/Business/LocationList" class="btn btn-primary btn-lg">Cancel</a>
+                                    <button onclick="return Getcustomfields('@Model.BusinessGuid');" id="btnsubmit" type="button" value="Save Location" class="btn btn-primary btn-lg">Save Branch</button>  <a href="/Business/LocationList" class="btn btn-primary btn-lg">Cancel</a>
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                   
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        var googleMapObj = {
+            isInEditMode: false,
+            intializeMap: function () {
+                googleMapObj.googleMapAddressLat = 56.2639;
+                googleMapObj.googleMapAddressLng = 9.5018;
+                var mapCanvas = document.getElementById("googleMap");
+                var center = new google.maps.LatLng(googleMapObj.googleMapAddressLat, googleMapObj.googleMapAddressLng);
+                var mapOptions = {
+                    center: center,
+                    zoom: 7,
+                    fullscreenControl: false,
+                    streetViewControl: false,
+                    gestureHandling: 'greedy',
+                    draggable: false,
+                    zoomControl: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true
+                };
+
+                googleMapObj.map = new google.maps.Map(mapCanvas, mapOptions);
+
+                googleMapObj.marker = new google.maps.Marker({
+                    position: center,
+                    map: googleMapObj.map,
+                    animation: google.maps.Animation.DROP,
+                });
+
+                googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+                googleMapObj.initializeMapEvents();
+            },
+
+            initializeMapEvents: function () {
+                googleMapObj.isInEditMode = true;
+                var center = new google.maps.LatLng(googleMapObj.googleMapAddressLat, googleMapObj.googleMapAddressLng);
+                googleMapObj.clickListener = google.maps.event.addListener(googleMapObj.map, 'click', function (event) {
+                    googleMapObj.placeMarker(googleMapObj.map, event.latLng);
+                });
+
+                googleMapObj.dragEndListener = googleMapObj.marker.addListener('dragend', googleMapObj.handleMarkerDragEvent);
+                googleMapObj.marker.setOptions({
+                    draggable: true
+                });
+
+                googleMapObj.map.setOptions({
+                    draggable: true,
+                    zoomControl: true,
+                    scrollwheel: true,
+                    disableDoubleClickZoom: true
+                });
+            },
+
+            destroidMapEvents: function () {
+                googleMapObj.isInEditMode = false;
+                google.maps.event.removeListener(googleMapObj.clickListener);
+                google.maps.event.removeListener(googleMapObj.dragEndListener);
+                googleMapObj.marker.setOptions({
+                    draggable: false
+                })
+
+                googleMapObj.map.setOptions({
+                    draggable: false,
+                    zoomControl: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true
+                });
+            },
+
+            placeMarker: function (map, location) {
+                if (googleMapObj.marker) {
+                    googleMapObj.marker.setPosition(location);
+                } else {
+                    googleMapObj.marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                    });
+                }
+
+                googleMapObj.googleMapAddressLat = location.lat();
+                googleMapObj.googleMapAddressLng = location.lng();
+                var html = 'Latitude: ' + googleMapObj.googleMapAddressLat + '<br /> Longitude: ' + googleMapObj.googleMapAddressLng + '<br />';
+                $("#tdLatLong").html(html);
+
+                googleMapObj.getAddressBylatLng(map, googleMapObj.marker);
+            },
+            handleMarkerDragEvent: function (event) {
+                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                googleMapObj.googleMapAddressLat = event.latLng.lat();
+                googleMapObj.googleMapAddressLng = event.latLng.lng();
+
+                googleMapObj.placeMarker(googleMapObj.map, latlng);
+                googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+            },
+
+            getAddressBylatLng: function (map, marker) {
+
+                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + googleMapObj.googleMapAddressLat + "," + googleMapObj.googleMapAddressLng + "&key=AIzaSyB8nw_CKZq_9_RRnvRtJgug_a94qTBqp7k",
+                    function (response) {
+                        if (response && response.results) {
+                            googleMapObj.locationObj = response.results.filter(x => x.geometry.location_type != "APPROXIMATE")[0];
+                            if (googleMapObj.locationObj) {
+                                window.parent.googleMapLocationObj = googleMapObj.locationObj;
+                                window.parent.googleAddressPlaceId = googleMapObj.placeId = googleMapObj.locationObj.place_id;
+                                googleMapObj.address = googleMapObj.getAddressFromLocationObj(googleMapObj.locationObj);
+
+                                var infoWindowData = `Address: ${googleMapObj.locationObj.formatted_address}<br /> City: ${googleMapObj.address.city}<br />Country: ${googleMapObj.address.country}<br /> Postal Code: ${googleMapObj.address.postal_code}`;//'Address: ' + googleMapObj.googleMapAddressLat + '<br>Longitude: ' + googleMapObj.googleMapAddressLng
+                                if (googleMapObj.infowindow) {
+                                    googleMapObj.infowindow.setContent(infoWindowData)
+                                }
+                                else {
+                                    googleMapObj.infowindow = new google.maps.InfoWindow({
+                                        content: infoWindowData
+                                    });
+                                }
+                                googleMapObj.infowindow.open(map, marker);
+                                googleMapObj.setAddressToDomObj();
+                            }
+                        }
+                    }, function (xhr, error, message) {
+
+                    });
+            },
+
+            getAddressFromLocationObj: function (locationObj) {
+                if (locationObj) {
+                    var address = {};
+                    locationObj.address_components.map(function (obj) {
+                        obj.types.map(function (local) {
+                            switch (local) {
+                                case "route":
+                                    address["route"] = obj.long_name;
+                                    break;
+
+                                case "locality":
+                                    address["city"] = obj.long_name;
+                                    break;
+                                case "country":
+                                    address["country"] = obj.long_name;
+                                    break;
+                                case "postal_code":
+                                    address["postal_code"] = obj.long_name;
+                                    break;
+                            }
+                        })
+                    });
+                    return address;
+                }
+            },
+
+            addGoogleAddress: function () {
+                window.parent.setAddress(googleMapObj.address, googleMapObj.locationObj);
+                window.parent.closeModelPopUpForm(false);
+            },
+
+            setAddressToDomObj: function () {
+                if (googleMapObj.isInEditMode) {
+                    googleMapObj.isCityFound = false;
+
+                    $("#Latitude").val(googleMapObj.googleMapAddressLat);
+                    $("#Longitude").val(googleMapObj.googleMapAddressLng);
+                    $("#PlaceId").val(googleMapObj.locationObj.place_id);
+                    $("#CountryName").val(googleMapObj.locationObj.country);
+
+                    $("#Address").val(googleMapObj.locationObj.formatted_address);
+                    $("#PinCode").val(googleMapObj.address.postal_code);
+                    var text2 = googleMapObj.address.city;
+                    $("#CityGuid option").filter(function () {
+                        if (this.text == text2) {
+                            googleMapObj.isCityFound = true;
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }).attr('selected', true);
+
+                    $("#CityGuid").trigger("chosen:updated.chosen");
+
+                    if (!googleMapObj.isCityFound) {
+                        $("#CityGuid").val('00000000-0000-0000-0000-000000000000').trigger("chosen:updated.chosen");
+                        $("#CityName").val(googleMapObj.address.city); $("#divCityName").removeClass("display-none");
+                    }
+                    else {
+                        $("#CityName").val(''); $("#divCityName").addClass("display-none")
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoolgeMapKey&callback=googleMapObj.intializeMap"></script>
+}

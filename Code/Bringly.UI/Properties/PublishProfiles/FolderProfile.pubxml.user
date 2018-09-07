@@ -6,2240 +6,2666 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Work\Projects\Bringly\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Work\Projects\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="angular.json">
+      <publishTime>07/25/2018 17:35:16</publishTime>
+    </File>
     <File Include="ApplicationInsights.config">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:30</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>02/19/2018 15:24:32</publishTime>
+      <publishTime>05/31/2018 13:19:41</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>02/19/2018 15:24:32</publishTime>
+      <publishTime>05/31/2018 13:19:41</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:30</publishTime>
     </File>
     <File Include="bin/Bringly.Data.dll">
-      <publishTime>03/14/2018 12:03:10</publishTime>
+      <publishTime>08/21/2018 10:47:48</publishTime>
     </File>
     <File Include="bin/Bringly.Data.dll.config">
-      <publishTime>02/19/2018 15:24:09</publishTime>
+      <publishTime>08/09/2018 18:12:26</publishTime>
     </File>
     <File Include="bin/Bringly.Data.pdb">
-      <publishTime>03/14/2018 12:03:10</publishTime>
+      <publishTime>08/21/2018 10:47:48</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll">
-      <publishTime>03/15/2018 18:22:32</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.dll.config">
-      <publishTime>02/19/2018 15:24:15</publishTime>
+      <publishTime>05/31/2018 13:19:30</publishTime>
     </File>
     <File Include="bin/Bringly.Domain.pdb">
-      <publishTime>03/15/2018 18:22:32</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.dll">
-      <publishTime>03/15/2018 18:22:32</publishTime>
+      <publishTime>08/21/2018 10:47:49</publishTime>
+    </File>
+    <File Include="bin/Bringly.DomainLogic.dll.config">
+      <publishTime>05/31/2018 13:19:30</publishTime>
     </File>
     <File Include="bin/Bringly.DomainLogic.pdb">
-      <publishTime>03/15/2018 18:22:32</publishTime>
+      <publishTime>08/21/2018 10:47:49</publishTime>
     </File>
     <File Include="bin/Bringly.UI.dll">
-      <publishTime>03/15/2018 18:22:35</publishTime>
+      <publishTime>08/21/2018 11:32:33</publishTime>
     </File>
     <File Include="bin/Bringly.UI.pdb">
-      <publishTime>03/15/2018 18:22:35</publishTime>
+      <publishTime>08/21/2018 11:32:33</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.UI.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.GoogleOAuth2.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.InfoCard.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.InfoCard.UI.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Common.dll">
+      <publishTime>05/31/2018 13:19:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.ServiceProvider.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.AuthorizationServer.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.Client.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.Client.UI.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.ClientAuthorization.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.ResourceServer.dll">
+      <publishTime>05/31/2018 13:19:42</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.Provider.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.Provider.UI.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.UI.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.UI.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenIdInfoCard.UI.dll">
+      <publishTime>05/31/2018 13:19:44</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenIdOAuth.dll">
+      <publishTime>05/31/2018 13:19:44</publishTime>
     </File>
     <File Include="bin/Elmah.dll">
-      <publishTime>02/19/2018 15:24:40</publishTime>
+      <publishTime>05/31/2018 13:19:49</publishTime>
     </File>
     <File Include="bin/Elmah.Mvc.dll">
-      <publishTime>02/19/2018 15:24:33</publishTime>
+      <publishTime>05/31/2018 13:19:44</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>02/19/2018 15:24:33</publishTime>
+      <publishTime>05/31/2018 13:19:44</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>02/19/2018 15:24:33</publishTime>
+      <publishTime>05/31/2018 13:19:44</publishTime>
+    </File>
+    <File Include="bin/Facebook.dll">
+      <publishTime>05/31/2018 13:19:45</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:45</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:45</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:45</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:45</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Membership.OpenAuth.dll">
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>05/31/2018 13:19:47</publishTime>
+    </File>
+    <File Include="bin/Mono.Math.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
+    </File>
+    <File Include="bin/Org.Mentalis.Security.Cryptography.dll">
+      <publishTime>05/31/2018 13:19:43</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe.config">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.Process.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.DriveInfo.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Pipes.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.AccessControl.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Claims.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Principal.Windows.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Threading.Thread.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.ValueTuple.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>02/19/2018 15:24:36</publishTime>
+      <publishTime>05/31/2018 13:19:48</publishTime>
     </File>
     <File Include="bin/System.Data.SqlServerCe.dll">
       <publishTime>06/04/2012 13:29:58</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>02/19/2018 15:24:34</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>02/19/2018 15:24:35</publishTime>
+      <publishTime>05/31/2018 13:19:46</publishTime>
     </File>
     <File Include="bin/Utilities.Conversion.dll">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Utilities.Conversion.pdb">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Utilities.EmailSender.dll">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Utilities.EmailSender.pdb">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Utilities.ErrorLog.dll">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:21</publishTime>
     </File>
     <File Include="bin/Utilities.ErrorLog.pdb">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:21</publishTime>
     </File>
     <File Include="bin/Utilities.Helper.dll">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:21</publishTime>
+    </File>
+    <File Include="bin/Utilities.Helper.dll.config">
+      <publishTime>07/02/2018 17:42:21</publishTime>
     </File>
     <File Include="bin/Utilities.Helper.pdb">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:21</publishTime>
     </File>
     <File Include="bin/Utilities.QueryStringHelper.dll">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/Utilities.QueryStringHelper.pdb">
-      <publishTime>03/13/2018 19:03:41</publishTime>
+      <publishTime>08/20/2018 14:51:22</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>02/19/2018 15:24:39</publishTime>
+      <publishTime>05/31/2018 13:19:49</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.Data.dll">
+      <publishTime>05/31/2018 13:19:46</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>05/31/2018 13:19:47</publishTime>
     </File>
     <File Include="d.aspx">
-      <publishTime>02/19/2018 15:24:26</publishTime>
+      <publishTime>06/26/2018 12:10:35</publishTime>
+    </File>
+    <File Include="email.aspx">
+      <publishTime>07/10/2018 18:09:11</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
+    </File>
+    <File Include="package.json">
+      <publishTime>07/25/2018 17:21:42</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app-routing.module.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app-routing.module.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.component.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.component.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.component.spec.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.component.spec.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.module.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/app.module.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/buyer-review/buyer-review.component.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/buyer-review/buyer-review.component.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/merchant-myorder/merchant-myorder.component.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/merchant-myorder/merchant-myorder.component.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/models/request-query-model.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/models/request-query-model.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/models/UserViewModel.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/models/UserViewModel.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/not-found/not-found.component.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/not-found/not-found.component.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/services/shared-service/api-service.service.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/services/shared-service/api-service.service.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/services/shared-service/sweet-alert-service.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/services/shared-service/sweet-alert-service.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/test/test.component.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/test/test.component.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/utility/app-setting.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/utility/app-setting.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/utility/validation-regex.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/app/utility/validation-regex.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/environments/environment.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/environments/environment.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/environments/environment.prod.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/environments/environment.prod.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/main.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/main.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/polyfills.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/polyfills.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/test.js">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="scripts/out-tsc/test.js.map">
+      <publishTime>08/20/2018 18:01:33</publishTime>
+    </File>
+    <File Include="src/app/app.component.css">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/app/app.component.html">
+      <publishTime>07/04/2018 11:25:00</publishTime>
+    </File>
+    <File Include="src/app/buyer-review/buyer-review.component.html">
+      <publishTime>07/23/2018 18:17:22</publishTime>
+    </File>
+    <File Include="src/app/merchant-myorder/merchant-myorder.component.html">
+      <publishTime>08/07/2018 12:07:42</publishTime>
+    </File>
+    <File Include="src/app/not-found/not-found.component.html">
+      <publishTime>07/03/2018 18:05:28</publishTime>
+    </File>
+    <File Include="src/app/test/test.component.html">
+      <publishTime>07/03/2018 18:09:55</publishTime>
+    </File>
+    <File Include="src/assets/.gitkeep">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/browserslist">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/favicon.ico">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/index.html">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/karma.conf.js">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/styles.css">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/tsconfig.app.json">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/tsconfig.spec.json">
+      <publishTime>07/03/2018 17:25:17</publishTime>
+    </File>
+    <File Include="src/tslint.json">
+      <publishTime>07/03/2018 17:25:17</publishTime>
     </File>
     <File Include="Templates/css/bootstrap.css">
-      <publishTime>03/07/2018 16:25:10</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/css/font-awesome.css">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/css/StyleSheet.css">
-      <publishTime>03/15/2018 16:04:44</publishTime>
+      <publishTime>08/21/2018 11:25:42</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.eot">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.svg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.woff">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/fontawesome-webfont.woff2">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/FontAwesome.otf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/MYRIADPROREGULAR/MYRIADPROREGULAR.eot">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/MYRIADPROREGULAR/MYRIADPROREGULAR.ttf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/MYRIADPROREGULAR/MYRIADPROREGULAR.woff">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/LICENSE.txt">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Black.ttf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-BlackItalic.ttf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Bold.ttf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-BoldItalic.ttf">
-      <publishTime>02/19/2018 15:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Italic.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Light.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-LightItalic.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Medium.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-MediumItalic.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Regular.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-Thin.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto/Roboto-ThinItalic.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto_Slab/LICENSE.txt">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto_Slab/RobotoSlab-Bold.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto_Slab/RobotoSlab-Light.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto_Slab/RobotoSlab-Regular.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/fonts/Roboto_Slab/RobotoSlab-Thin.ttf">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/about-img.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/app-mobile.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/arrow-top.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/bj-app.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo1.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo2.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo3.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo4.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/brand-logo5.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
+    </File>
+    <File Include="Templates/images/bringlylogoemail.png">
+      <publishTime>06/26/2018 10:37:06</publishTime>
     </File>
     <File Include="Templates/images/client-logo-lg.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/client-logo.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/client-logo1.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/client-profile.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
+    </File>
+    <File Include="Templates/images/cross-icon.png">
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/doller-icon.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/facebook.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/filter-bg.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/forward.png">
-      <publishTime>03/05/2018 18:24:20</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/google-play.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/google-plus.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/heading-line.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-1.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-10.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-2.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-3.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-4.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-5.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:31</publishTime>
     </File>
     <File Include="Templates/images/icon-6.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/icon-7.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/icon-8.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/icon-9.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/img-1.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/img-2.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/img-3.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/img-4.jpg">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/instagram.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/key-password.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/logo-2.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/logo.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/menu-icon.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/pie-chart.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/pinterest.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-1.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-2.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-3.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-4.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-5.png">
-      <publishTime>02/19/2018 15:24:21</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-6.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-7.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-8.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/product-9.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/profile.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/reply.png">
-      <publishTime>03/05/2018 18:22:51</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/restaurant-icon.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/slider-arrow.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/slider1.jpg">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/sub-heading-line.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
+    </File>
+    <File Include="Templates/images/thaku-mailicon.png">
+      <publishTime>06/26/2018 10:37:06</publishTime>
     </File>
     <File Include="Templates/images/twitter.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/wallet-icon.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/images/wallet.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/bootstrap.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/commonJs.js">
-      <publishTime>03/13/2018 15:58:08</publishTime>
+      <publishTime>07/30/2018 17:48:50</publishTime>
     </File>
     <File Include="Templates/Scripts/Jquery/jquery-3.2.1.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Jquery/jquery-ui.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/AlertMessage/sweetalert-dev.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/AlertMessage/sweetalert.css">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/chosen/chosen.jquery.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/chosen/chosen.jquery.min.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/chosen/style.css">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/adapters/jquery.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/build-config.js">
-      <publishTime>03/05/2018 18:44:53</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/CHANGES.md">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/ckeditor.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/config.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/contents.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/af.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ar.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/az.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/bg.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/bn.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/bs.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ca.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/cs.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/cy.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/da.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/de-ch.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/de.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/el.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/en-au.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/en-ca.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/en-gb.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/en.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/eo.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/es-mx.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/es.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/et.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/eu.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/fa.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/fi.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/fo.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/fr-ca.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/fr.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/gl.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/gu.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/he.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/hi.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/hr.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/hu.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/id.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/is.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/it.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ja.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ka.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/km.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ko.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ku.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/lt.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/lv.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/mk.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/mn.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ms.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/nb.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/nl.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/no.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/oc.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/pl.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/pt-br.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/pt.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ro.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ru.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/si.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sk.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sl.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sq.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sr-latn.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sr.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/sv.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/th.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/tr.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/tt.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/ug.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/uk.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/vi.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/zh-cn.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/lang/zh.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/LICENSE.md">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/af.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/az.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/da.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/de.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/el.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/en.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/es.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/et.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/he.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/id.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/it.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/km.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/no.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/si.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/th.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:33</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/about/dialogs/about.js">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/about/dialogs/logo_ckeditor.png">
-      <publishTime>03/12/2018 16:37:37</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/colordialog/dialogs/colordialog.css">
-      <publishTime>03/12/2018 16:37:32</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/colordialog/dialogs/colordialog.js">
-      <publishTime>03/12/2018 16:37:32</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/copyformatting/cursors/cursor-disabled.svg">
-      <publishTime>03/12/2018 16:37:32</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/copyformatting/cursors/cursor.svg">
-      <publishTime>03/12/2018 16:37:32</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/copyformatting/styles/copyformatting.css">
-      <publishTime>03/12/2018 16:37:32</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/dialog/dialogDefinition.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/div/dialogs/div.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/find/dialogs/find.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/flash/dialogs/flash.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/flash/images/placeholder.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/button.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/checkbox.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/form.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/hiddenfield.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/radio.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/select.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/textarea.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/dialogs/textfield.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:34</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/forms/images/hiddenfield.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/icons.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/icons_hidpi.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/iframe/dialogs/iframe.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/iframe/images/placeholder.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/image/dialogs/image.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/image/images/noimage.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/link/dialogs/anchor.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/link/dialogs/link.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/link/images/anchor.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/link/images/hidpi/anchor.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/liststyle/dialogs/liststyle.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/magicline/images/hidpi/icon-rtl.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/magicline/images/hidpi/icon.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/magicline/images/icon-rtl.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/magicline/images/icon.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/maxlengthplugin.js">
-      <publishTime>03/07/2018 16:39:25</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/pagebreak/images/pagebreak.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/pastefromword/filter/default.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/dev/placeholder.html">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/dialogs/placeholder.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/icons/hidpi/placeholder.png">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/icons/placeholder.png">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/af.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ar.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/az.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/bg.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ca.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/cs.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/cy.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/da.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/de-ch.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/de.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/el.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en-au.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en-gb.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/en.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/eo.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/es-mx.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/es.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/et.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/eu.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fa.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fi.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fr-ca.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/fr.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/gl.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/he.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/hr.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/hu.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/id.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/it.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ja.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/km.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ko.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ku.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/lv.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/nb.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/nl.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/no.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/oc.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pl.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pt-br.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/pt.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ro.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ru.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/si.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sk.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sl.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sq.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/sv.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/th.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/tr.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/tt.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/ug.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:35</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/uk.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/vi.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/zh-cn.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/lang/zh.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/plugin.js">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/placeholder/samples/placeholder.html">
-      <publishTime>03/14/2018 11:08:20</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/preview/preview.html">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/CHANGELOG.md">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/dialogs/dialog.css">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/dialogs/options.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/dialogs/toolbar.css">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/LICENSE.md">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/README.md">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_address.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_blockquote.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_div.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h1.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h2.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h3.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h4.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h5.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_h6.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_p.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/showblocks/images/block_pre.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/dialogs/smiley.js">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/angel_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/angel_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/angry_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/angry_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/broken_heart.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/broken_heart.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/confused_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/confused_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/cry_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/cry_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/devil_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/devil_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/embaressed_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/embarrassed_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/embarrassed_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/envelope.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/envelope.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/heart.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/heart.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/kiss.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/kiss.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/lightbulb.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/lightbulb.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/omg_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/omg_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/regular_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/regular_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/sad_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/sad_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/shades_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/shades_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/teeth_smile.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/teeth_smile.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/thumbs_down.gif">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/thumbs_down.png">
-      <publishTime>03/12/2018 16:37:35</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/thumbs_up.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/thumbs_up.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/tongue_smile.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/tongue_smile.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/tounge_smile.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/wink_smile.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/smiley/images/wink_smile.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/af.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ar.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/az.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/bg.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ca.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/cs.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/cy.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/da.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/de.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/el.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/en-au.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/en.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/eo.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/es.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/et.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/eu.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/fa.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/fi.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/fr.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/gl.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/he.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/hr.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/hu.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/id.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/it.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ja.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/km.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ko.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ku.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/lt.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/lv.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/nb.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/nl.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/no.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/oc.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/pl.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/pt.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ro.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ru.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/si.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/sk.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/sl.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/sq.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/sv.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/th.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/tr.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/tt.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/ug.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/uk.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/vi.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/zh.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:36</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/specialchar/dialogs/specialchar.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/table/dialogs/table.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/tableselection/styles/tableselection.css">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/tabletools/dialogs/tableCell.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/dialogs/templates.css">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/dialogs/templates.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/templates/default.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/templates/images/template1.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/templates/images/template2.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/templates/templates/images/template3.gif">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/widget/images/handle.png">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/dialogs/ciframe.html">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/dialogs/tmpFrameset.html">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/dialogs/wsc.css">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/dialogs/wsc.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/dialogs/wsc_ie.js">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/LICENSE.md">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/README.md">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/plugins/wsc/skins/moono-lisa/wsc.css">
-      <publishTime>03/12/2018 16:37:36</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/README.md">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/css/samples.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/img/github-top.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/img/header-bg.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:37</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/img/header-separator.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/img/logo.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/img/navigation-tip.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/index.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/js/sample.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/js/sf.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/ajax.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/api.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/appendto.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/assets/inlineall/logo.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/assets/outputxhtml/outputxhtml.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/assets/posteddata.php">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/assets/sample.jpg">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/assets/uilanguages/languages.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/datafiltering.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/dialog/assets/my_dialog.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/dialog/dialog.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/divreplace.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/enterkey/enterkey.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/htmlwriter/assets/outputforflash/outputforflash.fla">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/htmlwriter/assets/outputforflash/outputforflash.swf">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/htmlwriter/assets/outputforflash/swfobject.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/htmlwriter/outputforflash.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/htmlwriter/outputhtml.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/index.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/inlineall.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/inlinebycode.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/inlinetextarea.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/jquery.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/magicline/magicline.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/readonly.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/replacebyclass.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/replacebycode.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/sample.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/sample.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/sample_posteddata.php">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/tabindex.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/toolbar/toolbar.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/uicolor.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/uilanguages.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/wysiwygarea/fullpage.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/old/xhtmlstyle.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/css/fontello.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/config.json">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/fontello.eot">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/fontello.svg">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/fontello.ttf">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/fontello.woff">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/font/LICENSE.txt">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/index.html">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/js/abstracttoolbarmodifier.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/js/toolbarmodifier.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/js/toolbartextmodifier.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/javascript.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/LICENSE">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/dialog.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/dialog_ie.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/dialog_ie8.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/dialog_iequirks.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/editor.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/editor_gecko.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/editor_ie.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/editor_ie8.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/editor_iequirks.css">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/icons.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/icons_hidpi.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/arrow.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/close.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/hidpi/close.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:38</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/hidpi/lock-open.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/hidpi/lock.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/hidpi/refresh.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/lock-open.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/lock.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/refresh.png">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/images/spinner.gif">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/skins/moono-lisa/readme.md">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/ckeditor/styles.js">
-      <publishTime>12/13/2017 17:20:00</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.css">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:32</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/drpAUtoHelp/chosen-sprite.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/drpAUtoHelp/chosen.css">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/drpAUtoHelp/chosen.jquery.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/drpAUtoHelp/prism.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/jqDoubleScroll/bower.json">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/jqDoubleScroll/example.html">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/jqDoubleScroll/jquery.doubleScroll.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/Plugins/jquery.blockUI.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/SecureJs.js">
-      <publishTime>03/15/2018 18:21:59</publishTime>
+      <publishTime>08/21/2018 10:23:55</publishTime>
     </File>
     <File Include="Templates/Scripts/validation/jquery-migrate-1.1.0.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/validation/jquery.validate.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Templates/Scripts/validation/jquery.validate.unobtrusive.js">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
+    </File>
+    <File Include="tsconfig.json">
+      <publishTime>07/03/2018 17:54:32</publishTime>
     </File>
     <File Include="Upload/Item/product-1.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-2.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-3.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-4.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-5.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-6.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-7.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-8.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Item/product-9.png">
-      <publishTime>03/09/2018 18:28:34</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Restaurant/img-3.jpg">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Restaurant/img-4.jpg">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/Restaurant/pie-chart.png">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
     </File>
     <File Include="Upload/User/about-img.jpg">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:39</publishTime>
+    </File>
+    <File Include="Upload/User/bringlylogoemail.png">
+      <publishTime>06/25/2018 17:15:20</publishTime>
+    </File>
+    <File Include="Upload/User/thaku-mailicon.png">
+      <publishTime>06/25/2018 11:39:40</publishTime>
+    </File>
+    <File Include="Views/Business/AddLocation.cshtml">
+      <publishTime>08/08/2018 12:19:07</publishTime>
+    </File>
+    <File Include="Views/Business/LocationList.cshtml">
+      <publishTime>08/10/2018 12:57:42</publishTime>
+    </File>
+    <File Include="Views/Business/LocationListUser.cshtml">
+      <publishTime>08/10/2018 13:00:17</publishTime>
+    </File>
+    <File Include="Views/Business/ManageBusinessType.cshtml">
+      <publishTime>08/10/2018 12:57:57</publishTime>
+    </File>
+    <File Include="Views/Business/MyLocation.cshtml">
+      <publishTime>08/08/2018 14:54:46</publishTime>
+    </File>
+    <File Include="Views/Business/SaveBusinessType.cshtml">
+      <publishTime>06/14/2018 18:52:21</publishTime>
+    </File>
+    <File Include="Views/Business/UserAppointments.cshtml">
+      <publishTime>06/14/2018 18:55:21</publishTime>
+    </File>
+    <File Include="Views/Business/_multipleBusinessProperty.cshtml">
+      <publishTime>06/14/2018 18:55:21</publishTime>
     </File>
     <File Include="Views/Controls/Paging.cshtml">
-      <publishTime>03/15/2018 11:13:42</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
     </File>
     <File Include="Views/Email/Inbox.cshtml">
-      <publishTime>03/14/2018 15:31:32</publishTime>
+      <publishTime>06/20/2018 17:01:22</publishTime>
     </File>
     <File Include="Views/Email/Sent.cshtml">
-      <publishTime>03/15/2018 16:46:26</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
+    </File>
+    <File Include="Views/Email/_GetEmailPartial.cshtml">
+      <publishTime>08/10/2018 16:52:56</publishTime>
     </File>
     <File Include="Views/Errors/Error404.cshtml">
-      <publishTime>02/21/2018 16:51:11</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
+    </File>
+    <File Include="Views/Home/ForgetPasswordNotFound.cshtml">
+      <publishTime>07/11/2018 17:41:25</publishTime>
     </File>
     <File Include="Views/Home/ForgotPassword.cshtml">
-      <publishTime>03/15/2018 16:43:21</publishTime>
+      <publishTime>07/11/2018 16:43:23</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/01/2018 10:24:40</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>02/20/2018 15:55:27</publishTime>
+      <publishTime>06/19/2018 18:25:32</publishTime>
+    </File>
+    <File Include="Views/Home/SentForgetPassword.cshtml">
+      <publishTime>07/11/2018 17:39:44</publishTime>
+    </File>
+    <File Include="Views/Home/ThanksPasswordCreated.cshtml">
+      <publishTime>07/03/2018 13:05:55</publishTime>
+    </File>
+    <File Include="Views/Home/ThankUConfirmation.cshtml">
+      <publishTime>07/03/2018 17:44:32</publishTime>
+    </File>
+    <File Include="Views/Home/ThankURegistration.cshtml">
+      <publishTime>06/26/2018 10:43:22</publishTime>
     </File>
     <File Include="Views/Home/UserRegistration.cshtml">
-      <publishTime>03/12/2018 16:59:57</publishTime>
+      <publishTime>07/02/2018 12:25:47</publishTime>
+    </File>
+    <File Include="Views/Home/VerificationExpired.cshtml">
+      <publishTime>06/26/2018 12:49:58</publishTime>
+    </File>
+    <File Include="Views/Home/VerifyEmaillAddressError.cshtml">
+      <publishTime>06/25/2018 18:53:47</publishTime>
     </File>
     <File Include="Views/Home/_socialMediaLogin.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>07/02/2018 12:28:39</publishTime>
     </File>
     <File Include="Views/Menu/_chooseCity.cshtml">
-      <publishTime>03/14/2018 15:56:50</publishTime>
+      <publishTime>06/14/2018 14:48:25</publishTime>
     </File>
     <File Include="Views/Menu/_topMenu.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
+    </File>
+    <File Include="Views/Menu/_topSocialUserMenu.cshtml">
+      <publishTime>06/14/2018 18:55:21</publishTime>
     </File>
     <File Include="Views/Menu/_topUserMenu.cshtml">
-      <publishTime>03/15/2018 14:46:22</publishTime>
+      <publishTime>08/16/2018 17:26:38</publishTime>
+    </File>
+    <File Include="Views/Orders/MyOrders.cshtml">
+      <publishTime>08/20/2018 17:56:13</publishTime>
+    </File>
+    <File Include="Views/Orders/OrderDetailBuyer.cshtml">
+      <publishTime>08/10/2018 12:22:35</publishTime>
+    </File>
+    <File Include="Views/Restaurant/AddDiscountCoupon.cshtml">
+      <publishTime>08/03/2018 11:20:13</publishTime>
+    </File>
+    <File Include="Views/Restaurant/DiscountCoupons.cshtml">
+      <publishTime>08/07/2018 10:26:13</publishTime>
+    </File>
+    <File Include="Views/Restaurant/EditCoupon.cshtml">
+      <publishTime>08/03/2018 10:36:56</publishTime>
     </File>
     <File Include="Views/Restaurant/ListRestaurants.cshtml">
-      <publishTime>03/13/2018 10:27:05</publishTime>
+      <publishTime>06/14/2018 18:55:21</publishTime>
+    </File>
+    <File Include="Views/Restaurant/MerchantMenuItems.cshtml">
+      <publishTime>06/14/2018 18:55:21</publishTime>
     </File>
     <File Include="Views/Restaurant/MyRestaurant.cshtml">
-      <publishTime>02/21/2018 10:13:38</publishTime>
+      <publishTime>06/14/2018 18:55:22</publishTime>
     </File>
     <File Include="Views/Restaurant/RestaurantItems.cshtml">
-      <publishTime>03/13/2018 10:38:52</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/AnonymousUser.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>06/26/2018 11:15:42</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/AuthorizeUserMaster.cshtml">
-      <publishTime>03/13/2018 15:40:59</publishTime>
+      <publishTime>08/20/2018 17:29:38</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/PartialMaster.cshtml">
-      <publishTime>03/13/2018 12:18:42</publishTime>
+      <publishTime>07/31/2018 12:16:55</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/PartialMasterCommon.cshtml">
       <publishTime>03/08/2018 10:43:51</publishTime>
     </File>
     <File Include="Views/Shared/MasterPages/RestaurantMaster.cshtml">
-      <publishTime>02/20/2018 16:20:26</publishTime>
+      <publishTime>06/13/2018 12:37:49</publishTime>
     </File>
     <File Include="Views/Shared/UnauthorizedAccess.cshtml">
-      <publishTime>03/15/2018 11:09:18</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_AddItem.cshtml">
+      <publishTime>06/26/2018 15:21:56</publishTime>
     </File>
     <File Include="Views/Shared/_AddReview.cshtml">
-      <publishTime>03/14/2018 16:10:32</publishTime>
+      <publishTime>07/04/2018 16:55:01</publishTime>
+    </File>
+    <File Include="Views/Shared/_BuyerMyOrders.cshtml">
+      <publishTime>08/10/2018 12:59:32</publishTime>
     </File>
     <File Include="Views/Shared/_ComposeEmail.cshtml">
-      <publishTime>03/15/2018 18:18:30</publishTime>
+      <publishTime>08/03/2018 11:31:12</publishTime>
+    </File>
+    <File Include="Views/Shared/_DeleteAccount.cshtml">
+      <publishTime>07/31/2018 10:40:38</publishTime>
     </File>
     <File Include="Views/Shared/_EmailList.cshtml">
-      <publishTime>03/15/2018 15:43:40</publishTime>
+      <publishTime>08/10/2018 10:55:26</publishTime>
+    </File>
+    <File Include="Views/Shared/_FavouriteLocationList.cshtml">
+      <publishTime>08/10/2018 16:45:55</publishTime>
     </File>
     <File Include="Views/Shared/_FavouriteRestaurantsList.cshtml">
-      <publishTime>03/14/2018 15:55:52</publishTime>
+      <publishTime>08/10/2018 13:01:53</publishTime>
+    </File>
+    <File Include="Views/Shared/_filterBusinessHeader.cshtml">
+      <publishTime>06/05/2018 13:14:15</publishTime>
     </File>
     <File Include="Views/Shared/_filterRestaurants.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_GetBusinessInfo.cshtml">
+      <publishTime>06/14/2018 18:33:56</publishTime>
+    </File>
+    <File Include="Views/Shared/_GoogleMap.cshtml">
+      <publishTime>08/09/2018 12:04:47</publishTime>
+    </File>
+    <File Include="Views/Shared/_HotelList.cshtml">
+      <publishTime>06/14/2018 18:34:17</publishTime>
     </File>
     <File Include="Views/Shared/_ItemsList.cshtml">
-      <publishTime>03/15/2018 16:04:56</publishTime>
+      <publishTime>06/14/2018 18:34:34</publishTime>
     </File>
     <File Include="Views/Shared/_LeftPanel.cshtml">
-      <publishTime>03/14/2018 10:26:53</publishTime>
+      <publishTime>08/17/2018 11:25:37</publishTime>
+    </File>
+    <File Include="Views/Shared/_MerchantItemsList.cshtml">
+      <publishTime>07/18/2018 13:21:22</publishTime>
+    </File>
+    <File Include="Views/Shared/_MerchantMyOrders.cshtml">
+      <publishTime>07/23/2018 18:34:49</publishTime>
     </File>
     <File Include="Views/Shared/_NoRecordFound.cshtml">
-      <publishTime>02/27/2018 11:13:51</publishTime>
+      <publishTime>06/14/2018 18:35:06</publishTime>
     </File>
     <File Include="Views/Shared/_NotificationMessage.cshtml">
-      <publishTime>03/15/2018 10:49:19</publishTime>
+      <publishTime>06/19/2018 17:09:28</publishTime>
     </File>
     <File Include="Views/Shared/_pageFooter.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>06/14/2018 18:35:49</publishTime>
     </File>
     <File Include="Views/Shared/_pageHeader.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>08/20/2018 16:32:33</publishTime>
     </File>
     <File Include="Views/Shared/_partialpageFooter.cshtml">
-      <publishTime>02/28/2018 16:14:42</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_RestaurantList.cshtml">
+      <publishTime>06/18/2018 17:37:13</publishTime>
     </File>
     <File Include="Views/Shared/_RestaurantReviewList.cshtml">
-      <publishTime>03/15/2018 15:39:23</publishTime>
+      <publishTime>08/10/2018 13:02:28</publishTime>
     </File>
     <File Include="Views/Shared/_RestaurantsList.cshtml">
       <publishTime>03/14/2018 13:15:35</publishTime>
     </File>
+    <File Include="Views/Shared/_RestaurantsListOLD.cshtml">
+      <publishTime>06/14/2018 18:37:49</publishTime>
+    </File>
     <File Include="Views/Shared/_ReviewContent.cshtml">
-      <publishTime>02/23/2018 15:34:24</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_ShopList.cshtml">
+      <publishTime>08/10/2018 15:43:52</publishTime>
+    </File>
+    <File Include="Views/Shared/_SortedEmailList.cshtml">
+      <publishTime>08/10/2018 13:02:47</publishTime>
+    </File>
+    <File Include="Views/Shared/_SpaList.cshtml">
+      <publishTime>06/14/2018 18:38:45</publishTime>
+    </File>
+    <File Include="Views/Shared/_UserAppointments.cshtml">
+      <publishTime>07/18/2018 14:45:13</publishTime>
     </File>
     <File Include="Views/ShoppingCart/Cart.cshtml">
-      <publishTime>03/15/2018 16:06:36</publishTime>
+      <publishTime>08/08/2018 19:05:02</publishTime>
+    </File>
+    <File Include="Views/User/AddEditManager.cshtml">
+      <publishTime>06/19/2018 15:18:16</publishTime>
     </File>
     <File Include="Views/User/Dashboard.cshtml">
-      <publishTime>03/13/2018 16:24:24</publishTime>
+      <publishTime>08/17/2018 15:24:05</publishTime>
+    </File>
+    <File Include="Views/User/DeactivateAccount.cshtml">
+      <publishTime>07/30/2018 18:01:00</publishTime>
     </File>
     <File Include="Views/User/EditPersonalInformation.cshtml">
-      <publishTime>02/20/2018 16:20:26</publishTime>
+      <publishTime>08/10/2018 13:10:58</publishTime>
     </File>
     <File Include="Views/User/Favourites.cshtml">
-      <publishTime>03/14/2018 13:08:25</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
+    </File>
+    <File Include="Views/User/ManageManagers.cshtml">
+      <publishTime>07/18/2018 14:46:09</publishTime>
     </File>
     <File Include="Views/User/MerchantReview.cshtml">
-      <publishTime>02/23/2018 17:32:31</publishTime>
+      <publishTime>06/14/2018 18:43:16</publishTime>
+    </File>
+    <File Include="Views/User/NewRegistrationfromSocialPage.cshtml">
+      <publishTime>08/03/2018 11:32:08</publishTime>
+    </File>
+    <File Include="Views/User/NewRegistrationfromSocialPage.js">
+      <publishTime>06/04/2018 14:50:44</publishTime>
     </File>
     <File Include="Views/User/PersonalInformation.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>07/18/2018 14:48:54</publishTime>
     </File>
     <File Include="Views/User/RestaurantReview.cshtml">
-      <publishTime>03/15/2018 16:54:43</publishTime>
+      <publishTime>07/04/2018 16:54:33</publishTime>
+    </File>
+    <File Include="Views/User/Settings.cshtml">
+      <publishTime>07/31/2018 16:13:41</publishTime>
+    </File>
+    <File Include="Views/User/_ChangePassword.cshtml">
+      <publishTime>07/31/2018 12:10:09</publishTime>
+    </File>
+    <File Include="Views/Wallet/WalletHistory.cshtml">
+      <publishTime>08/17/2018 15:27:33</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>06/04/2018 13:02:25</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>02/19/2018 15:24:22</publishTime>
+      <publishTime>05/31/2018 13:19:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/12/2018 16:34:15</publishTime>
+      <publishTime>08/20/2018 14:51:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

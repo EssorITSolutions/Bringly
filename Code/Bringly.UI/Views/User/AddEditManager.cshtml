@@ -4,119 +4,74 @@
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
 
-
-
 @section BreadCrum{
     <li class="breadcrumb-item active">User Rebgistration</li>
 }
-    <div class="col-lg-9 col-md-7 col-sm-12">
-        <div class="right-side">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <form role="form" method="post">
-                        @Html.HiddenFor(m => m.UserGuid)
-                        <div class="card personal-information">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-lg-10 col-md-9 col-sm-8">
-                                        <h2 class="heading-sub">@(Model.UserGuid != Guid.Empty ? "Update" : "Add") User</h2>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 col-sm-4">
-                                    </div>
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form role="form" method="post">
+                    @Html.HiddenFor(m => m.UserGuid)
+                    <div class="card personal-information">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-8">
+                                    <h2 class="heading-sub">@(Model.UserGuid != Guid.Empty ? "Update" : "Add") Manager</h2>
                                 </div>
-                            </div>
-                            <div class="card-block">
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>Name<span class="required"> *</span> :</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.FullName)
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>E-mail<span class="required"> *</span> :</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.EmailAddress)
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>Mobile Number:</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @onKeyPress = "if(this.value.length==10) return false;", @type = "number" })
-                                        @Html.ValidationMessageFor(m => m.MobileNumber)
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>Role<span class="required"> *</span> :</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @*@Html.DropDownListFor(m => m.RoleGuid, new SelectList(Model.RolesList, "RoleGuid", "RoleName", new { @class = "chosen-select", @placeholder = "Choose a Role.." }))*@
-                                        @Html.DropDownListFor(m => m.RoleGuid, Model.RolesList.Select(x => new SelectListItem { Text = x.RoleName, Value = x.RoleGuid.ToString(), Selected = (x.RoleGuid == Model.RoleGuid) }), "", new { })
-                                        @Html.ValidationMessageFor(m => m.RoleGuid)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-lg-10 col-md-9 col-sm-8">
-                                        <h5 class="heading-sub">Address</h5>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 col-sm-4">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-block">
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>Billing Address:</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.TextBox("BillingAddress_Address", Model.BillingAddress.Address, new { @class = "form-control" })
-                                        @Html.ValidationMessage("BillingAddress_Address")
-                                        @Html.Hidden("BillingAddress_UserAddressGuid", Model.BillingAddress.UserAddressGuid)
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>City:</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.DropDownList("BillingAddress_CityGuid", Model.Cities.Select(t => new SelectListItem { Text = t.CityName, Value = t.CityGuid.ToString(), Selected = (t.CityGuid == Model.BillingAddress.CityGuid) }), " ", new { @class = "form-control" })
-                                        @Html.ValidationMessage("BillingAddress_CityGuid")
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                        <span>PostCode:</span>
-                                    </label>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        @Html.TextBox("BillingAddress_PostCode", Model.BillingAddress.PostCode, new { @class = "form-control",@type="number" })
-                                        @Html.ValidationMessage("BillingAddress_PostCode")
-                                    </div>
-                                </div>
-                            </div>
-                           
-                            <div class="card-block">
-                               
-                                <div class="form-group row">
-                                    <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label"></div>
-                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                        <button type="submit" class="btn btn-primary btn-lg">Save</button>  <a href="/user/ManageManagers" class="btn btn-primary btn-lg">Cancel</a>
-                                    </div>
+                                <div class="col-lg-2 col-md-3 col-sm-4">
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Name<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "Manager Name...", })
+                                    @Html.ValidationMessageFor(m => m.FullName)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>E-mail<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Manager Email...", @type = "email", @onchange = "checkUserEmailAlreadyExitsOrNot(4)" })
+                                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Mobile Number:</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Manager Contact Number...", @type = "number" })
+                                    @Html.ValidationMessageFor(m => m.MobileNumber)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                    <span>Role<span class="required"> *</span> :</span>
+                                </label>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    @Html.DropDownListFor(m => m.RoleGuid, Model.RolesList.Select(x => new SelectListItem { Text = x.RoleName, Value = x.RoleGuid.ToString(), Selected = (x.RoleGuid == Model.RoleGuid) }), "", new { })
+                                    @Html.ValidationMessageFor(m => m.RoleGuid)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label"></div>
+                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                    <button type="submit" class="btn btn-primary btn-lg">Save</button>  <a href="/user/ManageManagers" class="btn btn-primary btn-lg">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
     </div>
+</div>

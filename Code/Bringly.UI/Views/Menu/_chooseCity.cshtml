@@ -7,7 +7,7 @@
 <div class="Navbar-dropdown dropdown-menu-form">
     <div class="dropdown">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>@Model.SelectedCity.CityName</span>
+            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>@(Model.SelectedCity != null ? Model.SelectedCity.CityName : "")</span>
         </a>
         <div class="dropdown-menu   " aria-labelledby="dropdownMenuLink">
             <div class="shadow-box">
@@ -16,7 +16,7 @@
                 <ul class="list-unstyled">
                     @foreach (Bringly.Domain.City city in Model.TopCities.Distinct())
                     {
-                        if (!cityname.Contains(city.CityName))
+                        if (!cityname.Contains(city.CityName) && Model.SelectedCity != null)
                         {
                             <li class="@(Model.SelectedCity.CityGuid == city.CityGuid ? "active" : "")"><a href="/business/LocationListUser/@city.CityUrlName">@city.CityName</a></li>
                                 cityname += city.CityName+",";
@@ -27,7 +27,6 @@
                 <div class="form-row align-items-center pt-3">
                     <label>or enter in search bar</label>
                     <div class="map-form">
-                        @*<input type="text" class="chosen-search-input form-control form-control-lg" placeholder="Your City">*@
                         <select data-placeholder="Choose a City..." onchange="location = this.value;">
                             <option value=""></option>
                             @foreach (Bringly.Domain.City city in Model.Cities)

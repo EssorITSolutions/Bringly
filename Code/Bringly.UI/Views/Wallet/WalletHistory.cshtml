@@ -1,0 +1,79 @@
+﻿@model Bringly.Domain.MyWalletHistory
+@{
+    ViewBag.Title = "WalletHistory";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+<div class="col-lg-9 col-md-7 col-sm-12">
+    <div class="right-side">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3 mt-3">
+                <div class="page-sub-title">
+                    <h3>Wallet Account</h3>
+                </div>
+            </div>
+            @if (Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer)
+            {
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-end">
+                    <p>
+                        <a href="#" class="btn btn-primary btn-lg text-uppercase">ADD Money</a>
+                    </p>
+                </div>
+            }
+        </div>
+        <div class="shadow-box my-transactions">
+            <div class="row-block" style="padding-top:5px;">
+                <h4 class="text-weight mb-3 pl-3 pr-3">
+                    <strong style=" color: #fa5342; font-weight: normal;">
+                        Balance:
+                    </strong>  @Model.TotalAmount $
+                </h4>
+                <div class="table-order">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.WalletHistories != null && Model.WalletHistories.Count > 0)
+                            {
+                                foreach (var walletHistory in Model.WalletHistories)
+                                {
+                                    <tr>
+                                        <td>@walletHistory.DateCreated</td>
+                                        <td>@walletHistory.Message</td>
+                                        <td>@(walletHistory.TransactionType == Bringly.Domain.Enums.TransactionType.Debit ? walletHistory.Amount.ToString() : "_")</td>
+                                        <td>@(walletHistory.TransactionType == Bringly.Domain.Enums.TransactionType.Credit ? walletHistory.Amount.ToString() : "_")</td>
+                                        <td>@walletHistory.TotalAmount</td>
+                                    </tr>
+                                }
+
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5"><strong>No record found.</strong> </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                @{
+                    Html.RenderAction("paging", "controls", new { totalRecords = Model.TotalRecords, pageSize = Model.PageSize, currentPage = Model.CurrentPage });
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

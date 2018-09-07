@@ -1,0 +1,12 @@
+﻿@model Bringly.Domain.CMSPage
+@{
+    ViewBag.Title = "Not Found";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+
+@if (Model != null && Model.PageDescription != null)
+{
+    {
+        @Html.Raw(Model.PageDescription);
+    }
+}

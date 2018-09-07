@@ -1,298 +1,633 @@
-﻿@using Bringly.Domain.Business
-@model Bringly.Domain.Business.BusinessObject
+﻿@model Bringly.Domain.Business.BusinessObject
+
 @{
-    ViewBag.Title = "My Location";
+    string managerName = string.Empty;
+    ViewBag.Title = "My Branch";
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+    if (Model.ManagerGuid != null)
+    {
+        if (Model.Managers != null && Model.Managers.Count > 0)
+        {
+            managerName = (from z in Model.Managers where z.ManagerGuid == Model.ManagerGuid select z.Name).FirstOrDefault(); //Convert.ToString(Model.Managers.Where(x => x.ManagerGuid == Model.ManagerGuid).Select(x => x.Name));
+            if (managerName == null)
+            {
+                managerName = "No manager assign yet.";
+            }
+        }
+        else
+        {
+            managerName = "No manager assign yet.";
+        }
+    }
 
-
+    float lat = 0, lon = 0;
+    float.TryParse(Model.Latitude, out lat);
+    float.TryParse(Model.Longitude, out lon);
 }
+
 @section BreadCrum{
-    <li class="breadcrumb-item active">My Location</li>
+    <li class="breadcrumb-item active">My Branch</li>
 }
 
 <div class="col-lg-9 col-md-7 col-sm-12">
     <div class="right-side">
-        <div class="shadow-box MyRestaurantInfo">
+        <div class="branchinfo">
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-8">
-                        <h2 class="heading-sub">My Location</h2>
+                        <h2 class="heading-sub">My Branch</h2>
                     </div>
                     <div class="col-lg-5 col-md-4 col-sm-4 cvr-add-location">
                         <h4>  CVR Number : @Model.CVRNumber</h4>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-12">
-                        <a href="/Business/LocationList" class="mr-4 btn btn-primary" value="">Show Locations</a>
+                        <a href="/Business/LocationList" class="mr-4 btn btn-primary" value="">Show Branches</a>
                     </div>
                 </div>
             </div>
             <div class="row-block">
-                <form method="post" class="mws-form" id="formrestaurent">
-                    <div class="table-order divprofiledata">
-                        <div class="sub-title">
-                            <div class="row restaurentprofile">
-                                <div class="col-lg-8 col-md-7 col-sm-12">
-                                    <h5 class="m-0 text-weight">Basic Info</h5>
-                                </div>
-                                @*<div class="col-lg-4 col-md-5 col-sm-12">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
-                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updatebusinessprofile();"> Update</a></p>
-                                        </div><div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofilecancel">
-                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelbusinessprofile();"> Cancel</a></p>
+                <div class="card tabs-detail">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs" id="orderStatusTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#basic_info" role="tab">Basic Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#about_us" role="tab">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-block">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="basic_info" role="tabpanel">
+                                <div class="row-block">
+                                    <form method="post" class="mws-form" id="formrestaurent">
+                                        <div class="divprofiledata">
+                                            <div class="sub-title">
+                                                <div class="row restaurentprofile">
+                                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-end no-gutters">
+                                                        <div class="col-lg-5 col-md-5 col-sm-5 mb-3 float-left display-none divprofileupdate">
+                                                            <p class="edit-btn m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updatelocation();"> Update</a></p>
+                                                        </div><div class="col-lg-4 col-md-4 col-sm-5 mb-3 float-left display-none divprofilecancel">
+                                                            <p class="edit-btn m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelbusinessprofile();"> Cancel</a></p>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
+                                                            <p class="text-lg-right text-md-right text-left edit-btn"><a href="#" onclick="editbusinessprofile();"><i class="fa fa-pencil"></i> Edit</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="BusinessGuid" value="@Model.BusinessGuid" id="BusinessGuid" />
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="label-data"><label>Name:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>Address:</label></td>
+                                                                <td class="data">
+                                                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control disabled-textbox", @disabled = "disabled" })
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>City:</label></td>
+                                                                <td class="data citydropdown display-none">
+                                                                    @Html.DropDownListFor(m => m.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", new { @class = "chosen-select", @placeholder = "Choose a city.." }))
+
+                                                                    @Html.TextBoxFor(m => m.CityName, new { @class = "form-control display-none mt-2" })
+                                                                    @Html.HiddenFor(m => m.Latitude)
+                                                                    @Html.HiddenFor(m => m.Longitude)
+                                                                    @Html.HiddenFor(m => m.PlaceId)
+                                                                    @Html.HiddenFor(m => m.CountryName)
+
+                                                                </td>
+                                                                <td class="data cityname">
+                                                                    <label id="CityName1"> @Model.CityName</label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>P-number:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.PNumber, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+                                                            </tr>
+
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="label-data"><label>Zip Code:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.PinCode, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>Phone:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.Phone, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>E-mail:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "email" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-data"><label>Manager:</label></td>
+                                                                <td class="data manager-dropdown display-none">
+                                                                    @Html.DropDownListFor(m => m.ManagerGuid, new SelectList(Model.Managers, "ManagerGuid", "Name", Model.ManagerGuid), "Select Manager", new { @class = "chosen-select", @placeholder = "Choose a manager.." })
+                                                                </td>
+                                                                <td class="data manager-name">
+                                                                    <label id="managerName">@managerName</label>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <table width="100%">
+                                                        <tr class="ad-map">
+                                                            <td colspan="2" class="label-data">
+                                                                <div id="googleMap"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td id="tdLatLong"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
-                                            <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="editbusinessprofile();"><i class="fa fa-pencil"></i> Edit</a></p>
+                                        <div class="table-order divrestaurenttime">
+                                            <div class="sub-title">
+                                                <div class="row">
+                                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                                        <h5 class="m-0 text-weight">Timings</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Order Timings:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.OrderTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Pick Up Timings:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.PickUpTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>*@
-                                <div class="col-lg-4 col-md-5 col-sm-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate">
-                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updatelocation();"> Update</a></p>
-                                    </div><div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofilecancel">
-                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelbusinessprofile();"> Cancel</a></p>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit">
-                                        <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#" onclick="editbusinessprofile();"><i class="fa fa-pencil"></i> Edit</a></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <input type="hidden" name="BusinessGuid" value="@Model.BusinessGuid" id="BusinessGuid" />
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="label-data"><label>Name:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-data"><label>Address:</label></td>
-                                            <td class="data">
-                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control disabled-textbox", @disabled = "disabled" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-data"><label>City:</label></td>
-                                            <td class="data citydropdown display-none">
-                                                @Html.DropDownListFor(m => m.CityGuid, new SelectList(Model.CityList, "CityGuid", "CityName", new { @class = "chosen-select", @placeholder = "Choose a category.." }))
-                                            </td>
-                                            <td class="data cityname">
-                                                <label id="CityName"> @Model.CityName</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-data"><label>P-number:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.PNumber, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="label-data"><label>Zip Code:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.PinCode, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-data"><label>Phone:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.Phone, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "number" })</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="label-data"><label>E-mail:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled-textbox", @disabled = "disabled", @type = "email" })</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-order divrestaurenttime">
-                        <div class="sub-title">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-7 col-sm-12">
-                                    <h5 class="m-0 text-weight">Timings</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-7 col-md-12 col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:67%"><label>Order Timings:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.OrderTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:67%"><label>Pick Up Timings:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.PickUpTiming, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-order">
-                        <div class="sub-title">
-                            <div class="row">
-                                <div class="col-lg-10 col-md-9 col-sm-12">
-                                    <h5 class="m-0 text-weight">Tax Charges</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-7 col-md-12 col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:67%"><label>Service Charge(%):</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.ServiceCharge, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:67%"><label>Service Tax(%):</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-order">
-                        <div class="sub-title">
-                            <div class="row">
-                                <div class="col-lg-10 col-md-9 col-sm-12">
-                                    <h5 class="m-0 text-weight">Delivery Charges</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-7 col-md-12 col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:67%"><label>Flat Rate Upto 2.5 Kms:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.FlatRate, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:67%"><label>Rate for each ½ kms after 2.5 Kms:</label></td>
-                                            <td class="data">@Html.TextBoxFor(m => m.RateAfterKm, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-order">
-                        <div class="sub-title">
-                            <div class="row">
-                                <div class="col-lg-10 col-md-9 col-sm-12">
-                                    <h5 class="m-0 text-weight">Description</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p class="px-3">
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control disabled-textbox", @disabled = "disabled", @style = "height: 150px;" })
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="divNewField" class="table-order">
-                        @if (Model.CustomPropertyList != null && Model.CustomPropertyList.Count > 0)
-                        {
-                            <div class="sub-title">
-                                <div class="row">
-                                    <div class="col-lg-10 col-md-9 col-sm-12">
-                                        <h5 class="m-0 text-weight">Other Properties</h5>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            foreach (var customField in Model.CustomPropertyList)
-                            {
-                                <div class="col-md-12 dynamicdata div-@customField.CustomPropertyGuid">
-                                    <div class="row">
-                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                            <input type="text" class="dynamicfieldguid display-none" value="@customField.CustomPropertyGuid" />
-                                            <input type="text" class="dynamicfieldname form-control  disabled-textbox" disabled="disabled" placeholder="Field Name" value="@customField.Field" />
-                                        </label>
-                                        <div class="col-xl-6 col-lg-6 col-md-5 col-sm-10 col-form-label">
-                                            <input type="text" class="dynamicfieldvalue form-control  disabled-textbox" disabled="disabled" placeholder="Value" value="@customField.Value" />
+                                        <div class="table-order">
+                                            <div class="sub-title">
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                                        <h5 class="m-0 text-weight">Tax Charges</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Service Charge(%):</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.ServiceCharge, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Service Tax(%):</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-form-label text-center">
-                                            <img style="width:15%; margin-top:15%;cursor:pointer;" class="display-none" title="Delete field" src="~/Templates/images/cross-icon.png" onclick="removeParentDiv('@customField.CustomPropertyGuid',this)" />
+                                        <div class="table-order">
+                                            <div class="sub-title">
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                                        <h5 class="m-0 text-weight">Delivery Charges</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Flat Rate Upto 2.5 Kms:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.FlatRate, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:67%"><label>Rate for each ½ kms after 2.5 Kms:</label></td>
+                                                                <td class="data">@Html.TextBoxFor(m => m.RateAfterKm, new { @class = "form-control disabled-textbox", @disabled = "disabled" })</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            }
-
-                        }
-                        else
-                        {
-                            <div class="divaddproperty table-order display-none">
-                                <div class="sub-title">
-                                    <div class="row">
-                                        <div class="col-lg-10 col-md-9 col-sm-12">
-                                            <h5 class="m-0 text-weight">Add More Fields</h5>
+                                        <div class="table-order">
+                                            <div class="sub-title">
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                                        <h5 class="m-0 text-weight">Description</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <p class="px-3">
+                                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "height: 150px;" })
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divNewField" class="table-order">
+                                            @if (Model.CustomPropertyList != null && Model.CustomPropertyList.Count > 0)
+                                            {
+                                                <div class="sub-title">
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-md-9 col-sm-12">
+                                                            <h5 class="m-0 text-weight">Other Properties</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                foreach (var customField in Model.CustomPropertyList)
+                                                {
+                                                    <div class="col-md-12 dynamicdata div-@customField.CustomPropertyGuid">
+                                                        <div class="row">
+                                                            <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                                                <input type="text" class="dynamicfieldguid display-none" value="@customField.CustomPropertyGuid" />
+                                                                <input type="text" class="dynamicfieldname form-control  disabled-textbox" disabled="disabled" placeholder="Field Name" value="@customField.Field" />
+                                                            </label>
+                                                            <div class="col-xl-6 col-lg-6 col-md-5 col-sm-10 col-form-label">
+                                                                <input type="text" class="dynamicfieldvalue form-control  disabled-textbox" disabled="disabled" placeholder="Value" value="@customField.Value" />
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-form-label text-center">
+                                                                <img style="width:15%; margin-top:15%;cursor:pointer;" class="display-none" title="Delete field" src="~/Templates/images/cross-icon.png" onclick="removeParentDiv('@customField.CustomPropertyGuid',this)" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="divaddproperty table-order display-none">
+                                                    <div class="sub-title">
+                                                        <div class="row">
+                                                            <div class="col-lg-10 col-md-9 col-sm-12">
+                                                                <h5 class="m-0 text-weight">Add More Fields</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 divaddproperty display-none">
+                                            <input type="button" class="mr-4 btn btn-primary" onclick="addNewField()" value="Add More" />
+                                        </div>
+                                    </form>
+                                    <div class="table-order">
+                                        <div class="sub-title">
+                                            <div class="row">
+                                                <div class="col-lg-10 col-md-9 col-sm-12">
+                                                    <h5 class="m-0 text-weight">Branch Images</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="Image-panel">
+                                            <div class="Add-Images">
+                                                <label class="custom-file">
+                                                    <input type="file" id="file2" class="custom-file-input">
+                                                    <span class="custom-file-control"></span>
+                                                </label>
+                                            </div>
+                                            <div class="thumbnail-card">
+                                                <img src="/templates/images/img-1.jpg" class="m-auto d-block" />
+                                            </div>
+                                            <div class="thumbnail-card">
+                                                <img src="/templates/images/img-2.jpg" class="m-auto d-block" />
+                                            </div>
+                                            <div class="thumbnail-card">
+                                                <img src="/templates/images/img-3.jpg" class="m-auto d-block" />
+                                            </div>
+                                            <div class="thumbnail-card">
+                                                <img src="/templates/images/img-4.jpg" class="m-auto d-block" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        }
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 divaddproperty display-none">
-                        <input type="button" class="mr-4 btn btn-primary" onclick="addNewField()" value="Add More" />
-                    </div>
 
-                </form>
-                <div class="table-order">
-                    <div class="sub-title">
-                        <div class="row">
-                            <div class="col-lg-10 col-md-9 col-sm-12">
-                                <h5 class="m-0 text-weight">Location Images</h5>
+                            <div class="tab-pane" id="about_us" role="tabpanel">
+                                <div class="row-block">
+
+                                    @using (Html.BeginForm("aboutus", "business", null, FormMethod.Post, new { @class = "mws-form", id = "about_us_page_merchant_form" }))
+                                    {
+                                        Html.AntiForgeryToken();
+                                        <div class="table-order">
+                                            <div class="sub-title">
+                                                <div class="row restaurentprofile">
+                                                    <div class="col-lg-8 col-md-7 col-sm-12">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-end no-gutters  pr-0">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 divprofileedit about-us">
+                                                            <p class=" edit-btn text-lg-right text-md-right text-left"><a href="#" onclick="editAboutUsPageMechant();"><i class="fa fa-pencil"></i> Edit</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(x => x.AboutUsPageGuid)
+                                            <input type="hidden" name="BusinessGuid" value="@Model.BusinessGuid" id="BusinessGuid" />
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="">
+                                                        <div class="card-block">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                                                    <span>Title:</span>
+                                                                </label>
+                                                                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                                                    @Html.TextBoxFor(m => m.AboutUsTitle, new { @class = "form-control disabled-textbox about-us-page-input", @disabled = "disabled" })
+                                                                    @Html.ValidationMessageFor(m => m.AboutUsTitle)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                                                    <span>Description:</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-form-label">
+                                                                    @Html.TextAreaFor(m => m.AboutUsDescription, new { @class = "form-control about-us", @style = "height: 250px;" })
+                                                                    @Html.ValidationMessageFor(m => m.AboutUsDescription)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row restaurentprofile">
+                                                <div class="col-lg-8 col-md-7 col-sm-12">
+                                                </div>
+                                                <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-end no-gutters">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 float-left display-none divprofileupdate about-us no-gutters">
+                                                        <p class=" edit-btn m-0 text-lg-right text-md-right text-left"><a href="#" onclick="updateAboutUsPageMerchant();"> Update</a></p>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 float-left display-none about-us divprofilecancel">
+                                                        <p class="  edit-btn m-0 text-lg-right text-md-right text-left"><a href="#" onclick="cancelAboutUsPageMerchant();"> Cancel</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
-                            <div class="col-lg-2 col-md-3 col-sm-4">
-                                <p class="edit m-0 text-lg-right text-md-right text-left"><a href="#"><i class="fa fa-pencil"></i> Edit</a></p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="Image-panel">
-                        <div class="Add-Images">
-                            <label class="custom-file">
-                                <input type="file" id="file2" class="custom-file-input">
-                                <span class="custom-file-control"></span>
-                            </label>
-                        </div>
-                        <div class="thumbnail-card">
-                            <img src="/templates/images/img-1.jpg" class="m-auto d-block" />
-                        </div>
-                        <div class="thumbnail-card">
-                            <img src="/templates/images/img-2.jpg" class="m-auto d-block" />
-                        </div>
-                        <div class="thumbnail-card">
-                            <img src="/templates/images/img-3.jpg" class="m-auto d-block" />
-                        </div>
-                        <div class="thumbnail-card">
-                            <img src="/templates/images/img-4.jpg" class="m-auto d-block" />
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var editor = CKEDITOR.replace('AboutUsDescription');
+            if ($('#AboutUsDescription').val() == '') {
+                $('#AboutUsDescription').val('');
+            }
+            CKEDITOR.on('instanceReady', function () {
+                $.each(CKEDITOR.instances, function (instance) {
+                    CKEDITOR.instances[instance].on("change",
+                        function (e) {
+                            for (instance in CKEDITOR.instances
+                            )
+                                CKEDITOR.instances[instance].updateElement();
+                        });
+                });
+            });
+            CKEDITOR.autoGrow_onStartup = true;
+            CKEDITOR.config.height = 250;
+            CKEDITOR.config.readOnly = true;
+        });
 
+        var editor;
 
+        // The instanceReady event is fired when an instance of CKEditor has finished
+        // its initialization.
+        CKEDITOR.on('instanceReady', function (ev) {
+            editor = ev.editor;
 
+            // Event fired when the readOnly property changes.
+            editor.on('readOnly', function () {
 
+            });
+        });
 
+        var googleMapObj = {
+            isInEditMode: false,
+            intializeMap: function () {
+                googleMapObj.googleMapAddressLat = @(lat != 0 ? lat : 56.2639);
+                googleMapObj.googleMapAddressLng =  @(lon != 0 ? lon : 9.5018);
+                //googleMapObj.placeId =
+    var mapCanvas = document.getElementById("googleMap");
+    var center = new google.maps.LatLng(googleMapObj.googleMapAddressLat, googleMapObj.googleMapAddressLng);
+    var mapOptions = {
+                    center: center,
+                    zoom: 7,
+                    fullscreenControl: false,
+                    streetViewControl: false,
+                    gestureHandling: 'greedy',
+                    draggable: false,
+                    zoomControl: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true
+                };
+
+                googleMapObj.map = new google.maps.Map(mapCanvas, mapOptions);
+
+                googleMapObj.marker = new google.maps.Marker({
+                    position: center,
+                    map: googleMapObj.map,
+                    animation: google.maps.Animation.DROP,
+                });
+
+                googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+            },
+
+            initializeMapEvents: function () {
+                googleMapObj.isInEditMode = true;
+                var center = new google.maps.LatLng(googleMapObj.googleMapAddressLat, googleMapObj.googleMapAddressLng);
+                googleMapObj.clickListener = google.maps.event.addListener(googleMapObj.map, 'click', function (event) {
+                googleMapObj.placeMarker(googleMapObj.map, event.latLng);
+            });
+
+                googleMapObj.dragEndListener = googleMapObj.marker.addListener('dragend', googleMapObj.handleMarkerDragEvent);
+                googleMapObj.marker.setOptions({
+                    draggable: true
+                });
+
+                googleMapObj.map.setOptions({
+                    draggable: true,
+                    zoomControl: true,
+                    scrollwheel: true,
+                    disableDoubleClickZoom: true
+                });
+            },
+
+            destroidMapEvents: function () {
+        googleMapObj.isInEditMode = false;
+        google.maps.event.removeListener(googleMapObj.clickListener);
+        google.maps.event.removeListener(googleMapObj.dragEndListener);
+        googleMapObj.marker.setOptions({
+            draggable: false
+                })
+
+                googleMapObj.map.setOptions({
+            draggable: false,
+                    zoomControl: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true
+                });
+    },
+
+            placeMarker: function (map, location) {
+        if (googleMapObj.marker) {
+            googleMapObj.marker.setPosition(location);
+        } else {
+            googleMapObj.marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                    });
+        }
+
+        googleMapObj.googleMapAddressLat = location.lat();
+        googleMapObj.googleMapAddressLng = location.lng();
+        var html = 'Latitude: ' + googleMapObj.googleMapAddressLat + '<br /> Longitude: ' + googleMapObj.googleMapAddressLng + '<br />';
+                $("#tdLatLong").html(html);
+
+        googleMapObj.getAddressBylatLng(map, googleMapObj.marker);
+    },
+            handleMarkerDragEvent: function (event) {
+        var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+        googleMapObj.googleMapAddressLat = event.latLng.lat();
+        googleMapObj.googleMapAddressLng = event.latLng.lng();
+
+        googleMapObj.placeMarker(googleMapObj.map, latlng);
+        googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+    },
+
+            getAddressBylatLng: function (map, marker) {
+
+                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + googleMapObj.googleMapAddressLat + "," + googleMapObj.googleMapAddressLng + "&key=AIzaSyB8nw_CKZq_9_RRnvRtJgug_a94qTBqp7k",
+                    function (response) {
+            if (response && response.results) {
+                googleMapObj.locationObj = response.results.filter(x => x.geometry.location_type != "APPROXIMATE")[0];
+                if (googleMapObj.locationObj) {
+                    window.parent.googleMapLocationObj = googleMapObj.locationObj;
+                    window.parent.googleAddressPlaceId = googleMapObj.placeId = googleMapObj.locationObj.place_id;
+                    googleMapObj.address = googleMapObj.getAddressFromLocationObj(googleMapObj.locationObj);
+
+                    var infoWindowData = `Address: ${googleMapObj.locationObj.formatted_address}<br /> City: ${googleMapObj.address.city}<br />Country: ${googleMapObj.address.country}<br /> Postal Code: ${googleMapObj.address.postal_code}`;//'Address: ' + googleMapObj.googleMapAddressLat + '<br>Longitude: ' + googleMapObj.googleMapAddressLng
+                                if (googleMapObj.infowindow) {
+                                    googleMapObj.infowindow.setContent(infoWindowData)
+                                }
+                                else {
+                                    googleMapObj.infowindow = new google.maps.InfoWindow({
+                                        content: infoWindowData
+                                    });
+                                }
+                                googleMapObj.infowindow.open(map, marker);
+                                googleMapObj.setAddressToDomObj();
+                            }
+                        }
+                    }, function (xhr, error, message) {
+
+                    });
+            },
+
+            getAddressFromLocationObj: function (locationObj) {
+                if (locationObj) {
+                    var address = {};
+                    locationObj.address_components.map(function (obj) {
+                        obj.types.map(function (local) {
+                            switch (local) {
+                                case "route":
+                                    address["route"] = obj.long_name;
+                                    break;
+
+                                case "locality":
+                                    address["city"] = obj.long_name;
+                                    break;
+                                case "country":
+                                    address["country"] = obj.long_name;
+                                    break;
+                                case "postal_code":
+                                    address["postal_code"] = obj.long_name;
+                                    break;
+                            }
+                        })
+                    });
+                    return address;
+                }
+            },
+
+            addGoogleAddress: function () {
+                window.parent.setAddress(googleMapObj.address, googleMapObj.locationObj);
+                window.parent.closeModelPopUpForm(false);
+            },
+
+            setAddressToDomObj: function () {
+                if (googleMapObj.isInEditMode) {
+                    googleMapObj.isCityFound = false;
+
+                    $("#Latitude").val(googleMapObj.googleMapAddressLat);
+                    $("#Longitude").val(googleMapObj.googleMapAddressLng);
+                    $("#PlaceId").val(googleMapObj.locationObj.place_id);
+                    $("#CountryName").val(googleMapObj.locationObj.country);
+
+                    $("#Address").val(googleMapObj.locationObj.formatted_address);
+                    $("#PinCode").val(googleMapObj.address.postal_code);
+                    var text2 = googleMapObj.address.city;
+                    $("#CityGuid option").filter(function () {
+                        if (this.text == text2) {
+                            googleMapObj.isCityFound = true;
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }).attr('selected', true);
+
+                    $("#CityGuid").trigger("chosen:updated.chosen");
+
+                    if (!googleMapObj.isCityFound) {
+                        $("#CityGuid").val('00000000-0000-0000-0000-000000000000').trigger("chosen:updated.chosen");
+                        $("#CityName").val(googleMapObj.address.city).removeClass("display-none");
+                    }
+                    else {
+                        $("#CityName").val('').addClass("display-none")
+                    }
+                }
+            }
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoolgeMapKey&callback=googleMapObj.intializeMap"></script>
+}

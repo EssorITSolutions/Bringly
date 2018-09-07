@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Bringly.UI
 {
@@ -12,7 +11,7 @@ namespace Bringly.UI
             bundles.Add(new StyleBundle("~/css").Include(
 
                  //dropdown to auto help
-                 "~/Templates/scripts/Plugin/drpAUtoHelp/chosen.css"                 
+                 "~/Templates/scripts/Plugin/drpAUtoHelp/chosen.css"
 
                 //dropdown to auto help
                 , "~/Templates/scripts/Plugins/drpAUtoHelp/chosen.css"
@@ -26,8 +25,11 @@ namespace Bringly.UI
 
                  //datetime picker
                  , "~/Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.css"
-                         //"~/Templates/Scripts/Plugins/ckeditor/contents.css"
+               //"~/Templates/Scripts/Plugins/ckeditor/contents.css"
                ));
+
+            bundles.Add(new StyleBundle("~/Ngcss").Include("~/Templates/scripts/libs/styles.c362bfb2c56b5b71a27e.css"));
+
             #endregion
 
             #region javascript Bundel
@@ -65,10 +67,18 @@ namespace Bringly.UI
 
                  //datetime picker
                  , "~/Templates/Scripts/Plugins/DateTimePicker/jquery.datetimepicker.js"
-                   //ck editor js
+                 //ck editor js
 
-                 ,  "~/Templates/Scripts/Plugins/ckeditor/ckeditor.js"
-                  //,"~/Templates/Scripts/Plugins/ckeditor/plugins/maxlengthplugin.js"
+                 , "~/Templates/Scripts/Plugins/ckeditor/ckeditor.js"
+                //,"~/Templates/Scripts/Plugins/ckeditor/plugins/maxlengthplugin.js"
+                ));
+
+
+            bundles.Add(new ScriptBundle("~/NgLjs").Include(
+                "~/Templates/Scripts/libs/polyfills.7a0e6866a34e280f48e7.js",
+                "~/Templates/Scripts/libs/runtime.a66f828dca56eeb90e02.js",
+                "~/Templates/Scripts/libs/scripts.f2e2c97149783497f7de.js",
+                "~/Templates/Scripts/libs/main.48acce8a674ea1769784.js"
                 ));
             #endregion
         }

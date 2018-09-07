@@ -1,7 +1,16 @@
-﻿
+﻿@model Bringly.Domain.User.Dashboard
 @{
     ViewBag.Title = Bringly.DomainLogic.UserVariables.UserName;
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+    int completedOrderCount = 0, cancelledOrderCount = 0, pendingOrderCount = 0, totalOrderCount = 0, rejectedOrderCount = 0;
+    if (Model.MyOrder != null)
+    {
+        completedOrderCount = Model.MyOrder.CompletedOrderCount;
+        cancelledOrderCount = Model.MyOrder.CancelledOrderCount;
+        pendingOrderCount = Model.MyOrder.PendingOrderCount;
+        rejectedOrderCount = Model.MyOrder.RejectedOrderCount;
+        totalOrderCount = completedOrderCount + cancelledOrderCount + pendingOrderCount + rejectedOrderCount; 
+    }
 }
 @section BreadCrum{
     <li class="breadcrumb-item active">Dashboard</li>
@@ -17,105 +26,108 @@
                         <h4 class="heading-sub">My Orders</h4>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <p class="pie-text"><i class="square-icon"></i> Completed - 7</p>
-                                <p class="pie-text yellow-text"><i class="square-icon"></i> Current - 1</p>
-                                <p class="pie-text orange-text"><i class="square-icon"></i> Cancelled - 2</p>
+                                <p class="pie-text anchor-div" onclick="window.location.href='/orders/myorders/?activeTab=completed'"><i class="square-icon"></i> Completed - @completedOrderCount</p>
+                                <p class="pie-text yellow-text anchor-div" onclick="window.location.href='/orders/myorders/?activeTab=pending'"><i class="square-icon"></i> Current - @pendingOrderCount</p>
+                                <p class="pie-text orange-text anchor-div" onclick="window.location.href='/orders/myorders?activeTab=cancelled'"><i class="square-icon"></i> Cancelled - @cancelledOrderCount</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <img src="/templates/images/pie-chart.png" class="float-md-right float-sm-left" />
+                                <canvas id="chart-area" width="580" height="580" style="display: block; width: 580px; height: 580px;"></canvas>
                             </div>
                             <div class="col-lg-12">
-                                <h5 class="text-left">Total - 10</h5>
+                                <h5 class="text-left anchor-div" onclick="window.location.href='/orders/myorders/'">Total - @totalOrderCount</h5>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-Messages">
                         <h4 class="heading-sub">My Messages</h4>
-                        <div class="message">
-                            <div class="media">
-                                <img class="d-flex mr-3" src="/templates/images/profile.png" width="28px" height="28px">
-                                <div class="media-body">
-                                    <h4 class="mt-0">Larry k. &nbsp;&nbsp;<span class="tag-date">June 21 2017</span></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur ...</p>
+                        @if (Model != null && Model.MyMessage != null && Model.MyMessage.Count > 0)
+                        {
+                            <div class="message">
+                                @foreach (var message in Model.MyMessage)
+                                {
+                                    <div class="media">
+                                        @if (message.EmailFromImagePath != null && message.EmailFromImagePath.Contains("http"))
+                                        {
+                                            <img class="d-flex mr-3" src="@message.EmailFromImagePath" width="28" height="28">
+                                        }
+                                        else
+                                        {
+                                            <img class="d-flex mr-3" src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User, message.EmailFromImagePath))" width="28" height="28">
+                                        }
+                                        <div class="media-body anchor-div" onclick="openEmailMessagePopup(event,'@message.EmailGuid')">
+                                            <h4 class="mt-0">@message.FromName &nbsp;&nbsp;<span class="tag-date">@message.DateCreated.ToString()</span></h4>
+                                            <p>@message.Subject</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="message">
+                                <div class="media">
+                                    No record found.
                                 </div>
                             </div>
-
-                            <div class="media">
-                                <img class="d-flex mr-3" src="/templates/images/profile.png" width="28px" height="28px">
-                                <div class="media-body">
-                                    <h4 class="mt-0">Emma J. &nbsp;&nbsp;<span class="tag-date">June 21 2017</span></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur ...</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-wallet ">
                         <h4 class="heading-sub">My Wallet</h4>
                         <div class="row">
-
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <p>Your wallet status:</p>
-                                <h3>45<sub>$</sub></h3>
+                                <h3>@(Model.Wallet != null ? Model.Wallet.Amount.ToString() : "0.0")<sub>$</sub></h3>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <img src="/templates/images/wallet.png" class="float-md-right float-sm-left" />
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-Favourites">
                         <h4 class="heading-sub">My Favourites</h4>
-                        <div class="message">
-                            <div class="media">
-                                <img src="/templates/images/client-logo.png" class="d-flex mr-3" />
-                                <div class="media-body">
-                                    <h4 class="mt-0">
-                                        Panos Pizza &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span class="tag-star">
-                                            <a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a>
-                                        </span>
-                                        <span class="float-right">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </h4>
-                                    <p>Italian cuisine, European</p>
+                        @if (Model.MyFavourites != null && Model.MyFavourites.Count > 0)
+                        {
+                            <div class="message">
+                                @foreach (var favourite in Model.MyFavourites)
+                                {
+                                    <div class="media">
+                                        <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User, favourite.BusinessImage))" class="d-flex mr-3" width="28" height="28" />
+                                        <div class="media-body">
+                                            <h4 class="mt-0">
+                                                @favourite.BusinessName &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span class="float-right">
+                                                    <i class="fa fa-heart"></i>
+                                                </span>
+                                            </h4>
+                                            <p>@favourite.CityName</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="message">
+                                <div class="media">
+                                    No record found.
                                 </div>
                             </div>
-
-                            <div class="media">
-                                <img src="/templates/images/client-logo.png" class="d-flex mr-3" />
-                                <div class="media-body">
-                                    <h4 class="mt-0">
-                                        Qausi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span class="tag-star">
-                                            <a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a>
-                                        </span>
-                                        <span class="float-right">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </h4>
-                                    <p>Italian cuisine, European</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 }
 else
-{ 
+{
     <div class="col-lg-9 col-md-7 col-sm-12">
         <div class="right-side">
             <div class="row">
@@ -124,46 +136,56 @@ else
                         <h4 class="heading-sub">My Orders</h4>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <p class="pie-text"><i class="square-icon"></i> Completed - 7</p>
-                                <p class="pie-text yellow-text"><i class="square-icon"></i> Current - 1</p>
-                                <p class="pie-text orange-text"><i class="square-icon"></i> Cancelled - 2</p>
-                                <p class="pie-text green-text"><i class="square-icon"></i> Rejected - 2</p>
-                                <h5 class="text-center">Total - 269</h5>
+                                <p class="pie-text anchor-div" onclick="window.location.href='/orders/myorders/?activeTab=completed'"><i class="square-icon"></i> Completed - @completedOrderCount</p>
+                                <p class="pie-text yellow-text anchor-div" onclick="window.location.href='/orders/myorders/?activeTab=pending'"><i class="square-icon"></i> Current - @pendingOrderCount</p>
+                                <p class="pie-text orange-text anchor-div" onclick="window.location.href='/orders/myorders?activeTab=cancelled'"><i class="square-icon"></i> Cancelled - @cancelledOrderCount</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <img src="/templates/images/pie-chart.png" class="float-md-right float-sm-left" />
+                                <div id="container" class="order-graph" style="height:180px; width:180px">
+                                    <canvas id="chart-area" width="580" height="580" style="display: block; width: 580px; height: 580px;"></canvas>
+                                </div>
                             </div>
                             <div class="col-lg-12">
-                                <h5 class="text-center">Total - 269</h5>
+                                <h5 class="text-center anchor-div" onclick="window.location.href='/orders/myorders/'">Total - @totalOrderCount</h5>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-Messages min-height-box">
                         <h4 class="heading-sub">My Messages</h4>
-                        <div class="message">
-                            <div class="media">
-                                <img class="d-flex mr-3" src="/templates/images/profile.png" width="28" height="28">
-                                <div class="media-body">
-                                    <h4 class="mt-0">Larry k. &nbsp;&nbsp;<span class="tag-date">June 21, 2017</span></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur ...</p>
+                        @if (Model != null && Model.MyMessage != null && Model.MyMessage.Count > 0)
+                        {
+                            <div class="message">
+                                @foreach (var message in Model.MyMessage)
+                                {
+                                    <div class="media">
+                                        @if (message.EmailFromImagePath != null && message.EmailFromImagePath.Contains("http"))
+                                        {
+                                            <img class="d-flex mr-3" src="@message.EmailFromImagePath" width="28" height="28">
+                                        }
+                                        else
+                                        {
+                                            <img class="d-flex mr-3" src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.User, message.EmailFromImagePath))" width="28" height="28">
+                                        }
+                                        <div class="media-body anchor-div" onclick="openEmailMessagePopup(event,'@message.EmailGuid')">
+                                            <h4 class="mt-0">@message.FromName &nbsp;&nbsp;<span class="tag-date">@message.DateCreated.ToString()</span></h4>
+                                            <p>@message.Subject</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="message">
+                                <div class="media">
+                                    No record found.
                                 </div>
                             </div>
-
-                            <div class="media">
-                                <img class="d-flex mr-3" src="/templates/images/profile.png" width="28" height="28">
-                                <div class="media-body">
-                                    <h4 class="mt-0">Emma J. &nbsp;&nbsp;<span class="tag-date">June 21, 2017</span></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur ...</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-wallet merchant-wallet">
                         <h4 class="heading-sub">My Wallet</h4>
@@ -172,38 +194,68 @@ else
                                 <p>Your wallet status:</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <h3>152<sub>$</sub></h3>
+                                <h3>@(Model.Wallet != null ? Model.Wallet.Amount.ToString() : "0.0")<sub>$</sub></h3>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <a href="#" class="btn btn-primary btn-lg">WITHDRAW</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-Favourites">
                         <h4 class="heading-sub">My Reviews</h4>
-                        <div class="message">
-                            <div class="media">
-                                <img class="d-flex mr-3" src="/templates/images/profile.png" width="28" height="28">
-                                <div class="media-body">
-                                    <h4 class="mt-0">
-                                        Maty K. &nbsp;
-                                        <span class="tag-star">
-                                            <a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a><a href="#"><i class="fa fa-star"></i></a>
-                                        </span>
-
-                                    </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed malesuada ...</p>
+                        @if (Model.MyReview != null && Model.MyReview.GivenBusinessReviews.Count > 0)
+                        {
+                            <div class="message">
+                                @foreach (var review in Model.MyReview.GivenBusinessReviews)
+                                {
+                                    <div class="media">
+                                        <img class="d-flex mr-3" src="/templates/images/profile.png" width="28" height="28">
+                                        <div class="media-body">
+                                            <h4 class="mt-0">
+                                                @review.UserName &nbsp;
+                                            </h4>
+                                            <section class='rating-widget '>
+                                                <!-- Rating Stars Box -->
+                                                <div class='rating-stars text-center'>
+                                                    <ul id='stars' class="review-list">
+                                                        <li class='star @(review.Rating >= 1 ? "selected" : "")' title='Poor' data-value='1'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class='star @(review.Rating >= 2 ? "selected" : "")' title='Fair' data-value='2'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class='star @(review.Rating >= 3 ? "selected" : "")' title='Good' data-value='3'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class='star @(review.Rating >= 4 ? "selected" : "")' title='Excellent' data-value='4'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class='star @(review.Rating == 5 ? "selected" : "")' title='WOW!!!' data-value='5'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class="star-rating">Rating: @(review.Rating)</li>
+                                                    </ul>
+                                                </div>
+                                            </section>
+                                            <div class="clearfix"></div>
+                                            @Html.Partial("_ReviewContent", review.Review)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="message">
+                                <div class="media">
+                                    No record found.
                                 </div>
                             </div>
-
-                        </div>
+                        }
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box my-wallet">
                         <h4 class="heading-sub">My Transactions</h4>
@@ -216,19 +268,25 @@ else
                                 <img src="/templates/images/doller-icon.png" class="float-md-right float-sm-left" />
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="shadow-box review-rating">
                         <h4 class="heading-sub">My Restaurant</h4>
                         <div class="message">
                             <div class="media">
-                                <img src="/templates/images/client-logo-lg.png" class="d-flex mr-3">
+                                @if (Model.MyReview != null && Model.MyReview.BusinessImage != null)
+                                {
+                                    <img class="d-flex mr-3" src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Restaurant, Model.MyReview.BusinessImage))" width="100" height="100">
+                                }
+                                else
+                                {
+                                    <img src="/templates/images/client-logo-lg.png" class="d-flex mr-3">
+                                }
+
                                 <div class="media-body">
                                     <h4 class="mt-0">
-                                        Pano's Pizza
+                                        Business Name
                                     </h4>
                                     <p class="rating">
                                         <span class="tag-star">
@@ -245,6 +303,71 @@ else
             </div>
         </div>
     </div>
-
 }
 
+@section scripts{
+
+    <script>
+        var bgColors = ['#556080', '#F0C419', '#F0785A', '#71C285'];
+        var labels = ["Completed", 'Pending', 'Cancelled', 'Rejected'];
+        var chartData = [@completedOrderCount, @pendingOrderCount, @cancelledOrderCount , @rejectedOrderCount];
+
+        $(function () {
+            var canvas = document.getElementById("chart-area");
+            var ctx = canvas.getContext("2d");
+            Chart.defaults.global.legend.display = false;
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: chartData,
+                        backgroundColor: bgColors
+                    }],
+                    labels: labels
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    title: {
+                        display: false,
+                        text: 'My Orders'
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    },
+                    hover: {
+                        onHover: function (e, el) {
+                            canvas.style.cursor = el[0] ? "pointer" : "default";
+                        }
+                    }
+                },
+            });
+
+            canvas.onclick = function (evt) {
+                var activePoints = myDoughnutChart.getElementsAtEvent(evt);
+                if (activePoints[0]) {
+                    var chartData = activePoints[0]['_chart'].config.data;
+                    var idx = activePoints[0]['_index'];
+
+                    var label = chartData.labels[idx];
+                    var value = chartData.datasets[0].data[idx];
+                    window.location.href = `/orders/myorders?activeTab=${getTabNameByLabel(label)}`;
+                }
+            };
+        });
+        function getTabNameByLabel(label) {
+            var tabNames = {completed: "Completed", pending: 'Pending', cancelled: 'Cancelled', rejected: 'Rejected'};
+            switch (label) {
+                case tabNames.completed:
+                    return 'completed'
+                case tabNames.cancelled:
+                    return 'cancelled';
+                case tabNames.pending:
+                    return 'pending';
+                default:
+                    return undefined;
+            }
+        }
+    </script>
+}

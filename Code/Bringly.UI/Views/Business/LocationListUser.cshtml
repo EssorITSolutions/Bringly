@@ -1,12 +1,10 @@
 ﻿@model  Bringly.Domain.Business.MyBusiness
 @{
-
     var cityname = string.IsNullOrEmpty(Model.CityName) ? "" : Model.CityName;
     var businessname = string.IsNullOrEmpty(Model.BusinessName) ? "" : Model.BusinessName;
     ViewBag.Title = "List of " + businessname + "(s) in " + cityname;
     Layout = "~/Views/Shared/MasterPages/RestaurantMaster.cshtml";
     ViewBag.HideLeftSection = true;
-
 }
 
 @if (Model.BusinessObjects != null && Model.BusinessObjects.Count > 0)
@@ -21,6 +19,10 @@
     }
     else if (Model.BusinessName.IndexOf("restaurant", StringComparison.OrdinalIgnoreCase) >= 0)  //spa
     {
+        Html.RenderPartial("_RestaurantList", Model);
+    }
+    else if (Model.BusinessName.IndexOf("spa", StringComparison.OrdinalIgnoreCase) >= 0)  //spa
+    {
         <div class="col-md-12">
             <a href="/Business/UserAppointments" class="float-right btn btn-primary">Show Appointments</a>
         </div>
@@ -33,6 +35,6 @@
 }
 else
 {
-    @Html.Partial("_NoRecordFound", "No location(s) found.")
+    @Html.Partial("_NoRecordFound", "No record found.")
 }
 

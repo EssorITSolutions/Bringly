@@ -1,0 +1,175 @@
+﻿@model Bringly.Domain.Order
+@using Bringly.Domain.Enums
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="col-lg-9 col-md-7 col-sm-12" id="">
+        <div class="right-side">
+            <div class="page-sub-title">
+                <h3>Order Details</h3>
+            </div>
+            <div class="bg-white shadow-box tab-pane" id="step3">
+                <h5 class="text-weight">Order Id: @Model.OrderNumber</h5>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        @if (Model.UserProfile != null && Model.UserProfile.ShippingAddress != null)
+                        {
+                            <div class="Customer-Detail pl-0 pb-0">
+                                <p class="text-weight">Delivery Address: </p>
+                                <p>@Model.UserProfile.ShippingAddress.Address, @Model.UserProfile.ShippingAddress.PostCode</p>
+                                @Html.HiddenFor(x => x.UserProfile.ShippingAddress.PlaceId)
+                                @Html.HiddenFor(x => x.UserProfile.ShippingAddress.Latitude)
+                                @Html.HiddenFor(x => x.UserProfile.ShippingAddress.LoggedInUserId)
+                            </div>
+                        }
+                        <div class="Customer-Detail pl-0 pb-0">
+                            <p class="text-weight">Delivery Time: </p>
+                            <p>
+                                ASAP
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="Customer-Detail pl-0 pb-0">
+                            <p class="text-weight">Contact Information: </p>
+                            <p>@Model.UserProfile.FullName, @Model.UserProfile.MobileNumber</p>
+                        </div>
+
+                        <div class="Customer-Detail pl-0 pb-0">
+                            <p class="text-weight">Payment Method: </p>
+                            <p>@Model.PaymentMethod</p>
+                        </div>
+
+                        <div class="Customer-Detail pl-0 pb-0">
+                            <p class="text-weight">Order Status: </p>
+                            <p>@(Model.OrderStatusId != 0 ? Enum.GetName(typeof(OrderStatus), Model.OrderStatusId) : "")</p>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.OrderItems != null)
+                {
+                    decimal deliveryCharge = 0;
+                    decimal discount = 0;
+                    <div class="shopping-table mt-4">
+                        <div class="Customer-Detail pl-0 mb-2">
+                            <p class="text-weight">Order Details: </p>
+                        </div>
+                        <table id="cart" class="table table-responsive">
+                            <thead class="table-head">
+                                <tr>
+                                    <th style="width:34%" class="pl-0">Item</th>
+                                    <th style="width:17%">Quantity</th>
+                                    <th style="width:17%">Price</th>
+                                    <th style="width:17%">Discount</th>
+                                    <th style="width:15%; padding-left:3.60rem !important;" class="px-5">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    discount += item.Discount;// * item.Quantity;
+                                    deliveryCharge += item.DeliveryCharge;
+
+                                    <tr class="align-items-center">
+                                        <td class="Product py-3 pl-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-4">
+                                                    <img src="@(Bringly.DomainLogic.CommonDomainLogic.GetImagePath(Bringly.Domain.Enums.ImageType.Item, item.ItemImage))" class="img-fluid">
+                                                </div>
+                                                <div class="col-8">
+                                                    <h5 class="product-name">@item.ItemName</h5>
+                                                    <p>
+                                                        @(string.IsNullOrEmpty(item.ItemWeight) ? "" : string.IsNullOrEmpty(item.ItemSize) ? item.ItemWeight : item.ItemWeight + " / " + item.ItemSize)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="Quantity py-3">
+                                            <div class="row align-items-center px-4">
+                                                <span class="quanity-input">@item.Quantity</span>
+                                            </div>
+                                        </td>
+                                        <td class="Price py-3">
+                                            <div class="row align-items-center">
+                                                <span class="td-content">@item.ItemPrice<sub>$</sub></span>
+                                            </div>
+                                        </td>
+
+                                        <td class="discout py-3">
+                                            <div class="row align-items-center">
+                                                <span class="td-content">@item.Discount<sub>$</sub></span>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center action-button py-3">
+                                            <div class="row align-items-center px-5">
+                                                <span class="td-content">@((item.ItemPrice * item.Quantity) - item.Discount )<sub>$</sub></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td>
+                                        <table class="no-border">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Subtotal:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Delivery:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Discount:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total:</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="no-border" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">@Model.SubTotal $</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">@(deliveryCharge <= 0 ? "FREE" : deliveryCharge.ToString() + " $") </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">@discount $</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-5"><span class="total-amount">@Model.Total $</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                </tr>
+
+                                <tr class="foot-button">
+                                    <td>
+                                        <a href="@HttpContext.Current.Request.UrlReferrer.OriginalString" class="btn btn-secondary btn-lg">BACK</a>
+                                    </td>
+                                    <td colspan="3"></td>
+                                    <td></td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

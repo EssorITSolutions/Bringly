@@ -3,45 +3,42 @@
 <html lang="en">
 <head>
     @{Html.RenderPartial("_pageHeader");}
+    <base href="@HttpContext.Current.Request.Url.AbsoluteUri" />
 </head>
 <body>
     @if (!Convert.ToBoolean(ViewBag.TopMenuSection))
     {
         Html.RenderAction("TopMenu", "Menu");
     }
-    else {
+    else
+    {
         Html.RenderAction("SocialUserTopMenu", "Menu");
     }
-        <div class="container">
-            @if (!Convert.ToBoolean(ViewBag.BreadcrumSection))
-            {
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/User/Dashboard">Home</a></li>
-                    @RenderSection("BreadCrum", false)
-                </ol>
-            }
-            @if (Bringly.DomainLogic.UserVariables.IsAuthenticated)
-            {
-                <div class="main-heading">
-                    <h3>Welcome, @Bringly.DomainLogic.UserVariables.UserName !</h3>
-                </div>
-            }
-            @RenderSection("CustomizeTop", false)
-            <div class="dashboard-content inner-margin">
-                <div class="row">
-
-                    @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel", "User"); }
-
-                    @RenderBody()
-
-
-                </div>
+    <div class="container">
+        @if (!Convert.ToBoolean(ViewBag.BreadcrumSection))
+        {
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/User/Dashboard">Home</a></li>
+                @RenderSection("BreadCrum", false)
+            </ol>
+        }
+        @if (Bringly.DomainLogic.UserVariables.IsAuthenticated)
+        {
+            <div class="main-heading">
+                <h3>Welcome, @Bringly.DomainLogic.UserVariables.UserName !</h3>
             </div>
-
-
+        }
+        @RenderSection("CustomizeTop", false)
+        <div class="dashboard-content inner-margin">
+            <div class="row">
+                @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel", "User"); }
+                @RenderBody()
+            </div>
         </div>
+    </div>
 
-        <div class="clearfix"></div>
-        @{Html.RenderPartial("_pageFooter");}
-    </body>
+    <div class="clearfix"></div>
+    @{Html.RenderPartial("_pageFooter");}
+    @RenderSection("scripts", required: false)
+</body>
 </html>

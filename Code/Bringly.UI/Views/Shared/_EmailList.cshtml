@@ -1,6 +1,4 @@
-﻿@*@using Bringly.DomainLogic.BaseClass.DomainLogicBase*@
-
-@model Bringly.Domain.MyEmail
+﻿@model Bringly.Domain.MyEmail
 @{
     Layout = null;
     var isSentBox = Request.Url.AbsoluteUri.Contains("Sent");
@@ -9,11 +7,11 @@
 }
 
 @foreach (Bringly.Domain.Email email in Model.Emails)
-{
+{ 
     <div divemailguid="@email.EmailGuid" class="emails-count">
         <div class="cursor-pointer shadow-box @(!isSentBox?email.Read?"":"unreaded":"")" href="javascript:void(0)">
             <div class="row">
-                <div class="col-lg-10 col-md-6 col-sm-12 mail-name-div">
+                <div class="col-lg-8 col-md-6 col-sm-12 mail-name-div">
 
                     @if (!isSentBox)
                     {
@@ -22,8 +20,8 @@
                             <span class="custom-control-indicator"></span>
                         </label>
                         <div data-toggle="collapse" onclick="MarkEmailasReadOnInboxClick(this);" data-target="#@email.EmailGuid" class="name-col">
-                            <h4>
-                                <b> @email.FromName</b>
+                            <h4 class='@(!email.Read ? "font-bolder" : "")'>
+                                 @email.FromName
                             </h4>
                         </div>
                     }
@@ -36,16 +34,14 @@
                         </div>
                     }
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 normal-cursor">
-                    <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
+                <div class="col-lg-4 col-md-6 col-sm-12 normal-cursor">
+                    <p class="text-right">@email.DateCreated</p>
                 </div>
             </div>
             <div id="divemaildetail" onclick="MarkEmailasReadOnInboxClick(this);" data-toggle="collapse" data-target="#@email.EmailGuid" class="divemaildetail">
-
                 <div class="subject-tag" onclick="MarkEmailasReadOnInboxClick(this);" data-toggle="collapse" data-target="#@email.EmailGuid">
                     <h5>@email.Subject</h5>
                 </div>
-
             </div>
             <div class="clear"></div>
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -64,14 +60,14 @@
                 }
             </div>
             <div id="@email.EmailGuid" class="mail-detail-box collapse">
-                <span data-toggle="collapse" data-target="#@email.EmailGuid" class=" close-link" title="Close"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <span data-toggle="collapse" data-target="#@email.EmailGuid" class=" close-link" title="Close"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
                 <div class="shadow-box" href="javascript:void(0)">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-12">
                             @if ((!isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Buyer) || (isSentBox && Bringly.DomainLogic.UserVariables.UserRole == Bringly.Domain.Enums.User.UserRoles.Merchant))
                             {
                                 <div class="user-profile">
-                                    <img src="@email.RestaurantImage" />
+                                    <img src="@email.RestaurantImage" alt="Business Image" />
                                 </div>
                             }
                             else
@@ -84,7 +80,7 @@
                         <div class="col-lg-10 col-md-9 col-sm-12">
                             <div class="user-detail">
                                 <h3><b></b>@email.FromName</h3>
-                                <p class="text-right">@Bringly.Domain.BaseClasses.DomainBase.Dateformat(email.DateCreated)</p>
+                                <p class="text-right">@email.DateCreated</p>
                                 <h5>@email.Subject</h5>
                                 <p>
                                     <b>To :</b>

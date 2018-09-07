@@ -1,0 +1,18 @@
+﻿@model Bringly.Domain.MyEmail
+
+@if (Model.Emails != null && Model.Emails.Count > 0)
+{
+    <div id="partialEmaiList">
+        @Html.Partial("_EmailList", Model)
+    </div>
+}
+else
+{
+    <div class="right-side mail-box">
+        <div class="shadow-box top-bar-mail">
+            <div class="row">
+                @Html.Partial("_NoRecordFound", "No record found.")
+            </div>
+        </div>
+    </div>
+}

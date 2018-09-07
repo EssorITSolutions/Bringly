@@ -1,0 +1,55 @@
+﻿@model Guid
+@{
+    ViewBag.Title = "ThanksYou";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+}
+<style>
+    .btn-danger {
+        background-color: #FA5342;
+    }
+</style>
+<div class="thanku-page">
+    <h2>Thank You!</h2>
+    <p> Your email address has been successfully verified.</p>
+   
+    <div class="varification-msg">
+        @using (Html.BeginForm("createpassword", "home", FormMethod.Post))
+        {
+            @Html.Hidden("guid", Convert.ToString(Model));
+            <div class="row">
+
+                <div class="col-xl-12 text-justify">
+                    <div class="form-group">
+                       <h4>Please set your password.</h4>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><span>Enter Password: <span class="required"> *</span></span></label>
+                        @Html.TextBox("password", "", new { @class = "form-control", type = "password", @required = true, @pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}", @title = "Must contain at least one number and one uppercase and one special letter, and at least 8 or more characters" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><span>Confirm Password: <span class="required"> *</span></span></label>
+                        @Html.TextBox("confirm-password", "", new { @class = "form-control", type = "password", @required = true, @pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}", @title = "Must contain at least one number and one uppercase and one special letter, and at least 8 or more characters" })
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-danger">Create</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm-password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>

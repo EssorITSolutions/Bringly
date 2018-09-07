@@ -5,8 +5,8 @@
     //    $('ul.user-menu a[href$="/' + location.pathname.split("/")[2] + '"]').parents().addClass('active');
     //});
 
-   
-    
+
+
 });/********Document Ready function Ends********/
 /*************************************** Bring Element To Center Starts *****************************************/
 /*
@@ -166,14 +166,14 @@ function PostDataWithSuccessParam(url, _data, _successHandler, ShowBlackImage) {
 }
 /************************************** *AJAX Custom POST Ends***************************************/
 /************************************** *AJAX Custom POST Starts***************************************/
-function PostDataWithFormSuccessParam(url,form, _data, _successHandler, ShowBlackImage) {
+function PostDataWithFormSuccessParam(url, form, _data, _successHandler, ShowBlackImage) {
     if (ShowBlackImage == null || ShowBlackImage == undefined) {
         ShowBlackImage = true;
     }
     $.ajax({
         type: 'POST',
         url: url,
-        data: { businessObject: form, _data: _data},
+        data: { businessObject: form, _data: _data },
         success: function successHandler(result) {
             _successHandler(result, _data)
         },
@@ -268,11 +268,11 @@ $(function () {
                             $('img[name=leftProfileImage]').attr("src", result.NewImage);
                         }
                         else {
-                            ErrorBlock(result.Message);           
-                        }                        
+                            ErrorBlock(result.Message);
+                        }
                     },
                     error: function (err) {
-                        ErrorBlock(err.statusText);                        
+                        ErrorBlock(err.statusText);
                     }
                 })
             } else {
@@ -299,7 +299,7 @@ $(function () {
                     data: fileData,
                     success: function (result) {
                         if (result.IsSuccess) {
-                          //  Success(result.Message);
+                            //  Success(result.Message);
                             $('img[name=imgItemImage]').attr("src", result.NewImage);
                             $('#ItemImage').val(result.NewImage.substr(result.NewImage.lastIndexOf('/') + 1));
                         }
@@ -317,6 +317,25 @@ $(function () {
         } else {
             ErrorBlock("Please upload a valid image file.");
         }
+    });
+
+    $(document).ajaxStart(function () {
+        $.blockUI({
+            css: {
+                border: 'none',
+                padding: '15px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
+            }
+        }); 
+    });
+
+    $(document).ajaxComplete(function () {
+        $.unblockUI();
+        //setTimeout($.unblockUI, 2000); 
     });
 });
 
@@ -338,7 +357,7 @@ function closeModelPopUpForm(refereshPreviousPage) {
     if (refereshPreviousPage == true) {
         window.parent.location.reload();
     }
-   // alert(model_windowId + "!" + model_DivModalOverlayId);
+    // alert(model_windowId + "!" + model_DivModalOverlayId);
     $("#" + model_windowId).remove();
     $("#" + model_DivModalOverlayId).remove();
     $(window).scroll(function () { return true; });
@@ -351,16 +370,17 @@ function closeModelPopUpFormById(refereshPreviousPage, modelWindowId) {
         window.parent.location.reload();
     }
     $("#" + modelWindowId).remove();
+    $("#divmodaloverlay").remove();
     $(window).scroll(function () { return true; });
     $("body").css("overflow", "auto");
 }
-function closeModelPopUpFormCompose(Ismessagesent) {   
+function closeModelPopUpFormCompose(Ismessagesent) {
     $("#" + model_windowId).remove();
     $("#" + model_DivModalOverlayId).remove();
     $(window).scroll(function () { return true; });
     $("body").css("overflow", "auto");
-    if (Ismessagesent=='True') {
-     
+    if (Ismessagesent == 'True') {
+
         swal({
             title: "Mail Info!",
             text: "Message sent successfully.",
@@ -369,7 +389,7 @@ function closeModelPopUpFormCompose(Ismessagesent) {
             timer: 3000,
             showConfirmButton: false
         });
-       
+
     }
     else {
         swal({
@@ -409,7 +429,10 @@ var model_windowId, model_DivModalOverlayId;
                 $("#" + params.DivModalOverlayId).remove();
             },
         };
-
+        var left = 50;
+        if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) {
+            left = 50;
+        }
         //Overwrite default options 
         // with user provided ones 
         // and merge them into "options". 
@@ -417,14 +440,22 @@ var model_windowId, model_DivModalOverlayId;
 
         var modal = "";
         modal += "<div id=\"" + params.DivModalOverlayId + "\" class=\"modal-overlay\"></div>";
-        modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\" width:" + params.width + "px; height:" + params.height + "px; margin-top:-" + (params.height / 2) + "px; margin-left:-" + (params.width / 2) + "px;\" >";
+        if (screen.width <= 1024) {
+            //scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\"width:" + params.width + "px; height:" + params.height + "px; top:1%; position: absolute;left: " + left + "%;transform: translateX(-50%);-webkit-transform: translateX(-50%); -moz-transform: translateX(-50%); -ms-transform: translateX(-50%); max-width:90%;\">";
+        }
+        else {
+            modal += "<div id=\"" + params.windowId + "\" class=\"modal-window\" style=\"width:" + params.width + "px; height:" + params.height + "px; margin-top:-" + (params.height / 2) + "px; margin-left:-" + (params.width / 2) + "px;\">";
+        }
+        //modal += "<div  id=\"" + params.windowId + "\" class=\"modal-window\" style=\" width:" + params.width + "px; height:" + params.height + "px; margin-top:-" + (params.height / 2) + "px; margin-left:-" + (params.width / 2) + "px;\" >";
         if (params.addCloseButton) {
             modal += "<button style=\"float:right\" class=\"btn btn-primary\" onclick=\"closeModelPopUpForm()\">Close</button>";
         }
         modal += "<iframe width='" + params.width + "'  id='" + params.IFrameId + "' height='" + params.height + "' frameborder='0' scrolling='" + scroll + "' allowtransparency='true' src='" + params.url + "'></iframe>";
         modal += "</div>";
         $(params.parent).append(modal);
-   
+
         $(window).scroll(function () { return false; });
         $("body").css("overflow", "hidden");
 
@@ -437,7 +468,7 @@ var model_windowId, model_DivModalOverlayId;
         model_windowId = params.windowId;
         model_DivModalOverlayId = params.DivModalOverlayId;
         //Close on PouUp Close
-        
+
         $(document).keyup(function (e) {
             if (e.keyCode == 27) {
                 params.close();
@@ -456,7 +487,7 @@ $('.full-content a').on('click', function () {
     $(this).parent().removeClass('display-inline-block').addClass('display-none');
     $(this).parent().prev().removeClass('display-none').addClass('display-inline-block');
 })
-function Delete(text, confirmButtonText, url,param, Response) {
+function Delete(text, confirmButtonText, url, param, Response) {
     swal({
         title: "Are you sure?",
         text: text,
@@ -471,3 +502,26 @@ function Delete(text, confirmButtonText, url,param, Response) {
         });
 }
 
+function jqueryUISuccess(msg) {
+    $.blockUI({
+        message: msg,
+        fadeIn: 700,
+        fadeOut: 700,
+        timeout: 2000,
+        showOverlay: false,
+        centerY: false,
+        css: {
+            width: '350px',
+            top: '10px',
+            left: '',
+            right: '10px',
+            border: 'none',
+            padding: '5px',
+            backgroundColor: 'green',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .6,
+            color: '#fff'
+        }
+    }); 
+}

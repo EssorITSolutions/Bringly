@@ -28,22 +28,15 @@
                 <div class="form-group">
                     <p class="text-right forgot-password"><a href="/Home/ForgotPassword">Forgot password?</a></p>
                 </div>
-
                 <div class="form-group">
-
                     <button type="submit" class="btn btn-primary btn-lg">SIGN IN</button>
-
                     <p class="button-link">Don't have account? <a href="/Home/UserRegistration">Sign up</a></p>
-
                 </div>
-
-
             </form>
         </div>
-
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="right-content-form">
-                @{ Html.RenderPartial("~/Views/Home/_socialMediaLogin.cshtml");}
+                @{ Html.RenderPartial("~/Views/Home/_socialMediaLogin.cshtml", "login");}
             </div>
         </div>
     </div>

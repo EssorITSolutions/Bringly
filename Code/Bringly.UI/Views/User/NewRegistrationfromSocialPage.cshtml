@@ -7,11 +7,8 @@
     ViewBag.HideLeftSection = true;
     ViewBag.BreadcrumSection = true;
     ViewBag.TopMenuSection = true;
-    //Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
 }
-@*@section BreadCrum{
-        <li class="breadcrumb-item active">Personal Information</li>
-    }*@
+
 <div class="col-lg-9 col-md-7 col-sm-12">
     <div>
         <h4>Please complete registration</h4>
@@ -21,7 +18,48 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <form role="form" method="post" class="formuserprofile">
                     @Html.HiddenFor(m => m.UserGuid)
-                    <div class="card personal-information">
+                    <div class="card personal-information display-block" id="divMerchantMandatoryFields">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-9 col-sm-8">
+                                    <h5 class="heading-sub">Register As</h5>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="radio-option">
+                                <label class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.UserRegistrationType, "2", new { @checked = "checked", @class = "custom-control-input", @onchange = "CheckIsMerchant(this);" })
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description"> I am a Buyer</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.UserRegistrationType, "3", new { @class = "custom-control-input", @onchange = "CheckIsMerchant(this);" })
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">I am a Merchant</span>
+                                </label>
+                                @Html.HiddenFor(m => m.UserRegistrationType)
+                            </div>
+                            <div class="radio-option display-none" id="divMerchantMandatory">
+                                <label class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.CompanyorIndividual, "Company", new { @class = "custom-control-input checkboxcompany" })
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Company</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.CompanyorIndividual, "Individual", new { @class = "custom-control-input" })
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Individual</span>
+                                </label>
+                                <label>
+                                    (Mandatory if user is of type "Merchant".)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card personal-information" id="divPersonalInfoRegister">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-10 col-md-9 col-sm-8">
@@ -46,7 +84,14 @@
                                     <span>E-mail<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                                    @if (ViewBag.isFromSocialMedia != null && ViewBag.isFromSocialMedia)
+                                    {
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @readOnly = "true" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                                    }
                                     @Html.ValidationMessageFor(m => m.EmailAddress)
                                 </div>
                             </div>
@@ -61,6 +106,40 @@
                             </div>
                         </div>
 
+                        @if (ViewBag.isFromSocialMedia != null && ViewBag.isFromSocialMedia)
+                        {
+                            <div class="display-none" id="divMerchantBusinessType">
+                                <div class="card-header display-none" id="divBusinessInfoRegister">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-9 col-sm-8">
+                                            <h5 class="heading-sub">Business Information</h5>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                            <span>Business Type<span class="required"> *</span> :</span>
+                                        </label>
+                                        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                            @Html.DropDownListFor(m => m.BusinessTypeGuid, Model.BusinessTypeList.Select(x => new SelectListItem { Text = x.BusinessTypeName, Value = x.BusinessTypeGuid.ToString() }), "--Choose a Business Type--", new { @class = "chosen-select businesstype", @placeholder = "Choose a Business Type.." })
+                                            @Html.ValidationMessageFor(m => m.BusinessTypeGuid)
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
+                                            <span>CVR Number<span class="required"> *</span> :</span>
+                                        </label>
+                                        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                            @Html.TextBoxFor(m => m.CVRNumber, new { @class = "form-control", @onKeyPress = "if(this.value.length==10) return false;", @type = "number" })
+                                            @Html.ValidationMessageFor(m => m.CVRNumber)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-10 col-md-9 col-sm-8">
@@ -73,25 +152,33 @@
                         <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>Billing Address:</span>
+                                    <span>Billing Address:<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
                                     @Html.TextBoxFor(m => m.BillingAddress.Address, new { @class = "form-control" })
-                                    @Html.ValidationMessage("BillingAddress_Address")
+                                    @Html.ValidationMessageFor(m => m.BillingAddress.Address)
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>City:</span>
+                                <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12">
+                                    <span>City<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.DropDownList("BillingAddress_CityGuid", Model.Cities.Select(t => new SelectListItem { Text = t.CityName, Value = t.CityGuid.ToString(), Selected = (t.CityGuid == Model.BillingAddress.CityGuid) }), " ", new { @class = "form-control chosen-select billing" })
+                                    @Html.DropDownList("BillingAddress_CityGuid", Model.Cities.Select(t => new SelectListItem { Text = t.CityName, Value = t.CityGuid.ToString() }), " ", new { @class = "form-control chosen-select billing", @onchange = "onnewCityChanges(this, 'txtEnterBillingCityBox')" })
                                     @Html.ValidationMessage("BillingAddress_CityGuid")
                                 </div>
                             </div>
+                            <div class="form-group display-none" id="txtEnterBillingCityBox">
+                                <div class="row justify-content-end">
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.BillingAddress.CityName, new { @class = "form-control", @placeholder = "Enter billing city" })
+                                        @Html.ValidationMessageFor(m => m.BillingAddress.CityName)
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>PostCode:</span>
+                                    <span>PostCode<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
                                     @Html.TextBoxFor(m => m.BillingAddress.PostCode, new { @class = "form-control" })
@@ -101,39 +188,50 @@
                         </div>
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-lg-10 col-md-9 col-sm-8">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
                                     <h5 class="heading-sub">Shipping Information</h5>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4">
+                                <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input useragreement" type="checkbox" onchange="onCopyBillingAddressAsShippingAddressSocialMedia(this);"> Same as billing address.
+                                    </label>
                                 </div>
                             </div>
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>Shipping Address:</span>
+                                    <span>Shipping Address<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
                                     @Html.TextBoxFor(m => m.ShippingAddress.Address, new { @class = "form-control" })
-                                    @Html.ValidationMessage("ShippingAddress_Address")
+                                    @Html.ValidationMessage("ShippingAddress.Address")
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>City:</span>
+                                    <span>City<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
-                                    @Html.DropDownList("ShippingAddress_CityGuid", Model.Cities.Select(t => new SelectListItem { Text = t.CityName, Value = t.CityGuid.ToString(), Selected = (t.CityGuid == Model.ShippingAddress.CityGuid) }), " ", new { @class = "form-control chosen-select shipping" })
+                                    @Html.DropDownList("ShippingAddress_CityGuid", Model.Cities.Select(t => new SelectListItem { Text = t.CityName, Value = t.CityGuid.ToString() }), " ", new { @class = "form-control chosen-select shipping", @onchange = "onnewCityChanges(this, 'txtEnterShippingCityBox')" })
                                     @Html.ValidationMessage("ShippingAddress_CityGuid")
                                 </div>
                             </div>
+                            <div class="form-group display-none" id="txtEnterShippingCityBox">
+                                <div class="row justify-content-end">
+                                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
+                                        @Html.TextBoxFor(m => m.ShippingAddress.CityName, new { @class = "form-control", @placeholder = "Enter shipping city" })
+                                        @Html.ValidationMessageFor(m => m.ShippingAddress.CityName)
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">
-                                    <span>PostCode:</span>
+                                    <span>PostCode<span class="required"> *</span> :</span>
                                 </label>
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-form-label">
                                     @Html.TextBoxFor(m => m.ShippingAddress.PostCode, new { @class = "form-control" })
-                                    @Html.ValidationMessage("ShippingAddress_PostCode")
+                                    @Html.ValidationMessage("ShippingAddress.PostCode")
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -148,5 +246,8 @@
             </div>
         </div>
     </div>
-
 </div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Views/User/NewRegistrationfromSocialPage.js"></script>
+}

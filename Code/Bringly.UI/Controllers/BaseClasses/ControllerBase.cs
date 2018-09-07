@@ -5,6 +5,9 @@ using Utilities;
 
 namespace Bringly.UI.Controllers.BaseClasses
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ControllerBase : Controller
     {
         #region Message Functions

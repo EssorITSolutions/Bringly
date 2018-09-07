@@ -1,0 +1,71 @@
+﻿@model Bringly.Domain.Enums.PaymentType
+@{
+    ViewBag.Title = "PaymentOption";
+    Layout = "~/Views/Shared/MasterPages/AnonymousUser.cshtml";
+    string userGuid = Convert.ToString(ViewBag.userGuid);
+    string orderGuid = Convert.ToString(ViewBag.orderGuid);
+}
+
+<div class="container inner-margin">
+    <div class="wizard">
+
+        <ul class="nav nav-wizard">
+            <li>
+                @*<a href="@(HttpContext.Current.Request.UrlReferrer.AbsolutePath+ "?" +orderGuid)">Delivery</a>*@
+                <a href="javascript:void(0)">Delivery</a>
+            </li>
+            <li>
+                <a class="active" href="javascript:void(0)">Payment</a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)">Confirmation</a>
+                @*<a href="@(HttpContext.Current.Request.UrlReferrer.AbsolutePath+ HttpContext.Current.Request.UrlReferrer.Query)">Confirmation</a>*@
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="bg-white section-shadow tab-pane active mt-5" id="step2">
+                @using (Html.BeginForm("paymentoption", "orders", FormMethod.Post))
+                {
+                    @Html.Hidden("OrderGuid", orderGuid)
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <h5 class="text-weight">Payment</h5>
+                            <div class="media pt-2">
+                                <img class="d-flex mr-4" src="~/Templates/images/icon-9.png">
+                                <div class="media-body">
+                                    <div class="radio-option check-option pt-0">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio2" name="paymentType" checked=@(Bringly.Domain.Enums.PaymentType.Cash == Model ? true :false) type="radio" value="5" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Cash</span>
+                                        </label>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate tristique varius</p>
+                                </div>
+                            </div>
+
+                            <div class="media pt-4">
+                                <img class="d-flex mr-4" src="~/Templates/images/icon-10.png">
+                                <div class="media-body">
+                                    <div class="radio-option check-option pt-0">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio2" checked=@(Bringly.Domain.Enums.PaymentType.CreditCard == Model ? true :false) name="paymentType" type="radio" value="2" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Credit Card</span>
+                                        </label>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate tristique varius</p>
+                                </div>
+                            </div>
+                            <div class="media pt-4 pb-3">
+                                <a href="@("delivery?orderGuid=" + orderGuid)" class="btn btn-secondary btn-lg">BACK</a>
+                                <button type="submit" class="btn btn-secondary btn-lg ml-2">CONTINUE</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

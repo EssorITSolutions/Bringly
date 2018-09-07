@@ -9,7 +9,7 @@
 
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/User/Dashboard">Home</a></li>
             @RenderSection("BreadCrum", false)
         </ol>
         <div class="main-heading">
@@ -20,12 +20,8 @@
     <div class="container restaurant-list">
         <div class="dashboard-content inner-margin">
             <div class="row">
-
                 @if (!Convert.ToBoolean(ViewBag.HideLeftSection)) { Html.RenderAction("partialLeftPanel", "User"); }
-
                 @RenderBody()
-
-
             </div>
         </div>
     </div>

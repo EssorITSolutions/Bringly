@@ -1,0 +1,158 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @{Html.RenderPartial("_pageHeader");}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body class="popup-body google-map">
+    <div class="popup-heading">
+        <label class="close-button">
+            <button onclick="window.parent.closeModelPopUpForm(false)" class="btn-close">&times;</button>
+        </label>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <h1>Google Map</h1>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 gmap-input">
+                <input type="text" id="txtGoogleAddress" class="form-control" />
+                <button type="button" class="btn btn-primary" onclick="googleMapObj.addGoogleAddress()">Add</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+        <div id="googleMap"></div>
+    </div>
+    <div class="clearfix"></div>
+    @{Html.RenderPartial("_partialpageFooter");}
+    <script>
+        var googleMapObj = {
+            intializeMap: function () {
+                googleMapObj.googleMapAddressLat = 56.2639;
+                googleMapObj.googleMapAddressLng = 9.5018;
+                var mapCanvas = document.getElementById("googleMap");
+                var center = new google.maps.LatLng(googleMapObj.googleMapAddressLat, googleMapObj.googleMapAddressLng);
+                var mapOptions = {
+                    center: center,
+                    zoom: 7,
+                    fullscreenControl: false,
+                    streetViewControl: false,
+                    gestureHandling: 'greedy'
+                };
+                googleMapObj.map = new google.maps.Map(mapCanvas, mapOptions);
+                google.maps.event.addListener(googleMapObj.map, 'click', function (event) {
+                    googleMapObj.placeMarker(googleMapObj.map, event.latLng);
+                });
+
+                googleMapObj.marker = new google.maps.Marker({
+                    position: center,
+                    map: googleMapObj.map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                });
+
+                window.parent.googleMapAddressLat = googleMapObj.googleMapAddressLat;
+                window.parent.googleMapAddressLng = googleMapObj.googleMapAddressLng;
+
+                googleMapObj.marker.addListener('dragend', googleMapObj.handleMarkerDragEvent);
+                googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+            },
+            placeMarker: function (map, location) {
+                if (googleMapObj.marker) {
+                    googleMapObj.marker.setPosition(location);
+                } else {
+                    googleMapObj.marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                    });
+                }
+
+                googleMapObj.googleMapAddressLat = location.lat();
+                googleMapObj.googleMapAddressLng = location.lng();
+                window.parent.googleMapAddressLat = googleMapObj.googleMapAddressLat;
+                window.parent.googleMapAddressLng = googleMapObj.googleMapAddressLng;
+
+                googleMapObj.getAddressBylatLng(map, googleMapObj.marker);
+            },
+
+            handleMarkerDragEvent: function (event) {
+                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                googleMapObj.googleMapAddressLat = event.latLng.lat();
+                googleMapObj.googleMapAddressLng = event.latLng.lng();
+                window.parent.googleMapAddressLat = googleMapObj.googleMapAddressLat;
+                window.parent.googleMapAddressLng = googleMapObj.googleMapAddressLng;
+                googleMapObj.marker.setPosition(latlng); googleMapObj.getAddressBylatLng(googleMapObj.map, googleMapObj.marker);
+            },
+
+            getAddressBylatLng: function (map, marker) {
+
+                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + googleMapObj.googleMapAddressLat + "," + googleMapObj.googleMapAddressLng + "&key=AIzaSyB8nw_CKZq_9_RRnvRtJgug_a94qTBqp7k",
+                    function (response) {
+                        if (response && response.results) {
+                            googleMapObj.locationObj = response.results.filter(x => x.geometry.location_type != "APPROXIMATE")[0];
+                            if (googleMapObj.locationObj) {
+                                window.parent.googleMapLocationObj = googleMapObj.locationObj;
+                                window.parent.googleAddressPlaceId = googleMapObj.placeId = googleMapObj.locationObj.place_id;
+                                googleMapObj.address = googleMapObj.getAddressFeomLocationObj(googleMapObj.locationObj);
+                                $("#txtGoogleAddress").val(googleMapObj.locationObj.formatted_address);
+                                var infoWindowData = `Address: ${googleMapObj.locationObj.formatted_address}<br /> City: ${googleMapObj.address.city}<br />Country: ${googleMapObj.address.country}<br /> Postal Code: ${googleMapObj.address.postal_code}`;//'Address: ' + googleMapObj.googleMapAddressLat + '<br>Longitude: ' + googleMapObj.googleMapAddressLng
+                                if (googleMapObj.infowindow) {
+                                    googleMapObj.infowindow.setContent(infoWindowData)
+                                }
+                                else {
+                                    googleMapObj.infowindow = new google.maps.InfoWindow({
+                                        content: infoWindowData
+                                    });
+                                }
+
+                                googleMapObj.infowindow.open(map, marker);
+                                window.parent.placeId = googleMapObj.locationObj.place_id;
+                                window.parent.googleMapLocationAddress = googleMapObj.address;
+                            }
+                        }
+                    }, function (xhr, error, message) {
+                    });
+            },
+            getAddressFeomLocationObj: function (locationObj) {
+                if (locationObj) {
+                    var address = {};
+                    locationObj.address_components.map(function (obj) {
+                        obj.types.map(function (local) {
+                            switch (local) {
+                                case "route":
+                                    address["route"] = obj.long_name;
+                                    break;
+
+                                case "locality":
+                                    address["city"] = obj.long_name;
+                                    break;
+                                case "country":
+                                    address["country"] = obj.long_name;
+                                    break;
+                                case "postal_code":
+                                    address["postal_code"] = obj.long_name;
+                                    break;
+                            }
+                        })
+                    });
+                    return address;
+                }
+            },
+            addGoogleAddress: function () {
+                window.parent.setAddress(googleMapObj.address, googleMapObj.locationObj);
+                window.parent.closeModelPopUpForm(false);
+            }
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=@Model&callback=googleMapObj.intializeMap"></script>
+</body>
+</html>

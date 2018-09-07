@@ -4,16 +4,12 @@
     Layout = "~/Views/Shared/MasterPages/AuthorizeUserMaster.cshtml";
 }
 
-
-
-@if (Model.Emails != null && Model.Emails.Count > 0)
-{
 <div class="col-lg-9 col-md-7 col-sm-12 emaillist">
     <h2>Inbox</h2>
     <div class="right-side mail-box">
         <div class="shadow-box top-bar-mail">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <label class="custom-control custom-checkbox" title="Select all">
                         <input id="checkboxselectall" name="checkboxselectall" type="checkbox" class="checkboxselectall custom-control-input">
                         <span class="custom-control-indicator"></span>
@@ -27,29 +23,36 @@
                     </button>
                     <button title="Delete" type="button" class="email-header-btn delete-data btn btn-danger btn-disabled" disabled="disabled" onclick="DeleteInboxEmail();"><i class="fa fa-trash"></i></button>
                 </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <form method="get" id="searchSortEmailForm" action="/Email/Inbox">
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBox("EmailSearchQuery", "", new { @class = "form-control", @placeholder = "Search email...", @onkeyup = "InboxEmailSearchSortHandler(event);" })
+                            </div>
 
-                <div class="col-lg-6 text-right">
-
+                            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                @Html.DropDownList("EmailSortOrder", new List<SelectListItem> { new SelectListItem { Text = "Newest to Oldest", Value = "lto" }, new SelectListItem { Text = "Oldest to Newest", Value = "otl" } }, "Sort Email By", new { @class = "form-control", @onchange = "InboxEmailSearchSortHandler(event);" })
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div id="partialEmaiList">
-            @Html.Partial("_EmailList", Model)
-        </div>
-    </div>
-</div>
-}
-else
-{
-<div class="col-lg-9 col-md-7 col-sm-12">
-    <h2>Inbox</h2>
-    <div class="right-side mail-box">
-        <div class="shadow-box top-bar-mail">
-            <div class="row">
-                @Html.Partial("_NoRecordFound", "No message(s) found.")
+        @if (Model.Emails != null && Model.Emails.Count > 0)
+        {
+            <div id="partialEmaiList">
+                @Html.Partial("_EmailList", Model)
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="right-side mail-box">
+                <div class="shadow-box top-bar-mail">
+                    <div class="row">
+                        @Html.Partial("_NoRecordFound", "No message(s) found.")
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
-}
-
