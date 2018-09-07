@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bringly.Domain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ChooseCity
     {
         public List<City> Cities { get; set; }
@@ -13,6 +13,9 @@ namespace Bringly.Domain
         public List<City> TopCities { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class City
     {
         public Guid CityGuid { get; set; }
@@ -20,4 +23,12 @@ namespace Bringly.Domain
         public string CityUrlName { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Country {
+        public Guid CountryGuid { get; set; }
+        public string CountryName { get; set; }
+        public string CountriDisplayName { get; set; }
+    }
 }

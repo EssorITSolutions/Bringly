@@ -1,38 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bringly.Domain
 {
-    public class MyReview:Paging
+    /// <summary>
+    /// Review wrapper for buyer
+    /// </summary>
+    public class MyReview : Paging
     {
         public Guid ReviewGuid { get; set; }
-        public Guid RestaurantGuid { get; set; }
+        public Guid BusinessGuid { get; set; }
         public Guid UserGuid { get; set; }
         public bool IsSkipped { get; set; }
-        [Range(1, int.MaxValue,ErrorMessage = "Please provide rating.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please provide rating.")]
         public int Rating { get; set; }
-        [Required(ErrorMessage="Please fill review.")]
+        [Required(ErrorMessage = "Please fill review.")]
         [MaxLength(500)]
         public string Review { get; set; }
-        public string RestaurantImage { get; set; }
-        public string RestaurantName { get; set; }
-        public List<RestaurantReview> RestaurantReviews { get; set; }
+        public string BusinessImage { get; set; }
+        public string BusinessName { get; set; }
+
+        /// <summary>
+        /// List of business review with completed status
+        /// </summary>
+        public List<BusinessReview> GivenBusinessReviews { get; set; }
+
+        /// <summary>
+        /// List of business review with pending status
+        /// </summary>
+        public List<BusinessReview> PendingBusinessReviews { get; set; }
     }
-    public class RestaurantReview : BaseClasses.DomainBase
+
+    /// <summary>
+    /// Business Review Wrapper 
+    /// </summary>
+    public class BusinessReview : BaseClasses.DomainBase
     {
         public Guid ReviewGuid { get; set; }
-        public Guid RestaurantGuid { get; set; }
+        public Guid BusinessGuid { get; set; }
         public Guid UserGuid { get; set; }
-        public string RestaurantName { get; set; }
+        public string BusinessName { get; set; }
         public string UserName { get; set; }
         public int Rating { get; set; }
         public string Review { get; set; }
-        public string RestaurantImage { get; set; }
-        public bool IsCompleted { get; set; }
+        public string BusinessImage { get; set; }
+        public bool IsReviewed { get; set; }
         public bool IsSkipped { get; set; }
         public bool IsApproved { get; set; }
         public bool IsProcessed { get; set; }

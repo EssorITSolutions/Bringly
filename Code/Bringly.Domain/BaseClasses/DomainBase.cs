@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +23,9 @@ namespace Bringly.Domain.BaseClasses
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [JsonIgnore]
         [Required]
         public DateTime DateCreated
@@ -31,32 +33,41 @@ namespace Bringly.Domain.BaseClasses
             get { return _dateCreated; }
             set { _dateCreated = value; }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
         public static string Dateformat(DateTime _dateTime)
         {
             return _dateTime.ToString("dd/MM/yyyy");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
         public static string Time24hr(DateTime _dateTime)
         {
             return _dateTime.ToString("H:mm");
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         [JsonIgnore]
         public Guid LoggedInUserId
         {
             get
             {
-                //if (UserVariables.IsAuthenticated)
-                //    return UserVariables.LoggedInUserId;
-                //else
                 return Guid.Empty;
             }
         }
-        bool _isActive = true;
         public bool IsActive { get; set; }
         public Guid? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        bool _isDeleted = false;
         public bool IsDeleted { get; set; } 
         public Guid? DeletedBy { get; set; }
     }

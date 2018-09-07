@@ -5,6 +5,9 @@ namespace Bringly.Domain.Log
 {
     public class DataChangeLog : BaseClasses.DomainBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public DataChangeLog()
         {
             DataChangeLogId = Guid.NewGuid();
@@ -39,7 +42,7 @@ namespace Bringly.Domain.Log
         bool isActive = true, isDeleted = false;
 
         [Required]
-        public bool IsDeleted
+        public new bool IsDeleted
         {
             get { return isDeleted; }
             set { isDeleted = value; }
@@ -49,7 +52,7 @@ namespace Bringly.Domain.Log
         /// </summary>
 
         [Required]
-        public bool IsActive
+        public new bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
@@ -58,7 +61,6 @@ namespace Bringly.Domain.Log
         /// <summary>
         /// 
         /// </summary>
-
         public string IsActive_YesNo
         {
             get
@@ -67,12 +69,17 @@ namespace Bringly.Domain.Log
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? DeletedDateDateTime
         {
             get; set;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public Guid? FkDeletedBy { get; set; }
         #endregion
     }

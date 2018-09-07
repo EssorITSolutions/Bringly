@@ -1,23 +1,35 @@
 ﻿using Bringly.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bringly.Domain.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Message
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public MessageType MessageType { get; set; }
         public string MessageText { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Template
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public TemplateType TemplateType { get; set; }
         public string Body { get; set; }
         public string Subject { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Unauthorize
     {
         public string ReturnUrl { get; set; }

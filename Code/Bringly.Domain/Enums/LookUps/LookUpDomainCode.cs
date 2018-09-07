@@ -1,7 +1,8 @@
-﻿ 
-
-namespace Bringly.Domain.Enums.LookUps
+﻿namespace Bringly.Domain.Enums.LookUps
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum LookUpDomainCode
     {
     }

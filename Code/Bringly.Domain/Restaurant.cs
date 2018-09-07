@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bringly.Domain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class RestaurantSearch
     {
         public string CityName { get; set; }
         public Guid CityGuid { get; set; }
         public List<Restaurant> Restaurants { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Restaurant : BaseClasses.DomainBase
     {
         public Guid RestaurantGuid { get; set; }

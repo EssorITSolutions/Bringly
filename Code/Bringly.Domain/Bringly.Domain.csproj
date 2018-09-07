@@ -54,7 +54,9 @@
     <Compile Include="BaseClasses\DomainBase.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="CMSPage.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="DeliveryOption.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LookUps\LookUpDomainCode.cs" />
@@ -63,8 +65,11 @@
     <Compile Include="Log\DataChangeLog.cs" />
     <Compile Include="LookUps\LookUpDomains.cs" />
     <Compile Include="LookUps\LookUpDomainValues.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestQuery.cs" />
+    <Compile Include="SelectListItem.cs" />
     <Compile Include="ShoppingCart.cs" />
     <Compile Include="Restaurant.cs" />
     <Compile Include="Review.cs" />
@@ -72,12 +77,16 @@
     <Compile Include="User\ApplicationUserDetails.cs" />
     <Compile Include="User\ApplicationUserRoles.cs" />
     <Compile Include="User\ApplicationUsers.cs" />
+    <Compile Include="User\Dashboard.cs" />
     <Compile Include="User\UserProfile.cs" />
     <Compile Include="User\UserAddress.cs" />
+    <Compile Include="Wallet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities.Helper\Utilities.Helper.csproj">

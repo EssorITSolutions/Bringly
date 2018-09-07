@@ -1,15 +1,14 @@
-﻿using Bringly.Domain.Common;
-using Bringly.Domain.User;
+﻿using Bringly.Domain.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Bringly.Domain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MyEmail : Paging
     {
         public Guid EmailGuid { get; set; }
@@ -19,6 +18,10 @@ namespace Bringly.Domain
         public List<Email> Emails { get; set; }
         public bool Isemailreplyorforward { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Email : BaseClasses.DomainBase
     {
         Regex regex = new Regex("\\<[^\\>]*\\>");
@@ -26,6 +29,10 @@ namespace Bringly.Domain
         public Guid TemplateGuid { get; set; }
         public string FromName { get; set; }
         public string ToName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<EmailTo> EmailToList { get; set; }
         [MinLength(1)]
         public string[] EmailToGuid { get; set; }
@@ -52,8 +59,12 @@ namespace Bringly.Domain
 , (DateTime.Now - DateCreated).Minutes) + " ago";
             }
         }
-        public Guid CreatedByGuid { get; set; }
+        public Guid? CreatedByGuid { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class ComposeEmail
     {
         public Guid EmailGuid { get; set; }
@@ -66,9 +77,13 @@ namespace Bringly.Domain
         public string UserName { get; set; }
         public Guid CreatedGuid { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class EmailTo
     {
-        public Guid UserGuid { get; set; }
+        public Guid? UserGuid { get; set; }
         public string Name { get; set; }
     }    
 }

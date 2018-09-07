@@ -2,6 +2,9 @@
 
 namespace Bringly.Domain.Enums.User
 {
+    /// <summary>
+    /// User roles for the system
+    /// </summary>
     public enum UserRoles
     {
         [Display(Name = "System Admin")]
@@ -10,5 +13,8 @@ namespace Bringly.Domain.Enums.User
         Buyer = 2,
         [Display(Name = "Merchant")]
         Merchant = 3,
+
+        [Display(Name = "Manager")]
+        Manager = 4,
     }
 }

@@ -1,20 +1,25 @@
-﻿using Bringly.Domain.User;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
- 
+
 
 namespace Bringly.Domain.LookUps
 {
     public class LookUpDomains : BaseClasses.DomainBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public LookUpDomains()
         {
             LookUpDomainId = Guid.NewGuid();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Key]
         public Guid LookUpDomainId { get; set; }
 
@@ -31,7 +36,6 @@ namespace Bringly.Domain.LookUps
 
         [ForeignKey("CreatedByUser")]
         public Guid FkCreatedBy { get; set; }
-        //public virtual ApplicationUsers CreatedByUser { get; set; }
 
         #region 
         /// <summary>
@@ -40,7 +44,7 @@ namespace Bringly.Domain.LookUps
         bool isActive = true, isDeleted = false;
 
         [Required]
-        public bool IsDeleted
+        public new bool IsDeleted
         {
             get { return isDeleted; }
             set { isDeleted = value; }
@@ -50,7 +54,7 @@ namespace Bringly.Domain.LookUps
         /// </summary>
 
         [Required]
-        public bool IsActive
+        public new bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
@@ -72,7 +76,6 @@ namespace Bringly.Domain.LookUps
         {
             get; set;
         }
-
 
         public Guid? FkDeletedBy { get; set; }
         #endregion

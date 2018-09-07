@@ -2,12 +2,14 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Bringly.Domain.User;
 
 namespace Bringly.Domain.LookUps
 {
     public class LookUpDomainValues : BaseClasses.DomainBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public LookUpDomainValues()
         {
             LookUpDomainValueId = Guid.NewGuid();
@@ -16,6 +18,9 @@ namespace Bringly.Domain.LookUps
             CanDeleteRecord = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Key]
         public Guid LookUpDomainValueId { get; set; }
 
@@ -89,7 +94,7 @@ namespace Bringly.Domain.LookUps
         bool isActive = true, isDeleted = false;
 
         [Required]
-        public bool IsDeleted
+        public new bool IsDeleted
         {
             get { return isDeleted; }
             set { isDeleted = value; }
@@ -99,7 +104,7 @@ namespace Bringly.Domain.LookUps
         /// </summary>
 
         [Required]
-        public bool IsActive
+        public new bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
