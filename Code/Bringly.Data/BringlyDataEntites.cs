@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Bringly.Data
 {
@@ -25,8 +21,9 @@ namespace Bringly.Data
                         st.Append(string.Format("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage));
                     }
                 }
-               // Utilities.ErrorLog.WriteError(st.ToString(), "OdinEntities - SaveChanges", "dberrors");
-                throw;
+                Utilities.ErrorLog.LogError(st.ToString(), "OdinEntities - SaveChanges");
+                // throw;
+                return 0;
             }
         }
     }

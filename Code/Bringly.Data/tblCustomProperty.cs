@@ -19,6 +19,6 @@ namespace Bringly.Data
         public string Field { get; set; }
         public string Value { get; set; }
     
-        public virtual tblLocation tblLocation { get; set; }
+        public virtual tblBranch tblBranch { get; set; }
     }
 }

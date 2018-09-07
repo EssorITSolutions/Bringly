@@ -34,7 +34,7 @@ namespace Utilities
                 }
                 else
                 {
-                    new Exception(sb.ToString());
+                    annotatedException = new Exception(sb.ToString());
                 }
 
                 ErrorSignal.FromCurrentContext().Raise(annotatedException, HttpContext.Current);
@@ -44,6 +44,7 @@ namespace Utilities
                 // uh oh! just keep going
             }
         }
+
         /// <summary>
         /// 
         /// </summary>

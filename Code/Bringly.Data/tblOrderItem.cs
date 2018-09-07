@@ -15,15 +15,15 @@ namespace Bringly.Data
     public partial class tblOrderItem
     {
         public System.Guid OrderItemGuid { get; set; }
-        public System.Guid OrderGuid { get; set; }
-        public System.Guid ItemGuid { get; set; }
+        public System.Guid FK_OrderGuid { get; set; }
+        public System.Guid FK_ItemGuid { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public System.Guid FK_CreatedByGuid { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         public virtual tblItem tblItem { get; set; }
-        public virtual tblOrder tblOrder { get; set; }
         public virtual tblUser tblUser { get; set; }
+        public virtual tblOrder tblOrder { get; set; }
     }
 }

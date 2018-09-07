@@ -17,23 +17,44 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblOrder()
         {
+            this.tblOrderAddresses = new HashSet<tblOrderAddress>();
             this.tblOrderItems = new HashSet<tblOrderItem>();
             this.tblReviews = new HashSet<tblReview>();
         }
     
+        public long OrderID { get; set; }
         public System.Guid OrderGuid { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public Nullable<System.Guid> FK_BusinessGuid { get; set; }
+        public System.Guid FK_CreatedByGuid { get; set; }
         public decimal OrderDiscount { get; set; }
-        public decimal OrderSubTotal { get; set; }
         public decimal OrderTotal { get; set; }
-        public string OrderStatus { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
+        public Nullable<System.Guid> DeliveryBoyUserGuid { get; set; }
+        public string PaymentStatus { get; set; }
+        public string CustomerIpAddress { get; set; }
+        public string OrderNotes { get; set; }
+        public decimal Profit { get; set; }
+        public Nullable<int> PaymentMethodId { get; set; }
+        public short OrderType { get; set; }
+        public Nullable<System.DateTime> DeliveryDate { get; set; }
+        public Nullable<System.TimeSpan> DeliveryTime { get; set; }
+        public Nullable<int> FK_OrderStatusId { get; set; }
+        public Nullable<int> FK_CouponID { get; set; }
+        public Nullable<System.Guid> FK_BranchGuid { get; set; }
+        public int PaymentType { get; set; }
     
+        public virtual tblBranch tblBranch { get; set; }
+        public virtual tblBusiness tblBusiness { get; set; }
+        public virtual tblCoupon tblCoupon { get; set; }
+        public virtual tblPaymentMethod tblPaymentMethod { get; set; }
+        public virtual tblUser tblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrderAddress> tblOrderAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrderItem> tblOrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblReview> tblReviews { get; set; }
-        public virtual tblUser tblUser { get; set; }
+        public virtual tblOrderStatus tblOrderStatu { get; set; }
     }
 }

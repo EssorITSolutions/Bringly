@@ -8,12 +8,14 @@ namespace Utilities
         {
             return HttpContext.Current.Request.QueryString[keyName];
         }
+
         static bool isNumeric(string val)
         {
             Double result;
             return Double.TryParse(val, System.Globalization.NumberStyles.Integer,
                 System.Globalization.CultureInfo.CurrentCulture, out result);
         }
+
         /// <summary>
         /// used to get Interger Value.
         /// </summary>
@@ -28,6 +30,7 @@ namespace Utilities
             if (!isNumeric(data)) return false;
             value = Convert.ToInt32(data); return true;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +41,7 @@ namespace Utilities
             return Convert.ToInt32(getQueryStringVaue(key));
             
         }
+
         /// <summary>
         /// used to get Interger Value.
         /// </summary>
@@ -51,6 +55,7 @@ namespace Utilities
             if (isNumeric(data)) { return Convert.ToInt32(data); }
             return null;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -65,6 +70,7 @@ namespace Utilities
             if (string.IsNullOrEmpty(data) || string.IsNullOrWhiteSpace(data)) return false;
             value = data; return true;
         }
+
         /// <summary>
         /// get query string value
         /// </summary>

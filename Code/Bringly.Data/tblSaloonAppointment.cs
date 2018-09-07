@@ -15,22 +15,22 @@ namespace Bringly.Data
     public partial class tblSaloonAppointment
     {
         public System.Guid SaloonAppointmentGuid { get; set; }
-        public System.Guid SaloonTimeGuid { get; set; }
-        public System.Guid BusinessGuid { get; set; }
-        public System.Guid UserGuid { get; set; }
+        public System.Guid FK_SaloonTimeGuid { get; set; }
+        public System.Guid FK_BusinessGuid { get; set; }
+        public System.Guid FK_UserGuid { get; set; }
         public string SaloonTime { get; set; }
         public string AppointmentDate { get; set; }
         public bool IsApproved { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public System.Guid FK_CreatedByGuid { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<System.Guid> ModifiedBy { get; set; }
+        public Nullable<System.Guid> FK_ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
+        public virtual tblBranch tblBranch { get; set; }
         public virtual tblSaloonTimeMaster tblSaloonTimeMaster { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }
-        public virtual tblLocation tblLocation { get; set; }
     }
 }

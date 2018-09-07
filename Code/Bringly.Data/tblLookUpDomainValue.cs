@@ -21,7 +21,7 @@ namespace Bringly.Data
         }
     
         public System.Guid LookUpDomainValueGuid { get; set; }
-        public System.Guid LookUpDomainGuid { get; set; }
+        public System.Guid FK_LookUpDomainGuid { get; set; }
         public string LookUpDomainValue { get; set; }
         public string LookUpDomainText { get; set; }
         public bool IsActive { get; set; }

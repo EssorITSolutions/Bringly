@@ -15,14 +15,19 @@ namespace Bringly.Data
     public partial class tblUserAddress
     {
         public System.Guid UserAddressGuid { get; set; }
-        public System.Guid UserGuid { get; set; }
+        public System.Guid FK_UserGuid { get; set; }
         public string Address { get; set; }
-        public System.Guid CityGuid { get; set; }
+        public System.Guid FK_CityGuid { get; set; }
         public string PostCode { get; set; }
         public string AddressType { get; set; }
         public System.DateTime DateCreated { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string PlaceId { get; set; }
+        public Nullable<System.Guid> CountryGuid { get; set; }
+        public string Country { get; set; }
     
         public virtual tblCity tblCity { get; set; }
         public virtual tblUser tblUser { get; set; }

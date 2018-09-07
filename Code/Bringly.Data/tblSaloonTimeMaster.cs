@@ -22,11 +22,11 @@ namespace Bringly.Data
     
         public System.Guid SaloonTimeGuid { get; set; }
         public string SlotTime { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public System.Guid FK_CreatedByGuid { get; set; }
         public System.DateTime DateCreated { get; set; }
     
-        public virtual tblUser tblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSaloonAppointment> tblSaloonAppointments { get; set; }
+        public virtual tblUser tblUser { get; set; }
     }
 }

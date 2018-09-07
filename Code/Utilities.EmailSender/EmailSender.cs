@@ -36,7 +36,7 @@ namespace Utilities.EmailSender
                         ? new MailAddress(emailEntity.EmailTo, emailEntity.EmailToName.Trim())
                         : new MailAddress(emailEntity.EmailTo));
                 }
-                
+
                 if (emailEntity.ListOfMultpleEmailTo != null)
                 {
                     foreach (var emailTo in emailEntity.ListOfMultpleEmailTo)
@@ -175,6 +175,7 @@ namespace Utilities.EmailSender
                 if (!emailEntity.CanSendEmail)
                 {
                     emailEntity.EmailNotSentError = "Email not send as property 'CanSendEmail' is set to false.";
+                    emailEntity.IsEmailSent = false;
                     return emailEntity.EmailNotSentError;
                 }
                 else
@@ -191,7 +192,6 @@ namespace Utilities.EmailSender
             }
             finally
             {
-
                 if (smtp != null)
                 {
                     smtp.Dispose();

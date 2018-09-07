@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -52,8 +51,6 @@ namespace Utilities.EmailSender.Domain
             Add(element);
         }
     }
-
-
 
     public enum EmailMailPriority
     {
@@ -126,6 +123,7 @@ namespace Utilities.EmailSender.Domain
         /// if not set then Default True
         /// </summary>
         public bool? IsBodyHtml { get; set; }
+
         /// <summary>
         /// create a AppSetting in web.config file with name 'Port'
         /// </summary>
@@ -143,6 +141,7 @@ namespace Utilities.EmailSender.Domain
             set { _port = value; }
 
         }
+
         /// <summary>
         /// create a AppSetting in web.config file with name 'Host'
         /// </summary>
@@ -159,21 +158,25 @@ namespace Utilities.EmailSender.Domain
             get { return _host; }
             set { _host = value; }
         }
+
         /// <summary>
         /// Tells User will pass the Network Credentials or not. 
         /// Can Also Create a AppSetting in web.config file with name 'HasNetworkCredential'
         /// </summary>
         public bool HasNetworkCredential { get { return _hasNetworkCredential; } set { _hasNetworkCredential = value; } }
+
         /// <summary>
         /// User name for Network Credential 
         /// Can Also Create a AppSetting in web.config file with name 'NetworkCredential_UserName'
         /// </summary>
         public string NetworkCredentialUserName { get { return _networkCredentialUserName; } set { _networkCredentialUserName = value; } }
+
         /// <summary>
         /// Password for Network Credential 
         /// Can Also Create a AppSetting in web.config file with name 'NetworkCredential_Password'
         /// </summary>
         public string NetworkCredentialPassword { get { return _networkCredentialPassword; } set { _networkCredentialPassword = value; } }
+
         /// <summary>
         /// Tells is SSL needs to be used. Default false
         /// Can Also Create a AppSetting in web.config file with name 'EnableSsl'
@@ -184,21 +187,25 @@ namespace Utilities.EmailSender.Domain
         /// Key contains the Name of File to be Display and Value is the Full path of the File
         /// </summary>
         public Hashtable Attachments { get; set; }
+
         /// <summary>
         /// used to The that can email will be sent or not
         /// Can Also Create a AppSetting in web.config file with name 'CanSendEmail' .. If Set To False .. Email will be not send
         /// </summary>
         public bool CanSendEmail { get { return _canSendEmail; } set { _canSendEmail = value; } }
+
         /// <summary>
         /// used For sending attachments. This is speciall used if Attached File display name can be same
         /// Key contains the Name of File to be Display and Value is the Full path of the File
         /// </summary>
         public ListOfAttachments ListOfAttachments { get; set; }
+
         /// <summary>
         ///  key is email to 
         ///  value is Email TO Name
         /// </summary>
         public ListOfMultipleEmailTo ListOfMultpleEmailTo { get; set; }
+
         /// <summary>
         ///  key is email to 
         ///  value is Email TO Name

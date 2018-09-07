@@ -21,18 +21,18 @@ namespace Bringly.Data
         }
     
         public System.Guid EmailGuid { get; set; }
-        public System.Guid TemplateGuid { get; set; }
+        public System.Guid FK_TemplateGuid { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public string EmailFrom { get; set; }
         public bool Sent { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public Nullable<System.Guid> FK_CreatedByGuid { get; set; }
     
-        public virtual tblTemplate tblTemplate { get; set; }
+        public virtual tblEmailTemplate tblEmailTemplate { get; set; }
+        public virtual tblUser tblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblEmailTo> tblEmailToes { get; set; }
-        public virtual tblUser tblUser { get; set; }
     }
 }

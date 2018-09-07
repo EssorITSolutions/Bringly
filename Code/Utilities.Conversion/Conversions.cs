@@ -12,7 +12,6 @@ namespace Utilities
         /// <returns></returns>
         public static string DictionaryToJson(Dictionary<string, string> dict)
         {
-
             JavaScriptSerializer jss = new JavaScriptSerializer();
             return jss.Serialize(dict);
         }

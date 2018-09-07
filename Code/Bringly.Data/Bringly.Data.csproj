@@ -66,7 +66,13 @@
       <DependentUpon>Bringly.edmx</DependentUpon>
     </Compile>
     <Compile Include="BringlyDataEntites.cs" />
+    <Compile Include="ELMAH_Error.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tblBranch.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblBusiness.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
@@ -79,10 +85,16 @@
     <Compile Include="tblCountry.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCoupon.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblCustomProperty.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEmail.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblEmailTemplate.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEmailTo.cs">
@@ -94,19 +106,43 @@
     <Compile Include="tblItem.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblLocation.cs">
-      <DependentUpon>Bringly.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblLookUpDomain.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblLookUpDomainValue.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblManager.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMerchantAboutUsPage.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblOrder.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblOrderAddress.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrderDeliveryStatus.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrderDeliveryStatusMapping.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblOrderItem.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrderStatus.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrderStatus_old.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblPage.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblPaymentMethod.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblRestaurant.cs">
@@ -118,19 +154,31 @@
     <Compile Include="tblRole.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblRoomMaster.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblRoomReservation.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblSaloonAppointment.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblSaloonTimeMaster.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblTemplate.cs">
+    <Compile Include="tblState.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUser.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserAddress.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWallet.cs">
+      <DependentUpon>Bringly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWalletHistory.cs">
       <DependentUpon>Bringly.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -143,7 +191,9 @@
     <None Include="Bringly.edmx.diagram">
       <DependentUpon>Bringly.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -159,6 +209,15 @@
       <DependentUpon>Bringly.edmx</DependentUpon>
       <LastGenOutput>Bringly.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities.ErrorLog\Utilities.ErrorLog.csproj">
+      <Project>{2a771db4-24bc-4e84-bdcc-1a1d3c85e201}</Project>
+      <Name>Utilities.ErrorLog</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,6 +12,8 @@ namespace Bringly.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BringlyEntities : DbContext
     {
@@ -25,27 +27,118 @@ namespace Bringly.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tblCity> tblCities { get; set; }
-        public virtual DbSet<tblUserAddress> tblUserAddresses { get; set; }
-        public virtual DbSet<tblCountry> tblCountries { get; set; }
-        public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
-        public virtual DbSet<tblReview> tblReviews { get; set; }
-        public virtual DbSet<tblTemplate> tblTemplates { get; set; }
-        public virtual DbSet<tblEmailTo> tblEmailToes { get; set; }
-        public virtual DbSet<tblEmail> tblEmails { get; set; }
-        public virtual DbSet<tblItem> tblItems { get; set; }
-        public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
-        public virtual DbSet<tblOrder> tblOrders { get; set; }
-        public virtual DbSet<tblLookUpDomain> tblLookUpDomains { get; set; }
-        public virtual DbSet<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
-        public virtual DbSet<tblRole> tblRoles { get; set; }
-        public virtual DbSet<tblUser> tblUsers { get; set; }
-        public virtual DbSet<tblBusinessType> tblBusinessTypes { get; set; }
+        public virtual DbSet<tblBranch> tblBranches { get; set; }
         public virtual DbSet<tblBusiness> tblBusinesses { get; set; }
-        public virtual DbSet<tblLocation> tblLocations { get; set; }
+        public virtual DbSet<tblBusinessType> tblBusinessTypes { get; set; }
+        public virtual DbSet<tblCity> tblCities { get; set; }
+        public virtual DbSet<tblCountry> tblCountries { get; set; }
+        public virtual DbSet<tblCoupon> tblCoupons { get; set; }
         public virtual DbSet<tblCustomProperty> tblCustomProperties { get; set; }
         public virtual DbSet<tblFavourite> tblFavourites { get; set; }
-        public virtual DbSet<tblSaloonTimeMaster> tblSaloonTimeMasters { get; set; }
+        public virtual DbSet<tblItem> tblItems { get; set; }
+        public virtual DbSet<tblLookUpDomain> tblLookUpDomains { get; set; }
+        public virtual DbSet<tblLookUpDomainValue> tblLookUpDomainValues { get; set; }
+        public virtual DbSet<tblManager> tblManagers { get; set; }
+        public virtual DbSet<tblMerchantAboutUsPage> tblMerchantAboutUsPages { get; set; }
+        public virtual DbSet<tblOrderDeliveryStatusMapping> tblOrderDeliveryStatusMappings { get; set; }
+        public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
+        public virtual DbSet<tblPaymentMethod> tblPaymentMethods { get; set; }
+        public virtual DbSet<tblRestaurant> tblRestaurants { get; set; }
+        public virtual DbSet<tblReview> tblReviews { get; set; }
+        public virtual DbSet<tblRole> tblRoles { get; set; }
+        public virtual DbSet<tblRoomMaster> tblRoomMasters { get; set; }
+        public virtual DbSet<tblRoomReservation> tblRoomReservations { get; set; }
         public virtual DbSet<tblSaloonAppointment> tblSaloonAppointments { get; set; }
+        public virtual DbSet<tblSaloonTimeMaster> tblSaloonTimeMasters { get; set; }
+        public virtual DbSet<tblState> tblStates { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblUserAddress> tblUserAddresses { get; set; }
+        public virtual DbSet<ELMAH_Error> ELMAH_Error { get; set; }
+        public virtual DbSet<tblOrderDeliveryStatus> tblOrderDeliveryStatus { get; set; }
+        public virtual DbSet<tblOrderStatus> tblOrderStatus { get; set; }
+        public virtual DbSet<tblWallet> tblWallets { get; set; }
+        public virtual DbSet<tblWalletHistory> tblWalletHistories { get; set; }
+        public virtual DbSet<tblEmailTemplate> tblEmailTemplates { get; set; }
+        public virtual DbSet<tblPage> tblPages { get; set; }
+        public virtual DbSet<tblEmail> tblEmails { get; set; }
+        public virtual DbSet<tblEmailTo> tblEmailToes { get; set; }
+        public virtual DbSet<tblOrderAddress> tblOrderAddresses { get; set; }
+        public virtual DbSet<tblOrder> tblOrders { get; set; }
+        public virtual DbSet<tblOrderStatus_old> tblOrderStatus_old { get; set; }
+    
+        public virtual ObjectResult<string> ELMAH_GetErrorsXml(string application, Nullable<int> pageIndex, Nullable<int> pageSize, ObjectParameter totalCount)
+        {
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var pageIndexParameter = pageIndex.HasValue ?
+                new ObjectParameter("PageIndex", pageIndex) :
+                new ObjectParameter("PageIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorsXml", applicationParameter, pageIndexParameter, pageSizeParameter, totalCount);
+        }
+    
+        public virtual ObjectResult<string> ELMAH_GetErrorXml(string application, Nullable<System.Guid> errorId)
+        {
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var errorIdParameter = errorId.HasValue ?
+                new ObjectParameter("ErrorId", errorId) :
+                new ObjectParameter("ErrorId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorXml", applicationParameter, errorIdParameter);
+        }
+    
+        public virtual int ELMAH_LogError(Nullable<System.Guid> errorId, string application, string host, string type, string source, string message, string user, string allXml, Nullable<int> statusCode, Nullable<System.DateTime> timeUtc)
+        {
+            var errorIdParameter = errorId.HasValue ?
+                new ObjectParameter("ErrorId", errorId) :
+                new ObjectParameter("ErrorId", typeof(System.Guid));
+    
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var hostParameter = host != null ?
+                new ObjectParameter("Host", host) :
+                new ObjectParameter("Host", typeof(string));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            var sourceParameter = source != null ?
+                new ObjectParameter("Source", source) :
+                new ObjectParameter("Source", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("User", user) :
+                new ObjectParameter("User", typeof(string));
+    
+            var allXmlParameter = allXml != null ?
+                new ObjectParameter("AllXml", allXml) :
+                new ObjectParameter("AllXml", typeof(string));
+    
+            var statusCodeParameter = statusCode.HasValue ?
+                new ObjectParameter("StatusCode", statusCode) :
+                new ObjectParameter("StatusCode", typeof(int));
+    
+            var timeUtcParameter = timeUtc.HasValue ?
+                new ObjectParameter("TimeUtc", timeUtc) :
+                new ObjectParameter("TimeUtc", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELMAH_LogError", errorIdParameter, applicationParameter, hostParameter, typeParameter, sourceParameter, messageParameter, userParameter, allXmlParameter, statusCodeParameter, timeUtcParameter);
+        }
     }
 }

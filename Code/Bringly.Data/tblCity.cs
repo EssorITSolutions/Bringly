@@ -17,25 +17,28 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCity()
         {
-            this.tblUserAddresses = new HashSet<tblUserAddress>();
+            this.tblBranches = new HashSet<tblBranch>();
             this.tblRestaurants = new HashSet<tblRestaurant>();
             this.tblUsers = new HashSet<tblUser>();
-            this.tblLocations = new HashSet<tblLocation>();
+            this.tblUserAddresses = new HashSet<tblUserAddress>();
+            this.tblOrderAddresses = new HashSet<tblOrderAddress>();
         }
     
         public System.Guid CityGuid { get; set; }
         public string CityName { get; set; }
-        public bool IsDeleted { get; set; }
         public string CityUrlName { get; set; }
+        public bool IsDeleted { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUserAddress> tblUserAddresses { get; set; }
+        public virtual ICollection<tblBranch> tblBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRestaurant> tblRestaurants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUser> tblUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblLocation> tblLocations { get; set; }
+        public virtual ICollection<tblUserAddress> tblUserAddresses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrderAddress> tblOrderAddresses { get; set; }
     }
 }

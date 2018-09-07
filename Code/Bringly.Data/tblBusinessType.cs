@@ -18,7 +18,6 @@ namespace Bringly.Data
         public tblBusinessType()
         {
             this.tblBusinesses = new HashSet<tblBusiness>();
-            this.tblLocations = new HashSet<tblLocation>();
         }
     
         public System.Guid BusinessTypeGuid { get; set; }
@@ -26,7 +25,5 @@ namespace Bringly.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBusiness> tblBusinesses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblLocation> tblLocations { get; set; }
     }
 }

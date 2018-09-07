@@ -17,12 +17,15 @@ namespace Bringly.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblBusiness()
         {
-            this.tblSaloonAppointments = new HashSet<tblSaloonAppointment>();
+            this.tblBranches = new HashSet<tblBranch>();
+            this.tblItems = new HashSet<tblItem>();
+            this.tblReviews = new HashSet<tblReview>();
+            this.tblOrders = new HashSet<tblOrder>();
         }
     
         public System.Guid BusinessGuid { get; set; }
         public string BusinessName { get; set; }
-        public System.Guid BusinessTypeGuid { get; set; }
+        public System.Guid FK_BusinessTypeGuid { get; set; }
         public string PNumber { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -32,7 +35,7 @@ namespace Bringly.Data
         public string BusinessImage { get; set; }
         public System.Guid CountryGuid { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public System.Guid CreatedByGuid { get; set; }
+        public System.Guid FK_CreatedByGuid { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedByGuid { get; set; }
@@ -46,13 +49,20 @@ namespace Bringly.Data
         public string ServiceTax { get; set; }
         public string FlatRate { get; set; }
         public string RateAfterKm { get; set; }
+        public bool IsSelfDelivery { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBranch> tblBranches { get; set; }
         public virtual tblBusinessType tblBusinessType { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
         public virtual tblUser tblUser2 { get; set; }
         public virtual tblUser tblUser3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSaloonAppointment> tblSaloonAppointments { get; set; }
+        public virtual ICollection<tblItem> tblItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblReview> tblReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrder> tblOrders { get; set; }
     }
 }
