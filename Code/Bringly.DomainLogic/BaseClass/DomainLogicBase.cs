@@ -1,9 +1,4 @@
 ﻿using Bringly.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities;
 
 namespace Bringly.DomainLogic.BaseClass
@@ -11,6 +6,7 @@ namespace Bringly.DomainLogic.BaseClass
     public abstract class DomainLogicBase
     {
        public BringlyEntities bringlyEntities = new BringlyEntities();
+
         ///// <summary>
         ///// 
         ///// </summary>
@@ -47,7 +43,9 @@ namespace Bringly.DomainLogic.BaseClass
                 return current.Request.Url.Host.ToLower();
             }
         }
+
         #region Paging Properties
+
         /// <summary>
         /// returns the current page
         /// </summary>
@@ -74,6 +72,7 @@ namespace Bringly.DomainLogic.BaseClass
                 return Settings.SystemSettings.DefaultPageSize;
             }
         }
+
         protected int PageSizeBusiness
         {
             get
@@ -82,6 +81,7 @@ namespace Bringly.DomainLogic.BaseClass
             }
         }
         #endregion
+
         /// <summary>
         /// 
         /// </summary>

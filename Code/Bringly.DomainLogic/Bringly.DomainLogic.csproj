@@ -118,14 +118,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -141,8 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClass\DomainLogicBase.cs" />
+    <Compile Include="CMSDomainLogic.cs" />
     <Compile Include="CommonDomainLogic.cs" />
     <Compile Include="EmailDomainLogic.cs" />
+    <Compile Include="OrderDomainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCartDomainLogic.cs" />
     <Compile Include="RestaurantDomainLogic.cs" />
@@ -150,6 +144,7 @@
     <Compile Include="BusinessDomainLogic.cs" />
     <Compile Include="UserVariables.cs" />
     <Compile Include="User\UserDomainLogic.cs" />
+    <Compile Include="WalletDomainLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bringly.Data\Bringly.Data.csproj">

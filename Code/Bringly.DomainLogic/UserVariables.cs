@@ -1,9 +1,5 @@
 ﻿using Bringly.Domain.Enums.User;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Bringly.DomainLogic
@@ -23,6 +19,7 @@ namespace Bringly.DomainLogic
             if (st.Length <= 0) throw new System.InvalidOperationException("Out of index");
             return st[index];
         }
+
         /// <summary>
         /// Login User ID -- 0
         /// </summary>
@@ -33,6 +30,7 @@ namespace Bringly.DomainLogic
                 return Guid.Parse(GetValue(0).ToString());
             }
         }
+
         /// <summary>
         /// Is LoggedIn User Super Admin -- 2
         /// </summary>
@@ -44,6 +42,10 @@ namespace Bringly.DomainLogic
                 //return GetValue(2).ToType<bool>();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static UserRoles UserRole
         {
             get
@@ -51,6 +53,10 @@ namespace Bringly.DomainLogic
                 return ((UserRoles)Convert.ToInt32(GetValue(2)));
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string UserName
         {
             get
@@ -58,6 +64,7 @@ namespace Bringly.DomainLogic
                 return Convert.ToString(GetValue(3));
             }
         }
+
         /// <summary>
         /// Check current user is login or not
         /// </summary>
